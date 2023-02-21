@@ -10,7 +10,6 @@
 		5BCAD98B29A509820010E811 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCAD98A29A509820010E811 /* AppDelegate.swift */; };
 		5BCAD98D29A509820010E811 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCAD98C29A509820010E811 /* SceneDelegate.swift */; };
 		5BCAD98F29A509820010E811 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCAD98E29A509820010E811 /* ViewController.swift */; };
-		5BCAD99229A509820010E811 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BCAD99029A509820010E811 /* Main.storyboard */; };
 		5BCAD99429A509830010E811 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BCAD99329A509830010E811 /* Assets.xcassets */; };
 		5BCAD99729A509830010E811 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BCAD99529A509830010E811 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -20,7 +19,6 @@
 		5BCAD98A29A509820010E811 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BCAD98C29A509820010E811 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5BCAD98E29A509820010E811 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		5BCAD99129A509820010E811 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5BCAD99329A509830010E811 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5BCAD99629A509830010E811 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5BCAD99829A509830010E811 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,15 +54,62 @@
 		5BCAD98929A509820010E811 /* seoultechSC */ = {
 			isa = PBXGroup;
 			children = (
-				5BCAD98A29A509820010E811 /* AppDelegate.swift */,
-				5BCAD98C29A509820010E811 /* SceneDelegate.swift */,
-				5BCAD98E29A509820010E811 /* ViewController.swift */,
-				5BCAD99029A509820010E811 /* Main.storyboard */,
-				5BCAD99329A509830010E811 /* Assets.xcassets */,
-				5BCAD99529A509830010E811 /* LaunchScreen.storyboard */,
+				5BCAD9A529A519D40010E811 /* Helpers */,
+				5BCAD9A429A517E10010E811 /* Resources */,
+				5BCAD9A329A517CD0010E811 /* APIClient */,
+				5BCAD9A129A517530010E811 /* Views */,
+				5BCAD9A029A517440010E811 /* Models */,
+				5BCAD99F29A517330010E811 /* Controllers */,
 				5BCAD99829A509830010E811 /* Info.plist */,
 			);
 			path = seoultechSC;
+			sourceTree = "<group>";
+		};
+		5BCAD99F29A517330010E811 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5BCAD98E29A509820010E811 /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		5BCAD9A029A517440010E811 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5BCAD9A129A517530010E811 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5BCAD9A329A517CD0010E811 /* APIClient */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = APIClient;
+			sourceTree = "<group>";
+		};
+		5BCAD9A429A517E10010E811 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5BCAD98A29A509820010E811 /* AppDelegate.swift */,
+				5BCAD98C29A509820010E811 /* SceneDelegate.swift */,
+				5BCAD99329A509830010E811 /* Assets.xcassets */,
+				5BCAD99529A509830010E811 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		5BCAD9A529A519D40010E811 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +172,6 @@
 			files = (
 				5BCAD99729A509830010E811 /* LaunchScreen.storyboard in Resources */,
 				5BCAD99429A509830010E811 /* Assets.xcassets in Resources */,
-				5BCAD99229A509820010E811 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,14 +191,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		5BCAD99029A509820010E811 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5BCAD99129A509820010E811 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		5BCAD99529A509830010E811 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,7 +328,6 @@
 				INFOPLIST_FILE = seoultechSC/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -320,7 +355,6 @@
 				INFOPLIST_FILE = seoultechSC/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
