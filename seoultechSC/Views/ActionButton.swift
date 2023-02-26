@@ -11,6 +11,7 @@ class ActionButton: UIButton {
         self.heightAnchor.constraint(equalToConstant: height).isActive = true
         self.layer.cornerRadius = 5
         self.backgroundColor = backgroundColor
+        self.setTitleColor(.white, for: .normal)
     }
     
     override init(frame: CGRect) {
