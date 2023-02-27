@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  seoultechSC
-//
-//  Created by 오승언 on 2023/02/21.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -16,9 +9,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let vc = SelectLoginViewController()
+        let navController = UINavigationController(rootViewController: vc)
         
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = vc
+        window.rootViewController = navController
         window.makeKeyAndVisible()
         self.window = window
     }
