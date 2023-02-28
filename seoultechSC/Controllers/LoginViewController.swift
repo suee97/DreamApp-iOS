@@ -12,6 +12,7 @@ class LoginViewController: UIViewController {
     private let pwField: GreyTextField = {
         let textField = GreyTextField()
         textField.placeholder = "비밀번호를 입력하세요."
+        textField.isSecureTextEntry = true
         return textField
     }()
     
@@ -30,7 +31,7 @@ class LoginViewController: UIViewController {
     
     private let pwLabel: UILabel = {
         let label = UILabel()
-        label.text = "학번"
+        label.text = "비밀번호"
         label.font = UIFont(name: "Pretendard-Bold", size: 16)
         return label
     }()
