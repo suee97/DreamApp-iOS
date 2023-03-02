@@ -2,16 +2,17 @@ import UIKit
 
 class ActionButton: UIButton {
     
-    // width, height 기본값 : 320, 50
+    // 높이 기본값 : 50
     // 버튼 색상 기본값 : primaryPurple
-    init(title: String, width: CGFloat = 320, height: CGFloat = 50, backgroundColor: UIColor = .primaryPurple) {
+    // 폰트 기본값 : Pretendard-Bold, 16
+    init(title: String, backgroundColor: UIColor = .primaryPurple) {
         super.init(frame: .zero)
-        setTitle(title, for: .normal)
-        self.widthAnchor.constraint(equalToConstant: width).isActive = true
-        self.heightAnchor.constraint(equalToConstant: height).isActive = true
+        self.setTitle(title, for: .normal)
+        self.heightAnchor.constraint(equalToConstant: 50).isActive = true
         self.layer.cornerRadius = 5
         self.backgroundColor = backgroundColor
         self.setTitleColor(.white, for: .normal)
+        self.titleLabel?.font = UIFont(name: "Pretendard-Bold", size: 16)
     }
     
     override init(frame: CGRect) {
