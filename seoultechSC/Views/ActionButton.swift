@@ -2,6 +2,8 @@ import UIKit
 
 class ActionButton: UIButton {
     
+    let indicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
     // 높이 기본값 : 50
     // 버튼 색상 기본값 : primaryPurple
     // 폰트 기본값 : Pretendard-Bold, 16
@@ -23,4 +25,32 @@ class ActionButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setActive(_ isActive: Bool) {
+        if isActive {
+            self.backgroundColor = .primaryPurple
+            self.isEnabled = true
+        } else {
+            self.backgroundColor = .secondaryPurple
+            self.isEnabled = false
+        }
+    }
+    
+    func setLoading(_ isLoading: Bool) {
+        let w = self.bounds.size.width
+        let h = self.bounds.size.height
+        
+        if isLoading {
+            self.setActive(false)
+            self.setTitleColor(.clear, for: .normal)
+            self.indicator.center = CGPointMake(w / 2, h / 2)
+            self.indicator.color = .lightGrey
+            self.addSubview(indicator)
+            self.indicator.startAnimating()
+        } else {
+            self.setActive(true)
+            self.setTitleColor(.white, for: .normal)
+            self.indicator.stopAnimating()
+            
+        }
+    }
 }

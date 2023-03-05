@@ -4,16 +4,19 @@ import Alamofire
 class LoginViewController: UIViewController {
 
     // MARK: - Properties
-    private let idField: GreyTextField = {
+    private lazy var idField: GreyTextField = {
         let textField = GreyTextField()
         textField.placeholder = "학번 8자리를 입력하세요."
+        textField.addTarget(self, action: #selector(didTextFieldChanged), for: .editingChanged)
+        textField.keyboardType = .numberPad
         return textField
     }()
     
-    private let pwField: GreyTextField = {
+    private lazy var pwField: GreyTextField = {
         let textField = GreyTextField()
         textField.placeholder = "비밀번호를 입력하세요."
         textField.isSecureTextEntry = true
+        textField.addTarget(self, action: #selector(didTextFieldChanged), for: .editingChanged)
         return textField
     }()
     
@@ -62,11 +65,22 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    private let helpLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "Pretendard-Regular", size: 12)
+        label.textColor = UIColor(red: 255/255, green: 56/255, blue: 69/255, alpha: 1)
+        return label
+    }()
+    
     
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavigationBar()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
     
     override func viewDidLoad() {
@@ -92,6 +106,7 @@ class LoginViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .white
+        self.loginButton.setActive(false)
         
         view.addSubview(self.idField)
         view.addSubview(self.pwField)
@@ -101,6 +116,7 @@ class LoginViewController: UIViewController {
         view.addSubview(self.logo)
         view.addSubview(self.resetButton)
         view.addSubview(self.signUpButton)
+        view.addSubview(self.helpLabel)
         
         self.idField.translatesAutoresizingMaskIntoConstraints = false
         self.pwField.translatesAutoresizingMaskIntoConstraints = false
@@ -110,8 +126,13 @@ class LoginViewController: UIViewController {
         self.logo.translatesAutoresizingMaskIntoConstraints = false
         self.resetButton.translatesAutoresizingMaskIntoConstraints = false
         self.signUpButton.translatesAutoresizingMaskIntoConstraints = false
+        self.helpLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
+            self.logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 109),
+            self.logo.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            self.logo.widthAnchor.constraint(equalToConstant: 140),
+            self.logo.heightAnchor.constraint(equalToConstant: 67),
             self.idField.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -267),
             self.idField.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             self.idField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
@@ -128,31 +149,38 @@ class LoginViewController: UIViewController {
             self.idLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
             self.pwLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -228),
             self.pwLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
-            self.logo.bottomAnchor.constraint(equalTo: self.idLabel.topAnchor, constant: -106),
-            self.logo.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            self.logo.widthAnchor.constraint(equalToConstant: 140),
-            self.logo.heightAnchor.constraint(equalToConstant: 67),
-            self.resetButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 11),
+            self.resetButton.topAnchor.constraint(equalTo: self.loginButton.bottomAnchor, constant: 11),
             self.resetButton.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
-            self.signUpButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 11),
-            self.signUpButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20)
+            self.signUpButton.topAnchor.constraint(equalTo: self.loginButton.bottomAnchor, constant: 11),
+            self.signUpButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20),
+            self.helpLabel.bottomAnchor.constraint(equalTo: self.idLabel.topAnchor, constant: -24),
+            self.helpLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
         ])
     }
     
     
     // MARK: - Selectors
     @objc private func onTapLoginButton() {
-        let url = api_url + "/auth/login"
-        let params = ["studentNo" : idField.text, "password" : pwField.text] as Dictionary
-        let request = AF.request(url,
-                                 method: .post,
-                                 parameters: params,
-                                 encoding: JSONEncoding(options: []),
-                                 headers: nil
-        ).responseJSON { data in
-            print(data)
+        self.loginButton.setLoading(true)
+        
+//        let url = api_url + "/auth/login"
+//        let params = ["studentNo" : idField.text, "password" : pwField.text] as Dictionary
+//        let request = AF.request(url,
+//                                 method: .post,
+//                                 parameters: params,
+//                                 encoding: JSONEncoding(options: []),
+//                                 headers: nil
+//        ).responseJSON { data in
+//            print(data)
+//        }
+
+        // 딜레이
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.loginButton.setLoading(false)
         }
         
+        
+        self.helpLabel.text = "로그인에 실패하였습니다. 올바른 정보를 입력해주세요."
     }
     
     @objc private func onTapResetButton() {
@@ -160,7 +188,17 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func onTapSignUpButton() {
-        print("sign up button clicked")
+        let vc = PolicyAgreeViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc private func didTextFieldChanged() {
+        if idField.text != "" && pwField.text != "" {
+            self.loginButton.setActive(true)
+        } else {
+            self.loginButton.setActive(false)
+        }
     }
     
 }
+
