@@ -79,10 +79,6 @@ class LoginViewController: UIViewController {
         configureNavigationBar()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
