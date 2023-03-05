@@ -1,4 +1,5 @@
 import UIKit
+import Alamofire
 
 class LoginViewController: UIViewController {
 
@@ -141,7 +142,17 @@ class LoginViewController: UIViewController {
     
     // MARK: - Selectors
     @objc private func onTapLoginButton() {
-        print("login button clicked")
+        let url = api_url + "/auth/login"
+        let params = ["studentNo" : idField.text, "password" : pwField.text] as Dictionary
+        let request = AF.request(url,
+                                 method: .post,
+                                 parameters: params,
+                                 encoding: JSONEncoding(options: []),
+                                 headers: nil
+        ).responseJSON { data in
+            print(data)
+        }
+        
     }
     
     @objc private func onTapResetButton() {
@@ -151,7 +162,5 @@ class LoginViewController: UIViewController {
     @objc private func onTapSignUpButton() {
         print("sign up button clicked")
     }
-    
-    // MARK: - Functions
     
 }
