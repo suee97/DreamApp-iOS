@@ -23,10 +23,10 @@ class PolicyAgreeViewController: UIViewController {
         var config = UIButton.Configuration.plain()
         config.title = "전체 동의하기"
         config.attributedTitle?.font = UIFont(name: "Pretendard-Bold", size: 16)
-        config.attributedTitle?.foregroundColor = .black
         config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         config.imagePadding = 7
         button.configuration = config
+        button.titleLabel?.tintColor = .black
         button.addTarget(self, action: #selector(onTapAllCheckButton), for: .touchUpInside)
         return button
     }()
@@ -40,6 +40,7 @@ class PolicyAgreeViewController: UIViewController {
         config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         config.imagePadding = 7
         button.configuration = config
+        button.titleLabel?.tintColor = .black
         button.addTarget(self, action: #selector(onTapPrivacyCheckButton), for: .touchUpInside)
         return button
     }()
@@ -49,12 +50,11 @@ class PolicyAgreeViewController: UIViewController {
         var config = UIButton.Configuration.plain()
         config.title = "서비스 이용약관"
         config.attributedTitle?.font = UIFont(name: "Pretendard-Regular", size: 15)
-        config.attributedTitle?.foregroundColor = .black
         config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         config.imagePadding = 7
         button.configuration = config
+        button.titleLabel?.tintColor = .black
         button.addTarget(self, action: #selector(onTapServiceCheckButton), for: .touchUpInside)
-        
         return button
     }()
     
@@ -216,7 +216,8 @@ class PolicyAgreeViewController: UIViewController {
     }
     
     @objc private func onTapNextButton() {
-        print("next button clicked")
+        let vc = EnterInfoViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func onTapPrivacyContentButton() {
