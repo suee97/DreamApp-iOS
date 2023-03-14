@@ -13,37 +13,20 @@ class EnterInfoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         return imageView
     }()
     
-    private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "이름"
-        label.font = UIFont(name: "Pretendard-Bold", size: 16)
-        return label
-    }()
-    
-    private let idLabel: UILabel = {
-        let label = UILabel()
-        label.text = "학번"
-        label.font = UIFont(name: "Pretendard-Bold", size: 16)
-        return label
-    }()
-    
-    private let majorLabel: UILabel = {
-        let label = UILabel()
-        label.text = "학과"
-        label.font = UIFont(name: "Pretendard-Bold", size: 16)
-        return label
-    }()
+    private let nameLabel: TitleLabel = TitleLabel("이름")
+    private let idLabel: TitleLabel = TitleLabel("학번")
+    private let majorLabel: TitleLabel = TitleLabel("학과")
     
     private lazy var nameField: GreyTextField = {
         let textField = GreyTextField()
-        textField.placeholder = "이름을 입력하세요."
+        textField.configurePlaceholder("이름을 입력하세요.")
         textField.addTarget(self, action: #selector(didTextFieldChanged), for: .editingChanged)
         return textField
     }()
     
     private lazy var idField: GreyTextField = {
         let textField = GreyTextField()
-        textField.placeholder = "학번 8자리를 입력하세요."
+        textField.configurePlaceholder("학번 8자리를 입력하세요.")
         textField.keyboardType = .numberPad
         textField.addTarget(self, action: #selector(didTextFieldChanged), for: .editingChanged)
         return textField
@@ -61,7 +44,6 @@ class EnterInfoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         container.addSubview(imageView)
         textField.rightView = container
         textField.rightViewMode = .always
-        textField.placeholder = "학과를 선택해주세요."
         textField.text = "기계시스템디자인공학과"
         textField.addTarget(self, action: #selector(didTextFieldChanged), for: .editingChanged)
         return textField
@@ -183,6 +165,8 @@ class EnterInfoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
 //        ).responseJSON { data in
 //            print(data)
 //        }
+        let vc = PhoneAuthViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func didTextFieldChanged() {

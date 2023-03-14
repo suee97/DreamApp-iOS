@@ -6,7 +6,7 @@ class LoginViewController: UIViewController {
     // MARK: - Properties
     private lazy var idField: GreyTextField = {
         let textField = GreyTextField()
-        textField.placeholder = "학번 8자리를 입력하세요."
+        textField.configurePlaceholder("학번 8자리를 입력하세요.")
         textField.addTarget(self, action: #selector(didTextFieldChanged), for: .editingChanged)
         textField.keyboardType = .numberPad
         return textField
@@ -14,7 +14,7 @@ class LoginViewController: UIViewController {
     
     private lazy var pwField: GreyTextField = {
         let textField = GreyTextField()
-        textField.placeholder = "비밀번호를 입력하세요."
+        textField.configurePlaceholder("비밀번호를 입력하세요.")
         textField.isSecureTextEntry = true
         textField.addTarget(self, action: #selector(didTextFieldChanged), for: .editingChanged)
         return textField
@@ -26,19 +26,8 @@ class LoginViewController: UIViewController {
         return button
     }()
     
-    private let idLabel: UILabel = {
-        let label = UILabel()
-        label.text = "학번"
-        label.font = UIFont(name: "Pretendard-Bold", size: 16)
-        return label
-    }()
-    
-    private let pwLabel: UILabel = {
-        let label = UILabel()
-        label.text = "비밀번호"
-        label.font = UIFont(name: "Pretendard-Bold", size: 16)
-        return label
-    }()
+    private let idLabel: TitleLabel = TitleLabel("학번")
+    private let pwLabel: TitleLabel = TitleLabel("비밀번호")
     
     private let logo: UIImageView = {
         let imageView = UIImageView()
