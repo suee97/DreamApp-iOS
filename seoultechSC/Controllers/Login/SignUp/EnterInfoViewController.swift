@@ -1,5 +1,5 @@
 import UIKit
-import SwiftUI
+import Alamofire
 
 class EnterInfoViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -51,6 +51,16 @@ class EnterInfoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     lazy var majorField: GreyTextField = {
         let textField = GreyTextField()
+        let container = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        let imageView = UIImageView(frame: CGRect(x: 6, y: 10, width: 20, height: 20))
+
+        imageView.image = UIImage(systemName: "arrowtriangle.down.fill")
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .primaryPurple
+        
+        container.addSubview(imageView)
+        textField.rightView = container
+        textField.rightViewMode = .always
         textField.placeholder = "학과를 선택해주세요."
         textField.text = "기계시스템디자인공학과"
         textField.addTarget(self, action: #selector(didTextFieldChanged), for: .editingChanged)
@@ -152,12 +162,27 @@ class EnterInfoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     private func configureGesture() {
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapGesture)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     
     // MARK: - Selectors
     @objc func onTapNextButton() {
-        print("next button clicked")
+//        guard let studentNo = idField.text else { return }
+//        print(studentNo)
+//        let url = "\(api_url)/member/duplicate?studentNo=\(studentNo)"
+//        print(url)
+//
+//        let request = AF.request(url,
+//                                 method: .get,
+//                                 parameters: nil,
+//                                 encoding: URLEncoding.default,
+//                                 headers: nil
+//        ).responseJSON { data in
+//            print(data)
+//        }
     }
     
     @objc func didTextFieldChanged() {
@@ -176,6 +201,21 @@ class EnterInfoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         majorField.resignFirstResponder()
     }
     
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            self.view.frame.origin.y = -keyboardHeight
+        }
+    }
+    
+    @objc private func keyboardWillHide() {
+        self.view.frame.origin.y = 0
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
     
     // MARK: - Functions
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
