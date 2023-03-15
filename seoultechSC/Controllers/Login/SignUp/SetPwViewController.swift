@@ -69,7 +69,7 @@ class SetPwViewController: UIViewController {
             navigationController?.navigationBar.compactScrollEdgeAppearance = na
         }
         
-        self.navigationItem.title = "약관동의"
+        self.navigationItem.title = "비밀번호"
         self.navigationController?.navigationBar.tintColor = .white
     }
     
@@ -110,7 +110,9 @@ class SetPwViewController: UIViewController {
             pwField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20),
             pwLabel.bottomAnchor.constraint(equalTo: pwField.topAnchor, constant: -11),
             pwLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
-            helpLabelView.bottomAnchor.constraint(equalTo: pwLabel.topAnchor, constant: -90),
+            helpLabelView.widthAnchor.constraint(equalToConstant: 300),
+            helpLabelView.heightAnchor.constraint(equalToConstant: 40),
+            helpLabelView.bottomAnchor.constraint(equalTo: pwLabel.topAnchor, constant: -50),
             helpLabelView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
         ])
     }
@@ -118,7 +120,8 @@ class SetPwViewController: UIViewController {
     
     // MARK: - Selectors
     @objc private func onTapNextButton() {
-        print("on tap next button")
+        let vc = StudentCardAuthViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
