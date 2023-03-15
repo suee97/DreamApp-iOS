@@ -184,6 +184,8 @@ class PhoneAuthViewController: UIViewController {
 //        ).responseJSON { data in
 //            print(data)
 //        }
+        let vc = SetPwViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func didTextFieldChanged() {
