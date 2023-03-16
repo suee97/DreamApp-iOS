@@ -1,7 +1,7 @@
 import UIKit
 import Alamofire
 
-class EnterInfoViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class EnterInfoViewController: UIViewController {
     
     // MARK: - Properties
     private let pickerView = UIPickerView()
@@ -15,6 +15,7 @@ class EnterInfoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     private let nameLabel: TitleLabel = TitleLabel("이름")
     private let idLabel: TitleLabel = TitleLabel("학번")
+    private let collegeLabel: TitleLabel = TitleLabel("단과대학")
     private let majorLabel: TitleLabel = TitleLabel("학과")
     
     private lazy var nameField: GreyTextField = {
@@ -32,19 +33,34 @@ class EnterInfoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         return textField
     }()
     
+    lazy var collegeFieldContainer: UIView = {
+        let container = UIView()
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(onTapCollegeField))
+        container.addGestureRecognizer(gesture)
+        container.backgroundColor = .clear
+        return container
+    }()
+    
+    lazy var collegeField: GreyTextField = {
+        let textField = GreyTextField()
+        textField.configurePlaceholder("단과대학을 선택하세요.")
+        textField.isUserInteractionEnabled = false
+        textField.addTarget(self, action: #selector(didTextFieldChanged), for: .editingChanged)
+        return textField
+    }()
+    
+    lazy var majorFieldContainer: UIView = {
+        let container = UIView()
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(onTapMajorField))
+        container.addGestureRecognizer(gesture)
+        container.backgroundColor = .clear
+        return container
+    }()
+    
     lazy var majorField: GreyTextField = {
         let textField = GreyTextField()
-        let container = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        let imageView = UIImageView(frame: CGRect(x: 6, y: 10, width: 20, height: 20))
-
-        imageView.image = UIImage(systemName: "arrowtriangle.down.fill")
-        imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .primaryPurple
-        
-        container.addSubview(imageView)
-        textField.rightView = container
-        textField.rightViewMode = .always
-        textField.text = "기계시스템디자인공학과"
+        textField.configurePlaceholder("학과를 선택하세요.")
+        textField.isUserInteractionEnabled = false
         textField.addTarget(self, action: #selector(didTextFieldChanged), for: .editingChanged)
         return textField
     }()
@@ -80,13 +96,11 @@ class EnterInfoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             navigationController?.navigationBar.compactScrollEdgeAppearance = na
         }
         
-        self.navigationItem.title = "회원가입"
+        self.navigationItem.title = "학적 정보 입력"
         self.navigationController?.navigationBar.tintColor = .white
     }
     
     private func configureUI() {
-        configurePickerView()
-        nextButton.setActive(false)
         view.backgroundColor = .white
         
         view.addSubview(logo)
@@ -94,9 +108,13 @@ class EnterInfoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         view.addSubview(nameField)
         view.addSubview(idLabel)
         view.addSubview(idField)
+        view.addSubview(collegeFieldContainer)
+        view.addSubview(majorFieldContainer)
+        view.addSubview(collegeLabel)
         view.addSubview(majorLabel)
-        view.addSubview(majorField)
         view.addSubview(nextButton)
+        collegeFieldContainer.addSubview(collegeField)
+        majorFieldContainer.addSubview(majorField)
                 
         logo.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -106,6 +124,18 @@ class EnterInfoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         majorLabel.translatesAutoresizingMaskIntoConstraints = false
         majorField.translatesAutoresizingMaskIntoConstraints = false
         nextButton.translatesAutoresizingMaskIntoConstraints = false
+        collegeLabel.translatesAutoresizingMaskIntoConstraints = false
+        collegeField.translatesAutoresizingMaskIntoConstraints = false
+        collegeFieldContainer.translatesAutoresizingMaskIntoConstraints = false
+        majorFieldContainer.translatesAutoresizingMaskIntoConstraints = false
+        
+        // SubView
+        NSLayoutConstraint.activate([
+            collegeField.leftAnchor.constraint(equalTo: collegeFieldContainer.leftAnchor, constant: 0),
+            collegeField.rightAnchor.constraint(equalTo: collegeFieldContainer.rightAnchor, constant: 0),
+            majorField.leftAnchor.constraint(equalTo: majorFieldContainer.leftAnchor, constant: 0),
+            majorField.rightAnchor.constraint(equalTo: majorFieldContainer.rightAnchor, constant: 0)
+        ])
         
         NSLayoutConstraint.activate([
             logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 109),
@@ -116,29 +146,29 @@ class EnterInfoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             nextButton.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
             nextButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20),
-            majorField.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -50),
-            majorField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
-            majorField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20),
-            idField.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -140),
+            majorFieldContainer.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -50),
+            majorFieldContainer.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
+            majorFieldContainer.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20),
+            majorFieldContainer.heightAnchor.constraint(equalToConstant: 40),
+            idField.bottomAnchor.constraint(equalTo: nameLabel.topAnchor, constant: -20),
             idField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
             idField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20),
-            nameField.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -230),
+            nameField.bottomAnchor.constraint(equalTo: collegeLabel.topAnchor, constant: -20),
             nameField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
             nameField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20),
-            majorLabel.bottomAnchor.constraint(equalTo: majorField.topAnchor, constant: -11),
+            majorLabel.bottomAnchor.constraint(equalTo: majorFieldContainer.topAnchor, constant: -11),
             majorLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
             idLabel.bottomAnchor.constraint(equalTo: idField.topAnchor, constant: -11),
             idLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
             nameLabel.bottomAnchor.constraint(equalTo: nameField.topAnchor, constant: -11),
             nameLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
+            collegeFieldContainer.bottomAnchor.constraint(equalTo: majorLabel.topAnchor, constant: -20),
+            collegeFieldContainer.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
+            collegeFieldContainer.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20),
+            collegeFieldContainer.heightAnchor.constraint(equalToConstant: 40),
+            collegeLabel.bottomAnchor.constraint(equalTo: collegeFieldContainer.topAnchor, constant: -11),
+            collegeLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
         ])
-    }
-    
-    private func configurePickerView() {
-        pickerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 220)
-        pickerView.delegate = self
-        pickerView.dataSource = self
-        majorField.inputView = pickerView
     }
     
     private func configureGesture() {
@@ -170,19 +200,15 @@ class EnterInfoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
     
     @objc func didTextFieldChanged() {
-        if nameField.text != "" && idField.text != "" && majorField.text != "" {
-            nextButton.setActive(true)
-        } else {
-            nextButton.setActive(false)
-        }
+        
     }
     
-    @objc func onTapDone() {
-        majorField.resignFirstResponder()
+    @objc func onTapCollegeField() {
+        print("college field cilcked")
     }
     
-    @objc func onTapCancel() {
-        majorField.resignFirstResponder()
+    @objc func onTapMajorField() {
+        print("major field cilcked")
     }
     
     @objc private func keyboardWillShow(notification: NSNotification) {
@@ -201,20 +227,4 @@ class EnterInfoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    // MARK: - Functions
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-          return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return majors.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return majors[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        majorField.text = majors[row]
-    }
 }
