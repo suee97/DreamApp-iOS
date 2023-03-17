@@ -61,7 +61,7 @@ class SelectLoginViewController: UIViewController {
             self.withoutLoginButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20),
             self.logo.widthAnchor.constraint(equalToConstant: 218),
             self.logo.heightAnchor.constraint(equalToConstant: 105),
-            self.logo.bottomAnchor.constraint(equalTo: self.loginButton.topAnchor, constant: -253),
+            self.logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 119),
             self.logo.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
         ])
     }

@@ -12,6 +12,14 @@ class GreyTextField: UITextField {
         self.tintColor = .text_caption
         self.heightAnchor.constraint(equalToConstant: 40).isActive = true
         self.font = UIFont(name: "Pretendard-Regular", size: 16)
+        self.textColor = .black
+    }
+    
+    func configurePlaceholder(_ text: String) {
+        self.attributedPlaceholder = NSAttributedString(
+            string: text,
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.text_caption]
+        )
     }
     
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
