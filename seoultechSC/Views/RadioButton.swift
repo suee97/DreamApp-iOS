@@ -28,6 +28,15 @@ class RadioButton: UIButton {
         checked = !checked
     }
     
+    public func setState(_ isCheck: Bool) {
+        if isCheck {
+            self.setImage(getCheckedRadioButtonImage(), for: .normal)
+        } else {
+            self.setImage(getNormalRadioButtonImage(), for: .normal)
+        }
+        checked = isCheck
+    }
+    
     private func getNormalRadioButtonImage() -> UIImage? {
         let image = UIImage(systemName: "circle", withConfiguration: symbolConfig)
         return image
