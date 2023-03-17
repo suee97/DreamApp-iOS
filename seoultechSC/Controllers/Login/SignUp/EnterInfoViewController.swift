@@ -183,6 +183,7 @@ class EnterInfoViewController: UIViewController, UpdateCollegeDelegate, UpdateMa
     
     private func configureTextDelegate() {
         nameField.delegate = self
+        idField.delegate = self
     }
     
     func sendUpdateCollege(_ collegeText: String) {
@@ -200,9 +201,7 @@ class EnterInfoViewController: UIViewController, UpdateCollegeDelegate, UpdateMa
     // MARK: - Selectors
     @objc func onTapNextButton() {
 //        guard let studentNo = idField.text else { return }
-//        print(studentNo)
 //        let url = "\(api_url)/member/duplicate?studentNo=\(studentNo)"
-//        print(url)
 //
 //        let request = AF.request(url,
 //                                 method: .get,
@@ -215,12 +214,12 @@ class EnterInfoViewController: UIViewController, UpdateCollegeDelegate, UpdateMa
         
         view.endEditing(true)
         
-        let vc = PhoneAuthViewController()
-        navigationController?.pushViewController(vc, animated: true)
+//        let vc = PhoneAuthViewController()
+//        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func didTextFieldChanged() {
-        if idField.text != "" && nameField.text != "" && collegeField.text != "" && majorField.text != "" {
+        if idField.text?.count == 8 && nameField.text != "" && collegeField.text != "" && majorField.text != "" {
             nextButton.setActive(true)
         } else {
             nextButton.setActive(false)
@@ -266,6 +265,15 @@ class EnterInfoViewController: UIViewController, UpdateCollegeDelegate, UpdateMa
     // MARK: - Functions
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         nameField.resignFirstResponder()
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField.isEqual(idField) {
+            let allowedCharacters = CharacterSet.decimalDigits
+            let characterSet = CharacterSet(charactersIn: string)
+            return allowedCharacters.isSuperset(of: characterSet)
+        }
         return true
     }
 
