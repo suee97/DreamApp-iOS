@@ -9,6 +9,9 @@ extension UIColor {
     static var secondaryPurple: UIColor {
         return UIColor(red: 190/255, green: 197/255, blue: 255/255, alpha: 1)
     }
+    static var backgroundPurple: UIColor {
+        return UIColor(red: 233/255, green: 239/255, blue: 255/255, alpha: 1)
+    }
     static var navy: UIColor {
         return UIColor(red: 75/255, green: 82/255, blue: 136/255, alpha: 1)
     }
