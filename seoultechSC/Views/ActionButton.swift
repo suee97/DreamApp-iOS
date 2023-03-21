@@ -7,10 +7,10 @@ class ActionButton: UIButton {
     // 높이 기본값 : 50
     // 버튼 색상 기본값 : primaryPurple
     // 폰트 기본값 : Pretendard-Bold, 16
-    init(title: String, backgroundColor: UIColor = .primaryPurple) {
+    init(title: String, backgroundColor: UIColor = .primaryPurple, height: CGFloat = 50) {
         super.init(frame: .zero)
         self.setTitle(title, for: .normal)
-        self.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        self.heightAnchor.constraint(equalToConstant: height).isActive = true
         self.layer.cornerRadius = 5
         self.backgroundColor = backgroundColor
         self.setTitleColor(.white, for: .normal)
