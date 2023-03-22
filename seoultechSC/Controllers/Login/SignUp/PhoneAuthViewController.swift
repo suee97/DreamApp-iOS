@@ -1,9 +1,12 @@
 import UIKit
 import Alamofire
 
-class PhoneAuthViewController: UIViewController {
+class PhoneAuthViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Properties
+    private var timer: Timer?
+    private var timerCount: Int = 0
+    
     private let logo: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "dream_logo")
@@ -19,7 +22,7 @@ class PhoneAuthViewController: UIViewController {
     
     private let helpLabel: UILabel = {
         let label = UILabel()
-        label.text = "인증이 완료되었습니다."
+        label.text = ""
         label.textColor = UIColor(red: 255/255, green: 56/255, blue: 69/255, alpha: 1)
         label.font = UIFont(name: "Pretendard-Regular", size: 12)
         return label
@@ -28,29 +31,31 @@ class PhoneAuthViewController: UIViewController {
     private let phoneLabel: TitleLabel = TitleLabel("휴대폰번호")
     private let authLabel: TitleLabel = TitleLabel("인증번호")
     
-    private lazy var askAuthButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 66, height: 40))
+    private lazy var askAuthButton: ActionButton = {
+        let button = ActionButton(frame: CGRect(x: 0, y: 0, width: 66, height: 40))
         button.backgroundColor = .primaryPurple
         button.layer.cornerRadius = 10
         button.setTitle("인증요청", for: .normal)
         button.titleLabel?.font = UIFont(name: "Pretendard-Bold", size: 12)
+        button.addTarget(self, action: #selector(onTapAskAuthButton), for: .touchUpInside)
         return button
     }()
     
-    private lazy var confirmButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 66, height: 40))
+    private lazy var confirmButton: ActionButton = {
+        let button = ActionButton(frame: CGRect(x: 0, y: 0, width: 66, height: 40))
         button.backgroundColor = .primaryPurple
         button.layer.cornerRadius = 10
         button.setTitle("확인", for: .normal)
         button.titleLabel?.font = UIFont(name: "Pretendard-Bold", size: 12)
+        button.addTarget(self, action: #selector(onTapConfirmButton), for: .touchUpInside)
         return button
     }()
     
     private let timerLabel: UILabel = {
         let label = UILabel()
-        label.text = "3:00"
+        label.text = "03:00"
         label.font = UIFont(name: "Pretendard-Bold", size: 16)
-        label.textColor = UIColor(red: 255/255, green: 56/255, blue: 69/255, alpha: 1)
+        label.textColor = UIColor(red: 255/255, green: 56/255, blue: 69/255, alpha: 0.5)
         return label
     }()
     
@@ -80,7 +85,7 @@ class PhoneAuthViewController: UIViewController {
         container.addSubview(timerLabel)
         container.addSubview(confirmButton)
         
-        timerLabel.frame = CGRect(x: 0, y: 10, width: 36, height: 19)
+        timerLabel.frame = CGRect(x: -10, y: 10, width: 48, height: 19)
         confirmButton.frame = CGRect(x: 46, y: 0, width: 66, height: 40)
         
         textField.rightView = container
@@ -119,6 +124,12 @@ class PhoneAuthViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .white
+        configureTextDelegate()
+        
+        nextButton.setActive(false)
+        askAuthButton.setActive(false)
+        confirmButton.setActive(false)
+        authField.isEnabled = false
         
         view.addSubview(logo)
         view.addSubview(nextButton)
@@ -168,28 +179,197 @@ class PhoneAuthViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    private func configureTextDelegate() {
+        phoneField.delegate = self
+        authField.delegate = self
+    }
+    
     
     // MARK: - Selectors
     @objc func onTapNextButton() {
-//        guard let studentNo = idField.text else { return }
-//        print(studentNo)
-//        let url = "\(api_url)/member/duplicate?studentNo=\(studentNo)"
-//        print(url)
-//
-//        let request = AF.request(url,
-//                                 method: .get,
-//                                 parameters: nil,
-//                                 encoding: URLEncoding.default,
-//                                 headers: nil
-//        ).responseJSON { data in
-//            print(data)
-//        }
         let vc = SetPwViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc func didTextFieldChanged() {
-        print("text changed")
+    @objc private func didTextFieldChanged() {
+        if phoneField.isEnabled && (phoneField.text?.count == 10 || phoneField.text?.count == 11) {
+            askAuthButton.setActive(true)
+        } else {
+            askAuthButton.setActive(false)
+        }
+        
+        if authField.isEnabled && authField.text?.count == 6 {
+            confirmButton.setActive(true)
+        } else {
+            confirmButton.setActive(false)
+        }
+    }
+    
+    @objc private func onTapAskAuthButton() {
+        askAuthButton.setLoading(true)
+        phoneField.isEnabled = false
+        phoneField.textColor = .text_caption
+        
+        let url = api_url + "/auth/sms"
+        let params = ["phoneNo" : getPhoneParameter(phone: phoneField.text!)] as Dictionary
+        
+        let request = AF.request(url,
+                                 method: .post,
+                                 parameters: params,
+                                 encoding: JSONEncoding(options: []),
+                                 headers: nil
+        ).responseJSON { response in
+            switch response.result {
+            case .success:
+                do {
+                    let decoder = JSONDecoder()
+                    guard let responseData = response.data else { return }
+                    let result = try decoder.decode(AuthApiResult.self, from: responseData)
+                    
+                    if result.status == 200 {
+                        self.askAuthButton.setLoading(false)
+                        self.setHelpLabel("인증번호 6자리를 입력해주세요.")
+                        
+                        self.timerLabel.textColor = UIColor(red: 255/255, green: 56/255, blue: 69/255, alpha: 1)
+                        self.timerCount = 180
+                        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerCallBack), userInfo: nil, repeats: true)
+                        
+                        self.authField.isEnabled = true
+                        self.phoneField.textColor = .text_caption
+                        self.phoneField.isEnabled = false
+                        self.askAuthButton.setLoading(false)
+                        self.askAuthButton.setActive(false)
+                        
+                        // TODO: Hide Keyboard
+                        
+                    } else {
+                        switch result.errorCode {
+                        case "ST064":
+                            self.setHelpLabel("이미 가입된 계정이 존재합니다.")
+                            self.phoneField.isEnabled = true
+                            self.askAuthButton.setLoading(false)
+                            self.phoneField.textColor = .black
+                        case "ST065":
+                            self.setHelpLabel("너무 많은 요청을 보냈습니다. 10분 뒤 다시 시도해주세요.")
+                            self.phoneField.isEnabled = true
+                            self.askAuthButton.setLoading(false)
+                            self.phoneField.textColor = .black
+                        default:
+                            debugPrint(">> 휴대폰 인증번호 발송 : erorr code not found")
+                        }
+                    }
+                } catch {
+                    self.setHelpLabel("에러가 발생했습니다.")
+                    self.phoneField.isEnabled = true
+                    self.askAuthButton.setLoading(false)
+                    self.phoneField.textColor = .black
+                }
+            case .failure:
+                self.setHelpLabel("에러가 발생했습니다.")
+                self.phoneField.isEnabled = true
+                self.askAuthButton.setLoading(false)
+                self.phoneField.textColor = .black
+            }
+        }
+    }
+    
+    @objc private func onTapConfirmButton() {
+        // MARK: TODO
+        confirmButton.setLoading(true)
+        authField.isEnabled = false
+        authField.textColor = .text_caption
+        
+        let url = api_url + "/auth/sms/check"
+        let params = ["phoneNo" : getPhoneParameter(phone: phoneField.text!), "code" : authField.text!] as Dictionary
+        
+        let request = AF.request(url,
+                                 method: .post,
+                                 parameters: params,
+                                 encoding: JSONEncoding(options: []),
+                                 headers: nil
+        ).responseJSON { response in
+            switch response.result {
+            case .success:
+                do {
+                    let decoder = JSONDecoder()
+                    guard let responseData = response.data else { return }
+                    let result = try decoder.decode(AuthApiResult.self, from: responseData)
+                    
+                    if result.status == 200 {
+                        self.timer?.invalidate()
+                        self.timer = nil
+                        self.timerLabel.textColor = UIColor(red: 255/255, green: 56/255, blue: 69/255, alpha: 0.5)
+                        
+                        self.confirmButton.setLoading(false)
+                        self.confirmButton.setActive(false)
+                        
+                        self.authField.textColor = .text_caption
+                        self.authField.isEnabled = false
+                        
+                        self.setHelpLabel("인증이 완료되었습니다.")
+                        self.nextButton.setActive(true)
+                        
+                        // TODO: Hide Keyboard
+                        
+                        
+                    } else {
+                        switch result.errorCode {
+                        case "ST066":
+                            self.setHelpLabel("인증정보가 일치하지 않습니다.")
+                            self.authField.isEnabled = true
+                            self.confirmButton.setLoading(false)
+                            self.authField.textColor = .black
+                        case "ST067":
+                            self.setHelpLabel("인증시간이 만료되었습니다.")
+                            self.phoneField.isEnabled = true
+                            self.authField.textColor = .text_caption
+                            self.askAuthButton.setActive(true)
+                            self.askAuthButton.setLoading(false)
+                            self.phoneField.textColor = .black
+                        default:
+                            debugPrint(">> 인증번호 확인 : error code not found")
+                        }
+                    }
+                } catch {
+                    self.setHelpLabel("에러가 발생했습니다.")
+                    self.authField.isEnabled = true
+                    self.confirmButton.setLoading(false)
+                    self.authField.textColor = .black
+                }
+            case .failure:
+                self.setHelpLabel("에러가 발생했습니다.")
+                self.authField.isEnabled = true
+                self.confirmButton.setLoading(false)
+                self.authField.textColor = .black
+            }
+        }
+    }
+    
+    @objc private func timerCallBack() {
+        timerCount -= 1
+        
+        let str: String?
+        let min: Int = timerCount / 60
+        let sec: Int = timerCount % 60
+        if sec < 10 {
+            str = "0\(min):0\(sec)"
+        } else {
+            str = "0\(min):\(sec)"
+        }
+        
+        timerLabel.text = str
+        
+        if timerCount == 0 {
+            timer?.invalidate()
+            timer = nil
+            
+            setHelpLabel("인증시간이 만료되었습니다.")
+            phoneField.isEnabled = true
+            authField.isEnabled = false
+            askAuthButton.setLoading(false)
+            confirmButton.setActive(false)
+            phoneField.textColor = .black
+        }
     }
     
     @objc private func keyboardWillShow(notification: NSNotification) {
@@ -208,4 +388,42 @@ class PhoneAuthViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    
+    // MARK: - Functions
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let allowedCharacters = CharacterSet.decimalDigits
+        let characterSet = CharacterSet(charactersIn: string)
+        
+        if textField.isEqual(phoneField) {
+            let phoneString = phoneField.text ?? ""
+            guard let phoneStringRange = Range(range, in: phoneString) else { return false }
+            let updatedPhoneString = phoneString.replacingCharacters(in: phoneStringRange, with: string)
+            return updatedPhoneString.count <= 11 && allowedCharacters.isSuperset(of: characterSet)
+        }
+        if textField.isEqual(authField) {
+            let authString = authField.text ?? ""
+            guard let authStringRange = Range(range, in: authString) else { return false }
+            let updatedAuthString = authString.replacingCharacters(in: authStringRange, with: string)
+            return updatedAuthString.count <= 6 && allowedCharacters.isSuperset(of: characterSet)
+        }
+        
+        return false
+    }
+    
+    private func setHelpLabel(_ text: String) {
+        helpLabel.text = text
+    }
+    
+    private func getPhoneParameter(phone: String) -> String {
+        if phone.count == 10 {
+            let arr = Array(phone)
+            let returnString: String = "\(arr[0])\(arr[1])\(arr[2])-\(arr[3])\(arr[4])\(arr[5])-\(arr[6])\(arr[7])\(arr[8])\(arr[9])"
+            return returnString
+        } else {
+            let arr = Array(phone)
+            let returnString: String = "\(arr[0])\(arr[1])\(arr[2])-\(arr[3])\(arr[4])\(arr[5])\(arr[6])-\(arr[7])\(arr[8])\(arr[9])\(arr[10])"
+            return returnString
+        }
+    }
 }
