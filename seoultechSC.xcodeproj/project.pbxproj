@@ -39,6 +39,7 @@
 		3C204EAC29CD5DA20026E85E /* NavigationBarAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204EA629CD5DA20026E85E /* NavigationBarAppearance.swift */; };
 		3C204EAD29CD5DA20026E85E /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204EA729CD5DA20026E85E /* ActionButton.swift */; };
 		3C204EAE29CD5DA20026E85E /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204EA829CD5DA20026E85E /* TitleLabel.swift */; };
+		3C204EB129CD5DFE0026E85E /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204EB029CD5DFE0026E85E /* InfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		3C204EA629CD5DA20026E85E /* NavigationBarAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBarAppearance.swift; sourceTree = "<group>"; };
 		3C204EA729CD5DA20026E85E /* ActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		3C204EA829CD5DA20026E85E /* TitleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
+		3C204EB029CD5DFE0026E85E /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		5BCAD98729A509820010E811 /* seoultechSC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = seoultechSC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BCAD99829A509830010E811 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -102,6 +104,7 @@
 		3C204E6629CD5D660026E85E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				3C204EAF29CD5DE30026E85E /* Info */,
 				3C204E6729CD5D660026E85E /* HomeViewController.swift */,
 			);
 			path = Home;
@@ -186,6 +189,14 @@
 				3C204EA829CD5DA20026E85E /* TitleLabel.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		3C204EAF29CD5DE30026E85E /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				3C204EB029CD5DFE0026E85E /* InfoViewController.swift */,
+			);
+			path = Info;
 			sourceTree = "<group>";
 		};
 		5BCAD97E29A509820010E811 = {
@@ -308,6 +319,7 @@
 				3C204E7829CD5D660026E85E /* PhoneAuthViewController.swift in Sources */,
 				3C204E7529CD5D660026E85E /* StudentCardAuthViewController.swift in Sources */,
 				3C204E7229CD5D660026E85E /* HomeViewController.swift in Sources */,
+				3C204EB129CD5DFE0026E85E /* InfoViewController.swift in Sources */,
 				3C204E7329CD5D660026E85E /* SetPwViewController.swift in Sources */,
 				3C204E7629CD5D660026E85E /* SignUpEndViewController.swift in Sources */,
 				3C204EA129CD5D960026E85E /* SceneDelegate.swift in Sources */,
