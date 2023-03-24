@@ -7,17 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B027E1529BED16E0079D41B /* EnterInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B027E1429BED16E0079D41B /* EnterInfoViewController.swift */; };
+		5B027E1929C0593C0079D41B /* PhoneAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B027E1829C0593C0079D41B /* PhoneAuthViewController.swift */; };
+		5B535B1329C15AF5009E5BCE /* SetPwViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B535B1229C15AF5009E5BCE /* SetPwViewController.swift */; };
+		5B535B1529C17A57009E5BCE /* StudentCardAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B535B1429C17A57009E5BCE /* StudentCardAuthViewController.swift */; };
+		5B535B1729C2F41A009E5BCE /* SignUpEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B535B1629C2F41A009E5BCE /* SignUpEndViewController.swift */; };
+		5B535B1929C49788009E5BCE /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B535B1829C49788009E5BCE /* CustomTableViewCell.swift */; };
 		5B644E8B29A8C2AA009E7180 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B644E8A29A8C2AA009E7180 /* ActionButton.swift */; };
 		5B644E8F29AB6F41009E7180 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B644E8E29AB6F41009E7180 /* Extensions.swift */; };
 		5B644E9129AB7945009E7180 /* SelectLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B644E9029AB7945009E7180 /* SelectLoginViewController.swift */; };
 		5B644E9329AC625D009E7180 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B644E9229AC625D009E7180 /* LoginViewController.swift */; };
 		5B644E9529ACA12F009E7180 /* NavigationBarAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B644E9429ACA12F009E7180 /* NavigationBarAppearance.swift */; };
 		5B644E9729ACAA07009E7180 /* GreyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B644E9629ACAA07009E7180 /* GreyTextField.swift */; };
+		5B7ACEC829B7610D0058339B /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7ACEC729B7610D0058339B /* RadioButton.swift */; };
+		5B88AAC029C845E400D85572 /* AuthModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B88AABF29C845E400D85572 /* AuthModels.swift */; };
+		5B8FD11929C5B6010045DF75 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8FD11829C5B6000045DF75 /* HomeViewController.swift */; };
 		5BCAD98B29A509820010E811 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCAD98A29A509820010E811 /* AppDelegate.swift */; };
 		5BCAD98D29A509820010E811 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCAD98C29A509820010E811 /* SceneDelegate.swift */; };
-		5BCAD98F29A509820010E811 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCAD98E29A509820010E811 /* ViewController.swift */; };
 		5BCAD99429A509830010E811 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BCAD99329A509830010E811 /* Assets.xcassets */; };
 		5BCAD99729A509830010E811 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BCAD99529A509830010E811 /* LaunchScreen.storyboard */; };
+		5BF8016629C0789B00DED3D8 /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF8016529C0789B00DED3D8 /* TitleLabel.swift */; };
 		5BF96CE529AD018400E081D8 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5BF96CDC29AD018400E081D8 /* Pretendard-ExtraBold.otf */; };
 		5BF96CE629AD018400E081D8 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5BF96CDD29AD018400E081D8 /* Pretendard-Thin.otf */; };
 		5BF96CE729AD018400E081D8 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5BF96CDE29AD018400E081D8 /* Pretendard-Regular.otf */; };
@@ -27,22 +36,34 @@
 		5BF96CEB29AD018400E081D8 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5BF96CE229AD018400E081D8 /* Pretendard-Black.otf */; };
 		5BF96CEC29AD018400E081D8 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5BF96CE329AD018400E081D8 /* Pretendard-Light.otf */; };
 		5BF96CED29AD018400E081D8 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5BF96CE429AD018400E081D8 /* Pretendard-SemiBold.otf */; };
+		5BF96CF029B1D79200E081D8 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5BF96CEF29B1D79200E081D8 /* Alamofire */; };
+		5BF96CF629B1DF3700E081D8 /* Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF96CF529B1DF3700E081D8 /* Commons.swift */; };
+		5BF96CFD29B38FF300E081D8 /* PolicyAgreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF96CFC29B38FF300E081D8 /* PolicyAgreeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B027E1429BED16E0079D41B /* EnterInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterInfoViewController.swift; sourceTree = "<group>"; };
+		5B027E1829C0593C0079D41B /* PhoneAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneAuthViewController.swift; sourceTree = "<group>"; };
+		5B535B1229C15AF5009E5BCE /* SetPwViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPwViewController.swift; sourceTree = "<group>"; };
+		5B535B1429C17A57009E5BCE /* StudentCardAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentCardAuthViewController.swift; sourceTree = "<group>"; };
+		5B535B1629C2F41A009E5BCE /* SignUpEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEndViewController.swift; sourceTree = "<group>"; };
+		5B535B1829C49788009E5BCE /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		5B644E8A29A8C2AA009E7180 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		5B644E8E29AB6F41009E7180 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		5B644E9029AB7945009E7180 /* SelectLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLoginViewController.swift; sourceTree = "<group>"; };
 		5B644E9229AC625D009E7180 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5B644E9429ACA12F009E7180 /* NavigationBarAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarAppearance.swift; sourceTree = "<group>"; };
 		5B644E9629ACAA07009E7180 /* GreyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreyTextField.swift; sourceTree = "<group>"; };
+		5B7ACEC729B7610D0058339B /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
+		5B88AABF29C845E400D85572 /* AuthModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModels.swift; sourceTree = "<group>"; };
+		5B8FD11829C5B6000045DF75 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		5BCAD98729A509820010E811 /* seoultechSC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = seoultechSC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BCAD98A29A509820010E811 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BCAD98C29A509820010E811 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5BCAD98E29A509820010E811 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5BCAD99329A509830010E811 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5BCAD99629A509830010E811 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5BCAD99829A509830010E811 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5BF8016529C0789B00DED3D8 /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
 		5BF96CDC29AD018400E081D8 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
 		5BF96CDD29AD018400E081D8 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
 		5BF96CDE29AD018400E081D8 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
@@ -52,6 +73,8 @@
 		5BF96CE229AD018400E081D8 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		5BF96CE329AD018400E081D8 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
 		5BF96CE429AD018400E081D8 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		5BF96CF529B1DF3700E081D8 /* Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commons.swift; sourceTree = "<group>"; };
+		5BF96CFC29B38FF300E081D8 /* PolicyAgreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyAgreeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BF96CF029B1D79200E081D8 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,9 +122,10 @@
 		5BCAD99F29A517330010E811 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5BCAD98E29A509820010E811 /* ViewController.swift */,
+				5BF96CF929B38F2B00E081D8 /* Home */,
+				5BF96CF829B38F2100E081D8 /* Splash */,
+				5BF96CF729B38EB100E081D8 /* Login */,
 				5B644E9029AB7945009E7180 /* SelectLoginViewController.swift */,
-				5B644E9229AC625D009E7180 /* LoginViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -108,6 +133,7 @@
 		5BCAD9A029A517440010E811 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5B88AABF29C845E400D85572 /* AuthModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -118,6 +144,9 @@
 				5B644E8A29A8C2AA009E7180 /* ActionButton.swift */,
 				5B644E9429ACA12F009E7180 /* NavigationBarAppearance.swift */,
 				5B644E9629ACAA07009E7180 /* GreyTextField.swift */,
+				5B7ACEC729B7610D0058339B /* RadioButton.swift */,
+				5BF8016529C0789B00DED3D8 /* TitleLabel.swift */,
+				5B535B1829C49788009E5BCE /* CustomTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -145,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				5B644E8E29AB6F41009E7180 /* Extensions.swift */,
+				5BF96CF529B1DF3700E081D8 /* Commons.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -165,6 +195,51 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		5BF96CF729B38EB100E081D8 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				5BF96CFB29B38FCA00E081D8 /* ResetPassword */,
+				5BF96CFA29B38FC000E081D8 /* SignUp */,
+				5B644E9229AC625D009E7180 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		5BF96CF829B38F2100E081D8 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		5BF96CF929B38F2B00E081D8 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				5B8FD11829C5B6000045DF75 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		5BF96CFA29B38FC000E081D8 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				5BF96CFC29B38FF300E081D8 /* PolicyAgreeViewController.swift */,
+				5B027E1429BED16E0079D41B /* EnterInfoViewController.swift */,
+				5B027E1829C0593C0079D41B /* PhoneAuthViewController.swift */,
+				5B535B1229C15AF5009E5BCE /* SetPwViewController.swift */,
+				5B535B1429C17A57009E5BCE /* StudentCardAuthViewController.swift */,
+				5B535B1629C2F41A009E5BCE /* SignUpEndViewController.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		5BF96CFB29B38FCA00E081D8 /* ResetPassword */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ResetPassword;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -181,6 +256,9 @@
 			dependencies = (
 			);
 			name = seoultechSC;
+			packageProductDependencies = (
+				5BF96CEF29B1D79200E081D8 /* Alamofire */,
+			);
 			productName = seoultechSC;
 			productReference = 5BCAD98729A509820010E811 /* seoultechSC.app */;
 			productType = "com.apple.product-type.application";
@@ -209,6 +287,9 @@
 				Base,
 			);
 			mainGroup = 5BCAD97E29A509820010E811;
+			packageReferences = (
+				5BF96CEE29B1D79200E081D8 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 5BCAD98829A509820010E811 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -246,10 +327,21 @@
 			files = (
 				5B644E9329AC625D009E7180 /* LoginViewController.swift in Sources */,
 				5B644E8F29AB6F41009E7180 /* Extensions.swift in Sources */,
-				5BCAD98F29A509820010E811 /* ViewController.swift in Sources */,
+				5BF96CF629B1DF3700E081D8 /* Commons.swift in Sources */,
+				5BF8016629C0789B00DED3D8 /* TitleLabel.swift in Sources */,
+				5B027E1929C0593C0079D41B /* PhoneAuthViewController.swift in Sources */,
+				5B535B1929C49788009E5BCE /* CustomTableViewCell.swift in Sources */,
+				5B7ACEC829B7610D0058339B /* RadioButton.swift in Sources */,
+				5B535B1329C15AF5009E5BCE /* SetPwViewController.swift in Sources */,
+				5B535B1729C2F41A009E5BCE /* SignUpEndViewController.swift in Sources */,
 				5B644E9729ACAA07009E7180 /* GreyTextField.swift in Sources */,
+				5BF96CFD29B38FF300E081D8 /* PolicyAgreeViewController.swift in Sources */,
+				5B88AAC029C845E400D85572 /* AuthModels.swift in Sources */,
 				5BCAD98B29A509820010E811 /* AppDelegate.swift in Sources */,
+				5B535B1529C17A57009E5BCE /* StudentCardAuthViewController.swift in Sources */,
 				5BCAD98D29A509820010E811 /* SceneDelegate.swift in Sources */,
+				5B8FD11929C5B6010045DF75 /* HomeViewController.swift in Sources */,
+				5B027E1529BED16E0079D41B /* EnterInfoViewController.swift in Sources */,
 				5B644E9529ACA12F009E7180 /* NavigationBarAppearance.swift in Sources */,
 				5B644E9129AB7945009E7180 /* SelectLoginViewController.swift in Sources */,
 				5B644E8B29A8C2AA009E7180 /* ActionButton.swift in Sources */,
@@ -460,6 +552,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5BF96CEE29B1D79200E081D8 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5BF96CEF29B1D79200E081D8 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5BF96CEE29B1D79200E081D8 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5BCAD97F29A509820010E811 /* Project object */;
 }
