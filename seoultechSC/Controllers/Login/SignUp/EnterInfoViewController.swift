@@ -200,22 +200,43 @@ class EnterInfoViewController: UIViewController, UpdateCollegeDelegate, UpdateMa
     
     // MARK: - Selectors
     @objc func onTapNextButton() {
-//        guard let studentNo = idField.text else { return }
-//        let url = "\(api_url)/member/duplicate?studentNo=\(studentNo)"
-//
-//        let request = AF.request(url,
-//                                 method: .get,
-//                                 parameters: nil,
-//                                 encoding: URLEncoding.default,
-//                                 headers: nil
-//        ).responseJSON { data in
-//            print(data)
-//        }
-        
-        view.endEditing(true)
-        
-//        let vc = PhoneAuthViewController()
-//        navigationController?.pushViewController(vc, animated: true)
+        nextButton.setLoading(true)
+
+        guard let studentNo = idField.text else { return }
+        let url = "\(api_url)/member/duplicate?studentNo=\(studentNo)"
+
+        let request = AF.request(url,
+                                 method: .get,
+                                 parameters: nil,
+                                 encoding: URLEncoding.default,
+                                 headers: nil
+        ).responseJSON { response in
+            switch response.result {
+            case .success:
+                do {
+                    // TODO: 예외처리 UI
+                    let decoder = JSONDecoder()
+                    guard let responseData = response.data else { return }
+                    let result = try decoder.decode(AuthApiResult.self, from: responseData)
+                    if result.status == 200 {
+                        self.nextButton.setLoading(false)
+                        self.view.endEditing(true)
+                        let vc = PhoneAuthViewController()
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                    if result.errorCode == "ST053" {
+                        // 가입된 학번 존재
+                        self.nextButton.setLoading(false)
+                    } else {
+                        self.nextButton.setLoading(false)
+                    }
+                } catch {
+                    self.nextButton.setLoading(false)
+                }
+            case .failure:
+                self.nextButton.setLoading(false)
+            }
+        }
     }
     
     @objc func didTextFieldChanged() {

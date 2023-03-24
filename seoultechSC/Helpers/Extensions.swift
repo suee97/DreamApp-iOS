@@ -21,4 +21,7 @@ extension UIColor {
     static var text_caption: UIColor {
         return UIColor(red: 151/255, green: 151/255, blue: 151/255, alpha: 1)
     }
+    static var modalBackground: UIColor {
+        return UIColor.black.withAlphaComponent(0.3)
+    }
 }
