@@ -79,7 +79,9 @@ class HomeViewController: UIViewController {
         
         iconLabel.font = UIFont(name: "Pretendard-Bold", size: 25)
         label1.font = UIFont(name: "Pretendard-Bold", size: 12)
+        label1.textColor = .black
         label2.font = UIFont(name: "Pretendard-Bold", size: 12)
+        label2.textColor = .black
         
         iconLabel.translatesAutoresizingMaskIntoConstraints = false
         label1.translatesAutoresizingMaskIntoConstraints = false
@@ -307,6 +309,7 @@ class HomeTabButton: UIButton {
         
         logoIconLabel.font = UIFont(name: "Pretendard-Bold", size: 25)
         logoText.font = UIFont(name: "Pretendard-Bold", size: 12)
+        logoText.textColor = .black
         
         logoIconLabel.translatesAutoresizingMaskIntoConstraints = false
         logoText.translatesAutoresizingMaskIntoConstraints = false
