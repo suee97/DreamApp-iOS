@@ -313,7 +313,7 @@ class HomeTabButton: UIButton {
         
         logoIconLabel.translatesAutoresizingMaskIntoConstraints = false
         logoText.translatesAutoresizingMaskIntoConstraints = false
-        
+         
         self.addSubview(logoIconLabel)
         self.addSubview(logoText)
         
