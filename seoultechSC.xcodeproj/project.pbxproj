@@ -7,6 +7,40 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C204E7229CD5D660026E85E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E6729CD5D660026E85E /* HomeViewController.swift */; };
+		3C204E7329CD5D660026E85E /* SetPwViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E6A29CD5D660026E85E /* SetPwViewController.swift */; };
+		3C204E7429CD5D660026E85E /* PolicyAgreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E6B29CD5D660026E85E /* PolicyAgreeViewController.swift */; };
+		3C204E7529CD5D660026E85E /* StudentCardAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E6C29CD5D660026E85E /* StudentCardAuthViewController.swift */; };
+		3C204E7629CD5D660026E85E /* SignUpEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E6D29CD5D660026E85E /* SignUpEndViewController.swift */; };
+		3C204E7729CD5D660026E85E /* EnterInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E6E29CD5D660026E85E /* EnterInfoViewController.swift */; };
+		3C204E7829CD5D660026E85E /* PhoneAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E6F29CD5D660026E85E /* PhoneAuthViewController.swift */; };
+		3C204E7929CD5D660026E85E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E7029CD5D660026E85E /* LoginViewController.swift */; };
+		3C204E7A29CD5D660026E85E /* SelectLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E7129CD5D660026E85E /* SelectLoginViewController.swift */; };
+		3C204E7F29CD5D7C0026E85E /* Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E7C29CD5D7C0026E85E /* Commons.swift */; };
+		3C204E8029CD5D7C0026E85E /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E7D29CD5D7C0026E85E /* KeychainHelper.swift */; };
+		3C204E8129CD5D7C0026E85E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E7E29CD5D7C0026E85E /* Extensions.swift */; };
+		3C204E8429CD5D8A0026E85E /* AuthModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E8329CD5D8A0026E85E /* AuthModels.swift */; };
+		3C204E9529CD5D960026E85E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C204E8629CD5D960026E85E /* Assets.xcassets */; };
+		3C204E9629CD5D960026E85E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C204E8729CD5D960026E85E /* LaunchScreen.storyboard */; };
+		3C204E9729CD5D960026E85E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E8929CD5D960026E85E /* AppDelegate.swift */; };
+		3C204E9829CD5D960026E85E /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3C204E8B29CD5D960026E85E /* Pretendard-Regular.otf */; };
+		3C204E9929CD5D960026E85E /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3C204E8C29CD5D960026E85E /* Pretendard-Black.otf */; };
+		3C204E9A29CD5D960026E85E /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3C204E8D29CD5D960026E85E /* Pretendard-Medium.otf */; };
+		3C204E9B29CD5D960026E85E /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3C204E8E29CD5D960026E85E /* Pretendard-Light.otf */; };
+		3C204E9C29CD5D960026E85E /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3C204E8F29CD5D960026E85E /* Pretendard-ExtraBold.otf */; };
+		3C204E9D29CD5D960026E85E /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3C204E9029CD5D960026E85E /* Pretendard-Bold.otf */; };
+		3C204E9E29CD5D960026E85E /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3C204E9129CD5D960026E85E /* Pretendard-Thin.otf */; };
+		3C204E9F29CD5D960026E85E /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3C204E9229CD5D960026E85E /* Pretendard-ExtraLight.otf */; };
+		3C204EA029CD5D960026E85E /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3C204E9329CD5D960026E85E /* Pretendard-SemiBold.otf */; };
+		3C204EA129CD5D960026E85E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E9429CD5D960026E85E /* SceneDelegate.swift */; };
+		3C204EA929CD5DA20026E85E /* GreyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204EA329CD5DA20026E85E /* GreyTextField.swift */; };
+		3C204EAA29CD5DA20026E85E /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204EA429CD5DA20026E85E /* CustomTableViewCell.swift */; };
+		3C204EAB29CD5DA20026E85E /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204EA529CD5DA20026E85E /* RadioButton.swift */; };
+		3C204EAC29CD5DA20026E85E /* NavigationBarAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204EA629CD5DA20026E85E /* NavigationBarAppearance.swift */; };
+		3C204EAD29CD5DA20026E85E /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204EA729CD5DA20026E85E /* ActionButton.swift */; };
+		3C204EAE29CD5DA20026E85E /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204EA829CD5DA20026E85E /* TitleLabel.swift */; };
+		3C204EB129CD5DFE0026E85E /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204EB029CD5DFE0026E85E /* InfoViewController.swift */; };
+		5BEE4A0D29CE2BB400F34795 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5BEE4A0C29CE2BB400F34795 /* Alamofire */; };
 		5B027E1529BED16E0079D41B /* EnterInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B027E1429BED16E0079D41B /* EnterInfoViewController.swift */; };
 		5B027E1929C0593C0079D41B /* PhoneAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B027E1829C0593C0079D41B /* PhoneAuthViewController.swift */; };
 		5B535B1329C15AF5009E5BCE /* SetPwViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B535B1229C15AF5009E5BCE /* SetPwViewController.swift */; };
@@ -82,6 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BEE4A0D29CE2BB400F34795 /* Alamofire in Frameworks */,
 				5BF96CF029B1D79200E081D8 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,6 +284,7 @@
 			);
 			name = seoultechSC;
 			packageProductDependencies = (
+				5BEE4A0C29CE2BB400F34795 /* Alamofire */,
 				5BF96CEF29B1D79200E081D8 /* Alamofire */,
 			);
 			productName = seoultechSC;
@@ -280,6 +316,7 @@
 			);
 			mainGroup = 5BCAD97E29A509820010E811;
 			packageReferences = (
+				5BEE4A0B29CE2BB400F34795 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				5BF96CEE29B1D79200E081D8 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 5BCAD98829A509820010E811 /* Products */;
@@ -546,6 +583,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5BEE4A0B29CE2BB400F34795 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 		5BF96CEE29B1D79200E081D8 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -557,6 +595,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5BEE4A0C29CE2BB400F34795 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5BEE4A0B29CE2BB400F34795 /* XCRemoteSwiftPackageReference "Alamofire" */;
 		5BF96CEF29B1D79200E081D8 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5BF96CEE29B1D79200E081D8 /* XCRemoteSwiftPackageReference "Alamofire" */;
