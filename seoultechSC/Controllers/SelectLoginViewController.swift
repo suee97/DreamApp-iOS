@@ -15,6 +15,7 @@ class SelectLoginViewController: UIViewController {
         return button
     }()
     
+    
     private let logo: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "dream_logo")
