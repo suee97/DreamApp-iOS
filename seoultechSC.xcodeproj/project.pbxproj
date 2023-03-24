@@ -89,37 +89,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5BCAD97E29A509820010E811 = {
+		3C204E6529CD5D660026E85E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5BCAD98929A509820010E811 /* seoultechSC */,
-				5BCAD98829A509820010E811 /* Products */,
+				3C204E6629CD5D660026E85E /* Home */,
+				3C204E6829CD5D660026E85E /* Login */,
+				3C204E7129CD5D660026E85E /* SelectLoginViewController.swift */,
 			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		5BCAD98829A509820010E811 /* Products */ = {
+		3C204E6629CD5D660026E85E /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				5BCAD98729A509820010E811 /* seoultechSC.app */,
+				3C204EAF29CD5DE30026E85E /* Info */,
+				3C204E6729CD5D660026E85E /* HomeViewController.swift */,
 			);
-			name = Products;
+			path = Home;
 			sourceTree = "<group>";
 		};
-		5BCAD98929A509820010E811 /* seoultechSC */ = {
+		3C204E6829CD5D660026E85E /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				5BCAD9A529A519D40010E811 /* Helpers */,
-				5BCAD9A429A517E10010E811 /* Resources */,
-				5BCAD9A329A517CD0010E811 /* APIClient */,
-				5BCAD9A129A517530010E811 /* Views */,
-				5BCAD9A029A517440010E811 /* Models */,
-				5BCAD99F29A517330010E811 /* Controllers */,
-				5BCAD99829A509830010E811 /* Info.plist */,
+				3C204E6929CD5D660026E85E /* SignUp */,
+				3C204E7029CD5D660026E85E /* LoginViewController.swift */,
 			);
-			path = seoultechSC;
+			path = Login;
 			sourceTree = "<group>";
 		};
-		5BCAD99F29A517330010E811 /* Controllers */ = {
+		3C204E6929CD5D660026E85E /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
 				5BF96CF929B38F2B00E081D8 /* Home */,
@@ -127,10 +125,10 @@
 				5BF96CF729B38EB100E081D8 /* Login */,
 				5B644E9029AB7945009E7180 /* SelectLoginViewController.swift */,
 			);
-			path = Controllers;
+			path = SignUp;
 			sourceTree = "<group>";
 		};
-		5BCAD9A029A517440010E811 /* Models */ = {
+		3C204E7B29CD5D7C0026E85E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				5B88AABF29C845E400D85572 /* AuthModels.swift */,
@@ -138,7 +136,7 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		5BCAD9A129A517530010E811 /* Views */ = {
+		3C204E8529CD5D960026E85E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				5B644E8A29A8C2AA009E7180 /* ActionButton.swift */,
@@ -151,48 +149,42 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		5BCAD9A329A517CD0010E811 /* APIClient */ = {
+		3C204EAF29CD5DE30026E85E /* Info */ = {
 			isa = PBXGroup;
 			children = (
+				3C204EB029CD5DFE0026E85E /* InfoViewController.swift */,
 			);
-			path = APIClient;
+			path = Info;
 			sourceTree = "<group>";
 		};
-		5BCAD9A429A517E10010E811 /* Resources */ = {
+		5BCAD97E29A509820010E811 = {
 			isa = PBXGroup;
 			children = (
-				5BF96CDB29AD015700E081D8 /* Fonts */,
-				5BCAD98A29A509820010E811 /* AppDelegate.swift */,
-				5BCAD98C29A509820010E811 /* SceneDelegate.swift */,
-				5BCAD99329A509830010E811 /* Assets.xcassets */,
-				5BCAD99529A509830010E811 /* LaunchScreen.storyboard */,
+				5BCAD98929A509820010E811 /* seoultechSC */,
+				5BCAD98829A509820010E811 /* Products */,
 			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
-		5BCAD9A529A519D40010E811 /* Helpers */ = {
+		5BCAD98829A509820010E811 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				5B644E8E29AB6F41009E7180 /* Extensions.swift */,
 				5BF96CF529B1DF3700E081D8 /* Commons.swift */,
 			);
-			path = Helpers;
+			name = Products;
 			sourceTree = "<group>";
 		};
-		5BF96CDB29AD015700E081D8 /* Fonts */ = {
+		5BCAD98929A509820010E811 /* seoultechSC */ = {
 			isa = PBXGroup;
 			children = (
-				5BF96CE229AD018400E081D8 /* Pretendard-Black.otf */,
-				5BF96CE029AD018400E081D8 /* Pretendard-Bold.otf */,
-				5BF96CDC29AD018400E081D8 /* Pretendard-ExtraBold.otf */,
-				5BF96CE129AD018400E081D8 /* Pretendard-ExtraLight.otf */,
-				5BF96CE329AD018400E081D8 /* Pretendard-Light.otf */,
-				5BF96CDF29AD018400E081D8 /* Pretendard-Medium.otf */,
-				5BF96CDE29AD018400E081D8 /* Pretendard-Regular.otf */,
-				5BF96CE429AD018400E081D8 /* Pretendard-SemiBold.otf */,
-				5BF96CDD29AD018400E081D8 /* Pretendard-Thin.otf */,
+				3C204EA229CD5DA20026E85E /* Views */,
+				3C204E8529CD5D960026E85E /* Resources */,
+				3C204E8229CD5D8A0026E85E /* Models */,
+				3C204E7B29CD5D7C0026E85E /* Helpers */,
+				3C204E6529CD5D660026E85E /* Controllers */,
+				5BCAD99829A509830010E811 /* Info.plist */,
 			);
-			path = Fonts;
+			path = seoultechSC;
 			sourceTree = "<group>";
 		};
 		5BF96CF729B38EB100E081D8 /* Login */ = {
@@ -304,17 +296,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BF96CED29AD018400E081D8 /* Pretendard-SemiBold.otf in Resources */,
-				5BCAD99729A509830010E811 /* LaunchScreen.storyboard in Resources */,
-				5BCAD99429A509830010E811 /* Assets.xcassets in Resources */,
-				5BF96CEA29AD018400E081D8 /* Pretendard-ExtraLight.otf in Resources */,
-				5BF96CEC29AD018400E081D8 /* Pretendard-Light.otf in Resources */,
-				5BF96CE929AD018400E081D8 /* Pretendard-Bold.otf in Resources */,
-				5BF96CEB29AD018400E081D8 /* Pretendard-Black.otf in Resources */,
-				5BF96CE729AD018400E081D8 /* Pretendard-Regular.otf in Resources */,
-				5BF96CE529AD018400E081D8 /* Pretendard-ExtraBold.otf in Resources */,
-				5BF96CE629AD018400E081D8 /* Pretendard-Thin.otf in Resources */,
-				5BF96CE829AD018400E081D8 /* Pretendard-Medium.otf in Resources */,
+				3C204E9F29CD5D960026E85E /* Pretendard-ExtraLight.otf in Resources */,
+				3C204E9D29CD5D960026E85E /* Pretendard-Bold.otf in Resources */,
+				3C204E9C29CD5D960026E85E /* Pretendard-ExtraBold.otf in Resources */,
+				3C204E9B29CD5D960026E85E /* Pretendard-Light.otf in Resources */,
+				3C204E9A29CD5D960026E85E /* Pretendard-Medium.otf in Resources */,
+				3C204E9929CD5D960026E85E /* Pretendard-Black.otf in Resources */,
+				3C204EA029CD5D960026E85E /* Pretendard-SemiBold.otf in Resources */,
+				3C204E9E29CD5D960026E85E /* Pretendard-Thin.otf in Resources */,
+				3C204E9629CD5D960026E85E /* LaunchScreen.storyboard in Resources */,
+				3C204E9829CD5D960026E85E /* Pretendard-Regular.otf in Resources */,
+				3C204E9529CD5D960026E85E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,10 +343,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		5BCAD99529A509830010E811 /* LaunchScreen.storyboard */ = {
+		3C204E8729CD5D960026E85E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				5BCAD99629A509830010E811 /* Base */,
+				3C204E8829CD5D960026E85E /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
