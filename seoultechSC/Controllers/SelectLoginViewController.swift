@@ -1,6 +1,6 @@
 import UIKit
 
-class SelectLoginViewController: UIViewController {
+class SelectLoginViewController: UIViewController, UpdateAfterModalDelegate {
     
     // MARK: - Properties
     private lazy var loginButton: ActionButton = {
@@ -78,11 +78,23 @@ class SelectLoginViewController: UIViewController {
         let vc = WithoutLoginModal()
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overCurrentContext
+        vc.delegate = self
         self.present(vc, animated: true, completion: nil)
+    }
+    
+    // MARK: - Functions
+    func pushHome(withoutLogin: Bool) {
+        if withoutLogin {
+            let vc = HomeViewController()
+            navigationController?.pushViewController(vc, animated: true)
+            // TODO: pop all view
+        }
     }
 }
 
 class WithoutLoginModal: UIViewController {
+    
+    var delegate: UpdateAfterModalDelegate?
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -189,7 +201,11 @@ class WithoutLoginModal: UIViewController {
     }
     
     @objc private func onTapConfirmButton() {
-        // 로그인x 홈으로 이동
-        // pop all view
+        delegate?.pushHome(withoutLogin: true)
+        dismissModal()
     }
+}
+
+protocol UpdateAfterModalDelegate {
+    func pushHome(withoutLogin: Bool)
 }
