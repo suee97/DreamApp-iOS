@@ -1,8 +1,8 @@
 import UIKit
 import Alamofire
 
-class LoginViewController: UIViewController {
-
+class LoginViewController: UIViewController, UITextFieldDelegate {
+    
     // MARK: - Properties
     private lazy var idField: GreyTextField = {
         let textField = GreyTextField()
@@ -72,10 +72,15 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         configureGesture()
+        configureDelegate()
     }
     
     
     // MARK: - Helpers
+    private func configureDelegate() {
+        idField.delegate = self
+    }
+    
     private func configureNavigationBar() {
         self.navigationController?.navigationBar.isHidden = false
         let na = customNavBarAppearance()
@@ -155,26 +160,69 @@ class LoginViewController: UIViewController {
     
     // MARK: - Selectors
     @objc private func onTapLoginButton() {
-        self.loginButton.setLoading(true)
         
-//        let url = api_url + "/auth/login"
-//        let params = ["studentNo" : idField.text, "password" : pwField.text] as Dictionary
-//        let request = AF.request(url,
-//                                 method: .post,
-//                                 parameters: params,
-//                                 encoding: JSONEncoding(options: []),
-//                                 headers: nil
-//        ).responseJSON { data in
-//            print(data)
-//        }
+        // MARK: TODO
+        loginButton.setLoading(true)
+        setEnableStateForAllTextField(false)
+        
+        let url = api_url + "/auth/login"
+        let params = [
+            "studentNo" : idField.text,
+            "password" : pwField.text
+        ] as Dictionary
+        
+        let request = AF.request(url,
+                                 method: .post,
+                                 parameters: params,
+                                 encoding: JSONEncoding(options: []),
+                                 headers: nil
+        ).responseJSON { response in
+            switch response.result {
+            case .success:
+                do {
+                    let decoder = JSONDecoder()
+                    guard let responseData = response.data else { return }
+                    let result = try decoder.decode(LoginApiResult.self, from: responseData)
+                    
+                    if result.status == 200 {
+                        self.loginButton.setLoading(false)
+                        self.setEnableStateForAllTextField(true)
+                        
+                        KeychainHelper.sharedKeychain.saveAccessToken(result.data![0]["accessToken"]!)
+                        KeychainHelper.sharedKeychain.saveRefreshToken(result.data![0]["refreshToken"]!)
 
-        // 딜레이
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.loginButton.setLoading(false)
+                        setLoginState(true)
+                        
+                        let vc = HomeViewController()
+                        self.navigationController?.setViewControllers([vc], animated: true)
+                    } else {
+                        switch result.errorCode {
+                        case "ST041":
+                            self.setHelperText("일치하는 계정을 찾을 수 없습니다.")
+                        case "ST050":
+                            self.setHelperText("비밀번호가 올바르지 않습니다.")
+                        case "ST057":
+                            self.setHelperText("인증 대기중인 계정입니다.")
+                        case "ST058":
+                            self.setHelperText("탈퇴한 계정입니다.")
+                        default:
+                            self.setHelperText("오류가 발생했습니다.")
+                        }
+                    }
+                    
+                    self.loginButton.setLoading(false)
+                    self.setEnableStateForAllTextField(true)
+                } catch {
+                    self.loginButton.setLoading(false)
+                    self.setEnableStateForAllTextField(true)
+                    self.setHelperText("오류가 발생했습니다.")
+                }
+            case .failure:
+                self.loginButton.setLoading(false)
+                self.setEnableStateForAllTextField(true)
+                self.setHelperText("오류가 발생했습니다.")
+            }
         }
-        
-        
-        self.helpLabel.text = "로그인에 실패하였습니다. 올바른 정보를 입력해주세요."
     }
     
     @objc private func onTapResetButton() {
@@ -187,7 +235,7 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func didTextFieldChanged() {
-        if idField.text != "" && pwField.text != "" {
+        if idField.text != "" && pwField.text != "" && pwField.text!.count >= 8 && pwField.text!.count <= 16 {
             self.loginButton.setActive(true)
         } else {
             self.loginButton.setActive(false)
@@ -210,5 +258,35 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    
+    // MARK: - Functions
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        idField.resignFirstResponder()
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let allowedCharacters = CharacterSet.decimalDigits
+        let characterSet = CharacterSet(charactersIn: string)
+        return allowedCharacters.isSuperset(of: characterSet)
+    }
+    
+    private func setEnableStateForAllTextField(_ enable: Bool) {
+        if enable {
+            idField.isEnabled = true
+            pwField.isEnabled = true
+            idField.textColor = .black
+            pwField.textColor = .black
+        } else {
+            idField.isEnabled = false
+            pwField.isEnabled = false
+            idField.textColor = .text_caption
+            pwField.textColor = .text_caption
+        }
+    }
+    
+    private func setHelperText(_ text: String) {
+        helpLabel.text = text
+    }
 }
 

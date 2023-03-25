@@ -1,19 +1,19 @@
-//
-//  AppDelegate.swift
-//  seoultechSC
-//
-//  Created by 오승언 on 2023/02/21.
-//
-
 import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // MARK: Setup Login in splash
+        setLoginState(false)
+        
+        let aToken: String = KeychainHelper.sharedKeychain.getAccessToken() ?? ""
+        let rToken: String = KeychainHelper.sharedKeychain.getRefreshToken() ?? ""
+        print("스플래쉬 get access token : \(aToken)")
+        print("스플래쉬 get refresh token : \(rToken)")
+ 
         return true
     }
 
