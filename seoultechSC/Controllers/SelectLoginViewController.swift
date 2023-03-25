@@ -75,7 +75,121 @@ class SelectLoginViewController: UIViewController {
     }
     
     @objc private func onTapWithoutLoginButton() {
-        // dialog -> home
+        let vc = WithoutLoginModal()
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: true, completion: nil)
+    }
+}
+
+class WithoutLoginModal: UIViewController {
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "로그인 없이 이용하기"
+        label.textColor = .black
+        label.font = UIFont(name: "Pretendard-Bold", size: 16)
+        return label
+    }()
+    
+    private let modalView: UIView = {
+        let view = UIView()
+        view.configureModalView()
+        
+        let label1 = UILabel()
+        let label2 = UILabel()
+        let label3 = UILabel()
+        let label4 = UILabel()
+        
+        label1.text = "로그인을 하지 않을 시"
+        label2.text = "어플 사용에 제한이 있을 수 있습니다."
+        label3.text = "· 주 사업 이벤트"
+        label4.text = "· 상시사업 예약 확인"
+        
+        label1.textColor = .text_caption
+        label2.textColor = .text_caption
+        label3.textColor = .text_caption
+        label4.textColor = .text_caption
+        
+        label1.font = UIFont(name: "Pretendard-Regular", size: 15)
+        label2.font = UIFont(name: "Pretendard-Regular", size: 15)
+        label3.font = UIFont(name: "Pretendard-Regular", size: 12)
+        label4.font = UIFont(name: "Pretendard-Regular", size: 12)
+        
+        let labelArr: [UILabel] = [label1, label2, label3, label4]
+        
+        for i in labelArr {
+            view.addSubview(i)
+            i.translatesAutoresizingMaskIntoConstraints = false
+            i.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        }
+        
+        NSLayoutConstraint.activate([
+            label1.topAnchor.constraint(equalTo: view.topAnchor, constant: 58),
+            label2.topAnchor.constraint(equalTo: label1.bottomAnchor, constant: 0),
+            label3.topAnchor.constraint(equalTo: label2.bottomAnchor, constant: 10),
+            label4.topAnchor.constraint(equalTo: label3.bottomAnchor, constant: 0)
+        ])
+        
+        return view
+    }()
+    
+    private lazy var cancelButton: ActionButton = {
+        let button = ActionButton(title: "취소", backgroundColor: .secondaryPurple, height: 34)
+        button.addTarget(self, action: #selector(onTapCancelButton), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var confirmButton: ActionButton = {
+        let button = ActionButton(title: "확인", height: 34)
+        button.addTarget(self, action: #selector(onTapConfirmButton), for: .touchUpInside)
+        return button
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureUI()
     }
     
+    private func configureUI() {
+        view.backgroundColor = .black.withAlphaComponent(0.3)
+        
+        view.addSubview(modalView)
+        modalView.addSubview(titleLabel)
+        modalView.addSubview(cancelButton)
+        modalView.addSubview(confirmButton)
+        
+        modalView.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        confirmButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            modalView.widthAnchor.constraint(equalToConstant: 285),
+            modalView.heightAnchor.constraint(equalToConstant: 215),
+            modalView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            modalView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            titleLabel.topAnchor.constraint(equalTo: modalView.topAnchor, constant: 19),
+            titleLabel.centerXAnchor.constraint(equalTo: modalView.centerXAnchor),
+            cancelButton.widthAnchor.constraint(equalToConstant: 121),
+            confirmButton.widthAnchor.constraint(equalToConstant: 121),
+            cancelButton.bottomAnchor.constraint(equalTo: modalView.bottomAnchor, constant: -15),
+            confirmButton.bottomAnchor.constraint(equalTo: modalView.bottomAnchor, constant: -15),
+            cancelButton.leftAnchor.constraint(equalTo: modalView.leftAnchor, constant: 17),
+            confirmButton.rightAnchor.constraint(equalTo: modalView.rightAnchor, constant: -17)
+        ])
+    }
+
+    @objc private func dismissModal() {
+        self.dismiss(animated: true)
+    }
+    
+    @objc private func onTapCancelButton() {
+        dismissModal()
+    }
+    
+    @objc private func onTapConfirmButton() {
+        // 로그인x 홈으로 이동
+        // pop all view
+    }
 }
