@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C0EDCDB29D035C400AF7D0E /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EDCDA29D035C400AF7D0E /* KeychainHelper.swift */; };
+		3C0EDCDE29D037BB00AF7D0E /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EDCDD29D037BB00AF7D0E /* SettingViewController.swift */; };
 		3C204E7229CD5D660026E85E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E6729CD5D660026E85E /* HomeViewController.swift */; };
 		3C204E7329CD5D660026E85E /* SetPwViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E6A29CD5D660026E85E /* SetPwViewController.swift */; };
 		3C204E7429CD5D660026E85E /* PolicyAgreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E6B29CD5D660026E85E /* PolicyAgreeViewController.swift */; };
@@ -43,6 +45,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C0EDCDA29D035C400AF7D0E /* KeychainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		3C0EDCDD29D037BB00AF7D0E /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		3C204E6729CD5D660026E85E /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3C204E6A29CD5D660026E85E /* SetPwViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPwViewController.swift; sourceTree = "<group>"; };
 		3C204E6B29CD5D660026E85E /* PolicyAgreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolicyAgreeViewController.swift; sourceTree = "<group>"; };
@@ -91,9 +95,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C0EDCDC29D037AA00AF7D0E /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				3C0EDCDD29D037BB00AF7D0E /* SettingViewController.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		3C204E6529CD5D660026E85E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3C0EDCDC29D037AA00AF7D0E /* Setting */,
 				3C204E6629CD5D660026E85E /* Home */,
 				3C204E6829CD5D660026E85E /* Login */,
 				3C204E7129CD5D660026E85E /* SelectLoginViewController.swift */,
@@ -135,6 +148,7 @@
 		3C204E7B29CD5D7C0026E85E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				3C0EDCDA29D035C400AF7D0E /* KeychainHelper.swift */,
 				3C204E7C29CD5D7C0026E85E /* Commons.swift */,
 				3C204E7E29CD5D7C0026E85E /* Extensions.swift */,
 			);
@@ -317,6 +331,7 @@
 				3C204E9729CD5D960026E85E /* AppDelegate.swift in Sources */,
 				3C204EAC29CD5DA20026E85E /* NavigationBarAppearance.swift in Sources */,
 				3C204EAD29CD5DA20026E85E /* ActionButton.swift in Sources */,
+				3C0EDCDB29D035C400AF7D0E /* KeychainHelper.swift in Sources */,
 				3C204E7A29CD5D660026E85E /* SelectLoginViewController.swift in Sources */,
 				3C204E7F29CD5D7C0026E85E /* Commons.swift in Sources */,
 				3C204EAA29CD5DA20026E85E /* CustomTableViewCell.swift in Sources */,
@@ -329,6 +344,7 @@
 				3C204E7629CD5D660026E85E /* SignUpEndViewController.swift in Sources */,
 				3C204EA129CD5D960026E85E /* SceneDelegate.swift in Sources */,
 				3C204EAB29CD5DA20026E85E /* RadioButton.swift in Sources */,
+				3C0EDCDE29D037BB00AF7D0E /* SettingViewController.swift in Sources */,
 				3C204E7729CD5D660026E85E /* EnterInfoViewController.swift in Sources */,
 				3C204E7429CD5D660026E85E /* PolicyAgreeViewController.swift in Sources */,
 				3C204EA929CD5DA20026E85E /* GreyTextField.swift in Sources */,

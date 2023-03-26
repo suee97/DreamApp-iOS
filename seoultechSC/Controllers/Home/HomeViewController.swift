@@ -253,11 +253,13 @@ class HomeViewController: UIViewController {
     
     // MARK: - Selectors
     @objc private func onTapSettingButton() {
-        print("setting button clicked")
+        let vc = SettingViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func onTapInfoTap() {
-        print("onTapInfoTap")
+        let vc = InfoViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func onTapAllianceTap() {
