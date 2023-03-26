@@ -330,12 +330,7 @@ class CollegeSelectViewController: UIViewController, UITableViewDelegate, UITabl
     
     let modal: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 10
-        view.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
-        view.layer.shadowOpacity = 1
-        view.layer.shadowOffset = CGSize.zero
-        view.layer.shadowRadius = 6
+        view.configureModalView()
         return view
     }()
     
