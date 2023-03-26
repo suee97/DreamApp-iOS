@@ -48,21 +48,18 @@ class InfoViewController: UIViewController, UIPageViewControllerDelegate, UIPage
     
     private lazy var vc1: UIViewController = {
         let vc = UIViewController()
-        vc.view.backgroundColor = .red
         
         return vc
     }()
 
     private lazy var vc2: UIViewController = {
         let vc = UIViewController()
-        vc.view.backgroundColor = .green
     
         return vc
     }()
 
     private lazy var vc3: UIViewController = {
         let vc = UIViewController()
-        vc.view.backgroundColor = .blue
 
         return vc
     }()
