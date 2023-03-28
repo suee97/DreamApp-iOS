@@ -271,7 +271,8 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func onTapAlwaysTap() {
-        print("onTapAlwaysTap")
+        let vc = AlwaysViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func onTapFestivalTap() {
