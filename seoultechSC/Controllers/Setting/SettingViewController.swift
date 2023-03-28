@@ -53,6 +53,7 @@ class SettingViewController: UIViewController {
         logout.contentHorizontalAlignment = .leading
         logout.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
         logout.backgroundColor = .clear
+        logout.addTarget(self, action: #selector(logoutBtn), for: .touchUpInside)
         
         let resetPassword = UIButton(frame: CGRect(x: 15, y: 74, width: 320, height: 20))
         resetPassword.setTitle("비밀번호 재설정", for: .normal)
@@ -60,6 +61,7 @@ class SettingViewController: UIViewController {
         resetPassword.contentHorizontalAlignment = .leading
         resetPassword.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
         resetPassword.backgroundColor = .clear
+        resetPassword.addTarget(self, action: #selector(resetPasswordBtn), for: .touchUpInside)
         
         let withdrawl = UIButton(frame: CGRect(x: 15, y: 104, width: 320, height: 20))
         withdrawl.setTitle("회원탈퇴", for: .normal)
@@ -67,6 +69,7 @@ class SettingViewController: UIViewController {
         withdrawl.contentHorizontalAlignment = .leading
         withdrawl.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
         withdrawl.backgroundColor = .clear
+        withdrawl.addTarget(self, action: #selector(withdrawlBtn), for: .touchUpInside)
         
         container.addSubview(title)
         container.addSubview(logout)
@@ -96,6 +99,7 @@ class SettingViewController: UIViewController {
         instagram.setImage(UIImage(systemName: "person", withConfiguration: imageConfig), for: .normal)
         instagram.imageView?.contentMode = .scaleAspectFit
         instagram.alignTextBelow(spacing: 4)
+        instagram.addTarget(SettingViewController.self, action: #selector(instagramBtn), for: .touchUpInside)
         
         let youtube = UIButton(frame: CGRect(x: 109, y: 44, width: 52, height: 50))
         youtube.setTitle("유튜브", for: .normal)
@@ -104,6 +108,7 @@ class SettingViewController: UIViewController {
         youtube.setImage(UIImage(systemName: "person", withConfiguration: imageConfig), for: .normal)
         youtube.imageView?.contentMode = .scaleAspectFit
         youtube.alignTextBelow(spacing: 4)
+        youtube.addTarget(self, action: #selector(youtubeBtn), for: .touchUpInside)
         
         let kakao = UIButton(frame: CGRect(x: 185, y: 44, width: 52, height: 50))
         kakao.setTitle("카카오톡", for: .normal)
@@ -112,6 +117,7 @@ class SettingViewController: UIViewController {
         kakao.setImage(UIImage(systemName: "person", withConfiguration: imageConfig), for: .normal)
         kakao.imageView?.contentMode = .scaleAspectFit
         kakao.alignTextBelow(spacing: 4)
+        kakao.addTarget(self, action: #selector(kakaoBtn), for: .touchUpInside)
         
         let homepage = UIButton(frame: CGRect(x: 260, y: 44, width: 52, height: 50))
         homepage.setTitle("홈페이지", for: .normal)
@@ -120,6 +126,7 @@ class SettingViewController: UIViewController {
         homepage.setImage(UIImage(systemName: "person", withConfiguration: imageConfig), for: .normal)
         homepage.imageView?.contentMode = .scaleAspectFit
         homepage.alignTextBelow(spacing: 4)
+        homepage.addTarget(self, action: #selector(homepageBtn), for: .touchUpInside)
         
         container.addSubview(title)
         container.addSubview(instagram)
@@ -146,6 +153,7 @@ class SettingViewController: UIViewController {
         update.contentHorizontalAlignment = .leading
         update.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
         update.backgroundColor = .clear
+        update.addTarget(self, action: #selector(updateBtn), for: .touchUpInside)
         
         let infoAboutDev = UIButton(frame: CGRect(x: 15, y: 74, width: 320, height: 20))
         infoAboutDev.setTitle("개발 관련 정보 및 문의", for: .normal)
@@ -153,6 +161,7 @@ class SettingViewController: UIViewController {
         infoAboutDev.contentHorizontalAlignment = .leading
         infoAboutDev.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
         infoAboutDev.backgroundColor = .clear
+        infoAboutDev.addTarget(self, action: #selector(infoAboutDevBtn), for: .touchUpInside)
         
         container.addSubview(title)
         container.addSubview(update)
@@ -177,6 +186,7 @@ class SettingViewController: UIViewController {
         adviceFunction.contentHorizontalAlignment = .leading
         adviceFunction.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
         adviceFunction.backgroundColor = .clear
+        adviceFunction.addTarget(self, action: #selector(adviceFunctionBtn), for: .touchUpInside)
         
         let report = UIButton(frame: CGRect(x: 15, y: 74, width: 320, height: 20))
         report.setTitle("오류 신고", for: .normal)
@@ -184,6 +194,7 @@ class SettingViewController: UIViewController {
         report.contentHorizontalAlignment = .leading
         report.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
         report.backgroundColor = .clear
+        report.addTarget(self, action: #selector(reportBtn), for: .touchUpInside)
         
         let someAdvice = UIButton(frame: CGRect(x: 15, y: 104, width: 320, height: 20))
         someAdvice.setTitle("기타 제안", for: .normal)
@@ -191,6 +202,7 @@ class SettingViewController: UIViewController {
         someAdvice.contentHorizontalAlignment = .leading
         someAdvice.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
         someAdvice.backgroundColor = .clear
+        someAdvice.addTarget(self, action: #selector(someAdviceBtn), for: .touchUpInside)
         
         container.addSubview(title)
         container.addSubview(adviceFunction)
@@ -216,6 +228,7 @@ class SettingViewController: UIViewController {
         service.contentHorizontalAlignment = .leading
         service.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
         service.backgroundColor = .clear
+        service.addTarget(self, action: #selector(serviceBtn), for: .touchUpInside)
         
         let location = UIButton(frame: CGRect(x: 15, y: 74, width: 320, height: 20))
         location.setTitle("위치기반서비스 이용약관", for: .normal)
@@ -223,6 +236,7 @@ class SettingViewController: UIViewController {
         location.contentHorizontalAlignment = .leading
         location.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
         location.backgroundColor = .clear
+        location.addTarget(self, action: #selector(locationBtn), for: .touchUpInside)
         
         let policy = UIButton(frame: CGRect(x: 15, y: 104, width: 320, height: 20))
         policy.setTitle("개인정보처리방침", for: .normal)
@@ -230,6 +244,7 @@ class SettingViewController: UIViewController {
         policy.contentHorizontalAlignment = .leading
         policy.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
         policy.backgroundColor = .clear
+        policy.addTarget(self, action: #selector(policyBtn), for: .touchUpInside)
         
         let info = UIButton(frame: CGRect(x: 15, y: 134, width: 320, height: 20))
         info.setTitle("정보제공처", for: .normal)
@@ -237,6 +252,7 @@ class SettingViewController: UIViewController {
         info.contentHorizontalAlignment = .leading
         info.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
         info.backgroundColor = .clear
+        info.addTarget(self, action: #selector(infoBtn), for: .touchUpInside)
         
         let opensource = UIButton(frame: CGRect(x: 15, y: 164, width: 320, height: 20))
         opensource.setTitle("오픈소스 라이선스", for: .normal)
@@ -244,6 +260,7 @@ class SettingViewController: UIViewController {
         opensource.contentHorizontalAlignment = .leading
         opensource.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
         opensource.backgroundColor = .clear
+        opensource.addTarget(self, action: #selector(opensourceBtn), for: .touchUpInside)
         
         container.addSubview(title)
         container.addSubview(service)
@@ -408,6 +425,75 @@ class SettingViewController: UIViewController {
         contentViewHeight.priority = .defaultLow
         contentViewHeight.isActive = true
         
+    }
+    
+    // MARK: - Selectors
+    @objc private func logoutBtn() {
+        print("logout")
+    }
+    
+    @objc private func resetPasswordBtn() {
+    }
+    
+    @objc private func withdrawlBtn() {
+        print("onTapAllianceTap")
+    }
+    
+    @objc private func instagramBtn() {
+        print("onTapDuesTap")
+    }
+    
+    @objc private func youtubeBtn() {
+        print("onTapAlwaysTap")
+    }
+    
+    @objc private func kakaoBtn() {
+        print("onTapFestivalTap")
+    }
+    
+    @objc private func homepageBtn() {
+        print("onTapEventTap")
+    }
+    
+    @objc private func updateBtn() {
+        print("onTapEventTap")
+    }
+    
+    @objc private func infoAboutDevBtn() {
+        let vc = DevInfoViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc private func adviceFunctionBtn() {
+        print("onTapEventTap")
+    }
+    
+    @objc private func reportBtn() {
+        print("onTapEventTap")
+    }
+    
+    @objc private func someAdviceBtn() {
+        print("onTapEventTap")
+    }
+    
+    @objc private func serviceBtn() {
+        print("onTapEventTap")
+    }
+    
+    @objc private func locationBtn() {
+        print("onTapEventTap")
+    }
+    
+    @objc private func policyBtn() {
+        print("onTapEventTap")
+    }
+    
+    @objc private func infoBtn() {
+        print("onTapEventTap")
+    }
+    
+    @objc private func opensourceBtn() {
+        print("onTapEventTap")
     }
 }
 
