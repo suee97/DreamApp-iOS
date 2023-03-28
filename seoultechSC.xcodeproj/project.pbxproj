@@ -41,6 +41,8 @@
 		3C204EAD29CD5DA20026E85E /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204EA729CD5DA20026E85E /* ActionButton.swift */; };
 		3C204EAE29CD5DA20026E85E /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204EA829CD5DA20026E85E /* TitleLabel.swift */; };
 		3C204EB129CD5DFE0026E85E /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204EB029CD5DFE0026E85E /* InfoViewController.swift */; };
+		3C6317E729D16DE100469836 /* DevInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6317E629D16DE100469836 /* DevInfoViewController.swift */; };
+		3C6317EB29D1864800469836 /* AlwaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6317EA29D1864800469836 /* AlwaysViewController.swift */; };
 		5BEE4A7C29CE43CC00F34795 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5BEE4A7B29CE43CC00F34795 /* Alamofire */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +81,8 @@
 		3C204EA729CD5DA20026E85E /* ActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		3C204EA829CD5DA20026E85E /* TitleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
 		3C204EB029CD5DFE0026E85E /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		3C6317E629D16DE100469836 /* DevInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevInfoViewController.swift; sourceTree = "<group>"; };
+		3C6317EA29D1864800469836 /* AlwaysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysViewController.swift; sourceTree = "<group>"; };
 		5BCAD98729A509820010E811 /* seoultechSC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = seoultechSC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BCAD99829A509830010E811 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				3C0EDCDD29D037BB00AF7D0E /* SettingViewController.swift */,
+				3C6317E629D16DE100469836 /* DevInfoViewController.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -117,8 +122,9 @@
 		3C204E6629CD5D660026E85E /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				3C204EAF29CD5DE30026E85E /* Info */,
 				3C204E6729CD5D660026E85E /* HomeViewController.swift */,
+				3C6317E829D185DC00469836 /* Always */,
+				3C204EAF29CD5DE30026E85E /* Info */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -210,6 +216,14 @@
 				3C204EB029CD5DFE0026E85E /* InfoViewController.swift */,
 			);
 			path = Info;
+			sourceTree = "<group>";
+		};
+		3C6317E829D185DC00469836 /* Always */ = {
+			isa = PBXGroup;
+			children = (
+				3C6317EA29D1864800469836 /* AlwaysViewController.swift */,
+			);
+			path = Always;
 			sourceTree = "<group>";
 		};
 		5BCAD97E29A509820010E811 = {
@@ -326,6 +340,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C6317E729D16DE100469836 /* DevInfoViewController.swift in Sources */,
 				3C204E8129CD5D7C0026E85E /* Extensions.swift in Sources */,
 				3C204E8429CD5D8A0026E85E /* AuthModels.swift in Sources */,
 				3C204E9729CD5D960026E85E /* AppDelegate.swift in Sources */,
@@ -336,6 +351,7 @@
 				3C204E7F29CD5D7C0026E85E /* Commons.swift in Sources */,
 				3C204EAA29CD5DA20026E85E /* CustomTableViewCell.swift in Sources */,
 				3C204E7929CD5D660026E85E /* LoginViewController.swift in Sources */,
+				3C6317EB29D1864800469836 /* AlwaysViewController.swift in Sources */,
 				3C204E7829CD5D660026E85E /* PhoneAuthViewController.swift in Sources */,
 				3C204E7529CD5D660026E85E /* StudentCardAuthViewController.swift in Sources */,
 				3C204E7229CD5D660026E85E /* HomeViewController.swift in Sources */,
