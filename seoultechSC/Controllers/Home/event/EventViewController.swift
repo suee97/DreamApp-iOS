@@ -21,6 +21,7 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
     private let loadingView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
+        view.isUserInteractionEnabled = false
         return view
     }()
     
