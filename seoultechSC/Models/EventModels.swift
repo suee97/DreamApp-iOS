@@ -1,12 +1,12 @@
 import Foundation
 
-struct EventsApiResult {
+struct EventsApiResult: Codable {
     let status: Int
     let message: String?
     let data: [Event]?
 }
 
-struct Event {
+struct Event: Codable {
     let eventId: Int
     let title: String
     let formLink: String

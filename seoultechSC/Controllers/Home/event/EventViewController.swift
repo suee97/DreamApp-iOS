@@ -3,24 +3,12 @@ import Alamofire
 
 class EventViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var tmpEventList: [Event] = [
-        Event(eventId: 1, title: "이벤트 항목 두줄까지?", formLink: "1", imageUrl: "2", startTime: "2022-07-04T22:23:21.15922", endTime: "2022-07-04T22:23:21.15922", eventStatus: "5"),
-        Event(eventId: 2, title: "hello2", formLink: "1", imageUrl: "2", startTime: "2022-07-04T22:23:21.15922", endTime: "2022-08-01T22:23:21.15922", eventStatus: "5"),
-        Event(eventId: 1, title: "이벤트 항목 두줄까지?이건두줄입니다", formLink: "1", imageUrl: "2", startTime: "2022-07-04T22:23:21.15922", endTime: "2022-07-04T22:23:21.15922", eventStatus: "5"),
-        Event(eventId: 2, title: "hello2", formLink: "1", imageUrl: "2", startTime: "2022-07-04T22:23:21.15922", endTime: "2022-08-01T22:23:21.15922", eventStatus: "5"),
-        Event(eventId: 1, title: "이벤트 항목 두줄까지?이건두줄인데 최대를초과합니다", formLink: "1", imageUrl: "2", startTime: "2022-07-04T22:23:21.15922", endTime: "2022-07-04T22:23:21.15922", eventStatus: "5"),
-        Event(eventId: 2, title: "hello2", formLink: "1", imageUrl: "2", startTime: "2022-07-04T22:23:21.15922", endTime: "2022-08-01T22:23:21.15922", eventStatus: "5"),
-        Event(eventId: 1, title: "이벤트 항목 두줄까지?", formLink: "1", imageUrl: "2", startTime: "2022-07-04T22:23:21.15922", endTime: "2022-07-04T22:23:21.15922", eventStatus: "5"),
-        Event(eventId: 2, title: "hello2", formLink: "1", imageUrl: "2", startTime: "2022-07-04T22:23:21.15922", endTime: "2022-08-01T22:23:21.15922", eventStatus: "5"),
-        Event(eventId: 1, title: "이벤트 항목 두줄까지?", formLink: "1", imageUrl: "2", startTime: "2022-07-04T22:23:21.15922", endTime: "2022-07-04T22:23:21.15922", eventStatus: "5"),
-        Event(eventId: 2, title: "hello2", formLink: "1", imageUrl: "2", startTime: "2022-07-04T22:23:21.15922", endTime: "2022-08-01T22:23:21.15922", eventStatus: "5"),
-        
-    ]
-    
     // MARK: - Properties
     let LRSpacing: CGFloat = screenWidth * (20/360)
     let cellWidth: CGFloat = screenWidth * (155/360)
     let cellHeight: CGFloat = screenWidth * (155/360) * (220/155)
+    
+    var eventList: [EventWithImage] = []
     
     private lazy var collectionViewLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -48,6 +36,7 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
         super.viewDidLoad()
         configureUI()
         configureCollectionViewDelegate()
+        fetchEventList()
     }
     
     
@@ -93,19 +82,75 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     // MARK: - Functions
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return eventList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "event_collectionview_cell", for: indexPath) as! EventCollectionViewCell
-        cell.titleLabel.text = tmpEventList[indexPath.row].title
-        cell.startTimeLabel.text = getDateFromString(tmpEventList[indexPath.row].startTime)
-        cell.endTimeLabel.text = getDateFromString(tmpEventList[indexPath.row].endTime)
+        cell.titleLabel.text = eventList[indexPath.row].title
+        cell.startTimeLabel.text = getDateFromString(eventList[indexPath.row].startTime)
+        cell.endTimeLabel.text = getDateFromString(eventList[indexPath.row].endTime)
         return cell
+    }
+    
+    private func fetchEventList() {
+        let url = "\(api_url)/event"
+        AF.request(url, method: .get).responseJSON { response in
+            switch response.result {
+            case .success:
+                print("success")
+                do {
+                    let decoder = JSONDecoder()
+                    guard let responseData = response.data else { return }
+                    let result = try decoder.decode(EventsApiResult.self, from: responseData)
+                    let dataCount = result.data?.count
+                    
+                    if result.status == 200 && dataCount != 0 {
+                        for event in result.data! {
+                            guard let url = URL(string: event.imageUrl) else { return }
+                            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                                guard let data = data, error == nil else { return }
+                                DispatchQueue.main.async() {
+                                    if let image = UIImage(data: data) {
+                                        self.eventList.append(EventWithImage(eventId: event.eventId, title: event.title, formLink: event.formLink, image: image, startTime: event.startTime, endTime: event.endTime, eventStatus: event.eventStatus))
+                                    }
+                                    
+                                    if self.eventList.count == dataCount {
+                                        self.eventCollectionView.reloadData()
+                                    }
+                                }
+                            }
+                            task.resume()
+                        }
+                    } else {
+                        print("not 200 error")
+                        // error
+                    }
+                } catch {
+                    print("catch error")
+                    // catch error
+                }
+            case .failure:
+                print("failure")
+                // request error
+            }
+        }
+        
     }
     
     private func getDateFromString(_ str: String) -> String {
         let arr = Array(str)
         return "\(arr[5])\(arr[6])/\(arr[8])\(arr[9])"
     }
+
+}
+
+struct EventWithImage {
+    let eventId: Int
+    let title: String
+    let formLink: String
+    let image: UIImage
+    let startTime: String
+    let endTime: String
+    let eventStatus: String
 }
