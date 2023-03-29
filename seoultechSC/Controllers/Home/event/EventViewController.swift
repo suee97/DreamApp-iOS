@@ -24,6 +24,64 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
         return view
     }()
     
+    private let errorView: UIView = {
+        let view = UIView()
+        let logoImageView = UIImageView()
+        let messageLabel = UILabel()
+        
+        messageLabel.text = "이벤트를 불러오지 못했습니다."
+        messageLabel.font = UIFont(name: "Pretendard-Bold", size: 16)
+        messageLabel.textColor = .primaryPurple
+        logoImageView.image = UIImage(named: "dream_logo")
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 10
+        
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(logoImageView)
+        view.addSubview(messageLabel)
+        NSLayoutConstraint.activate([
+            logoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: screenHeight * (172/640)),
+            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoImageView.widthAnchor.constraint(equalToConstant: screenWidth * (140/360)),
+            logoImageView.heightAnchor.constraint(equalToConstant: screenHeight * (61/640)),
+            messageLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: screenHeight * (28/640)),
+            messageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        view.isHidden = true
+        return view
+    }()
+    
+    private let noEventView: UIView = {
+        let view = UIView()
+        let logoImageView = UIImageView()
+        let messageLabel = UILabel()
+        
+        messageLabel.text = "진행중인 이벤트가 없습니다."
+        messageLabel.font = UIFont(name: "Pretendard-Bold", size: 16)
+        messageLabel.textColor = .primaryPurple
+        logoImageView.image = UIImage(named: "dream_logo")
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 10
+        
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(logoImageView)
+        view.addSubview(messageLabel)
+        NSLayoutConstraint.activate([
+            logoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: screenHeight * (172/640)),
+            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoImageView.widthAnchor.constraint(equalToConstant: screenWidth * (140/360)),
+            logoImageView.heightAnchor.constraint(equalToConstant: screenHeight * (61/640)),
+            messageLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: screenHeight * (28/640)),
+            messageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        view.isHidden = true
+        return view
+    }()
+    
     private lazy var collectionViewLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -74,11 +132,15 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
         
         view.addSubview(eventCollectionView)
         view.addSubview(loadingView)
+        view.addSubview(errorView)
+        view.addSubview(noEventView)
         loadingView.addSubview(indicator)
         
         indicator.translatesAutoresizingMaskIntoConstraints = false
         loadingView.translatesAutoresizingMaskIntoConstraints = false
         eventCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        errorView.translatesAutoresizingMaskIntoConstraints = false
+        noEventView.translatesAutoresizingMaskIntoConstraints = false
         
         // indicator
         NSLayoutConstraint.activate([
@@ -94,7 +156,15 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
             loadingView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
             loadingView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
             loadingView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-            loadingView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+            loadingView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+            errorView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            errorView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
+            errorView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            errorView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -22),
+            noEventView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            noEventView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
+            noEventView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            noEventView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -22),
         ])
     }
     
@@ -134,7 +204,6 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
                     guard let responseData = response.data else { return }
                     let result = try decoder.decode(EventsApiResult.self, from: responseData)
                     let dataCount = result.data?.count
-                    
                     if result.status == 200 && dataCount != 0 {
                         for event in result.data! {
                             guard let url = URL(string: event.imageUrl) else { return }
@@ -162,17 +231,20 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
                             }
                             task.resume()
                         }
+                    } else if result.status == 200 && dataCount == 0 {
+                        self.indicator.stopAnimating()
+                        self.noEventView.isHidden = false
                     } else {
-                        print("not 200 error")
-                        // error
+                        self.indicator.stopAnimating()
+                        self.errorView.isHidden = false
                     }
                 } catch {
-                    print("catch error")
-                    // catch error
+                    self.indicator.stopAnimating()
+                    self.errorView.isHidden = false
                 }
             case .failure:
-                print("failure")
-                // request error
+                self.indicator.stopAnimating()
+                self.errorView.isHidden = false
             }
         }
         
