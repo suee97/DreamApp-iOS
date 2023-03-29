@@ -15,3 +15,9 @@ struct Event: Codable {
     let endTime: String
     let eventStatus: String
 }
+
+enum EventStatus {
+    case BEFORE
+    case PROCEEDING
+    case END
+}

@@ -119,6 +119,7 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
         cell.titleLabel.text = eventList[indexPath.row].title
         cell.startTimeLabel.text = getDateFromString(eventList[indexPath.row].startTime)
         cell.endTimeLabel.text = getDateFromString(eventList[indexPath.row].endTime)
+        cell.status = eventList[indexPath.row].eventStatus
         return cell
     }
     
@@ -141,7 +142,16 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
                                 guard let data = data, error == nil else { return }
                                 DispatchQueue.main.async() {
                                     if let image = UIImage(data: data) {
-                                        self.eventList.append(EventWithImage(eventId: event.eventId, title: event.title, formLink: event.formLink, image: image, startTime: event.startTime, endTime: event.endTime, eventStatus: event.eventStatus))
+                                        let status: EventStatus
+                                        switch event.eventStatus {
+                                        case "BEFORE":
+                                            status = .BEFORE
+                                        case "PROCEEDING":
+                                            status = .PROCEEDING
+                                        default: // END
+                                            status = .END
+                                        }
+                                        self.eventList.append(EventWithImage(eventId: event.eventId, title: event.title, formLink: event.formLink, image: image, startTime: event.startTime, endTime: event.endTime, eventStatus: status))
                                     }
                                     
                                     if self.eventList.count == dataCount {
@@ -182,5 +192,5 @@ struct EventWithImage {
     let image: UIImage
     let startTime: String
     let endTime: String
-    let eventStatus: String
+    let eventStatus: EventStatus
 }

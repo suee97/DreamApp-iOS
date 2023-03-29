@@ -5,6 +5,21 @@ class EventCollectionViewCell: UICollectionViewCell {
     let cellWidth: CGFloat = screenWidth * (155/360)
     let cellHeight: CGFloat = screenWidth * (155/360) * (220/155)
     
+    var status: EventStatus? {
+        willSet {
+            switch newValue {
+            case .BEFORE:
+                self.setForegroundColor(.secondaryPurple)
+            case .PROCEEDING:
+                setForegroundColor(.purple)
+            case .END:
+                setForegroundColor(.text_caption)
+            case .none:
+                setForegroundColor(.black)
+            }
+        }
+    }
+    
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = UIColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1)
@@ -90,5 +105,12 @@ class EventCollectionViewCell: UICollectionViewCell {
             endTimeLabel.leftAnchor.constraint(equalTo: tiltLabel.rightAnchor, constant: 0),
             endTimeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: screenWidth * (155/360) * (2/155))
         ])
+    }
+    
+    private func setForegroundColor(_ color: UIColor) {
+        titleLabel.textColor = color
+        startTimeLabel.textColor = color
+        tiltLabel.textColor = color
+        endTimeLabel.textColor = color
     }
 }
