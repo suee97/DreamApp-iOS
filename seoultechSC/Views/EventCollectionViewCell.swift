@@ -9,6 +9,8 @@ class EventCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.backgroundColor = UIColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1)
         imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     

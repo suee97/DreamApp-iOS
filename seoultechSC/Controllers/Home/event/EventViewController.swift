@@ -87,6 +87,7 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "event_collectionview_cell", for: indexPath) as! EventCollectionViewCell
+        cell.imageView.image = eventList[indexPath.row].image
         cell.titleLabel.text = eventList[indexPath.row].title
         cell.startTimeLabel.text = getDateFromString(eventList[indexPath.row].startTime)
         cell.endTimeLabel.text = getDateFromString(eventList[indexPath.row].endTime)
