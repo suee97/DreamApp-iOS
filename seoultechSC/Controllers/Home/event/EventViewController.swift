@@ -10,6 +10,20 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     var eventList: [EventWithImage] = []
     
+    private let indicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.color = .text_caption
+        indicator.hidesWhenStopped = true
+        indicator.startAnimating()
+        return indicator
+    }()
+    
+    private let loadingView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
     private lazy var collectionViewLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -59,14 +73,28 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
         view.backgroundColor = .backgroundPurple
         
         view.addSubview(eventCollectionView)
+        view.addSubview(loadingView)
+        loadingView.addSubview(indicator)
         
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
         eventCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // indicator
+        NSLayoutConstraint.activate([
+            indicator.centerXAnchor.constraint(equalTo: loadingView.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: loadingView.centerYAnchor)
+        ])
         
         NSLayoutConstraint.activate([
             eventCollectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: LRSpacing),
             eventCollectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -LRSpacing),
             eventCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: screenHeight * (22/640)),
-            eventCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+            eventCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+            loadingView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
+            loadingView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
+            loadingView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            loadingView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
         ])
     }
     
@@ -118,6 +146,7 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
                                     
                                     if self.eventList.count == dataCount {
                                         self.eventCollectionView.reloadData()
+                                        self.indicator.stopAnimating()
                                     }
                                 }
                             }
@@ -143,7 +172,7 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
         let arr = Array(str)
         return "\(arr[5])\(arr[6])/\(arr[8])\(arr[9])"
     }
-
+    
 }
 
 struct EventWithImage {
