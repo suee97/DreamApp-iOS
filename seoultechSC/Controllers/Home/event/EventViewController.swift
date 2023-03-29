@@ -1,8 +1,21 @@
 import UIKit
 import Alamofire
-import SwiftUI
 
 class EventViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    var tmpEventList: [Event] = [
+        Event(eventId: 1, title: "이벤트 항목 두줄까지?", formLink: "1", imageUrl: "2", startTime: "2022-07-04T22:23:21.15922", endTime: "2022-07-04T22:23:21.15922", eventStatus: "5"),
+        Event(eventId: 2, title: "hello2", formLink: "1", imageUrl: "2", startTime: "2022-07-04T22:23:21.15922", endTime: "2022-08-01T22:23:21.15922", eventStatus: "5"),
+        Event(eventId: 1, title: "이벤트 항목 두줄까지?이건두줄입니다", formLink: "1", imageUrl: "2", startTime: "2022-07-04T22:23:21.15922", endTime: "2022-07-04T22:23:21.15922", eventStatus: "5"),
+        Event(eventId: 2, title: "hello2", formLink: "1", imageUrl: "2", startTime: "2022-07-04T22:23:21.15922", endTime: "2022-08-01T22:23:21.15922", eventStatus: "5"),
+        Event(eventId: 1, title: "이벤트 항목 두줄까지?이건두줄인데 최대를초과합니다", formLink: "1", imageUrl: "2", startTime: "2022-07-04T22:23:21.15922", endTime: "2022-07-04T22:23:21.15922", eventStatus: "5"),
+        Event(eventId: 2, title: "hello2", formLink: "1", imageUrl: "2", startTime: "2022-07-04T22:23:21.15922", endTime: "2022-08-01T22:23:21.15922", eventStatus: "5"),
+        Event(eventId: 1, title: "이벤트 항목 두줄까지?", formLink: "1", imageUrl: "2", startTime: "2022-07-04T22:23:21.15922", endTime: "2022-07-04T22:23:21.15922", eventStatus: "5"),
+        Event(eventId: 2, title: "hello2", formLink: "1", imageUrl: "2", startTime: "2022-07-04T22:23:21.15922", endTime: "2022-08-01T22:23:21.15922", eventStatus: "5"),
+        Event(eventId: 1, title: "이벤트 항목 두줄까지?", formLink: "1", imageUrl: "2", startTime: "2022-07-04T22:23:21.15922", endTime: "2022-07-04T22:23:21.15922", eventStatus: "5"),
+        Event(eventId: 2, title: "hello2", formLink: "1", imageUrl: "2", startTime: "2022-07-04T22:23:21.15922", endTime: "2022-08-01T22:23:21.15922", eventStatus: "5"),
+        
+    ]
     
     // MARK: - Properties
     let LRSpacing: CGFloat = screenWidth * (20/360)
@@ -19,7 +32,8 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
     private lazy var eventCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         collectionView.register(EventCollectionViewCell.self, forCellWithReuseIdentifier: "event_collectionview_cell")
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .backgroundPurple
+        collectionView.showsVerticalScrollIndicator = false
         return collectionView
     }()
     
@@ -53,7 +67,7 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     private func configureUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .backgroundPurple
         
         view.addSubview(eventCollectionView)
         
@@ -84,28 +98,14 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "event_collectionview_cell", for: indexPath) as! EventCollectionViewCell
-        cell.titleLabel.text = "title \(indexPath.row)"
+        cell.titleLabel.text = tmpEventList[indexPath.row].title
+        cell.startTimeLabel.text = getDateFromString(tmpEventList[indexPath.row].startTime)
+        cell.endTimeLabel.text = getDateFromString(tmpEventList[indexPath.row].endTime)
         return cell
     }
     
-}
-
-
-#if DEBUG
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-
-    }
-    @available(iOS 13.0, *)
-    func makeUIViewController(context: Context) -> some UIViewController {
-        EventViewController()
+    private func getDateFromString(_ str: String) -> String {
+        let arr = Array(str)
+        return "\(arr[5])\(arr[6])/\(arr[8])\(arr[9])"
     }
 }
-
-struct ViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewControllerRepresentable()
-    }
-}
-
-#endif
