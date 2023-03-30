@@ -232,6 +232,7 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
                                     
                                     if self.eventList.count == dataCount {
                                         // TODO: Sort event list
+                                        self.sortEventList()
                                         self.eventCollectionView.reloadData()
                                         self.indicator.stopAnimating()
                                     }
@@ -261,6 +262,41 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
     private func getDateFromString(_ str: String) -> String {
         let arr = Array(str)
         return "\(arr[5])\(arr[6])/\(arr[8])\(arr[9])"
+    }
+    
+    private func sortEventList() {
+        var beforeArr: [EventWithImage] = []
+        var proceedingArr: [EventWithImage] = []
+        var endArr: [EventWithImage] = []
+        
+        for event in eventList {
+            switch event.eventStatus {
+            case .BEFORE:
+                beforeArr.append(event)
+            case .PROCEEDING:
+                proceedingArr.append(event)
+            case .END:
+                endArr.append(event)
+            }
+        }
+        
+        beforeArr.sort(by: {
+            return getIntFromTimeString($0.startTime) > getIntFromTimeString($1.startTime)
+        })
+        proceedingArr.sort(by: {
+            return getIntFromTimeString($0.startTime) > getIntFromTimeString($1.startTime)
+        })
+        endArr.sort(by: {
+            return getIntFromTimeString($0.startTime) > getIntFromTimeString($1.startTime)
+        })
+        
+        eventList = proceedingArr + beforeArr + endArr
+    }
+    
+    private func getIntFromTimeString(_ str: String) -> Int {
+        let arr = Array(str)
+        let stringValue = "\(arr[2])\(arr[3])\(arr[5])\(arr[6])\(arr[8])\(arr[9])"
+        return Int(stringValue) ?? 0
     }
     
 }
