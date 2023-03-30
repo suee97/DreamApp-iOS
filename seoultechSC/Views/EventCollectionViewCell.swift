@@ -9,13 +9,17 @@ class EventCollectionViewCell: UICollectionViewCell {
         willSet {
             switch newValue {
             case .BEFORE:
-                self.setForegroundColor(.secondaryPurple)
+                setForegroundColor(.secondaryPurple)
+                setScabLabel(.BEFORE)
             case .PROCEEDING:
-                setForegroundColor(.purple)
+                setForegroundColor(.primaryPurple)
+                setScabLabel(.PROCEEDING)
             case .END:
                 setForegroundColor(.text_caption)
+                setScabLabel(.END)
             case .none:
                 setForegroundColor(.black)
+                setScabLabel(.END)
             }
         }
     }
@@ -60,6 +64,21 @@ class EventCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    let scabLabel: UILabel = {
+        let label = UILabel()
+        let radius = getRatWidth(32)
+        label.font = UIFont(name: "Pretendard-Bold", size: 10)
+        label.textColor = .white
+        label.layer.cornerRadius = radius / 2
+        label.clipsToBounds = true
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.widthAnchor.constraint(equalToConstant: radius).isActive = true
+        label.heightAnchor.constraint(equalToConstant: radius).isActive = true
+        label.backgroundColor = .black
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         configureUI()
@@ -82,12 +101,14 @@ class EventCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(startTimeLabel)
         contentView.addSubview(tiltLabel)
         contentView.addSubview(endTimeLabel)
+        contentView.addSubview(scabLabel)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
         startTimeLabel.translatesAutoresizingMaskIntoConstraints = false
         tiltLabel.translatesAutoresizingMaskIntoConstraints = false
         endTimeLabel.translatesAutoresizingMaskIntoConstraints = false
+        scabLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             imageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 0),
@@ -103,7 +124,9 @@ class EventCollectionViewCell: UICollectionViewCell {
             tiltLabel.leftAnchor.constraint(equalTo: startTimeLabel.rightAnchor, constant: 0),
             tiltLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: screenWidth * (155/360) * (2/155)),
             endTimeLabel.leftAnchor.constraint(equalTo: tiltLabel.rightAnchor, constant: 0),
-            endTimeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: screenWidth * (155/360) * (2/155))
+            endTimeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: screenWidth * (155/360) * (2/155)),
+            scabLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -getRatWidth(8)),
+            scabLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: getRatWidth(8))
         ])
     }
     
@@ -112,5 +135,19 @@ class EventCollectionViewCell: UICollectionViewCell {
         startTimeLabel.textColor = color
         tiltLabel.textColor = color
         endTimeLabel.textColor = color
+    }
+    
+    private func setScabLabel(_ status: EventStatus) {
+        switch status {
+        case .BEFORE:
+            scabLabel.text = "진행\n예정"
+            scabLabel.backgroundColor = .secondaryPurple
+        case .PROCEEDING:
+            scabLabel.text = "진행중"
+            scabLabel.backgroundColor = .primaryPurple
+        case .END:
+            scabLabel.text = "종료"
+            scabLabel.backgroundColor = .text_caption
+        }
     }
 }
