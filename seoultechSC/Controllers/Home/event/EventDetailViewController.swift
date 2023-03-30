@@ -117,7 +117,10 @@ class EventDetailViewController: UIViewController {
     
     // MARK: - Selectors
     @objc private func onTapApplyButton() {
-        print("apply button clicked!")
+        guard let formStr = event?.formLink else { return }
+        guard let url = URL(string: formStr),
+        UIApplication.shared.canOpenURL(url) else { return }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     
