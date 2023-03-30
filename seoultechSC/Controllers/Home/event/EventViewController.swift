@@ -194,6 +194,12 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = EventDetailViewController()
+        vc.event = eventList[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     private func fetchEventList() {
         let url = "\(api_url)/event"
         AF.request(url, method: .get).responseJSON { response in
@@ -225,6 +231,7 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
                                     }
                                     
                                     if self.eventList.count == dataCount {
+                                        // TODO: Sort event list
                                         self.eventCollectionView.reloadData()
                                         self.indicator.stopAnimating()
                                     }
