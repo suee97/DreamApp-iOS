@@ -280,7 +280,8 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func onTapEventTap() {
-        print("onTapEventTap")
+        let vc = EventViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

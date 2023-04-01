@@ -200,8 +200,8 @@ class WithoutLoginModal: UIViewController {
     }
     
     @objc private func onTapConfirmButton() {
-        delegate?.pushHome(withoutLogin: true)
         dismissModal()
+        delegate?.pushHome(withoutLogin: true)
     }
 }
 

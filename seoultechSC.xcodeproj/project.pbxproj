@@ -124,6 +124,9 @@
 		3C204E6629CD5D660026E85E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				5BF106B429D5C9B300808426 /* festival */,
+				5BF106AB29D3485C00808426 /* event */,
+				3C204EAF29CD5DE30026E85E /* Info */,
 				3C204E6729CD5D660026E85E /* HomeViewController.swift */,
 				3C6317E829D185DC00469836 /* Always */,
 				3C204EAF29CD5DE30026E85E /* Info */,
@@ -256,6 +259,20 @@
 				5BCAD99829A509830010E811 /* Info.plist */,
 			);
 			path = seoultechSC;
+			sourceTree = "<group>";
+		};
+		5BF106AB29D3485C00808426 /* event */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = event;
+			sourceTree = "<group>";
+		};
+		5BF106B429D5C9B300808426 /* festival */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = festival;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
