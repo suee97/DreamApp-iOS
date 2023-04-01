@@ -2,8 +2,16 @@ import UIKit
 
 class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    private var itemList = ["캐노피", "듀라테이블","앰프&마이크","리드선","L카","의자"]
+    private var itemTitle = ["돗자리","간이테이블","듀라테이블","앰프&마이크","캐노피","리드선","L카","의자"]
     
+    private var itemImageList : [UIImage] = [UIImage(named: "icon_mat")!, UIImage(named: "icon_dura_table")!, UIImage(named: "icon_dura_table")!, UIImage(named: "icon_amp")!, UIImage(named: "icon_canopy")!, UIImage(named: "icon_wire")!, UIImage(named: "icon_cart")!, UIImage(named: "icon_chair")!]
+    
+    private var itemAmount = ["4개","4개","4개","1개","2개","2개","2개","10개"]
+    
+    private var itemDescription = ["돗자리입니다.","간이테이블로 사용할 수 있습니다.","간이테이블 보다 좀 더 넓게 사용할 수 있습니다.","행사 시에 큰 음향을 낼 수 있습니다.","기둥과 천막으로 부스를 만들 수 있습니다.","콘센트를 연장하여 사용할 수 있습니다.","여러 짐을 한 번에 옮길 수 있습니다.","외부 행사 시에 간이 의자로 활용할 수 있습니다."]
+    
+    
+    let imageList: [UIImage] = [UIImage(named: "dream_logo")!, UIImage(named: "dream_logo")!, UIImage(systemName: "person")!]
     private let scrollView : UIScrollView = UIScrollView()
     
     private let contentView : UIView = UIView()
@@ -49,7 +57,12 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
         return myReservation
     }()
     
-    private let collectionView : UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    private lazy var collectionView : UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.register(AlwaysCollectionViewCell.self, forCellWithReuseIdentifier: AlwaysCollectionViewCell.identifier)
+        
+        return collectionView
+    }()
     
     private let infoContainer : UIView = {
         let view = UIView()
@@ -57,6 +70,7 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
         let title = UILabel()
         title.text = "안내사항"
         title.font = UIFont(name: "Pretendard-Bold", size: 16)
+        title.textColor = .red
         
         view.addSubview(title)
         
@@ -77,7 +91,7 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
             i.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             
             i.font = UIFont(name: "Pretendard-Regular", size: 12)
-            i.textColor = .text_caption
+            i.textColor = .navy
             i.numberOfLines = 3
             
             NSLayoutConstraint.activate([
@@ -107,10 +121,7 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(AlwaysCollectionViewCell.self, forCellWithReuseIdentifier: AlwaysCollectionViewCell.identifier)
-        
+        configureCollectionViewDelegate()
         configureUI()
         
     }
@@ -173,11 +184,11 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
             collectionView.topAnchor.constraint(equalTo: myReservationButton.bottomAnchor, constant: 30),
             collectionView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
             collectionView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
-            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -181),
+            collectionView.bottomAnchor.constraint(equalTo: myReservationButton.bottomAnchor, constant: 240),
             infoContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             infoContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
             infoContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
-            infoContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -136),
+            infoContainer.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 45),
         ])
         
         contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
@@ -188,35 +199,59 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
         
     }
     
+    private func configureCollectionViewDelegate() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+    }
+    
     // CollectionView Datasource
     
     // 셀 갯수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return itemList.count
+        return itemTitle.count
     }
     
     // 셀 지정
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlwaysCollectionViewCell.identifier, for: indexPath) as? AlwaysCollectionViewCell else {
-            return UICollectionViewCell()
-        }
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlwaysCollectionViewCell.identifier, for: indexPath) as! AlwaysCollectionViewCell
+            
+        cell.itemTitle.text = itemTitle[indexPath.row]
+        cell.itemImageView.image = itemImageList[indexPath.row]
+        
         cell.backgroundColor = .white
         cell.layer.cornerRadius = 10
         return cell
     }
-    
-    // CollectionView DelegateFlowLayout
     
     // 셀 크기 설정
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 74, height: 100)
     }
     
+    // 셀 선택
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = AlwaysRentViewController()
+        vc.item.text = itemTitle[indexPath.row]
+        vc.itemImageView.image = itemImageList[indexPath.row]
+        vc.purpose.text = itemDescription[indexPath.row]
+        vc.totalAmount.text = itemAmount[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
-
     
     // MARK: - Selectors
     @objc private func myReservationBtn() {
         print("MyReservation Confirm")
     }
+}
+
+struct ItemWithImage {
+    let eventId: Int
+    let title: String
+    let formLink: String
+    let image: UIImage
+    let startTime: String
+    let endTime: String
+    let eventStatus: EventStatus
 }
