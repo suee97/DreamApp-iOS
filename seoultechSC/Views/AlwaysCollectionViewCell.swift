@@ -1,10 +1,3 @@
-//
-//  AlwaysCollectionViewCell.swift
-//  seoultechSC
-//
-//  Created by 변상우 on 2023/03/28.
-//
-
 import UIKit
 
 class AlwaysCollectionViewCell: UICollectionViewCell {
@@ -13,18 +6,20 @@ class AlwaysCollectionViewCell: UICollectionViewCell {
     
     private let itemImageViewSize : CGFloat = 40
     
-    private let itemImageView : UIImageView = {
+    let itemImageView : UIImageView = {
         
         var imageView = UIImageView()
-        imageView.backgroundColor = .blue
         imageView.layer.cornerRadius = 10
         
         return imageView
     }()
     
-    private let itemTitle : UILabel = {
+    let itemTitle : UILabel = {
         
         var itemTitle = UILabel()
+        itemTitle.font = UIFont(name: "Pretendard-Bold", size: 12)
+        itemTitle.textColor = .navy
+        itemTitle.textAlignment = .center
         itemTitle.backgroundColor = .secondaryPurple
         itemTitle.clipsToBounds = true
         itemTitle.layer.cornerRadius = 10
