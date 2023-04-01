@@ -41,6 +41,7 @@
 		3C204EAD29CD5DA20026E85E /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204EA729CD5DA20026E85E /* ActionButton.swift */; };
 		3C204EAE29CD5DA20026E85E /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204EA829CD5DA20026E85E /* TitleLabel.swift */; };
 		3C204EB129CD5DFE0026E85E /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204EB029CD5DFE0026E85E /* InfoViewController.swift */; };
+		3C6207C229D2CAC8008C696F /* AlwaysCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6207C129D2CAC8008C696F /* AlwaysCollectionViewCell.swift */; };
 		3C6317E729D16DE100469836 /* DevInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6317E629D16DE100469836 /* DevInfoViewController.swift */; };
 		3C6317EB29D1864800469836 /* AlwaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6317EA29D1864800469836 /* AlwaysViewController.swift */; };
 		5BEE4A7C29CE43CC00F34795 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5BEE4A7B29CE43CC00F34795 /* Alamofire */; };
@@ -81,6 +82,7 @@
 		3C204EA729CD5DA20026E85E /* ActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		3C204EA829CD5DA20026E85E /* TitleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
 		3C204EB029CD5DFE0026E85E /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		3C6207C129D2CAC8008C696F /* AlwaysCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysCollectionViewCell.swift; sourceTree = "<group>"; };
 		3C6317E629D16DE100469836 /* DevInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevInfoViewController.swift; sourceTree = "<group>"; };
 		3C6317EA29D1864800469836 /* AlwaysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysViewController.swift; sourceTree = "<group>"; };
 		5BCAD98729A509820010E811 /* seoultechSC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = seoultechSC.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				3C6317EA29D1864800469836 /* AlwaysViewController.swift */,
+				3C6207C129D2CAC8008C696F /* AlwaysCollectionViewCell.swift */,
 			);
 			path = Always;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				3C204E7829CD5D660026E85E /* PhoneAuthViewController.swift in Sources */,
 				3C204E7529CD5D660026E85E /* StudentCardAuthViewController.swift in Sources */,
 				3C204E7229CD5D660026E85E /* HomeViewController.swift in Sources */,
+				3C6207C229D2CAC8008C696F /* AlwaysCollectionViewCell.swift in Sources */,
 				3C204EB129CD5DFE0026E85E /* InfoViewController.swift in Sources */,
 				3C204E7329CD5D660026E85E /* SetPwViewController.swift in Sources */,
 				3C204E7629CD5D660026E85E /* SignUpEndViewController.swift in Sources */,
