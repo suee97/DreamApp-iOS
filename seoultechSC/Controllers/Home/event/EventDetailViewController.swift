@@ -14,16 +14,28 @@ class EventDetailViewController: UIViewController {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
         label.font = UIFont(name: "Pretendard-Bold", size: 25)
         label.numberOfLines = 2
         label.text = event?.title
+        if event?.eventStatus == .BEFORE {
+            label.textColor = .secondaryPurple
+        } else if event?.eventStatus == .PROCEEDING {
+            label.textColor = .primaryPurple
+        } else {
+            label.textColor = .text_caption
+        }
         return label
     }()
     
-    private let divider: UIView = {
+    private lazy var divider: UIView = {
         let view = UIView()
-        view.backgroundColor = .primaryPurple
+        if event?.eventStatus == .BEFORE {
+            view.backgroundColor = .secondaryPurple
+        } else if event?.eventStatus == .PROCEEDING {
+            view.backgroundColor = .primaryPurple
+        } else {
+            view.backgroundColor = .text_caption
+        }
         return view
     }()
     
@@ -45,6 +57,7 @@ class EventDetailViewController: UIViewController {
             button.backgroundColor = .text_caption
             button.setTitle("종료된 이벤트", for: .normal)
         }
+        button.layer.cornerRadius = 25
         button.addTarget(self, action: #selector(onTapApplyButton), for: .touchUpInside)
         return button
     }()
@@ -63,7 +76,11 @@ class EventDetailViewController: UIViewController {
     
     // MARK: - Helpers
     private func configureUI() {
-        view.backgroundColor = .backgroundPurple
+        if event?.eventStatus == .END {
+            view.backgroundColor = .lightGrey
+        } else {
+            view.backgroundColor = .backgroundPurple
+        }
         
         view.addSubview(contentView)
         contentView.addSubview(titleLabel)
