@@ -6,14 +6,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        // MARK: Setup Login in splash
-        setLoginState(false)
-        
-        let aToken: String = KeychainHelper.sharedKeychain.getAccessToken() ?? ""
-        let rToken: String = KeychainHelper.sharedKeychain.getRefreshToken() ?? ""
-        print("스플래쉬 get access token : \(aToken)")
-        print("스플래쉬 get refresh token : \(rToken)")
- 
         return true
     }
 
@@ -33,4 +25,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-

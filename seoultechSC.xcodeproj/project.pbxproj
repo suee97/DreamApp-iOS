@@ -51,6 +51,9 @@
 		3C6317E729D16DE100469836 /* DevInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6317E629D16DE100469836 /* DevInfoViewController.swift */; };
 		3C6317EB29D1864800469836 /* AlwaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6317EA29D1864800469836 /* AlwaysViewController.swift */; };
 		5BEE4A7C29CE43CC00F34795 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5BEE4A7B29CE43CC00F34795 /* Alamofire */; };
+		5BF106C029D9676D00808426 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 5BF106BF29D9676D00808426 /* SwiftKeychainWrapper */; };
+		5BF106C229D9678500808426 /* JWTAuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF106C129D9678500808426 /* JWTAuthHelper.swift */; };
+		5BF106C429D967CC00808426 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF106C329D967CC00808426 /* LoadingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +102,8 @@
 		3C6317EA29D1864800469836 /* AlwaysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysViewController.swift; sourceTree = "<group>"; };
 		5BCAD98729A509820010E811 /* seoultechSC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = seoultechSC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BCAD99829A509830010E811 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5BF106C129D9678500808426 /* JWTAuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTAuthHelper.swift; sourceTree = "<group>"; };
+		5BF106C329D967CC00808426 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BF106C029D9676D00808426 /* SwiftKeychainWrapper in Frameworks */,
 				5BEE4A7C29CE43CC00F34795 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -129,6 +135,7 @@
 				3C204E6629CD5D660026E85E /* Home */,
 				3C204E6829CD5D660026E85E /* Login */,
 				3C204E7129CD5D660026E85E /* SelectLoginViewController.swift */,
+				5BF106C329D967CC00808426 /* LoadingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -173,6 +180,7 @@
 				3C0EDCDA29D035C400AF7D0E /* KeychainHelper.swift */,
 				3C204E7C29CD5D7C0026E85E /* Commons.swift */,
 				3C204E7E29CD5D7C0026E85E /* Extensions.swift */,
+				5BF106C129D9678500808426 /* JWTAuthHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -310,6 +318,7 @@
 			name = seoultechSC;
 			packageProductDependencies = (
 				5BEE4A7B29CE43CC00F34795 /* Alamofire */,
+				5BF106BF29D9676D00808426 /* SwiftKeychainWrapper */,
 			);
 			productName = seoultechSC;
 			productReference = 5BCAD98729A509820010E811 /* seoultechSC.app */;
@@ -341,6 +350,7 @@
 			mainGroup = 5BCAD97E29A509820010E811;
 			packageReferences = (
 				5BEE4A7A29CE43CC00F34795 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				5BF106BE29D9676D00808426 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 			);
 			productRefGroup = 5BCAD98829A509820010E811 /* Products */;
 			projectDirPath = "";
@@ -391,10 +401,12 @@
 				3C204E7F29CD5D7C0026E85E /* Commons.swift in Sources */,
 				3C204EAA29CD5DA20026E85E /* CustomTableViewCell.swift in Sources */,
 				3C204E7929CD5D660026E85E /* LoginViewController.swift in Sources */,
+				5BF106C229D9678500808426 /* JWTAuthHelper.swift in Sources */,
 				3C6317EB29D1864800469836 /* AlwaysViewController.swift in Sources */,
 				3C204E7829CD5D660026E85E /* PhoneAuthViewController.swift in Sources */,
 				3C204E7529CD5D660026E85E /* StudentCardAuthViewController.swift in Sources */,
 				3C204E7229CD5D660026E85E /* HomeViewController.swift in Sources */,
+				5BF106C429D967CC00808426 /* LoadingViewController.swift in Sources */,
 				3C6207C229D2CAC8008C696F /* AlwaysCollectionViewCell.swift in Sources */,
 				3C204EB129CD5DFE0026E85E /* InfoViewController.swift in Sources */,
 				3C204E7329CD5D660026E85E /* SetPwViewController.swift in Sources */,
@@ -626,6 +638,14 @@
 				kind = branch;
 			};
 		};
+		5BF106BE29D9676D00808426 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -633,6 +653,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5BEE4A7A29CE43CC00F34795 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		5BF106BF29D9676D00808426 /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5BF106BE29D9676D00808426 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
