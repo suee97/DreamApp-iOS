@@ -33,7 +33,7 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
         messageLabel.text = "이벤트를 불러오지 못했습니다."
         messageLabel.font = UIFont(name: "Pretendard-Bold", size: 16)
         messageLabel.textColor = .primaryPurple
-        logoImageView.image = UIImage(named: "dream_logo")
+        logoImageView.image = UIImage(named: "dream_charactor")
         view.backgroundColor = .white
         view.layer.cornerRadius = 10
         
@@ -44,8 +44,8 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: screenHeight * (172/640)),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoImageView.widthAnchor.constraint(equalToConstant: screenWidth * (140/360)),
-            logoImageView.heightAnchor.constraint(equalToConstant: screenHeight * (61/640)),
+            logoImageView.widthAnchor.constraint(equalToConstant: getRatWidth(81)),
+            logoImageView.heightAnchor.constraint(equalToConstant: getRatWidth(97)),
             messageLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: screenHeight * (28/640)),
             messageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
@@ -62,7 +62,7 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
         messageLabel.text = "진행중인 이벤트가 없습니다."
         messageLabel.font = UIFont(name: "Pretendard-Bold", size: 16)
         messageLabel.textColor = .primaryPurple
-        logoImageView.image = UIImage(named: "dream_logo")
+        logoImageView.image = UIImage(named: "dream_charactor")
         view.backgroundColor = .white
         view.layer.cornerRadius = 10
         
@@ -73,8 +73,8 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: screenHeight * (172/640)),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoImageView.widthAnchor.constraint(equalToConstant: screenWidth * (140/360)),
-            logoImageView.heightAnchor.constraint(equalToConstant: screenHeight * (61/640)),
+            logoImageView.widthAnchor.constraint(equalToConstant: getRatWidth(81)),
+            logoImageView.heightAnchor.constraint(equalToConstant: getRatWidth(97)),
             messageLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: screenHeight * (28/640)),
             messageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
@@ -231,7 +231,6 @@ class EventViewController: UIViewController, UICollectionViewDelegate, UICollect
                                     }
                                     
                                     if self.eventList.count == dataCount {
-                                        // TODO: Sort event list
                                         self.sortEventList()
                                         self.eventCollectionView.reloadData()
                                         self.indicator.stopAnimating()
