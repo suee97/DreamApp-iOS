@@ -37,14 +37,14 @@ class SetPwViewController: UIViewController {
     private let pwLabel: TitleLabel = TitleLabel("비밀번호")
     private let pwCheckLabel: TitleLabel = TitleLabel("비밀번호 확인")
     
-    private let formCheckLabel1: UITextField = {
-        let textField = UITextField()
+    private let formCheckLabel1: UILabel = {
+        let textField = UILabel()
         textField.font = UIFont(name: "Pretendard-Regular", size: 12)
         return textField
     }()
     
-    private let formCheckLabel2: UITextField = {
-        let textField = UITextField()
+    private let formCheckLabel2: UILabel = {
+        let textField = UILabel()
         textField.font = UIFont(name: "Pretendard-Regular", size: 12)
         return textField
     }()
@@ -75,6 +75,7 @@ class SetPwViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        configureGesture()
     }
     
     
@@ -146,9 +147,23 @@ class SetPwViewController: UIViewController {
         ])
     }
     
+    private func configureGesture() {
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tapGesture)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     
     // MARK: - Selectors
     @objc private func onTapNextButton() {
+        signUpUser.appPassword = pwField.text
         let vc = StudentCardAuthViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -177,6 +192,17 @@ class SetPwViewController: UIViewController {
         } else {
             nextButton.setActive(false)
         }
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            self.view.frame.origin.y = -keyboardHeight + 40
+        }
+    }
+    
+    @objc private func keyboardWillHide() {
+        self.view.frame.origin.y = 0
     }
     
 }

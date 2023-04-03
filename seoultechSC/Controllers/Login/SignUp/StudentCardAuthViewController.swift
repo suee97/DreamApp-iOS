@@ -1,4 +1,5 @@
 import UIKit
+import Alamofire
 import AVFoundation
 import Photos
 
@@ -13,7 +14,7 @@ class StudentCardAuthViewController: UIViewController, UpdateImageDelegate {
     }()
     
     private lazy var nextButton: ActionButton = {
-        let button = ActionButton(title: "확인")
+        let button = ActionButton(title: "가입 요청하기")
         button.addTarget(self, action: #selector(onTapNextButton), for: .touchUpInside)
         return button
     }()
@@ -159,8 +160,70 @@ class StudentCardAuthViewController: UIViewController, UpdateImageDelegate {
     
     // MARK: - Selectors
     @objc private func onTapNextButton() {
-        let vc = SignUpEndViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        nextButton.setLoading(true)
+        signUpUser.file = cardImageView.image?.jpegData(compressionQuality: 0.1)
+        
+        let url = api_url + "/member"
+        let header: HTTPHeaders = ["Content-type" : "multipart/form-data"]
+        let params = [
+            "studentNo": signUpUser.studentNo ?? "",
+            "appPassword": signUpUser.appPassword ?? "",
+            "name": signUpUser.name ?? "",
+            "department": signUpUser.department ?? "",
+            "fcmToken": "none",
+            "phoneNo": signUpUser.phoneNo ?? ""
+        ]
+        
+        // TODO: 예외처리
+        AF.upload(multipartFormData: { multipartFormData in
+            for (key, value) in params {
+                multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
+            }
+            
+            multipartFormData.append(signUpUser.file!, withName: "file", fileName: "tmp_file.jpeg", mimeType: "image/jpeg")
+            
+        }, to: url, method: .post, headers: header)
+        .responseJSON { response in
+            switch response.result {
+            case .success:
+                do {
+                    let decoder = JSONDecoder()
+                    guard let responseData = response.data else { return }
+                    let result = try decoder.decode(AuthApiResult.self, from: responseData)
+                    if result.status == 201 {
+                        self.nextButton.setLoading(false)
+                        let vc = SelectLoginViewController()
+                        self.navigationController?.setViewControllers([vc], animated: true)
+                        showToast(view: vc.view, message: "회원가입 요청을 완료했습니다.")
+                    } else if result.errorCode == "ST053" {
+                        self.nextButton.setLoading(false)
+                        let vc = SelectLoginViewController()
+                        self.navigationController?.setViewControllers([vc], animated: true)
+                        showToast(view: vc.view, message: "이미 가입된 회원입니다. 로그인해주세요.")
+                    } else if result.errorCode == "ST058" {
+                        self.nextButton.setLoading(false)
+                        let vc = SelectLoginViewController()
+                        self.navigationController?.setViewControllers([vc], animated: true)
+                        showToast(view: vc.view, message: "탈퇴한 회원입니다. 02-970-7012로 문의해주세요.")
+                    } else if result.errorCode == "ST066" {
+                        self.nextButton.setLoading(false)
+                        let vc = SelectLoginViewController()
+                        self.navigationController?.setViewControllers([vc], animated: true)
+                        showToast(view: vc.view, message: "휴대폰 인증정보가 일치하지 않습니다. 다시 시도해주세요.")
+                    } else {
+                        self.nextButton.setLoading(false)
+                        showToast(view: self.view, message: "오류가 발생했습니다.")
+                    }
+                    
+                } catch {
+                    self.nextButton.setLoading(false)
+                    showToast(view: self.view, message: "오류가 발생했습니다.")
+                }
+            case .failure:
+                self.nextButton.setLoading(false)
+                showToast(view: self.view, message: "오류가 발생했습니다.")
+            }
+        }
     }
     
     @objc private func onTapUploadButton() {
@@ -337,7 +400,7 @@ class ChooseModalViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let image: UIImage = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage else { return }
+        guard let image: UIImage = info[.originalImage] as? UIImage else { return }
         delegate?.sendUpdateImage(image)
         picker.dismiss(animated: true)
         dismissModal()
@@ -364,11 +427,13 @@ class ChooseModalViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     private func openPhotoLibrary() {
-        let pickerController = UIImagePickerController()
-        pickerController.sourceType = .photoLibrary
-        pickerController.delegate = self
-        pickerController.allowsEditing = true
-        present(pickerController, animated: true)
+        DispatchQueue.main.async {
+            let pickerController = UIImagePickerController()
+            pickerController.sourceType = .photoLibrary
+            pickerController.delegate = self
+            pickerController.allowsEditing = false
+            self.present(pickerController, animated: true, completion: nil)
+        }
     }
     
     private func openCamera() {
@@ -376,7 +441,7 @@ class ChooseModalViewController: UIViewController, UIImagePickerControllerDelega
             let pickerController = UIImagePickerController()
             pickerController.sourceType = .camera
             pickerController.delegate = self
-            pickerController.allowsEditing = true
+            pickerController.allowsEditing = false
             pickerController.mediaTypes = ["public.image"]
             self.present(pickerController, animated: true)
         }

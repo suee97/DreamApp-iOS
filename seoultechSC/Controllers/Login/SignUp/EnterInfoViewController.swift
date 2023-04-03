@@ -117,7 +117,7 @@ class EnterInfoViewController: UIViewController, UpdateCollegeDelegate, UpdateMa
         view.addSubview(nextButton)
         collegeFieldContainer.addSubview(collegeField)
         majorFieldContainer.addSubview(majorField)
-                
+        
         logo.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameField.translatesAutoresizingMaskIntoConstraints = false
@@ -201,10 +201,11 @@ class EnterInfoViewController: UIViewController, UpdateCollegeDelegate, UpdateMa
     // MARK: - Selectors
     @objc func onTapNextButton() {
         nextButton.setLoading(true)
-
+        
         guard let studentNo = idField.text else { return }
         let url = "\(api_url)/member/duplicate?studentNo=\(studentNo)"
-
+        
+        // TODO: 예외처리 UI
         let request = AF.request(url,
                                  method: .get,
                                  parameters: nil,
@@ -214,26 +215,30 @@ class EnterInfoViewController: UIViewController, UpdateCollegeDelegate, UpdateMa
             switch response.result {
             case .success:
                 do {
-                    // TODO: 예외처리 UI
                     let decoder = JSONDecoder()
                     guard let responseData = response.data else { return }
                     let result = try decoder.decode(AuthApiResult.self, from: responseData)
                     if result.status == 200 {
                         self.nextButton.setLoading(false)
                         self.view.endEditing(true)
+                        signUpUser.studentNo = self.idField.text
+                        signUpUser.department = self.majorField.text
+                        signUpUser.name = self.nameField.text
                         let vc = PhoneAuthViewController()
                         self.navigationController?.pushViewController(vc, animated: true)
-                    }
-                    if result.errorCode == "ST053" {
-                        // 가입된 학번 존재
+                    } else if result.errorCode == "ST053" {
+                        showToast(view: self.view, message: "같은 학번으로 가입된 계정이 존재합니다.")
                         self.nextButton.setLoading(false)
                     } else {
+                        showToast(view: self.view, message: "오류가 발생했습니다.")
                         self.nextButton.setLoading(false)
                     }
                 } catch {
+                    showToast(view: self.view, message: "오류가 발생했습니다.")
                     self.nextButton.setLoading(false)
                 }
             case .failure:
+                showToast(view: self.view, message: "오류가 발생했습니다.")
                 self.nextButton.setLoading(false)
             }
         }
@@ -290,14 +295,23 @@ class EnterInfoViewController: UIViewController, UpdateCollegeDelegate, UpdateMa
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let allowedCharacters = CharacterSet.decimalDigits
+        let characterSet = CharacterSet(charactersIn: string)
+        
         if textField.isEqual(idField) {
             let allowedCharacters = CharacterSet.decimalDigits
             let characterSet = CharacterSet(charactersIn: string)
-            return allowedCharacters.isSuperset(of: characterSet)
+            
+            let idString = idField.text ?? ""
+            guard let idRange = Range(range, in: idString) else { return false }
+            let updatedIdString = idString.replacingCharacters(in: idRange, with: string)
+            
+            return allowedCharacters.isSuperset(of: characterSet) && updatedIdString.count <= 8
         }
         return true
     }
-
+    
 }
 
 
@@ -330,7 +344,12 @@ class CollegeSelectViewController: UIViewController, UITableViewDelegate, UITabl
     
     let modal: UIView = {
         let view = UIView()
-        view.configureModalView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 10
+        view.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        view.layer.shadowOpacity = 1
+        view.layer.shadowOffset = CGSize.zero
+        view.layer.shadowRadius = 6
         return view
     }()
     
@@ -340,7 +359,7 @@ class CollegeSelectViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewDidLoad()
         configureUI()
     }
-
+    
     
     // MARK: - Helpers
     private func configureUI() {
@@ -418,7 +437,7 @@ class CollegeSelectViewController: UIViewController, UITableViewDelegate, UITabl
         cell.radioButton.setState(true)
         selectedCollege = collegeList[indexPath.row]
     }
-
+    
 }
 
 
@@ -471,7 +490,7 @@ class MajorSelectViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
         configureUI()
     }
-
+    
     
     // MARK: - Helpers
     private func configureUI() {
@@ -549,7 +568,7 @@ class MajorSelectViewController: UIViewController, UITableViewDelegate, UITableV
         cell.radioButton.setState(true)
         selectedMajor = majorList[majorIndex][indexPath.row]
     }
-
+    
 }
 
 protocol UpdateCollegeDelegate {

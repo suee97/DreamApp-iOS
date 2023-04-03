@@ -13,7 +13,7 @@ class PhoneAuthViewController: UIViewController, UITextFieldDelegate {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-
+    
     private lazy var nextButton: ActionButton = {
         let button = ActionButton(title: "다음")
         button.addTarget(self, action: #selector(onTapNextButton), for: .touchUpInside)
@@ -138,7 +138,7 @@ class PhoneAuthViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(authField)
         view.addSubview(authLabel)
         view.addSubview(helpLabel)
-                
+        
         logo.translatesAutoresizingMaskIntoConstraints = false
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         phoneLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -187,6 +187,7 @@ class PhoneAuthViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Selectors
     @objc func onTapNextButton() {
+        signUpUser.phoneNo = getPhoneParameter(phone: phoneField.text ?? "")
         let vc = SetPwViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -239,13 +240,10 @@ class PhoneAuthViewController: UIViewController, UITextFieldDelegate {
                         self.phoneField.isEnabled = false
                         self.askAuthButton.setLoading(false)
                         self.askAuthButton.setActive(false)
-                        
-                        // TODO: Hide Keyboard
-                        
                     } else {
                         switch result.errorCode {
                         case "ST064":
-                            self.setHelpLabel("이미 가입된 계정이 존재합니다.")
+                            self.setHelpLabel("같은 번호로 가입된 계정이 존재합니다.")
                             self.phoneField.isEnabled = true
                             self.askAuthButton.setLoading(false)
                             self.phoneField.textColor = .black
@@ -255,17 +253,20 @@ class PhoneAuthViewController: UIViewController, UITextFieldDelegate {
                             self.askAuthButton.setLoading(false)
                             self.phoneField.textColor = .black
                         default:
-                            debugPrint(">> 휴대폰 인증번호 발송 : erorr code not found")
+                            self.setHelpLabel("오류가 발생했습니다.")
+                            self.phoneField.isEnabled = true
+                            self.askAuthButton.setLoading(false)
+                            self.phoneField.textColor = .black
                         }
                     }
                 } catch {
-                    self.setHelpLabel("에러가 발생했습니다.")
+                    self.setHelpLabel("오류가 발생했습니다.")
                     self.phoneField.isEnabled = true
                     self.askAuthButton.setLoading(false)
                     self.phoneField.textColor = .black
                 }
             case .failure:
-                self.setHelpLabel("에러가 발생했습니다.")
+                self.setHelpLabel("오류가 발생했습니다.")
                 self.phoneField.isEnabled = true
                 self.askAuthButton.setLoading(false)
                 self.phoneField.textColor = .black
@@ -308,10 +309,6 @@ class PhoneAuthViewController: UIViewController, UITextFieldDelegate {
                         
                         self.setHelpLabel("인증이 완료되었습니다.")
                         self.nextButton.setActive(true)
-                        
-                        // TODO: Hide Keyboard
-                        
-                        
                     } else {
                         switch result.errorCode {
                         case "ST066":
@@ -327,17 +324,20 @@ class PhoneAuthViewController: UIViewController, UITextFieldDelegate {
                             self.askAuthButton.setLoading(false)
                             self.phoneField.textColor = .black
                         default:
-                            debugPrint(">> 인증번호 확인 : error code not found")
+                            self.setHelpLabel("오류가 발생했습니다.")
+                            self.authField.isEnabled = true
+                            self.confirmButton.setLoading(false)
+                            self.authField.textColor = .black
                         }
                     }
                 } catch {
-                    self.setHelpLabel("에러가 발생했습니다.")
+                    self.setHelpLabel("오류가 발생했습니다.")
                     self.authField.isEnabled = true
                     self.confirmButton.setLoading(false)
                     self.authField.textColor = .black
                 }
             case .failure:
-                self.setHelpLabel("에러가 발생했습니다.")
+                self.setHelpLabel("오류가 발생했습니다.")
                 self.authField.isEnabled = true
                 self.confirmButton.setLoading(false)
                 self.authField.textColor = .black
