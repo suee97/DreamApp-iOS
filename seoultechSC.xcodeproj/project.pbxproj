@@ -50,13 +50,17 @@
 		3C6207CC29D7FC1A008C696F /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6207CA29D7FC1A008C696F /* EventCollectionViewCell.swift */; };
 		3C6317E729D16DE100469836 /* DevInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6317E629D16DE100469836 /* DevInfoViewController.swift */; };
 		3C6317EB29D1864800469836 /* AlwaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6317EA29D1864800469836 /* AlwaysViewController.swift */; };
-		5BEE4A7C29CE43CC00F34795 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5BEE4A7B29CE43CC00F34795 /* Alamofire */; };
-		5BF106C029D9676D00808426 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 5BF106BF29D9676D00808426 /* SwiftKeychainWrapper */; };
+		5B5FDB7129D9B1940027F88E /* FestivalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FDB6F29D9B1940027F88E /* FestivalViewController.swift */; };
+		5B5FDB7229D9B1940027F88E /* IntroModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FDB7029D9B1940027F88E /* IntroModalViewController.swift */; };
+		5B5FDB7429D9D5A60027F88E /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FDB7329D9D5A60027F88E /* FloatingButton.swift */; };
+		5B65D43F29D98D1A00130B89 /* SecureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B65D43E29D98D1A00130B89 /* SecureData.swift */; };
 		5BF106C229D9678500808426 /* JWTAuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF106C129D9678500808426 /* JWTAuthHelper.swift */; };
 		5BF106C429D967CC00808426 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF106C329D967CC00808426 /* LoadingViewController.swift */; };
+		B766BB9091C7865CAAC44448 /* Pods_seoultechSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348E0EFAB93AB9ABDEB808C0 /* Pods_seoultechSC.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		348E0EFAB93AB9ABDEB808C0 /* Pods_seoultechSC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_seoultechSC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C0EDCDA29D035C400AF7D0E /* KeychainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		3C0EDCDD29D037BB00AF7D0E /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		3C204E6729CD5D660026E85E /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -100,10 +104,16 @@
 		3C6207CA29D7FC1A008C696F /* EventCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCell.swift; sourceTree = "<group>"; };
 		3C6317E629D16DE100469836 /* DevInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevInfoViewController.swift; sourceTree = "<group>"; };
 		3C6317EA29D1864800469836 /* AlwaysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysViewController.swift; sourceTree = "<group>"; };
+		5B5FDB6F29D9B1940027F88E /* FestivalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FestivalViewController.swift; sourceTree = "<group>"; };
+		5B5FDB7029D9B1940027F88E /* IntroModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroModalViewController.swift; sourceTree = "<group>"; };
+		5B5FDB7329D9D5A60027F88E /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
+		5B65D43E29D98D1A00130B89 /* SecureData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureData.swift; sourceTree = "<group>"; };
 		5BCAD98729A509820010E811 /* seoultechSC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = seoultechSC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BCAD99829A509830010E811 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5BF106C129D9678500808426 /* JWTAuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTAuthHelper.swift; sourceTree = "<group>"; };
 		5BF106C329D967CC00808426 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		B593027624D1A53E470E0011 /* Pods-seoultechSC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seoultechSC.debug.xcconfig"; path = "Target Support Files/Pods-seoultechSC/Pods-seoultechSC.debug.xcconfig"; sourceTree = "<group>"; };
+		E62EC5836EB205930811B690 /* Pods-seoultechSC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seoultechSC.release.xcconfig"; path = "Target Support Files/Pods-seoultechSC/Pods-seoultechSC.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,8 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BF106C029D9676D00808426 /* SwiftKeychainWrapper in Frameworks */,
-				5BEE4A7C29CE43CC00F34795 /* Alamofire in Frameworks */,
+				B766BB9091C7865CAAC44448 /* Pods_seoultechSC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +190,7 @@
 				3C204E7C29CD5D7C0026E85E /* Commons.swift */,
 				3C204E7E29CD5D7C0026E85E /* Extensions.swift */,
 				5BF106C129D9678500808426 /* JWTAuthHelper.swift */,
+				5B65D43E29D98D1A00130B89 /* SecureData.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -269,6 +279,8 @@
 			children = (
 				5BCAD98929A509820010E811 /* seoultechSC */,
 				5BCAD98829A509820010E811 /* Products */,
+				8AA048773C59E029DD3C2D6C /* Pods */,
+				CF22E5E8F3170932B33CD57A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -296,8 +308,28 @@
 		5BF106B429D5C9B300808426 /* festival */ = {
 			isa = PBXGroup;
 			children = (
+				5B5FDB6F29D9B1940027F88E /* FestivalViewController.swift */,
+				5B5FDB7029D9B1940027F88E /* IntroModalViewController.swift */,
+				5B5FDB7329D9D5A60027F88E /* FloatingButton.swift */,
 			);
 			path = festival;
+			sourceTree = "<group>";
+		};
+		8AA048773C59E029DD3C2D6C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B593027624D1A53E470E0011 /* Pods-seoultechSC.debug.xcconfig */,
+				E62EC5836EB205930811B690 /* Pods-seoultechSC.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		CF22E5E8F3170932B33CD57A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				348E0EFAB93AB9ABDEB808C0 /* Pods_seoultechSC.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,19 +339,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5BCAD99B29A509830010E811 /* Build configuration list for PBXNativeTarget "seoultechSC" */;
 			buildPhases = (
+				FEA3EE006CDA2D16D1BC9FAB /* [CP] Check Pods Manifest.lock */,
 				5BCAD98329A509820010E811 /* Sources */,
 				5BCAD98429A509820010E811 /* Frameworks */,
 				5BCAD98529A509820010E811 /* Resources */,
+				330000AE779FC966D92DA735 /* [CP] Copy Pods Resources */,
+				5B204053BA8D592FC677BE21 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = seoultechSC;
-			packageProductDependencies = (
-				5BEE4A7B29CE43CC00F34795 /* Alamofire */,
-				5BF106BF29D9676D00808426 /* SwiftKeychainWrapper */,
-			);
 			productName = seoultechSC;
 			productReference = 5BCAD98729A509820010E811 /* seoultechSC.app */;
 			productType = "com.apple.product-type.application";
@@ -348,10 +379,6 @@
 				Base,
 			);
 			mainGroup = 5BCAD97E29A509820010E811;
-			packageReferences = (
-				5BEE4A7A29CE43CC00F34795 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				5BF106BE29D9676D00808426 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
-			);
 			productRefGroup = 5BCAD98829A509820010E811 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -382,6 +409,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		330000AE779FC966D92DA735 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-seoultechSC/Pods-seoultechSC-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-seoultechSC/Pods-seoultechSC-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-seoultechSC/Pods-seoultechSC-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5B204053BA8D592FC677BE21 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-seoultechSC/Pods-seoultechSC-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-seoultechSC/Pods-seoultechSC-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-seoultechSC/Pods-seoultechSC-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FEA3EE006CDA2D16D1BC9FAB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-seoultechSC-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5BCAD98329A509820010E811 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -397,6 +483,7 @@
 				3C204EAD29CD5DA20026E85E /* ActionButton.swift in Sources */,
 				3C6207C929D7FBD5008C696F /* EventModels.swift in Sources */,
 				3C0EDCDB29D035C400AF7D0E /* KeychainHelper.swift in Sources */,
+				5B65D43F29D98D1A00130B89 /* SecureData.swift in Sources */,
 				3C204E7A29CD5D660026E85E /* SelectLoginViewController.swift in Sources */,
 				3C204E7F29CD5D7C0026E85E /* Commons.swift in Sources */,
 				3C204EAA29CD5DA20026E85E /* CustomTableViewCell.swift in Sources */,
@@ -407,7 +494,9 @@
 				3C204E7529CD5D660026E85E /* StudentCardAuthViewController.swift in Sources */,
 				3C204E7229CD5D660026E85E /* HomeViewController.swift in Sources */,
 				5BF106C429D967CC00808426 /* LoadingViewController.swift in Sources */,
+				5B5FDB7229D9B1940027F88E /* IntroModalViewController.swift in Sources */,
 				3C6207C229D2CAC8008C696F /* AlwaysCollectionViewCell.swift in Sources */,
+				5B5FDB7429D9D5A60027F88E /* FloatingButton.swift in Sources */,
 				3C204EB129CD5DFE0026E85E /* InfoViewController.swift in Sources */,
 				3C204E7329CD5D660026E85E /* SetPwViewController.swift in Sources */,
 				3C204E7629CD5D660026E85E /* SignUpEndViewController.swift in Sources */,
@@ -420,6 +509,7 @@
 				3C204E7429CD5D660026E85E /* PolicyAgreeViewController.swift in Sources */,
 				3C204EA929CD5DA20026E85E /* GreyTextField.swift in Sources */,
 				3C6207C729D7FB81008C696F /* EventDetailViewController.swift in Sources */,
+				5B5FDB7129D9B1940027F88E /* FestivalViewController.swift in Sources */,
 				3C204EAE29CD5DA20026E85E /* TitleLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -554,6 +644,7 @@
 		};
 		5BCAD99C29A509830010E811 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B593027624D1A53E470E0011 /* Pods-seoultechSC.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -581,6 +672,7 @@
 		};
 		5BCAD99D29A509830010E811 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E62EC5836EB205930811B690 /* Pods-seoultechSC.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -598,6 +690,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = suee97.seoultechSC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -628,38 +721,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		5BEE4A7A29CE43CC00F34795 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		5BF106BE29D9676D00808426 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
-			requirement = {
-				branch = develop;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		5BEE4A7B29CE43CC00F34795 /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5BEE4A7A29CE43CC00F34795 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
-		5BF106BF29D9676D00808426 /* SwiftKeychainWrapper */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5BF106BE29D9676D00808426 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
-			productName = SwiftKeychainWrapper;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5BCAD97F29A509820010E811 /* Project object */;
 }
