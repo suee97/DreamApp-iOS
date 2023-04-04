@@ -185,16 +185,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     let result = try decoder.decode(LoginApiResult.self, from: responseData)
                     
                     if result.status == 200 {
-                        self.loginButton.setLoading(false)
-                        self.setEnableStateForAllTextField(true)
+                        
+                        print("login : login authorized")
                         
                         KeychainHelper.sharedKeychain.saveAccessToken(result.data![0]["accessToken"]!)
                         KeychainHelper.sharedKeychain.saveRefreshToken(result.data![0]["refreshToken"]!)
-
-                        setLoginState(true)
                         
-                        let vc = HomeViewController()
-                        self.navigationController?.setViewControllers([vc], animated: true)
+                        AuthHelper.shared.getUserInfo(completion: { getUserInfoResult in
+                            if getUserInfoResult == .success {
+                                setLoginState(true)
+                                let vc = HomeViewController()
+                                self.navigationController?.setViewControllers([vc], animated: true)
+                            } else {
+                                self.loginButton.setLoading(false)
+                                self.setEnableStateForAllTextField(true)
+                                self.setHelperText("오류가 발생했습니다.")
+                            }
+                        })
                     } else {
                         switch result.errorCode {
                         case "ST041":
@@ -208,10 +215,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         default:
                             self.setHelperText("오류가 발생했습니다.")
                         }
+                        self.loginButton.setLoading(false)
+                        self.setEnableStateForAllTextField(true)
                     }
-                    
-                    self.loginButton.setLoading(false)
-                    self.setEnableStateForAllTextField(true)
                 } catch {
                     self.loginButton.setLoading(false)
                     self.setEnableStateForAllTextField(true)

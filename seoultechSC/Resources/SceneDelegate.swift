@@ -7,7 +7,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let navController = UINavigationController(rootViewController: LoadingViewController())
+        var navController = UINavigationController(rootViewController: LoadingViewController())
+        
+        let window = UIWindow(windowScene: windowScene)
+        window.rootViewController = navController
+        window.makeKeyAndVisible()
+        self.window = window
         
         setLoginState(false)
         
@@ -18,47 +23,68 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         print("LaunchScreen get refresh token : \(rToken)")
         
         if aToken != "" && rToken != "" {
-            JWTAuthHelper.shared.authAccessToken(completion: { result in
+            AuthHelper.shared.authAccessToken(completion: { result in
                 switch result {
                 case .authorized:
-                    print("access token authorized")
-                    setLoginState(true)
-                    navController.setViewControllers([HomeViewController()], animated: false)
+                    print("auto login : access token authorized")
+                    AuthHelper.shared.getUserInfo(completion: { result in
+                        if result == .success {
+                            setLoginState(true)
+                            let vc = HomeViewController()
+                            navController.setViewControllers([vc], animated: false)
+                        } else {
+                            setLoginState(false)
+                            let vc = SelectLoginViewController()
+                            navController.setViewControllers([vc], animated: false)
+                        }
+                    })
                 case .expired:
-                    JWTAuthHelper.shared.refreshAccessToken(completion: { result in
+                    AuthHelper.shared.refreshAccessToken(completion: { result in
                         switch result {
                         case .refreshed:
-                            JWTAuthHelper.shared.authAccessToken(completion: { result in
+                            AuthHelper.shared.authAccessToken(completion: { result in
                                 switch result {
                                 case .authorized:
-                                    print("access token authorized after refresh")
-                                    setLoginState(true)
-                                    navController.setViewControllers([HomeViewController()], animated: false)
+                                    print("auto login : access token authorized after refresh")
+                                    AuthHelper.shared.getUserInfo(completion: { result in
+                                        if result == .success {
+                                            setLoginState(true)
+                                            let vc = HomeViewController()
+                                            navController.setViewControllers([vc], animated: false)
+                                        } else {
+                                            setLoginState(false)
+                                            let vc = HomeViewController()
+                                            navController.setViewControllers([vc], animated: false)
+                                        }
+                                    })
                                 case .expired, .fail:
                                     print("fail to access token auth after refresh")
                                     setLoginState(false)
-                                    navController.setViewControllers([SelectLoginViewController()], animated: false)
+                                    let vc = SelectLoginViewController()
+                                    navController.setViewControllers([vc], animated: false)
                                 }
                             })
                             print("refreshed")
                         case .fail:
                             print("refresh failed")
                             setLoginState(false)
-                            navController.setViewControllers([SelectLoginViewController()], animated: false)
+                            let vc = SelectLoginViewController()
+                            navController.setViewControllers([vc], animated: false)
                         }
                     })
                 case .fail:
                     print("access token failed")
                     setLoginState(false)
-                    navController.setViewControllers([SelectLoginViewController()], animated: false)
+                    let vc = SelectLoginViewController()
+                    navController.setViewControllers([vc], animated: false)
                 }
             })
+        } else {
+            print("auto login : no token")
+            setLoginState(false)
+            let vc = SelectLoginViewController()
+            navController.setViewControllers([vc], animated: false)
         }
-        
-        let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = navController
-        window.makeKeyAndVisible()
-        self.window = window
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

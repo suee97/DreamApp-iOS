@@ -42,3 +42,10 @@ public struct SignUpUser {
     var fcmToken: String?
     var file: Data?
 }
+
+public struct Logout: Decodable {
+    let status: Int
+    let message: String
+    let data: [String]?
+    let errorCode: String?
+}
