@@ -89,10 +89,9 @@ class SettingViewController: UIViewController {
     
     private let SNSContainer: UIView = {
         
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 30)
         let container = UIView()
         container.layer.cornerRadius = 10
-        
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 30)
         
         let title = UILabel()
         title.text = "총학생회 SNS 바로가기"
@@ -101,43 +100,22 @@ class SettingViewController: UIViewController {
         
         let instagram = UIButton()
         instagram.setTitle("인스타그램", for: .normal)
-        instagram.tintColor = .primaryPurple
-        instagram.setTitleColor(.primaryPurple, for: .normal)
-        instagram.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 12)
         instagram.setImage(UIImage(named: "instagram_logo"), for: .normal)
-        instagram.imageView?.contentMode = .scaleAspectFit
-        instagram.alignTextBelow(spacing: 4)
         instagram.addTarget(self, action: #selector(instagramBtn), for: .touchUpInside)
-
         
         let youtube = UIButton()
-        youtube.tintColor = .primaryPurple
         youtube.setTitle("유튜브", for: .normal)
-        youtube.setTitleColor(.primaryPurple, for: .normal)
-        youtube.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 12)
         youtube.setImage(UIImage(named: "youtube_logo"), for: .normal)
-        youtube.imageView?.contentMode = .scaleAspectFit
-        youtube.alignTextBelow(spacing: 4)
         youtube.addTarget(self, action: #selector(youtubeBtn), for: .touchUpInside)
         
         let kakao = UIButton()
-        kakao.tintColor = .primaryPurple
         kakao.setTitle("카카오톡", for: .normal)
-        kakao.setTitleColor(.primaryPurple, for: .normal)
-        kakao.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 12)
         kakao.setImage(UIImage(named: "kakao_logo"), for: .normal)
-        kakao.imageView?.contentMode = .scaleAspectFit
-        kakao.alignTextBelow(spacing: 4)
         kakao.addTarget(self, action: #selector(kakaoBtn), for: .touchUpInside)
         
         let homepage = UIButton()
-        homepage.tintColor = .primaryPurple
         homepage.setTitle("홈페이지", for: .normal)
-        homepage.setTitleColor(.primaryPurple, for: .normal)
-        homepage.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 12)
         homepage.setImage(UIImage(systemName: "globe", withConfiguration: imageConfig), for: .normal)
-        homepage.imageView?.contentMode = .scaleAspectFit
-        homepage.alignTextBelow(spacing: 4)
         homepage.addTarget(self, action: #selector(homepageBtn), for: .touchUpInside)
         
         let stackView: UIStackView = {
@@ -149,17 +127,23 @@ class SettingViewController: UIViewController {
             return stackView
         }()
         
+        let buttonList: [UIButton] = [instagram, youtube, kakao, homepage]
+        
+        for i in buttonList {
+            i.tintColor = .primaryPurple
+            i.setTitleColor(.primaryPurple, for: .normal)
+            i.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 12)
+            i.imageView?.contentMode = .scaleAspectFit
+            i.alignTextBelow(spacing: 4)
+            i.translatesAutoresizingMaskIntoConstraints = false
+            stackView.addArrangedSubview(i)
+            i.widthAnchor.constraint(equalToConstant: 52).isActive = true
+            i.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        }
+        
         title.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        instagram.translatesAutoresizingMaskIntoConstraints = false
-        youtube.translatesAutoresizingMaskIntoConstraints = false
-        kakao.translatesAutoresizingMaskIntoConstraints = false
-        homepage.translatesAutoresizingMaskIntoConstraints = false
-        
-        stackView.addArrangedSubview(instagram)
-        stackView.addArrangedSubview(youtube)
-        stackView.addArrangedSubview(kakao)
-        stackView.addArrangedSubview(homepage)
+
         container.addSubview(title)
         container.addSubview(stackView)
         
@@ -168,14 +152,6 @@ class SettingViewController: UIViewController {
             stackView.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -20),
             stackView.topAnchor.constraint(equalTo: container.topAnchor, constant: 44),
             stackView.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -7),
-            instagram.widthAnchor.constraint(equalToConstant: 52),
-            instagram.heightAnchor.constraint(equalToConstant: 50),
-            youtube.widthAnchor.constraint(equalToConstant: 52),
-            youtube.heightAnchor.constraint(equalToConstant: 50),
-            kakao.widthAnchor.constraint(equalToConstant: 52),
-            kakao.heightAnchor.constraint(equalToConstant: 50),
-            homepage.widthAnchor.constraint(equalToConstant: 52),
-            homepage.heightAnchor.constraint(equalToConstant: 50),
             title.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 14),
             title.topAnchor.constraint(equalTo: container.topAnchor, constant: 9)
         ])
@@ -321,7 +297,7 @@ class SettingViewController: UIViewController {
         return container
         
     }()
-   
+    
     private var tel : UILabel = {
         let tel = UILabel()
         tel.text = "Tel. 02) 970-7012"
@@ -350,7 +326,7 @@ class SettingViewController: UIViewController {
         return right
     }()
     
-
+    
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -414,7 +390,7 @@ class SettingViewController: UIViewController {
         location.translatesAutoresizingMaskIntoConstraints = false
         right.translatesAutoresizingMaskIntoConstraints = false
         
-
+        
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
@@ -474,10 +450,10 @@ class SettingViewController: UIViewController {
     
     // MARK: - Selectors
     @objc private func logoutBtn() {
-//        let vc = LogoutModalViewCnotroller()
-//        vc.modalTransitionStyle = .crossDissolve
-//        vc.modalPresentationStyle = .overCurrentContext
-//        self.present(vc, animated: true, completion: nil)
+        //        let vc = LogoutModalViewCnotroller()
+        //        vc.modalTransitionStyle = .crossDissolve
+        //        vc.modalPresentationStyle = .overCurrentContext
+        //        self.present(vc, animated: true, completion: nil)
         let vc = SelectLoginViewController()
         setLoginState(false)
         let url = "\(api_url)/auth/logout"
@@ -487,9 +463,9 @@ class SettingViewController: UIViewController {
             "Authorization": "Bearer \(aToken)",
             "refresh" : "Bearer \(rToken)"
         ]
-
+        
         KeychainHelper.sharedKeychain.resetAccessRefreshToken()
-
+        
         let request = AF.request(url,
                                  method: .get,
                                  parameters: nil,
@@ -497,7 +473,7 @@ class SettingViewController: UIViewController {
         ).responseJSON { response in
             print("logout")
         }
-
+        
         navigationController?.setViewControllers([vc], animated: true)
     }
     
@@ -569,23 +545,23 @@ class SettingViewController: UIViewController {
 extension UIButton {
     
     func alignTextBelow(spacing: CGFloat = 8.0) {
-            guard let image = self.imageView?.image else {
-                return
-            }
-
-            guard let titleLabel = self.titleLabel else {
-                return
-            }
-
-            guard let titleText = titleLabel.text else {
-                return
-            }
-
-            let titleSize = titleText.size(withAttributes: [
-                NSAttributedString.Key.font: titleLabel.font as Any
-            ])
-
-            titleEdgeInsets = UIEdgeInsets(top: spacing, left: -image.size.width, bottom: -image.size.height, right: 0)
-            imageEdgeInsets = UIEdgeInsets(top: -(titleSize.height + spacing), left: 0, bottom: 0, right: -titleSize.width)
+        guard let image = self.imageView?.image else {
+            return
         }
+        
+        guard let titleLabel = self.titleLabel else {
+            return
+        }
+        
+        guard let titleText = titleLabel.text else {
+            return
+        }
+        
+        let titleSize = titleText.size(withAttributes: [
+            NSAttributedString.Key.font: titleLabel.font as Any
+        ])
+        
+        titleEdgeInsets = UIEdgeInsets(top: spacing, left: -image.size.width, bottom: -image.size.height, right: 0)
+        imageEdgeInsets = UIEdgeInsets(top: -(titleSize.height + spacing), left: 0, bottom: 0, right: -titleSize.width)
+    }
 }
