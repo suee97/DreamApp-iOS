@@ -44,6 +44,53 @@ class SettingViewController: UIViewController {
         return container
     }()
     
+    private let needLoginContainer: UIView = {
+        let container = UIView()
+        
+        let myImageView: UIImageView = {
+            let imageView = UIImageView()
+            imageView.image = UIImage(systemName: "person.crop.circle")
+            imageView.contentMode = .scaleAspectFit
+            imageView.tintColor = .secondaryPurple
+            return imageView
+        }()
+                
+        let needLoginLabel: UILabel = {
+            let label = UILabel()
+            label.text = "로그인이 필요합니다."
+            label.textColor = .black
+            label.font = UIFont(name: "Pretendard-Bold", size: 16)
+            return label
+        }()
+        
+        let loginButton: ActionButton = {
+            let button = ActionButton(title: "로그인 하기", height: 34)
+            return button
+        }()
+        
+        container.addSubview(myImageView)
+        container.addSubview(needLoginLabel)
+        container.addSubview(loginButton)
+        
+        myImageView.translatesAutoresizingMaskIntoConstraints = false
+        needLoginLabel.translatesAutoresizingMaskIntoConstraints = false
+        loginButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            myImageView.leftAnchor.constraint(equalTo: container.leftAnchor),
+            myImageView.centerYAnchor.constraint(equalTo: container.centerYAnchor),
+            myImageView.widthAnchor.constraint(equalToConstant: 78),
+            myImageView.heightAnchor.constraint(equalToConstant: 78),
+            needLoginLabel.leftAnchor.constraint(equalTo: myImageView.rightAnchor, constant: 17),
+            needLoginLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: 7),
+            loginButton.widthAnchor.constraint(equalToConstant: 97),
+            loginButton.leftAnchor.constraint(equalTo: myImageView.rightAnchor, constant: 18),
+            loginButton.topAnchor.constraint(equalTo: needLoginLabel.bottomAnchor, constant: 10)
+        ])
+        
+        return container
+    }()
+    
     private let manageAccountContainer: UIView = {
         
         let container = UIView()
@@ -367,8 +414,6 @@ class SettingViewController: UIViewController {
         
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        
-        contentView.addSubview(myInfoContainer)
         contentView.addSubview(manageAccountContainer)
         contentView.addSubview(SNSContainer)
         contentView.addSubview(InfoContainer)
@@ -380,7 +425,6 @@ class SettingViewController: UIViewController {
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        myInfoContainer.translatesAutoresizingMaskIntoConstraints = false
         manageAccountContainer.translatesAutoresizingMaskIntoConstraints = false
         SNSContainer.translatesAutoresizingMaskIntoConstraints = false
         InfoContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -400,10 +444,6 @@ class SettingViewController: UIViewController {
             contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
             contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
-            myInfoContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            myInfoContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 26),
-            myInfoContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
-            myInfoContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
             manageAccountContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             manageAccountContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 140),
             manageAccountContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
@@ -446,6 +486,25 @@ class SettingViewController: UIViewController {
         contentViewHeight.priority = .defaultLow
         contentViewHeight.isActive = true
         
+        if getLoginState() {
+            contentView.addSubview(myInfoContainer)
+            myInfoContainer.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                myInfoContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+                myInfoContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 26),
+                myInfoContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
+                myInfoContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
+            ])
+        } else {
+            contentView.addSubview(needLoginContainer)
+            needLoginContainer.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                needLoginContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 26),
+                needLoginContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
+                needLoginContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
+                needLoginContainer.bottomAnchor.constraint(equalTo: manageAccountContainer.topAnchor, constant: -32)
+            ])
+        }
     }
     
     // MARK: - Selectors
