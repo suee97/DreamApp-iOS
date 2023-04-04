@@ -94,53 +94,91 @@ class SettingViewController: UIViewController {
         
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 30)
         
-        let title = UILabel(frame: CGRect(x: 14, y: 9, width: 320, height: 19))
+        let title = UILabel()
         title.text = "총학생회 SNS 바로가기"
         title.textColor = .black
         title.font = UIFont(name: "Pretendard-Bold", size: 16)
         
-//        인스타그램 유튜브 카카오톡 홈페이지
-        let instagram = UIButton(frame: CGRect(x: 20, y: 44, width: 52, height: 50))
+        let instagram = UIButton()
         instagram.setTitle("인스타그램", for: .normal)
+        instagram.tintColor = .primaryPurple
         instagram.setTitleColor(.primaryPurple, for: .normal)
         instagram.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 12)
-        instagram.setImage(UIImage(systemName: "person", withConfiguration: imageConfig), for: .normal)
+        instagram.setImage(UIImage(named: "instagram_logo"), for: .normal)
         instagram.imageView?.contentMode = .scaleAspectFit
         instagram.alignTextBelow(spacing: 4)
-        instagram.addTarget(SettingViewController.self, action: #selector(instagramBtn), for: .touchUpInside)
+        instagram.addTarget(self, action: #selector(instagramBtn), for: .touchUpInside)
+
         
-        let youtube = UIButton(frame: CGRect(x: 109, y: 44, width: 52, height: 50))
+        let youtube = UIButton()
+        youtube.tintColor = .primaryPurple
         youtube.setTitle("유튜브", for: .normal)
         youtube.setTitleColor(.primaryPurple, for: .normal)
         youtube.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 12)
-        youtube.setImage(UIImage(systemName: "person", withConfiguration: imageConfig), for: .normal)
+        youtube.setImage(UIImage(named: "youtube_logo"), for: .normal)
         youtube.imageView?.contentMode = .scaleAspectFit
         youtube.alignTextBelow(spacing: 4)
         youtube.addTarget(self, action: #selector(youtubeBtn), for: .touchUpInside)
         
-        let kakao = UIButton(frame: CGRect(x: 185, y: 44, width: 52, height: 50))
+        let kakao = UIButton()
+        kakao.tintColor = .primaryPurple
         kakao.setTitle("카카오톡", for: .normal)
         kakao.setTitleColor(.primaryPurple, for: .normal)
         kakao.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 12)
-        kakao.setImage(UIImage(systemName: "person", withConfiguration: imageConfig), for: .normal)
+        kakao.setImage(UIImage(named: "kakao_logo"), for: .normal)
         kakao.imageView?.contentMode = .scaleAspectFit
         kakao.alignTextBelow(spacing: 4)
         kakao.addTarget(self, action: #selector(kakaoBtn), for: .touchUpInside)
         
-        let homepage = UIButton(frame: CGRect(x: 260, y: 44, width: 52, height: 50))
+        let homepage = UIButton()
+        homepage.tintColor = .primaryPurple
         homepage.setTitle("홈페이지", for: .normal)
         homepage.setTitleColor(.primaryPurple, for: .normal)
         homepage.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 12)
-        homepage.setImage(UIImage(systemName: "person", withConfiguration: imageConfig), for: .normal)
+        homepage.setImage(UIImage(systemName: "globe", withConfiguration: imageConfig), for: .normal)
         homepage.imageView?.contentMode = .scaleAspectFit
         homepage.alignTextBelow(spacing: 4)
         homepage.addTarget(self, action: #selector(homepageBtn), for: .touchUpInside)
         
+        let stackView: UIStackView = {
+            let stackView = UIStackView()
+            stackView.backgroundColor = .clear
+            stackView.axis = .horizontal
+            stackView.distribution = .equalSpacing
+            stackView.alignment = .center
+            return stackView
+        }()
+        
+        title.translatesAutoresizingMaskIntoConstraints = false
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        instagram.translatesAutoresizingMaskIntoConstraints = false
+        youtube.translatesAutoresizingMaskIntoConstraints = false
+        kakao.translatesAutoresizingMaskIntoConstraints = false
+        homepage.translatesAutoresizingMaskIntoConstraints = false
+        
+        stackView.addArrangedSubview(instagram)
+        stackView.addArrangedSubview(youtube)
+        stackView.addArrangedSubview(kakao)
+        stackView.addArrangedSubview(homepage)
         container.addSubview(title)
-        container.addSubview(instagram)
-        container.addSubview(youtube)
-        container.addSubview(kakao)
-        container.addSubview(homepage)
+        container.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 20),
+            stackView.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -20),
+            stackView.topAnchor.constraint(equalTo: container.topAnchor, constant: 44),
+            stackView.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -7),
+            instagram.widthAnchor.constraint(equalToConstant: 52),
+            instagram.heightAnchor.constraint(equalToConstant: 50),
+            youtube.widthAnchor.constraint(equalToConstant: 52),
+            youtube.heightAnchor.constraint(equalToConstant: 50),
+            kakao.widthAnchor.constraint(equalToConstant: 52),
+            kakao.heightAnchor.constraint(equalToConstant: 50),
+            homepage.widthAnchor.constraint(equalToConstant: 52),
+            homepage.heightAnchor.constraint(equalToConstant: 50),
+            title.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 14),
+            title.topAnchor.constraint(equalTo: container.topAnchor, constant: 9)
+        ])
         
         return container
         
@@ -396,10 +434,10 @@ class SettingViewController: UIViewController {
             manageAccountContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
             manageAccountContainer.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: 270),
             SNSContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            SNSContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 290),
+            SNSContainer.topAnchor.constraint(equalTo: manageAccountContainer.bottomAnchor, constant: 20),
             SNSContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
             SNSContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
-            SNSContainer.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: 390),
+            SNSContainer.bottomAnchor.constraint(equalTo: manageAccountContainer.bottomAnchor, constant: 120),
             InfoContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             InfoContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 410),
             InfoContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
