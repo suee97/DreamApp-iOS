@@ -75,6 +75,40 @@ class AuthHelper {
             }
         }
     }
+    
+    func getUserInfo(completion: @escaping (GetUserInfoResult) -> Void) {
+        let url = "\(api_url)/member"
+        let aToken: String = KeychainHelper.sharedKeychain.getAccessToken() ?? ""
+        let header: HTTPHeaders = [
+            "Authorization": "Bearer \(aToken)"
+        ]
+
+        let request = AF.request(url,
+                                 method: .get,
+                                 parameters: nil,
+                                 headers: header
+        ).responseJSON { response in
+            switch response.result {
+            case .success:
+                do {
+                    let decoder = JSONDecoder()
+                    guard let responseData = response.data else { return }
+                    let result = try decoder.decode(UserInfo.self, from: responseData)
+                    if result.status == 200 {
+                        print("get user info : success")
+                        completion(.success)
+                        signInUser = result.data![0]
+                    } else {
+                        completion(.fail)
+                    }
+                } catch {
+                    completion(.fail)
+                }
+            case .failure:
+                completion(.fail)
+            }
+        }
+    }
 }
 
 enum JWTAuthTokenResult {
@@ -85,5 +119,10 @@ enum JWTAuthTokenResult {
 
 enum RefreshAccessTokenResult {
     case refreshed
+    case fail
+}
+
+enum GetUserInfoResult {
+    case success
     case fail
 }
