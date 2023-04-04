@@ -1,4 +1,5 @@
 import UIKit
+import Alamofire
 
 class SettingViewController: UIViewController {
     
@@ -10,23 +11,28 @@ class SettingViewController: UIViewController {
         let container = UIView()
         
         let myImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 78, height: 78))
-        myImage.image = UIImage(systemName: "person")
+        myImage.image = UIImage(systemName: "person.crop.circle")
         myImage.contentMode = .scaleAspectFit
+        myImage.tintColor = .secondaryPurple
         
         let myName = UILabel(frame: CGRect(x: 95, y: 0, width: 100, height: 19))
         myName.text = "이름"
+        myName.textColor = .black
         myName.font = UIFont(name: "Pretendard-Bold", size: 16)
         
         let myCode = UILabel(frame: CGRect(x: 95, y: 32, width: 100, height: 16))
         myCode.text = "학번"
+        myCode.textColor = .black
         myCode.font = UIFont(name: "Pretendard-Regular", size: 12)
         
         let myGroup = UILabel(frame: CGRect(x: 95, y: 52, width: 100, height: 16))
         myGroup.text = "단과대학"
+        myGroup.textColor = .black
         myGroup.font = UIFont(name: "Pretendard-Regular", size: 12)
         
         let myMajor = UILabel(frame: CGRect(x: 95, y: 72, width: 100, height: 16))
         myMajor.text = "학과"
+        myMajor.textColor = .black
         myMajor.font = UIFont(name: "Pretendard-Regular", size: 12)
         
         container.addSubview(myImage)
@@ -45,6 +51,7 @@ class SettingViewController: UIViewController {
         
         let title = UILabel(frame: CGRect(x: 14, y: 9, width: 320, height: 19))
         title.text = "계정관리"
+        title.textColor = .black
         title.font = UIFont(name: "Pretendard-Bold", size: 16)
         
         let logout = UIButton(frame: CGRect(x: 15, y: 44, width: 320, height: 20))
@@ -89,6 +96,7 @@ class SettingViewController: UIViewController {
         
         let title = UILabel(frame: CGRect(x: 14, y: 9, width: 320, height: 19))
         title.text = "총학생회 SNS 바로가기"
+        title.textColor = .black
         title.font = UIFont(name: "Pretendard-Bold", size: 16)
         
 //        인스타그램 유튜브 카카오톡 홈페이지
@@ -145,6 +153,7 @@ class SettingViewController: UIViewController {
         
         let title = UILabel(frame: CGRect(x: 14, y: 9, width: 320, height: 19))
         title.text = "정보"
+        title.textColor = .black
         title.font = UIFont(name: "Pretendard-Bold", size: 16)
         
         let update = UIButton(frame: CGRect(x: 15, y: 44, width: 320, height: 20))
@@ -178,6 +187,7 @@ class SettingViewController: UIViewController {
         
         let title = UILabel(frame: CGRect(x: 14, y: 9, width: 320, height: 19))
         title.text = "제안사항"
+        title.textColor = .black
         title.font = UIFont(name: "Pretendard-Bold", size: 16)
         
         let adviceFunction = UIButton(frame: CGRect(x: 15, y: 44, width: 320, height: 20))
@@ -220,6 +230,7 @@ class SettingViewController: UIViewController {
         
         let title = UILabel(frame: CGRect(x: 14, y: 9, width: 320, height: 19))
         title.text = "약관 및 정책"
+        title.textColor = .black
         title.font = UIFont(name: "Pretendard-Bold", size: 16)
         
         let service = UIButton(frame: CGRect(x: 15, y: 44, width: 320, height: 20))
@@ -272,11 +283,7 @@ class SettingViewController: UIViewController {
         return container
         
     }()
-//
-//    Tel. 02) 970-7012
-//    서울특별시 노원구 공릉로 232 제1학생회관 226호
-//    ⓒSeoul National University of Science and Technology. All Rights Reserved.
-    
+   
     private var tel : UILabel = {
         let tel = UILabel()
         tel.text = "Tel. 02) 970-7012"
@@ -315,7 +322,7 @@ class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        
+        print("setting : is Login? >> \(getLoginState())")
     }
     
     // MARK: - Helpers
@@ -429,7 +436,31 @@ class SettingViewController: UIViewController {
     
     // MARK: - Selectors
     @objc private func logoutBtn() {
-        print("logout")
+//        let vc = LogoutModalViewCnotroller()
+//        vc.modalTransitionStyle = .crossDissolve
+//        vc.modalPresentationStyle = .overCurrentContext
+//        self.present(vc, animated: true, completion: nil)
+        let vc = SelectLoginViewController()
+        setLoginState(false)
+        let url = "\(api_url)/auth/logout"
+        let aToken: String = KeychainHelper.sharedKeychain.getAccessToken() ?? ""
+        let rToken: String = KeychainHelper.sharedKeychain.getRefreshToken() ?? ""
+        let header: HTTPHeaders = [
+            "Authorization": "Bearer \(aToken)",
+            "refresh" : "Bearer \(rToken)"
+        ]
+
+        KeychainHelper.sharedKeychain.resetAccessRefreshToken()
+
+        let request = AF.request(url,
+                                 method: .get,
+                                 parameters: nil,
+                                 headers: header
+        ).responseJSON { response in
+            print("logout")
+        }
+
+        navigationController?.setViewControllers([vc], animated: true)
     }
     
     @objc private func resetPasswordBtn() {
