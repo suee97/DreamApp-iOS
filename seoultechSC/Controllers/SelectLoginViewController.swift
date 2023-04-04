@@ -85,6 +85,7 @@ class SelectLoginViewController: UIViewController, UpdateAfterModalDelegate {
     // MARK: - Functions
     func pushHome(withoutLogin: Bool) {
         if withoutLogin {
+            setLoginState(false)
             let vc = HomeViewController()
             navigationController?.setViewControllers([vc], animated: true)
         }

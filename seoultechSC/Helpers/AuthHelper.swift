@@ -1,8 +1,8 @@
 import Foundation
 import Alamofire
 
-class JWTAuthHelper {
-    static let shared = JWTAuthHelper()
+class AuthHelper {
+    static let shared = AuthHelper()
     
     private init(){}
     
