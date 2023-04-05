@@ -315,23 +315,3 @@ extension CALayer {
         self.addSublayer(border)
     }
 }
-
-import SwiftUI
-#if DEBUG
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-
-    }
-    @available(iOS 13.0, *)
-    func makeUIViewController(context: Context) -> some UIViewController {
-        InfoViewController()
-    }
-}
-
-struct ViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewControllerRepresentable()
-    }
-}
-
-#endif
