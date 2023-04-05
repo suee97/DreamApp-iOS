@@ -11,11 +11,6 @@ class InfoViewController: UIViewController, UIPageViewControllerDelegate, UIPage
     
     private var currentPage = 0
     
-    private lazy var settingButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(image: UIImage(named: "carbon_settings"), style: .plain, target: self, action: #selector(onTapSettingButton))
-        return button
-    }()
-    
     private let tabButtonContainer: UIView = {
         let view = UIView()
         return view
@@ -47,20 +42,17 @@ class InfoViewController: UIViewController, UIPageViewControllerDelegate, UIPage
     }()
     
     private lazy var vc1: UIViewController = {
-        let vc = UIViewController()
-        
+        let vc = WhatIsSCViewController()
         return vc
     }()
 
     private lazy var vc2: UIViewController = {
-        let vc = UIViewController()
-    
+        let vc = FAQViewController()
         return vc
     }()
 
     private lazy var vc3: UIViewController = {
-        let vc = UIViewController()
-
+        let vc = SCFeatureViewController()
         return vc
     }()
     
@@ -96,7 +88,7 @@ class InfoViewController: UIViewController, UIPageViewControllerDelegate, UIPage
         
         if let firstVC = viewsList.first {
                     pageViewController.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
-                }
+        }
         configureUI()
     }
     
@@ -111,9 +103,7 @@ class InfoViewController: UIViewController, UIPageViewControllerDelegate, UIPage
             navigationController?.navigationBar.compactScrollEdgeAppearance = na
         }
         
-        self.navigationItem.title = "서울과학기술대학교 총학생회"
-        self.navigationItem.setRightBarButton(settingButton, animated: true)
-        
+        self.navigationItem.title = "총학생회 설명"
         self.navigationController?.navigationBar.tintColor = .white
     }
     
@@ -125,6 +115,7 @@ class InfoViewController: UIViewController, UIPageViewControllerDelegate, UIPage
         tabButtonContainer.addSubview(info3Button)
         view.addSubview(tabButtonContainer)
         view.addSubview(pageViewController.view)
+        info1Button.setTitlePrimary()
         
         pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
         tabButtonContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -137,8 +128,8 @@ class InfoViewController: UIViewController, UIPageViewControllerDelegate, UIPage
             tabButtonContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             tabButtonContainer.widthAnchor.constraint(equalToConstant: screenWidth * (320/360)),
             tabButtonContainer.heightAnchor.constraint(equalToConstant: tabHeight),
-            pageViewController.view.topAnchor.constraint(equalTo: tabButtonContainer.bottomAnchor, constant: screenHeight * (10/640)),
-            pageViewController.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0),
+            pageViewController.view.topAnchor.constraint(equalTo: tabButtonContainer.bottomAnchor, constant: screenHeight * (19/640)),
+            pageViewController.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
             pageViewController.view.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pageViewController.view.widthAnchor.constraint(equalToConstant: screenWidth * (320/360)),
             info1Button.widthAnchor.constraint(equalToConstant: tabWidth),
@@ -163,16 +154,25 @@ class InfoViewController: UIViewController, UIPageViewControllerDelegate, UIPage
             info2Button.layer.nonClickedBorder()
             info3Button.layer.nonClickedBorder()
             pageViewController.setViewControllers([vc1], direction: .reverse, animated: true, completion: nil)
+            info1Button.setTitlePrimary()
+            info2Button.setTitleSecondary()
+            info3Button.setTitleSecondary()
         } else if index == 1 {
             info1Button.layer.nonClickedBorder()
             info2Button.layer.clickedBorder()
             info3Button.layer.nonClickedBorder()
             pageViewController.setViewControllers([vc2], direction: .forward, animated: true, completion: nil)
+            info1Button.setTitleSecondary()
+            info2Button.setTitlePrimary()
+            info3Button.setTitleSecondary()
         } else if index == 2 {
             info1Button.layer.nonClickedBorder()
             info2Button.layer.nonClickedBorder()
             info3Button.layer.clickedBorder()
             pageViewController.setViewControllers([vc3], direction: .forward, animated: true, completion: nil)
+            info1Button.setTitleSecondary()
+            info2Button.setTitleSecondary()
+            info3Button.setTitlePrimary()
         }
     }
     
@@ -241,10 +241,6 @@ class InfoViewController: UIViewController, UIPageViewControllerDelegate, UIPage
 
     
     // MARK: - Selectors
-    @objc private func onTapSettingButton() {
-        print("setting button clicked")
-    }
-    
     @objc private func onTapInfo1() {
         changeCurrentPage(index: 0)
     }
@@ -265,15 +261,27 @@ class InfoTabButton: UIButton {
         
         self.backgroundColor = .white
         
-        let logoText = UILabel()
-        
-        logoText.text = title
-        logoText.font = UIFont(name: "Pretendard-Bold", size: 12)
-        logoText.translatesAutoresizingMaskIntoConstraints = false
+        self.setTitle(title, for: .normal)
+        self.setTitleColor(.secondaryPurple, for: .normal)
+        self.titleLabel?.font = UIFont(name: "Pretendard-Bold", size: 16)
+//        let logoText = UILabel()
+//
+//        logoText.text = title
+//        logoText.font = UIFont(name: "Pretendard-Bold", size: 16)
+//        logoText.textColor = .primaryPurple
+//        logoText.translatesAutoresizingMaskIntoConstraints = false
+//
+//        self.addSubview(logoText)
+//        logoText.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+//        logoText.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+    }
     
-        self.addSubview(logoText)
-        logoText.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        logoText.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+    func setTitlePrimary() {
+        self.setTitleColor(.primaryPurple, for: .normal)
+    }
+    
+    func setTitleSecondary() {
+        self.setTitleColor(.secondaryPurple, for: .normal)
     }
     
     override init(frame: CGRect) {
@@ -289,7 +297,6 @@ extension CALayer {
     func clickedBorder() {
         let border = CALayer()
         border.frame = CGRect.init(x: 0, y: frame.height - 5, width: frame.width, height: 5)
-        border.cornerRadius = 1
         border.backgroundColor = UIColor.primaryPurple.cgColor
         
         self.addSublayer(border)
@@ -298,9 +305,33 @@ extension CALayer {
     func nonClickedBorder() {
         let border = CALayer()
         border.frame = CGRect.init(x: 0, y: frame.height - 3, width: frame.width, height: 3)
-        border.cornerRadius = 1
         border.backgroundColor = UIColor.secondaryPurple.cgColor
         
+        let border2 = CALayer()
+        border2.frame = CGRect.init(x: 0, y: frame.height - 5, width: frame.width, height: 5)
+        border2.backgroundColor = UIColor.white.cgColor
+        
+        self.addSublayer(border2)
         self.addSublayer(border)
     }
 }
+
+import SwiftUI
+#if DEBUG
+struct ViewControllerRepresentable: UIViewControllerRepresentable {
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+
+    }
+    @available(iOS 13.0, *)
+    func makeUIViewController(context: Context) -> some UIViewController {
+        InfoViewController()
+    }
+}
+
+struct ViewController_Previews: PreviewProvider {
+    static var previews: some View {
+        ViewControllerRepresentable()
+    }
+}
+
+#endif
