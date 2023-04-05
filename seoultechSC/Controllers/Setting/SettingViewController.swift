@@ -1,7 +1,7 @@
 import UIKit
 import Alamofire
 
-class SettingViewController: UIViewController {
+class SettingViewController: UIViewController, LogoutDelegate {
     
     private let scrollView : UIScrollView = UIScrollView()
     
@@ -509,31 +509,11 @@ class SettingViewController: UIViewController {
     
     // MARK: - Selectors
     @objc private func logoutBtn() {
-        //        let vc = LogoutModalViewCnotroller()
-        //        vc.modalTransitionStyle = .crossDissolve
-        //        vc.modalPresentationStyle = .overCurrentContext
-        //        self.present(vc, animated: true, completion: nil)
-        let vc = SelectLoginViewController()
-        setLoginState(false)
-        let url = "\(api_url)/auth/logout"
-        let aToken: String = KeychainHelper.sharedKeychain.getAccessToken() ?? ""
-        let rToken: String = KeychainHelper.sharedKeychain.getRefreshToken() ?? ""
-        let header: HTTPHeaders = [
-            "Authorization": "Bearer \(aToken)",
-            "refresh" : "Bearer \(rToken)"
-        ]
-        
-        KeychainHelper.sharedKeychain.resetAccessRefreshToken()
-        
-        let request = AF.request(url,
-                                 method: .get,
-                                 parameters: nil,
-                                 headers: header
-        ).responseJSON { response in
-            print("logout")
-        }
-        
-        navigationController?.setViewControllers([vc], animated: true)
+        let vc = LogoutModalViewController()
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.delegate = self
+        self.present(vc, animated: true, completion: nil)
     }
     
     @objc private func resetPasswordBtn() {
@@ -598,6 +578,32 @@ class SettingViewController: UIViewController {
     
     @objc private func opensourceBtn() {
         print("onTapEventTap")
+    }
+    
+    func updateLogout(isLogout: Bool) {
+        if isLogout {
+            let vc = SelectLoginViewController()
+            setLoginState(false)
+            let url = "\(api_url)/auth/logout"
+            let aToken: String = KeychainHelper.sharedKeychain.getAccessToken() ?? ""
+            let rToken: String = KeychainHelper.sharedKeychain.getRefreshToken() ?? ""
+            let header: HTTPHeaders = [
+                "Authorization": "Bearer \(aToken)",
+                "refresh" : "Bearer \(rToken)"
+            ]
+            
+            KeychainHelper.sharedKeychain.resetAccessRefreshToken()
+            
+            let request = AF.request(url,
+                                     method: .get,
+                                     parameters: nil,
+                                     headers: header
+            ).responseJSON { response in
+                print("logout api call")
+            }
+            
+            navigationController?.setViewControllers([vc], animated: true)
+        }
     }
 }
 
