@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3C0EDCDB29D035C400AF7D0E /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EDCDA29D035C400AF7D0E /* KeychainHelper.swift */; };
-		3C0EDCDE29D037BB00AF7D0E /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EDCDD29D037BB00AF7D0E /* SettingViewController.swift */; };
 		3C204E7229CD5D660026E85E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E6729CD5D660026E85E /* HomeViewController.swift */; };
 		3C204E7329CD5D660026E85E /* SetPwViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E6A29CD5D660026E85E /* SetPwViewController.swift */; };
 		3C204E7429CD5D660026E85E /* PolicyAgreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E6B29CD5D660026E85E /* PolicyAgreeViewController.swift */; };
@@ -40,7 +39,6 @@
 		3C204EAC29CD5DA20026E85E /* NavigationBarAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204EA629CD5DA20026E85E /* NavigationBarAppearance.swift */; };
 		3C204EAD29CD5DA20026E85E /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204EA729CD5DA20026E85E /* ActionButton.swift */; };
 		3C204EAE29CD5DA20026E85E /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204EA829CD5DA20026E85E /* TitleLabel.swift */; };
-		3C204EB129CD5DFE0026E85E /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204EB029CD5DFE0026E85E /* InfoViewController.swift */; };
 		3C2FC84629D80CBD00BE9A4C /* AlwaysRentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2FC84529D80CBD00BE9A4C /* AlwaysRentViewController.swift */; };
 		3C2FC84829D82CF200BE9A4C /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2FC84729D82CF200BE9A4C /* CalendarCollectionViewCell.swift */; };
 		3C6207C229D2CAC8008C696F /* AlwaysCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6207C129D2CAC8008C696F /* AlwaysCollectionViewCell.swift */; };
@@ -50,7 +48,16 @@
 		3C6207CC29D7FC1A008C696F /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6207CA29D7FC1A008C696F /* EventCollectionViewCell.swift */; };
 		3C6317E729D16DE100469836 /* DevInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6317E629D16DE100469836 /* DevInfoViewController.swift */; };
 		3C6317EB29D1864800469836 /* AlwaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6317EA29D1864800469836 /* AlwaysViewController.swift */; };
-		5BF106C229D9678500808426 /* JWTAuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF106C129D9678500808426 /* JWTAuthHelper.swift */; };
+		5B5FDB7529DB02010027F88E /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EDCDD29D037BB00AF7D0E /* SettingViewController.swift */; };
+		5B5FDB7729DB04D00027F88E /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FDB7629DB04D00027F88E /* UserInfo.swift */; };
+		5B5FDB7929DB1B2B0027F88E /* LogoutModalViewCnotroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FDB7829DB1B2B0027F88E /* LogoutModalViewCnotroller.swift */; };
+		5B5FDB7B29DC71700027F88E /* WhatIsSCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FDB7A29DC71700027F88E /* WhatIsSCViewController.swift */; };
+		5B5FDB7D29DC71B20027F88E /* FAQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FDB7C29DC71B20027F88E /* FAQViewController.swift */; };
+		5B5FDB7F29DC71C70027F88E /* SCFeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FDB7E29DC71C70027F88E /* SCFeatureViewController.swift */; };
+		5B5FDB8529DD2BC80027F88E /* ContentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FDB8429DD2BC80027F88E /* ContentLabel.swift */; };
+		5B5FDB8629DDA2CA0027F88E /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204EB029CD5DFE0026E85E /* InfoViewController.swift */; };
+		5BD6058B29DF44800071BE96 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BD6058A29DF44800071BE96 /* Keys.plist */; };
+		5BF106C229D9678500808426 /* AuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF106C129D9678500808426 /* AuthHelper.swift */; };
 		5BF106C429D967CC00808426 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF106C329D967CC00808426 /* LoadingViewController.swift */; };
 		B991CC9591397800BF22392B /* Pods_seoultechSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A2342102BF1978DA7AF982 /* Pods_seoultechSC.framework */; };
 /* End PBXBuildFile section */
@@ -101,9 +108,16 @@
 		3C6317E629D16DE100469836 /* DevInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevInfoViewController.swift; sourceTree = "<group>"; };
 		3C6317EA29D1864800469836 /* AlwaysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysViewController.swift; sourceTree = "<group>"; };
 		531F5CAE1AA62561B2CAA7CA /* Pods-seoultechSC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seoultechSC.release.xcconfig"; path = "Target Support Files/Pods-seoultechSC/Pods-seoultechSC.release.xcconfig"; sourceTree = "<group>"; };
+		5B5FDB7629DB04D00027F88E /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		5B5FDB7829DB1B2B0027F88E /* LogoutModalViewCnotroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutModalViewCnotroller.swift; sourceTree = "<group>"; };
+		5B5FDB7A29DC71700027F88E /* WhatIsSCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIsSCViewController.swift; sourceTree = "<group>"; };
+		5B5FDB7C29DC71B20027F88E /* FAQViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQViewController.swift; sourceTree = "<group>"; };
+		5B5FDB7E29DC71C70027F88E /* SCFeatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCFeatureViewController.swift; sourceTree = "<group>"; };
+		5B5FDB8429DD2BC80027F88E /* ContentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLabel.swift; sourceTree = "<group>"; };
 		5BCAD98729A509820010E811 /* seoultechSC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = seoultechSC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BCAD99829A509830010E811 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5BF106C129D9678500808426 /* JWTAuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTAuthHelper.swift; sourceTree = "<group>"; };
+		5BD6058A29DF44800071BE96 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		5BF106C129D9678500808426 /* AuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHelper.swift; sourceTree = "<group>"; };
 		5BF106C329D967CC00808426 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		A9A2342102BF1978DA7AF982 /* Pods_seoultechSC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_seoultechSC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -133,6 +147,7 @@
 			children = (
 				3C0EDCDD29D037BB00AF7D0E /* SettingViewController.swift */,
 				3C6317E629D16DE100469836 /* DevInfoViewController.swift */,
+				5B5FDB7829DB1B2B0027F88E /* LogoutModalViewCnotroller.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -188,7 +203,7 @@
 				3C0EDCDA29D035C400AF7D0E /* KeychainHelper.swift */,
 				3C204E7C29CD5D7C0026E85E /* Commons.swift */,
 				3C204E7E29CD5D7C0026E85E /* Extensions.swift */,
-				5BF106C129D9678500808426 /* JWTAuthHelper.swift */,
+				5BF106C129D9678500808426 /* AuthHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -198,6 +213,7 @@
 			children = (
 				3C6207C829D7FBD5008C696F /* EventModels.swift */,
 				3C204E8329CD5D8A0026E85E /* AuthModels.swift */,
+				5B5FDB7629DB04D00027F88E /* UserInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -250,6 +266,10 @@
 			isa = PBXGroup;
 			children = (
 				3C204EB029CD5DFE0026E85E /* InfoViewController.swift */,
+				5B5FDB7A29DC71700027F88E /* WhatIsSCViewController.swift */,
+				5B5FDB7C29DC71B20027F88E /* FAQViewController.swift */,
+				5B5FDB7E29DC71C70027F88E /* SCFeatureViewController.swift */,
+				5B5FDB8429DD2BC80027F88E /* ContentLabel.swift */,
 			);
 			path = Info;
 			sourceTree = "<group>";
@@ -299,6 +319,7 @@
 				3C204E7B29CD5D7C0026E85E /* Helpers */,
 				3C204E6529CD5D660026E85E /* Controllers */,
 				5BCAD99829A509830010E811 /* Info.plist */,
+				5BD6058A29DF44800071BE96 /* Keys.plist */,
 			);
 			path = seoultechSC;
 			sourceTree = "<group>";
@@ -373,6 +394,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BD6058B29DF44800071BE96 /* Keys.plist in Resources */,
 				3C204E9F29CD5D960026E85E /* Pretendard-ExtraLight.otf in Resources */,
 				3C204E9D29CD5D960026E85E /* Pretendard-Bold.otf in Resources */,
 				3C204E9C29CD5D960026E85E /* Pretendard-ExtraBold.otf in Resources */,
@@ -457,30 +479,36 @@
 				3C6207CC29D7FC1A008C696F /* EventCollectionViewCell.swift in Sources */,
 				3C204E8129CD5D7C0026E85E /* Extensions.swift in Sources */,
 				3C204E8429CD5D8A0026E85E /* AuthModels.swift in Sources */,
+				5B5FDB7B29DC71700027F88E /* WhatIsSCViewController.swift in Sources */,
+				5B5FDB7929DB1B2B0027F88E /* LogoutModalViewCnotroller.swift in Sources */,
 				3C204E9729CD5D960026E85E /* AppDelegate.swift in Sources */,
+				5B5FDB7529DB02010027F88E /* SettingViewController.swift in Sources */,
 				3C204EAC29CD5DA20026E85E /* NavigationBarAppearance.swift in Sources */,
 				3C6207C629D7FB81008C696F /* EventViewController.swift in Sources */,
 				3C204EAD29CD5DA20026E85E /* ActionButton.swift in Sources */,
+				5B5FDB7D29DC71B20027F88E /* FAQViewController.swift in Sources */,
 				3C6207C929D7FBD5008C696F /* EventModels.swift in Sources */,
 				3C0EDCDB29D035C400AF7D0E /* KeychainHelper.swift in Sources */,
+				5B5FDB8629DDA2CA0027F88E /* InfoViewController.swift in Sources */,
 				3C204E7A29CD5D660026E85E /* SelectLoginViewController.swift in Sources */,
 				3C204E7F29CD5D7C0026E85E /* Commons.swift in Sources */,
+				5B5FDB7729DB04D00027F88E /* UserInfo.swift in Sources */,
 				3C204EAA29CD5DA20026E85E /* CustomTableViewCell.swift in Sources */,
+				5B5FDB7F29DC71C70027F88E /* SCFeatureViewController.swift in Sources */,
 				3C204E7929CD5D660026E85E /* LoginViewController.swift in Sources */,
-				5BF106C229D9678500808426 /* JWTAuthHelper.swift in Sources */,
+				5BF106C229D9678500808426 /* AuthHelper.swift in Sources */,
 				3C6317EB29D1864800469836 /* AlwaysViewController.swift in Sources */,
 				3C204E7829CD5D660026E85E /* PhoneAuthViewController.swift in Sources */,
 				3C204E7529CD5D660026E85E /* StudentCardAuthViewController.swift in Sources */,
+				5B5FDB8529DD2BC80027F88E /* ContentLabel.swift in Sources */,
 				3C204E7229CD5D660026E85E /* HomeViewController.swift in Sources */,
 				5BF106C429D967CC00808426 /* LoadingViewController.swift in Sources */,
 				3C6207C229D2CAC8008C696F /* AlwaysCollectionViewCell.swift in Sources */,
-				3C204EB129CD5DFE0026E85E /* InfoViewController.swift in Sources */,
 				3C204E7329CD5D660026E85E /* SetPwViewController.swift in Sources */,
 				3C204E7629CD5D660026E85E /* SignUpEndViewController.swift in Sources */,
 				3C204EA129CD5D960026E85E /* SceneDelegate.swift in Sources */,
 				3C204EAB29CD5DA20026E85E /* RadioButton.swift in Sources */,
 				3C2FC84829D82CF200BE9A4C /* CalendarCollectionViewCell.swift in Sources */,
-				3C0EDCDE29D037BB00AF7D0E /* SettingViewController.swift in Sources */,
 				3C2FC84629D80CBD00BE9A4C /* AlwaysRentViewController.swift in Sources */,
 				3C204E7729CD5D660026E85E /* EnterInfoViewController.swift in Sources */,
 				3C204E7429CD5D660026E85E /* PolicyAgreeViewController.swift in Sources */,

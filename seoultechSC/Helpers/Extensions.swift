@@ -51,3 +51,21 @@ extension UILabel {
         attributedText = attributedString
     }
 }
+
+extension Bundle {
+    var api_url: String {
+        guard let file = self.path(forResource: "Keys", ofType: "plist") else { return "" }
+        
+        guard let resource = NSDictionary(contentsOfFile: file) else { return "" }
+        guard let key = resource["API_BASE_URL"] as? String else { fatalError("api base url 설정 안됨") }
+        return key
+    }
+    
+    var dev_api_url: String {
+        guard let file = self.path(forResource: "Keys", ofType: "plist") else { return "" }
+        
+        guard let resource = NSDictionary(contentsOfFile: file) else { return "" }
+        guard let key = resource["DEV_API_BASE_URL"] as? String else { fatalError("dev api base url 설정 안됨") }
+        return key
+    }
+}
