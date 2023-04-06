@@ -6,6 +6,7 @@ class WhatIsSCViewController: UIViewController {
         let scrollView = UIScrollView()
         scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         scrollView.isScrollEnabled = true
+        scrollView.showsVerticalScrollIndicator = false
         return scrollView
     }()
     
