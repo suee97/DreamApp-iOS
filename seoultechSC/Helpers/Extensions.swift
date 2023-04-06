@@ -68,4 +68,12 @@ extension Bundle {
         guard let key = resource["DEV_API_BASE_URL"] as? String else { fatalError("dev api base url 설정 안됨") }
         return key
     }
+    
+    var maps_api_key: String {
+        guard let file = self.path(forResource: "Keys", ofType: "plist") else { return "" }
+        
+        guard let resource = NSDictionary(contentsOfFile: file) else { return "" }
+        guard let key = resource["MAPS_API_KEY"] as? String else { fatalError("dev api base url 설정 안됨") }
+        return key
+    }
 }
