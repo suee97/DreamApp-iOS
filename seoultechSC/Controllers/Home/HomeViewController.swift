@@ -304,16 +304,17 @@ class HomeViewController: UIViewController {
     
     @objc private func onTapAlwaysTap() {
         let vc = AlwaysViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func onTapFestivalTap() {
-        print("onTapFestivalTap")
+        let vc = FestivalViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func onTapEventTap() {
         let vc = EventViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     private func setUpImageScrollView(_ imageList: [UIImage]) {
