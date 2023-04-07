@@ -35,6 +35,11 @@ class FestivalViewController: UIViewController, GMSMapViewDelegate {
     
     private func configureUI() {
         view.backgroundColor = .white
+        
+        let vc = IntroModalViewController()
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: true, completion: nil)
     }
     
     private func configureMap() {
