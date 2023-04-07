@@ -161,7 +161,14 @@ class InfoViewController: UIViewController, UIPageViewControllerDelegate, UIPage
             info1Button.layer.nonClickedBorder()
             info2Button.layer.clickedBorder()
             info3Button.layer.nonClickedBorder()
-            pageViewController.setViewControllers([vc2], direction: .forward, animated: true, completion: nil)
+            
+            guard let currentVC = pageViewController.viewControllers!.first else { return }
+            
+            if currentVC.isEqual(vc1) {
+                pageViewController.setViewControllers([vc2], direction: .forward, animated: true, completion: nil)
+            } else {
+                pageViewController.setViewControllers([vc2], direction: .reverse, animated: true, completion: nil)
+            }
             info1Button.setTitleSecondary()
             info2Button.setTitlePrimary()
             info3Button.setTitleSecondary()
