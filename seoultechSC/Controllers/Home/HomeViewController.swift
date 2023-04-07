@@ -1,4 +1,5 @@
 import UIKit
+import Alamofire
 
 class HomeViewController: UIViewController {
     
@@ -113,7 +114,7 @@ class HomeViewController: UIViewController {
     }()
     
     private lazy var festivalTab: HomeTabButton = {
-        let button = HomeTabButton(icon: "🎟️", title: "축제 이벤트")
+        let button = HomeTabButton(icon: "🎟️", title: "어의대동제")
         button.addTarget(self, action: #selector(onTapFestivalTap), for: .touchUpInside)
         return button
     }()
@@ -156,6 +157,7 @@ class HomeViewController: UIViewController {
     }
     
     private func configureUI() {
+        setUpInitImageScrollView()
         configureImageScrollView()
         
         view.backgroundColor = .white
@@ -225,29 +227,53 @@ class HomeViewController: UIViewController {
     }
     
     private func configureImageScrollView() {
-        // Fetch Image
-        let imageList: [UIImage] = [UIImage(named: "dream_logo")!, UIImage(named: "dream_logo")!, UIImage(systemName: "person")!]
+        // TODO: 예외처리, 이미지 개수 없을 때 처리, 다운로드 중 로딩 처리
+        var imageList: [UIImage] = []
         
-        // Setup imageScrollView
-        for i in 0..<imageList.count {
-            let imageView = UIImageView(image: imageList[i])
-            let xPos: CGFloat = imageScrollViewWidth * CGFloat(i)
-            imageView.frame = CGRect(x: xPos,
-                                     y: 0,
-                                     width: imageScrollViewWidth,
-                                     height: imageScrollViewWidth)
-            
-            imageView.backgroundColor = .clear
-            imageView.layer.cornerRadius = 10
-            imageView.clipsToBounds = true
-            
-            imageScrollView.addSubview(imageView)
-            
-            imageScrollView.contentSize.width = imageScrollViewWidth * CGFloat(i + 1)
-        }
+        let url = api_url + "/banner"
         
-        // Setup imagePageControl
-        imagePageControl.numberOfPages = imageList.count
+        let request = AF.request(url, method: .get, parameters: nil)
+            .responseJSON { response in
+                switch response.result {
+                case .success:
+                    do {
+                        let decoder = JSONDecoder()
+                        guard let responseData = response.data else { return }
+                        let result = try decoder.decode(Banners.self, from: responseData)
+                        let dataCount = result.data.count
+                        if result.status == 200 && dataCount != 0 {
+                            for banner in result.data {
+                                guard let url = URL(string: banner.imageUrl) else { return }
+
+                                let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                                    guard let data = data, error == nil else { return }
+                                    DispatchQueue.main.async() {
+                                        if let image = UIImage(data: data) {
+                                            imageList.append(image)
+                                        }
+                                        
+                                        if imageList.count == dataCount {
+                                            self.setUpImageScrollView(imageList)
+                                        }
+                                    }
+                                }
+                                task.resume()
+                            }
+                            
+                        } else if result.status == 200 && dataCount == 0 {
+                            // no banner image UI
+                        } else {
+                            // result status != 200
+                        }
+                    } catch {
+                        print("do catch error")
+                        // Error UI
+                    }
+                case .failure:
+                    print("failure")
+                    // Error UI
+                }
+            }
     }
     
     
@@ -271,8 +297,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func onTapAlwaysTap() {
-        let vc = AlwaysViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        print("onTapAlwaysTap")
     }
     
     @objc private func onTapFestivalTap() {
@@ -280,9 +305,47 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func onTapEventTap() {
-        let vc = EventViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        print("onTapEventTap")
     }
+    
+    private func setUpImageScrollView(_ imageList: [UIImage]) {
+        // Setup imageScrollView
+        for i in 0..<imageList.count {
+            let imageView = UIImageView(image: imageList[i])
+            let xPos: CGFloat = imageScrollViewWidth * CGFloat(i)
+            imageView.frame = CGRect(x: xPos,
+                                     y: 0,
+                                     width: imageScrollViewWidth,
+                                     height: imageScrollViewWidth)
+            
+            imageView.backgroundColor = .clear
+            imageView.layer.cornerRadius = 10
+            imageView.clipsToBounds = true
+            
+            imageScrollView.addSubview(imageView)
+            
+            imageScrollView.contentSize.width = imageScrollViewWidth * CGFloat(i + 1)
+        }
+        
+        // Setup imagePageControl
+        imagePageControl.numberOfPages = imageList.count
+    }
+    
+    private func setUpInitImageScrollView() {
+        // Setup initial imageScrollView
+        let indicator: UIActivityIndicatorView = UIActivityIndicatorView()
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: imageScrollViewWidth, height: imageScrollViewWidth))
+        imageView.addSubview(indicator)
+        imageView.backgroundColor = .clear
+        indicator.center = imageView.center
+        indicator.startAnimating()
+        
+        imageScrollView.addSubview(imageView)
+        
+        // Setup initial imagePageControl
+        imagePageControl.numberOfPages = 1
+    }
+
 }
 
 extension HomeViewController: UIScrollViewDelegate {
