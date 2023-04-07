@@ -7,7 +7,7 @@ class SettingViewController: UIViewController, LogoutDelegate {
     
     private let contentView : UIView = UIView()
     
-    private let myInfoContainer: UIView = {
+    private lazy var myInfoContainer: UIView = {
         let container = UIView()
         
         let myImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 78, height: 78))
@@ -16,22 +16,22 @@ class SettingViewController: UIViewController, LogoutDelegate {
         myImage.tintColor = .secondaryPurple
         
         let myName = UILabel(frame: CGRect(x: 95, y: 0, width: 100, height: 19))
-        myName.text = "이름"
+        myName.text = signInUser.name
         myName.textColor = .black
         myName.font = UIFont(name: "Pretendard-Bold", size: 16)
         
         let myCode = UILabel(frame: CGRect(x: 95, y: 32, width: 100, height: 16))
-        myCode.text = "학번"
+        myCode.text = signInUser.studentNo
         myCode.textColor = .black
         myCode.font = UIFont(name: "Pretendard-Regular", size: 12)
         
         let myGroup = UILabel(frame: CGRect(x: 95, y: 52, width: 100, height: 16))
-        myGroup.text = "단과대학"
+        myGroup.text = findCollege(major: signInUser.department)
         myGroup.textColor = .black
         myGroup.font = UIFont(name: "Pretendard-Regular", size: 12)
         
         let myMajor = UILabel(frame: CGRect(x: 95, y: 72, width: 100, height: 16))
-        myMajor.text = "학과"
+        myMajor.text = signInUser.department
         myMajor.textColor = .black
         myMajor.font = UIFont(name: "Pretendard-Regular", size: 12)
         
@@ -604,6 +604,17 @@ class SettingViewController: UIViewController, LogoutDelegate {
             
             navigationController?.setViewControllers([vc], animated: true)
         }
+    }
+    
+    private func findCollege(major: String) -> String {
+        for i in 0..<collegeList.count {
+            for j in 0..<majorList[i].count {
+                if major == majorList[i][j] {
+                    return collegeList[i]
+                }
+            }
+        }
+        return ""
     }
 }
 
