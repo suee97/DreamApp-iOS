@@ -261,17 +261,23 @@ class HomeViewController: UIViewController {
                             }
                             
                         } else if result.status == 200 && dataCount == 0 {
-                            // no banner image UI
+                            guard let tmpImage = UIImage(named: "dream_logo") else { return }
+                            let tmpImageList: [UIImage] = [tmpImage]
+                            self.setUpImageScrollView(tmpImageList)
                         } else {
-                            // result status != 200
+                            guard let tmpImage = UIImage(named: "dream_logo") else { return }
+                            let tmpImageList: [UIImage] = [tmpImage]
+                            self.setUpImageScrollView(tmpImageList)
                         }
                     } catch {
-                        print("do catch error")
-                        // Error UI
+                        guard let tmpImage = UIImage(named: "dream_logo") else { return }
+                        let tmpImageList: [UIImage] = [tmpImage]
+                        self.setUpImageScrollView(tmpImageList)
                     }
                 case .failure:
-                    print("failure")
-                    // Error UI
+                    guard let tmpImage = UIImage(named: "dream_logo") else { return }
+                    let tmpImageList: [UIImage] = [tmpImage]
+                    self.setUpImageScrollView(tmpImageList)
                 }
             }
     }
@@ -297,7 +303,8 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func onTapAlwaysTap() {
-        print("onTapAlwaysTap")
+        let vc = AlwaysViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func onTapFestivalTap() {
@@ -305,7 +312,8 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func onTapEventTap() {
-        print("onTapEventTap")
+        let vc = EventViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
     }
     
     private func setUpImageScrollView(_ imageList: [UIImage]) {
@@ -321,6 +329,7 @@ class HomeViewController: UIViewController {
             imageView.backgroundColor = .clear
             imageView.layer.cornerRadius = 10
             imageView.clipsToBounds = true
+            imageView.contentMode = .scaleAspectFit
             
             imageScrollView.addSubview(imageView)
             
