@@ -302,15 +302,7 @@ class SettingViewController: UIViewController, LogoutDelegate {
         service.backgroundColor = .clear
         service.addTarget(self, action: #selector(serviceBtn), for: .touchUpInside)
         
-        let location = UIButton(frame: CGRect(x: 15, y: 74, width: 320, height: 20))
-        location.setTitle("위치기반서비스 이용약관", for: .normal)
-        location.setTitleColor(.black, for: .normal)
-        location.contentHorizontalAlignment = .leading
-        location.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
-        location.backgroundColor = .clear
-        location.addTarget(self, action: #selector(locationBtn), for: .touchUpInside)
-        
-        let policy = UIButton(frame: CGRect(x: 15, y: 104, width: 320, height: 20))
+        let policy = UIButton(frame: CGRect(x: 15, y: 74, width: 320, height: 20))
         policy.setTitle("개인정보처리방침", for: .normal)
         policy.setTitleColor(.black, for: .normal)
         policy.contentHorizontalAlignment = .leading
@@ -318,15 +310,7 @@ class SettingViewController: UIViewController, LogoutDelegate {
         policy.backgroundColor = .clear
         policy.addTarget(self, action: #selector(policyBtn), for: .touchUpInside)
         
-        let info = UIButton(frame: CGRect(x: 15, y: 134, width: 320, height: 20))
-        info.setTitle("정보제공처", for: .normal)
-        info.setTitleColor(.black, for: .normal)
-        info.contentHorizontalAlignment = .leading
-        info.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
-        info.backgroundColor = .clear
-        info.addTarget(self, action: #selector(infoBtn), for: .touchUpInside)
-        
-        let opensource = UIButton(frame: CGRect(x: 15, y: 164, width: 320, height: 20))
+        let opensource = UIButton(frame: CGRect(x: 15, y: 104, width: 320, height: 20))
         opensource.setTitle("오픈소스 라이선스", for: .normal)
         opensource.setTitleColor(.black, for: .normal)
         opensource.contentHorizontalAlignment = .leading
@@ -336,9 +320,7 @@ class SettingViewController: UIViewController, LogoutDelegate {
         
         container.addSubview(title)
         container.addSubview(service)
-        container.addSubview(location)
         container.addSubview(policy)
-        container.addSubview(info)
         container.addSubview(opensource)
         
         return container
@@ -468,13 +450,13 @@ class SettingViewController: UIViewController, LogoutDelegate {
             policyContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 680),
             policyContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
             policyContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
-            policyContainer.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: 880),
+            policyContainer.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: 810),
             tel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            tel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 913),
+            tel.topAnchor.constraint(equalTo: policyContainer.bottomAnchor, constant: 25),
             location.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            location.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 925),
+            location.topAnchor.constraint(equalTo: tel.bottomAnchor),
             right.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            right.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 937),
+            right.topAnchor.constraint(equalTo: location.bottomAnchor),
             right.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 30),
             right.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -30),
             right.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -33)
