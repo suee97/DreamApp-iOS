@@ -295,11 +295,17 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func onTapAllianceTap() {
-        print("onTapAllianceTap")
+        showToast(view: view, message: "준비중입니다.")
     }
     
     @objc private func onTapDuesTap() {
-        print("onTapDuesTap")
+        if !getLoginState() {
+            showToast(view: view, message: needLoginMessage)
+        } else {
+            let vc = DuesViewController()
+            vc.user = signInUser
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     @objc private func onTapAlwaysTap() {
