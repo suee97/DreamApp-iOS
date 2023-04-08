@@ -14,7 +14,6 @@ class IntroModalViewController: UIViewController {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "dream_charactor")
         imageView.contentMode = .scaleAspectFit
-        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -22,7 +21,7 @@ class IntroModalViewController: UIViewController {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "message_container")
         imageView.contentMode = .scaleAspectFit
-        imageView.clipsToBounds = true
+        
         return imageView
     }()
     
@@ -31,7 +30,7 @@ class IntroModalViewController: UIViewController {
         label.numberOfLines = 0
         label.text = "축제 장소를 찾아가\n도장을 모아보세요!"
         label.font = UIFont(name: "Pretendard-Bold", size: 16)
-        label.textColor = .white
+        label.textColor = .navy
         return label
     }()
     
@@ -54,22 +53,22 @@ class IntroModalViewController: UIViewController {
     }()
     
     private let element1: FestivalInfoElementView = {
-        let view = FestivalInfoElementView(image: UIImage(named: "dream_charactor")!, title: "축제 정보", subTitle: "위치 / 요금 / 축제일정")
+        let view = FestivalInfoElementView(image: UIImage(named: "festival_pin")!, title: "축제 정보", subTitle: "위치 / 요금 / 축제일정")
         return view
     }()
     
     private let element2: FestivalInfoElementView = {
-        let view = FestivalInfoElementView(image: UIImage(named: "dream_charactor")!, title: "도장 현황", subTitle: "지도에 표시된 5개의 장소에 방문하여\n마커를 클릭해보세요")
+        let view = FestivalInfoElementView(image: UIImage(named: "festival_stamp")!, title: "도장 현황", subTitle: "지도에 표시된 5개의 장소에 방문하여\n마커를 클릭해보세요")
         return view
     }()
     
     private let element3: FestivalInfoElementView = {
-        let view = FestivalInfoElementView(image: UIImage(named: "dream_charactor")!, title: "푸드트럭", subTitle: "푸드트럭 위치 / 업체")
+        let view = FestivalInfoElementView(image: UIImage(named: "festival_food")!, title: "푸드트럭", subTitle: "푸드트럭 위치 / 업체")
         return view
     }()
     
     private let element4: FestivalInfoElementView = {
-        let view = FestivalInfoElementView(image: UIImage(named: "dream_charactor")!, title: "포토존", subTitle: "포토존 위치")
+        let view = FestivalInfoElementView(image: UIImage(named: "festival_photo")!, title: "포토존", subTitle: "포토존 위치")
         return view
     }()
     
@@ -171,16 +170,32 @@ class FestivalInfoElementView: UIView {
         self.widthAnchor.constraint(equalToConstant: 270).isActive = true
         self.heightAnchor.constraint(equalToConstant: 62).isActive = true
         
-        let logo: UIImageView = {
+        let logoImage: UIImageView = {
             let imageView = UIImageView()
             imageView.image = image
-            imageView.backgroundColor = .black
+            imageView.backgroundColor = .white
             imageView.contentMode = .scaleAspectFit
-            imageView.widthAnchor.constraint(equalToConstant: 62).isActive = true
-            imageView.heightAnchor.constraint(equalToConstant: 62).isActive = true
-            imageView.layer.cornerRadius = 31
-            imageView.clipsToBounds = true
+            imageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            imageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            imageView.layer.cornerRadius = 15
+            imageView.translatesAutoresizingMaskIntoConstraints = false
             return imageView
+        }()
+        
+        let logo: UIView = {
+            let logo = UIView()
+            logo.widthAnchor.constraint(equalToConstant: 62).isActive = true
+            logo.heightAnchor.constraint(equalToConstant: 62).isActive = true
+            logo.backgroundColor = .white
+            logo.layer.cornerRadius = 31
+            logo.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+            logo.layer.shadowOpacity = 1
+            logo.layer.shadowOffset = CGSize.zero
+            logo.layer.shadowRadius = 6
+            logo.addSubview(logoImage)
+            logoImage.centerXAnchor.constraint(equalTo: logo.centerXAnchor).isActive = true
+            logoImage.centerYAnchor.constraint(equalTo: logo.centerYAnchor).isActive = true
+            return logo
         }()
         
         let largeTitle: UILabel = {
