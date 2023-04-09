@@ -1,7 +1,7 @@
 import UIKit
 import Alamofire
 
-class SettingViewController: UIViewController, LogoutDelegate {
+class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate {
     
     private let scrollView : UIScrollView = UIScrollView()
     
@@ -65,6 +65,7 @@ class SettingViewController: UIViewController, LogoutDelegate {
         
         let loginButton: ActionButton = {
             let button = ActionButton(title: "로그인 하기", height: 34)
+            button.addTarget(self, action: #selector(loginBtn), for: .touchUpInside)
             return button
         }()
         
@@ -490,12 +491,53 @@ class SettingViewController: UIViewController, LogoutDelegate {
     }
     
     // MARK: - Selectors
+    @objc private func loginBtn() {
+        let vc = LoginModalViewController()
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.delegate = self
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    func updateLogin(isLogin: Bool) {
+        if isLogin {
+            let vc = SelectLoginViewController()
+            navigationController?.setViewControllers([vc], animated: true)
+        }
+    }
+    
     @objc private func logoutBtn() {
         let vc = LogoutModalViewController()
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overCurrentContext
         vc.delegate = self
         self.present(vc, animated: true, completion: nil)
+    }
+    
+    func updateLogout(isLogout: Bool) {
+        if isLogout {
+            let vc = SelectLoginViewController()
+            setLoginState(false)
+            let url = "\(api_url)/auth/logout"
+            let aToken: String = KeychainHelper.sharedKeychain.getAccessToken() ?? ""
+            let rToken: String = KeychainHelper.sharedKeychain.getRefreshToken() ?? ""
+            let header: HTTPHeaders = [
+                "Authorization": "Bearer \(aToken)",
+                "refresh" : "Bearer \(rToken)"
+            ]
+            
+            KeychainHelper.sharedKeychain.resetAccessRefreshToken()
+            
+            let request = AF.request(url,
+                                     method: .get,
+                                     parameters: nil,
+                                     headers: header
+            ).responseJSON { response in
+                print("logout api call")
+            }
+            
+            navigationController?.setViewControllers([vc], animated: true)
+        }
     }
     
     @objc private func resetPasswordBtn() {
@@ -560,32 +602,6 @@ class SettingViewController: UIViewController, LogoutDelegate {
     
     @objc private func opensourceBtn() {
         print("onTapEventTap")
-    }
-    
-    func updateLogout(isLogout: Bool) {
-        if isLogout {
-            let vc = SelectLoginViewController()
-            setLoginState(false)
-            let url = "\(api_url)/auth/logout"
-            let aToken: String = KeychainHelper.sharedKeychain.getAccessToken() ?? ""
-            let rToken: String = KeychainHelper.sharedKeychain.getRefreshToken() ?? ""
-            let header: HTTPHeaders = [
-                "Authorization": "Bearer \(aToken)",
-                "refresh" : "Bearer \(rToken)"
-            ]
-            
-            KeychainHelper.sharedKeychain.resetAccessRefreshToken()
-            
-            let request = AF.request(url,
-                                     method: .get,
-                                     parameters: nil,
-                                     headers: header
-            ).responseJSON { response in
-                print("logout api call")
-            }
-            
-            navigationController?.setViewControllers([vc], animated: true)
-        }
     }
     
     private func findCollege(major: String) -> String {
