@@ -135,6 +135,46 @@ class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate {
         
     }()
     
+    private let nonLoginManageAccountContainer: UIView = {
+        
+        let container = UIView()
+        container.layer.cornerRadius = 10
+        
+        let title = UILabel(frame: CGRect(x: 14, y: 9, width: 320, height: 19))
+        title.text = "계정관리"
+        title.textColor = .text_caption
+        title.font = UIFont(name: "Pretendard-Bold", size: 16)
+        
+        let logout = UIButton(frame: CGRect(x: 15, y: 44, width: 320, height: 20))
+        logout.setTitle("로그아웃", for: .normal)
+        logout.setTitleColor(.text_caption, for: .normal)
+        logout.contentHorizontalAlignment = .leading
+        logout.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
+        logout.backgroundColor = .clear
+        
+        let resetPassword = UIButton(frame: CGRect(x: 15, y: 74, width: 320, height: 20))
+        resetPassword.setTitle("비밀번호 재설정", for: .normal)
+        resetPassword.setTitleColor(.text_caption, for: .normal)
+        resetPassword.contentHorizontalAlignment = .leading
+        resetPassword.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
+        resetPassword.backgroundColor = .clear
+        
+        let withdrawl = UIButton(frame: CGRect(x: 15, y: 104, width: 320, height: 20))
+        withdrawl.setTitle("회원탈퇴", for: .normal)
+        withdrawl.setTitleColor(.text_caption, for: .normal)
+        withdrawl.contentHorizontalAlignment = .leading
+        withdrawl.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
+        withdrawl.backgroundColor = .clear
+        
+        container.addSubview(title)
+        container.addSubview(logout)
+        container.addSubview(resetPassword)
+        container.addSubview(withdrawl)
+        
+        return container
+        
+    }()
+    
     private let SNSContainer: UIView = {
         
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 30)
@@ -390,6 +430,7 @@ class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate {
         scrollView.backgroundColor = .clear
         contentView.backgroundColor = .clear
         manageAccountContainer.backgroundColor = .white
+        nonLoginManageAccountContainer.backgroundColor = .white
         SNSContainer.backgroundColor = .white
         InfoContainer.backgroundColor = .white
         adviceContainer.backgroundColor = .white
@@ -397,7 +438,6 @@ class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate {
         
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        contentView.addSubview(manageAccountContainer)
         contentView.addSubview(SNSContainer)
         contentView.addSubview(InfoContainer)
         contentView.addSubview(adviceContainer)
@@ -408,7 +448,6 @@ class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate {
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        manageAccountContainer.translatesAutoresizingMaskIntoConstraints = false
         SNSContainer.translatesAutoresizingMaskIntoConstraints = false
         InfoContainer.translatesAutoresizingMaskIntoConstraints = false
         adviceContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -427,16 +466,11 @@ class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate {
             contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
             contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
-            manageAccountContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            manageAccountContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 140),
-            manageAccountContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
-            manageAccountContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
-            manageAccountContainer.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: 270),
             SNSContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            SNSContainer.topAnchor.constraint(equalTo: manageAccountContainer.bottomAnchor, constant: 20),
+            SNSContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 290),
             SNSContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
             SNSContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
-            SNSContainer.bottomAnchor.constraint(equalTo: manageAccountContainer.bottomAnchor, constant: 120),
+            SNSContainer.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: 390),
             InfoContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             InfoContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 410),
             InfoContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
@@ -471,21 +505,37 @@ class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate {
         
         if getLoginState() {
             contentView.addSubview(myInfoContainer)
+            contentView.addSubview(manageAccountContainer)
             myInfoContainer.translatesAutoresizingMaskIntoConstraints = false
+            manageAccountContainer.translatesAutoresizingMaskIntoConstraints = false
+            
             NSLayoutConstraint.activate([
                 myInfoContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
                 myInfoContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 26),
                 myInfoContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
                 myInfoContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
+                manageAccountContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+                manageAccountContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 140),
+                manageAccountContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
+                manageAccountContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
+                manageAccountContainer.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: 270)
             ])
         } else {
             contentView.addSubview(needLoginContainer)
+            contentView.addSubview(nonLoginManageAccountContainer)
             needLoginContainer.translatesAutoresizingMaskIntoConstraints = false
+            nonLoginManageAccountContainer.translatesAutoresizingMaskIntoConstraints = false
+            
             NSLayoutConstraint.activate([
                 needLoginContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 26),
                 needLoginContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
                 needLoginContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
-                needLoginContainer.bottomAnchor.constraint(equalTo: manageAccountContainer.topAnchor, constant: -32)
+                needLoginContainer.bottomAnchor.constraint(equalTo: nonLoginManageAccountContainer.topAnchor, constant: -32),
+                nonLoginManageAccountContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+                nonLoginManageAccountContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 140),
+                nonLoginManageAccountContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
+                nonLoginManageAccountContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
+                nonLoginManageAccountContainer.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: 270)
             ])
         }
     }
