@@ -645,15 +645,24 @@ class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate {
     }
     
     @objc private func adviceFunctionBtn() {
-        print("onTapEventTap")
+        let vc = SuggestViewController()
+        vc.appBarTitle = "기능 개선 제안"
+        vc.suggestCase = .feature
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func reportBtn() {
-        print("onTapEventTap")
+        let vc = SuggestViewController()
+        vc.appBarTitle = "오류 신고"
+        vc.suggestCase = .error
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func someAdviceBtn() {
-        print("onTapEventTap")
+        let vc = SuggestViewController()
+        vc.appBarTitle = "기타 제안"
+        vc.suggestCase = .etc
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func serviceBtn() {
