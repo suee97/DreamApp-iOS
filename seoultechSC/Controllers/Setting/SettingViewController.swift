@@ -54,7 +54,7 @@ class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate {
             imageView.tintColor = .secondaryPurple
             return imageView
         }()
-                
+        
         let needLoginLabel: UILabel = {
             let label = UILabel()
             label.text = "로그인이 필요합니다."
@@ -231,7 +231,7 @@ class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate {
         
         title.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         container.addSubview(title)
         container.addSubview(stackView)
         
@@ -598,19 +598,41 @@ class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate {
     }
     
     @objc private func instagramBtn() {
-        print("onTapDuesTap")
+        let Username =  "seoultech__39"
+        let appURL = URL(string: "instagram://user?username=\(Username)")!
+        let application = UIApplication.shared
+        
+        if application.canOpenURL(appURL) {
+            application.open(appURL)
+        } else {
+            let webURL = URL(string: "https://instagram.com/\(Username)")!
+            application.open(webURL)
+        }
     }
     
     @objc private func youtubeBtn() {
-        print("onTapAlwaysTap")
+        let youtubeId = "UCLYljVZiYHeJxaHTbRpVauQ"
+        var youtubeUrl = URL(string:"youtube://www.youtube.com/channel/\(youtubeId)")!
+        let application = UIApplication.shared
+        
+        if application.canOpenURL(youtubeUrl){
+            application.open(youtubeUrl)
+        } else{
+            let webURL = URL(string: "https://www.youtube.com/channel/\(youtubeId)")!
+            application.open(webURL)
+        }
     }
     
     @objc private func kakaoBtn() {
-        print("onTapFestivalTap")
+        let application = UIApplication.shared
+        let url = URL(string: "https://pf.kakao.com/_yxatCV")!
+        application.open(url)
     }
     
     @objc private func homepageBtn() {
-        print("onTapEventTap")
+        let application = UIApplication.shared
+        let url = URL(string: "https://gwack2.seoultech.ac.kr")!
+        application.open(url)
     }
     
     @objc private func updateBtn() {
