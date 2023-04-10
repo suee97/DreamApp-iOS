@@ -1,10 +1,14 @@
 import UIKit
+import Photos
+import Alamofire
 
-class SuggestViewController: UIViewController, UITextFieldDelegate,  UITextViewDelegate {
+class SuggestViewController: UIViewController, UITextFieldDelegate,  UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // MARK: Properties
     var appBarTitle: String?
     var suggestCase: SuggestCase?
+    private var suggestImage: UIImage?
+    private let noImageImageData = UIImage(named: "no_image_image")?.jpegData(compressionQuality: 0.01)
     
     private let contentTextViewPlaceHolder = "문의내용을 입력하세요."
     
@@ -61,6 +65,64 @@ class SuggestViewController: UIViewController, UITextFieldDelegate,  UITextViewD
             label.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 8)
         ])
         
+        return button
+    }()
+    
+    private lazy var removePhotoButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 12
+        button.layer.borderWidth = 1.5
+        button.layer.borderColor = UIColor.primaryPurple.cgColor
+        
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "photo_image")?.withRenderingMode(.alwaysTemplate)
+        imageView.tintColor = .primaryPurple
+        imageView.contentMode = .scaleAspectFit
+        
+        let label = UILabel()
+        label.text = "사진 추가됨"
+        label.font = UIFont(name: "Pretendard-Bold", size: 12)
+        label.textColor = .text_caption
+        label.textColor = .primaryPurple
+        
+        let removeView = UIView()
+        removeView.backgroundColor = .white
+        removeView.layer.cornerRadius = 12
+        
+        let cancelImageView = UIImageView()
+        cancelImageView.image = UIImage(named: "remove_photo")
+        cancelImageView.contentMode = .scaleAspectFit
+        
+        button.addSubview(imageView)
+        button.addSubview(label)
+        button.addSubview(removeView)
+        removeView.addSubview(cancelImageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        label.translatesAutoresizingMaskIntoConstraints = false
+        removeView.translatesAutoresizingMaskIntoConstraints = false
+        cancelImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            imageView.widthAnchor.constraint(equalToConstant: 18),
+            imageView.leftAnchor.constraint(equalTo: button.leftAnchor, constant: 10),
+            imageView.centerYAnchor.constraint(equalTo: button.centerYAnchor),
+            label.centerYAnchor.constraint(equalTo: button.centerYAnchor),
+            label.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 8),
+            removeView.widthAnchor.constraint(equalToConstant: 27),
+            removeView.rightAnchor.constraint(equalTo: button.rightAnchor),
+            removeView.heightAnchor.constraint(equalToConstant: 25),
+            removeView.centerYAnchor.constraint(equalTo: button.centerYAnchor),
+            cancelImageView.widthAnchor.constraint(equalToConstant: 13),
+            cancelImageView.heightAnchor.constraint(equalToConstant: 13),
+            cancelImageView.centerXAnchor.constraint(equalTo: removeView.centerXAnchor),
+            cancelImageView.centerYAnchor.constraint(equalTo: removeView.centerYAnchor)
+        ])
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(onTapRemovePhotoButton))
+        removeView.addGestureRecognizer(gesture)
+        
+        button.isHidden = true
         return button
     }()
     
@@ -140,6 +202,7 @@ class SuggestViewController: UIViewController, UITextFieldDelegate,  UITextViewD
         view.addSubview(titleField)
         view.addSubview(contentTextView)
         view.addSubview(addPhotoButton)
+        view.addSubview(removePhotoButton)
         view.addSubview(helpContainer)
         view.addSubview(cancelButton)
         view.addSubview(sendButton)
@@ -147,6 +210,7 @@ class SuggestViewController: UIViewController, UITextFieldDelegate,  UITextViewD
         titleField.translatesAutoresizingMaskIntoConstraints = false
         contentTextView.translatesAutoresizingMaskIntoConstraints = false
         addPhotoButton.translatesAutoresizingMaskIntoConstraints = false
+        removePhotoButton.translatesAutoresizingMaskIntoConstraints = false
         helpContainer.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         sendButton.translatesAutoresizingMaskIntoConstraints = false
@@ -164,6 +228,10 @@ class SuggestViewController: UIViewController, UITextFieldDelegate,  UITextViewD
             addPhotoButton.leftAnchor.constraint(equalTo: contentTextView.leftAnchor),
             addPhotoButton.widthAnchor.constraint(equalToConstant: 96),
             addPhotoButton.heightAnchor.constraint(equalToConstant: 25),
+            removePhotoButton.topAnchor.constraint(equalTo: contentTextView.bottomAnchor, constant: 9),
+            removePhotoButton.leftAnchor.constraint(equalTo: contentTextView.leftAnchor),
+            removePhotoButton.widthAnchor.constraint(equalToConstant: 123),
+            removePhotoButton.heightAnchor.constraint(equalToConstant: 25),
             helpContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -127),
             helpContainer.leftAnchor.constraint(equalTo: addPhotoButton.leftAnchor),
             cancelButton.leftAnchor.constraint(equalTo: helpContainer.leftAnchor),
@@ -181,19 +249,108 @@ class SuggestViewController: UIViewController, UITextFieldDelegate,  UITextViewD
     }
     
     @objc private func onTapAddPhotoButton() {
-        print("add photo button clicked")
+        let authStatus = PHPhotoLibrary.authorizationStatus()
+        switch authStatus {
+        case .authorized:
+            openPhotoLibrary()
+        case .denied:
+            showRequestPermissionSettingDialog(title: "사진에 대한 접근 권한이 없습니다.", message: "'설정 > 사진'에서 접근 권한을 활성화 해주세요.")
+        case .notDetermined, .restricted:
+            PHPhotoLibrary.requestAuthorization({ newStatus in
+                if newStatus == PHAuthorizationStatus.authorized {
+                    self.openPhotoLibrary()
+                    print("new status granted")
+                } else {
+                    print("new status not granted")
+                }
+            })
+        case .limited: print("limited")
+        default: print("default")
+        }
     }
     
-    @objc private func onTapRemovePhotoButton() {
-        print("remove photo button clicked")
+    @objc private func
+    onTapRemovePhotoButton() {
+        if !removePhotoButton.isHidden {
+            removePhotoButton.isHidden = true
+        }
+        if addPhotoButton.isHidden {
+            addPhotoButton.isHidden = false
+        }
+        suggestImage = nil
     }
     
     @objc private func onTapCancelButton() {
-        print("cancel button clicked")
+        navigationController?.popViewController(animated: true)
     }
     
     @objc private func onTapSendButton() {
-        print("send button clicked")
+        if titleField.text == "" || contentTextView.text == contentTextViewPlaceHolder {
+            showToast(view: view, message: "내용을 입력해주세요.")
+            return
+        }
+        
+        let file = suggestImage?.jpegData(compressionQuality: 0.01) ?? noImageImageData
+        
+        var suggestCategory: String?
+        let url = api_url + "/suggestion"
+        
+        switch suggestCase {
+        case .feature:
+            suggestCategory = "FEATURE"
+        case .error:
+            suggestCategory = "ERROR"
+        case .etc:
+            suggestCategory = "ETC"
+        case .none:
+            suggestCategory = "ETC"
+        }
+        
+        let header: HTTPHeaders = ["Content-type" : "multipart/form-data"]
+        let params : [String: String] = [
+            "title": titleField.text!,
+            "content": contentTextView.text,
+            "category": suggestCategory!,
+        ]
+        
+        sendButton.setLoading(true)
+        
+        AF.upload(multipartFormData: { multipartFormData in
+            for (key, value) in params {
+                multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
+            }
+            
+            multipartFormData.append(file!, withName: "file", fileName: "suggest_image.jpeg", mimeType: "image/jpeg")
+        }, to: url, method: .post, headers: header).responseJSON { response in
+            switch response.result {
+            case .success:
+                print(response)
+                do {
+                    let decoder = JSONDecoder()
+                    guard let responseData = response.data else { return }
+                    let result = try decoder.decode(SuggestApiResult.self, from: responseData)
+                    if result.status == 201 {
+                        self.sendButton.setLoading(false)
+                        self.sendButton.setActive(true)
+                        self.navigationController?.popViewController(animated: true)
+                        showToast(view: (self.navigationController?.topViewController?.view)!, message: "요청이 완료되었습니다.")
+                    }
+                } catch {
+                    self.sendButton.setLoading(false)
+                    self.sendButton.setActive(true)
+                    self.navigationController?.popViewController(animated: true)
+                    showToast(view: (self.navigationController?.topViewController?.view)!, message: "오류가 발생했습니다.")
+                }
+            case .failure:
+                self.sendButton.setLoading(false)
+                self.sendButton.setActive(true)
+                self.navigationController?.popViewController(animated: true)
+                showToast(view: (self.navigationController?.topViewController?.view)!, message: "오류가 발생했습니다.")
+            }
+            
+            self.sendButton.setLoading(false)
+            self.sendButton.setActive(true)
+        }
     }
     
     private func configureGesture() {
@@ -242,6 +399,43 @@ class SuggestViewController: UIViewController, UITextFieldDelegate,  UITextViewD
     @objc func didTapBackground() {
         view.endEditing(true)
     }
+    
+    private func showRequestPermissionSettingDialog(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let cancelaction = UIAlertAction(title: "취소", style: .default)
+        let settingaction = UIAlertAction(title: "설정", style: UIAlertAction.Style.default) { UIAlertAction in
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url, options: [:], completionHandler: { _ in })
+            }
+        }
+        alert.addAction(cancelaction)
+        alert.addAction(settingaction)
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    private func openPhotoLibrary() {
+        DispatchQueue.main.async {
+            let pickerController = UIImagePickerController()
+            pickerController.sourceType = .photoLibrary
+            pickerController.delegate = self
+            pickerController.allowsEditing = false
+            self.present(pickerController, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image: UIImage = info[.originalImage] as? UIImage else { return }
+        suggestImage = image
+        addPhotoButton.isHidden = true
+        removePhotoButton.isHidden = false
+        picker.dismiss(animated: true)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
 }
 
 enum SuggestCase {
@@ -262,3 +456,9 @@ class titleTextField: UITextField {
     }
 }
 
+private struct SuggestApiResult: Codable {
+    let status: Int
+    let message: String
+    let data: [String]?
+    let errorCode: String?
+}
