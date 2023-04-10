@@ -12,7 +12,7 @@ class DevInfoViewController: UIViewController {
     private let versionContainer : UIView = {
         let container = UIView()
         container.configureModalView()
-        
+        container.layer.shadowRadius = 3
         return container
     }()
     
@@ -37,7 +37,7 @@ class DevInfoViewController: UIViewController {
     private let contactContainer : UIView = {
         let container = UIView()
         container.configureModalView()
-        
+        container.layer.shadowRadius = 3
         return container
     }()
     
