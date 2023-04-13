@@ -97,6 +97,19 @@ class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate {
         let container = UIView()
         container.layer.cornerRadius = 10
         
+        let divider: UIView = {
+            let view = UIView()
+            view.backgroundColor = .lightGrey
+            return view
+        }()
+        
+        container.addSubview(divider)
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        divider.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 14).isActive = true
+        divider.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -9).isActive = true
+        divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        divider.topAnchor.constraint(equalTo: container.topAnchor, constant: 36).isActive = true
+        
         let title = UILabel(frame: CGRect(x: 14, y: 9, width: 320, height: 19))
         title.text = "계정관리"
         title.textColor = .black
@@ -140,6 +153,19 @@ class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate {
         let container = UIView()
         container.layer.cornerRadius = 10
         
+        let divider: UIView = {
+            let view = UIView()
+            view.backgroundColor = .lightGrey
+            return view
+        }()
+        
+        container.addSubview(divider)
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        divider.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 14).isActive = true
+        divider.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -9).isActive = true
+        divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        divider.topAnchor.constraint(equalTo: container.topAnchor, constant: 36).isActive = true
+        
         let title = UILabel(frame: CGRect(x: 14, y: 9, width: 320, height: 19))
         title.text = "계정관리"
         title.textColor = .text_caption
@@ -180,6 +206,19 @@ class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 30)
         let container = UIView()
         container.layer.cornerRadius = 10
+        
+        let divider: UIView = {
+            let view = UIView()
+            view.backgroundColor = .lightGrey
+            return view
+        }()
+        
+        container.addSubview(divider)
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        divider.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 14).isActive = true
+        divider.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -9).isActive = true
+        divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        divider.topAnchor.constraint(equalTo: container.topAnchor, constant: 36).isActive = true
         
         let title = UILabel()
         title.text = "총학생회 SNS 바로가기"
@@ -253,6 +292,19 @@ class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate {
         let container = UIView()
         container.layer.cornerRadius = 10
         
+        let divider: UIView = {
+            let view = UIView()
+            view.backgroundColor = .lightGrey
+            return view
+        }()
+        
+        container.addSubview(divider)
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        divider.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 14).isActive = true
+        divider.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -9).isActive = true
+        divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        divider.topAnchor.constraint(equalTo: container.topAnchor, constant: 36).isActive = true
+        
         let title = UILabel(frame: CGRect(x: 14, y: 9, width: 320, height: 19))
         title.text = "정보"
         title.textColor = .black
@@ -286,6 +338,19 @@ class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate {
         
         let container = UIView()
         container.layer.cornerRadius = 10
+        
+        let divider: UIView = {
+            let view = UIView()
+            view.backgroundColor = .lightGrey
+            return view
+        }()
+        
+        container.addSubview(divider)
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        divider.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 14).isActive = true
+        divider.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -9).isActive = true
+        divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        divider.topAnchor.constraint(equalTo: container.topAnchor, constant: 36).isActive = true
         
         let title = UILabel(frame: CGRect(x: 14, y: 9, width: 320, height: 19))
         title.text = "제안사항"
@@ -329,6 +394,19 @@ class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate {
         
         let container = UIView()
         container.layer.cornerRadius = 10
+        
+        let divider: UIView = {
+            let view = UIView()
+            view.backgroundColor = .lightGrey
+            return view
+        }()
+        
+        container.addSubview(divider)
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        divider.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 14).isActive = true
+        divider.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -9).isActive = true
+        divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        divider.topAnchor.constraint(equalTo: container.topAnchor, constant: 36).isActive = true
         
         let title = UILabel(frame: CGRect(x: 14, y: 9, width: 320, height: 19))
         title.text = "약관 및 정책"
