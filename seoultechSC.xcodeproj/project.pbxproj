@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3C0EDCDB29D035C400AF7D0E /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EDCDA29D035C400AF7D0E /* KeychainHelper.swift */; };
+		3C20096929EA762E000D4B71 /* RentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C20096829EA762E000D4B71 /* RentViewController.swift */; };
 		3C204E7229CD5D660026E85E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E6729CD5D660026E85E /* HomeViewController.swift */; };
 		3C204E7329CD5D660026E85E /* SetPwViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E6A29CD5D660026E85E /* SetPwViewController.swift */; };
 		3C204E7429CD5D660026E85E /* PolicyAgreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E6B29CD5D660026E85E /* PolicyAgreeViewController.swift */; };
@@ -42,6 +43,9 @@
 		3C2FC84629D80CBD00BE9A4C /* AlwaysRentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2FC84529D80CBD00BE9A4C /* AlwaysRentViewController.swift */; };
 		3C2FC84829D82CF200BE9A4C /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2FC84729D82CF200BE9A4C /* CalendarCollectionViewCell.swift */; };
 		3C5C1F2429E1307A0027E66B /* Banners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5C1F2329E1307A0027E66B /* Banners.swift */; };
+		3C5C1F2629E14AA60027E66B /* RentDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5C1F2529E14AA60027E66B /* RentDataModels.swift */; };
+		3C5C1F2829E40C440027E66B /* GetRentDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5C1F2729E40C440027E66B /* GetRentDataService.swift */; };
+		3C5C1F2A29E40CF70027E66B /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5C1F2929E40CF70027E66B /* NetworkResult.swift */; };
 		3C6207C229D2CAC8008C696F /* AlwaysCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6207C129D2CAC8008C696F /* AlwaysCollectionViewCell.swift */; };
 		3C6207C629D7FB81008C696F /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6207C429D7FB81008C696F /* EventViewController.swift */; };
 		3C6207C729D7FB81008C696F /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6207C529D7FB81008C696F /* EventDetailViewController.swift */; };
@@ -66,6 +70,7 @@
 /* Begin PBXFileReference section */
 		3C0EDCDA29D035C400AF7D0E /* KeychainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		3C0EDCDD29D037BB00AF7D0E /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		3C20096829EA762E000D4B71 /* RentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentViewController.swift; sourceTree = "<group>"; };
 		3C204E6729CD5D660026E85E /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3C204E6A29CD5D660026E85E /* SetPwViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPwViewController.swift; sourceTree = "<group>"; };
 		3C204E6B29CD5D660026E85E /* PolicyAgreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolicyAgreeViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +106,9 @@
 		3C2FC84529D80CBD00BE9A4C /* AlwaysRentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysRentViewController.swift; sourceTree = "<group>"; };
 		3C2FC84729D82CF200BE9A4C /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		3C5C1F2329E1307A0027E66B /* Banners.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Banners.swift; sourceTree = "<group>"; };
+		3C5C1F2529E14AA60027E66B /* RentDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentDataModels.swift; sourceTree = "<group>"; };
+		3C5C1F2729E40C440027E66B /* GetRentDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRentDataService.swift; sourceTree = "<group>"; };
+		3C5C1F2929E40CF70027E66B /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		3C6207C129D2CAC8008C696F /* AlwaysCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysCollectionViewCell.swift; sourceTree = "<group>"; };
 		3C6207C429D7FB81008C696F /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		3C6207C529D7FB81008C696F /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
@@ -209,6 +217,8 @@
 				3C6207C829D7FBD5008C696F /* EventModels.swift */,
 				3C204E8329CD5D8A0026E85E /* AuthModels.swift */,
 				5B5FDB7629DB04D00027F88E /* UserInfo.swift */,
+				3C5C1F2529E14AA60027E66B /* RentDataModels.swift */,
+				3C5C1F2929E40CF70027E66B /* NetworkResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -283,6 +293,8 @@
 			children = (
 				3C6317EA29D1864800469836 /* AlwaysViewController.swift */,
 				3C2FC84529D80CBD00BE9A4C /* AlwaysRentViewController.swift */,
+				3C5C1F2729E40C440027E66B /* GetRentDataService.swift */,
+				3C20096829EA762E000D4B71 /* RentViewController.swift */,
 			);
 			path = Always;
 			sourceTree = "<group>";
@@ -506,6 +518,7 @@
 				5B5FDB8529DD2BC80027F88E /* ContentLabel.swift in Sources */,
 				3C204E7229CD5D660026E85E /* HomeViewController.swift in Sources */,
 				5BF106C429D967CC00808426 /* LoadingViewController.swift in Sources */,
+				3C20096929EA762E000D4B71 /* RentViewController.swift in Sources */,
 				3C6207C229D2CAC8008C696F /* AlwaysCollectionViewCell.swift in Sources */,
 				3C204E7329CD5D660026E85E /* SetPwViewController.swift in Sources */,
 				3C204E7629CD5D660026E85E /* SignUpEndViewController.swift in Sources */,
@@ -513,10 +526,13 @@
 				3C204EAB29CD5DA20026E85E /* RadioButton.swift in Sources */,
 				3C2FC84829D82CF200BE9A4C /* CalendarCollectionViewCell.swift in Sources */,
 				3C2FC84629D80CBD00BE9A4C /* AlwaysRentViewController.swift in Sources */,
+				3C5C1F2A29E40CF70027E66B /* NetworkResult.swift in Sources */,
 				3C204E7729CD5D660026E85E /* EnterInfoViewController.swift in Sources */,
 				3C5C1F2429E1307A0027E66B /* Banners.swift in Sources */,
 				3C204E7429CD5D660026E85E /* PolicyAgreeViewController.swift in Sources */,
+				3C5C1F2629E14AA60027E66B /* RentDataModels.swift in Sources */,
 				3C204EA929CD5DA20026E85E /* GreyTextField.swift in Sources */,
+				3C5C1F2829E40C440027E66B /* GetRentDataService.swift in Sources */,
 				3C6207C729D7FB81008C696F /* EventDetailViewController.swift in Sources */,
 				3C204EAE29CD5DA20026E85E /* TitleLabel.swift in Sources */,
 			);

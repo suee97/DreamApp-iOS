@@ -1,11 +1,13 @@
 import UIKit
+import Alamofire
 
 class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     // MARK: - Properties
     private let calendar = Calendar.current
     private let dateFormatter = DateFormatter()
-    private var calendarDate = Date()
+    private var calendarYear = Date()
+    private var calendarMonth = Date()
     private var days = [String]()
     
     
@@ -135,6 +137,7 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
     
     private lazy var rentButton : ActionButton = {
         let button = ActionButton(title: "대여하러 가기")
+        button.addTarget(self, action: #selector(rentBtn), for: .touchUpInside)
         
         return button
     }()
@@ -147,6 +150,7 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         configureCollectionViewDelegate()
         configureCalendar()
@@ -301,23 +305,23 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
     
     private func configureCalendar() {
         let components = calendar.dateComponents([.year, .month], from: Date())
-        calendarDate = calendar.date(from: components) ?? Date()
+        calendarMonth = calendar.date(from: components) ?? Date()
         dateFormatter.dateFormat = "MM월"
         updateCalendar()
     }
     
     // 일요일: 1, 토요일: 7 로 반환되니 0번 인덱스를 일요일로 표시해주기 위해 -1을 해줌
     private func startDayOfTheWeek() -> Int {
-        return calendar.component(.weekday, from: calendarDate) - 1
+        return calendar.component(.weekday, from: calendarMonth) - 1
     }
     
     // 해당 달의 날짜가 며칠까지 있는지 계산 후 반환
     private func endDate() -> Int {
-        return calendar.range(of: .day, in: .month, for: calendarDate)?.count ?? Int()
+        return calendar.range(of: .day, in: .month, for: calendarMonth)?.count ?? Int()
     }
     
     private func updateTitle() {
-        let date = dateFormatter.string(from: calendarDate)
+        let date = dateFormatter.string(from: calendarMonth)
         titleLabel.text = date + " 예약 현황"
     }
     
@@ -340,15 +344,16 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
     private func updateCalendar() {
         updateTitle()
         updateDays()
+        fetchRent()
     }
     
     private func minusMonth() {
-        calendarDate = calendar.date(byAdding: DateComponents(month: -1), to: calendarDate) ?? Date()
+        calendarMonth = calendar.date(byAdding: DateComponents(month: -1), to: calendarMonth) ?? Date()
         updateCalendar()
     }
     
     private func plusMonth() {
-        calendarDate = calendar.date(byAdding: DateComponents(month: 1), to: calendarDate) ?? Date()
+        calendarMonth = calendar.date(byAdding: DateComponents(month: 1), to: calendarMonth) ?? Date()
         updateCalendar()
     }
     
@@ -362,8 +367,40 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
             return UICollectionViewCell() }
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor(red: 0.913, green: 0.913, blue: 0.913, alpha: 1).cgColor
+        cell.backgroundColor = .white
+        selectedDay.text = ""
         cell.update(day: days[indexPath.item])
+        cell.checkWeekend(indexPath: indexPath)
+        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! CalendarCollectionViewCell
+        
+        let components = calendar.dateComponents([.year, .month], from: Date())
+        calendarMonth = calendar.date(from: components) ?? Date()
+        dateFormatter.dateFormat = "MM월"
+        
+        
+        
+        selectedDay.text = days[indexPath.item] + "일"
+        selectedDay.textColor = .navy
+        selectedDay.font = UIFont(name: "Pretendard-Bold", size: 12)
+        
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor(red: 0.486, green: 0.529, blue: 0.949, alpha: 1).cgColor
+        cell.backgroundColor = UIColor(red: 0.914, green: 0.937, blue: 1, alpha: 1)
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! CalendarCollectionViewCell
+        
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor(red: 0.913, green: 0.913, blue: 0.913, alpha: 1).cgColor
+        cell.backgroundColor = .white
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -378,6 +415,37 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return .zero
     }
+//month: Int, year: Int, category: String
+    private func fetchRent() {
+        let url = "\(api_url)/rent/calendar?month=4&year=2023&category=TABLE"
+        AF.request(url, method: .get).responseJSON { response in
+            switch response.result {
+            case .success:
+                print("success")
+                do {
+                    let decoder = JSONDecoder()
+                    guard let responseData = response.data else { return }
+                    let result = try decoder.decode(RentApiResult.self, from: responseData)
+                    let dataCount = result.data?.count
+                    
+                    print(result)
+
+                    if result.status == 200 && dataCount != 0 {
+                        for rent in result.data! {
+                            print(rent)
+                        }
+                    }
+
+
+                } catch {
+
+                }
+            case .failure:
+                print("fail")
+            }
+        }
+
+    }
     
     @objc private func prevButtonTouched(_ sender: UIButton) {
         minusMonth()
@@ -385,6 +453,11 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
     
     @objc private func nextButtonTouched(_ sender: UIButton) {
         plusMonth()
+    }
+    
+    @objc private func rentBtn() {
+        let vc = RentViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

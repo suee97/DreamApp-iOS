@@ -37,4 +37,16 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     func update(day: String) {
         dayLabel.text = day
     }
+    
+    func checkWeekend(indexPath: IndexPath) {
+        if indexPath.row == 0 || indexPath.row == 7 || indexPath.row == 14 || indexPath.row == 21 || indexPath.row == 28 || indexPath.row == 35  {
+            dayLabel.textColor = .red
+        }
+        else if indexPath.row == 6 || indexPath.row == 13 || indexPath.row == 20 || indexPath.row == 27 || indexPath.row == 34 {
+            dayLabel.textColor = .blue
+        }
+        else {
+            dayLabel.textColor = .black
+        }
+    }
 }

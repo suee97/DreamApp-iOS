@@ -245,13 +245,3 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
         print("MyReservation Confirm")
     }
 }
-
-struct ItemWithImage {
-    let eventId: Int
-    let title: String
-    let formLink: String
-    let image: UIImage
-    let startTime: String
-    let endTime: String
-    let eventStatus: EventStatus
-}
