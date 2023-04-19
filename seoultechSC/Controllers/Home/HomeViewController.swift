@@ -295,25 +295,32 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func onTapAllianceTap() {
-        print("onTapAllianceTap")
+        showToast(view: view, message: "준비중입니다.")
     }
     
     @objc private func onTapDuesTap() {
-        print("onTapDuesTap")
+        if !getLoginState() {
+            showToast(view: view, message: needLoginMessage)
+        } else {
+            let vc = DuesViewController()
+            vc.user = signInUser
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     @objc private func onTapAlwaysTap() {
         let vc = AlwaysViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func onTapFestivalTap() {
-        print("onTapFestivalTap")
+        let vc = FestivalViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func onTapEventTap() {
         let vc = EventViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     private func setUpImageScrollView(_ imageList: [UIImage]) {
