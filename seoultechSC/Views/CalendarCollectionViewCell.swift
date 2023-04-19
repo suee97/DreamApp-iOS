@@ -1,15 +1,13 @@
 //
 //  CalendarCollectionViewCell.swift
 //  seoultechSC
-//
-//  Created by 변상우 on 2023/04/01.
-//
-
 import UIKit
 
 class CalendarCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "CalendarCollectionViewCell"
+    
+    private var circularProgressBarView = CircularProgressBar()
     
     private lazy var dayLabel = UILabel()
     
@@ -25,12 +23,18 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     
     private func configure() {
         self.addSubview(dayLabel)
+        self.addSubview(circularProgressBarView)
+        
         dayLabel.font = UIFont(name: "Pretendard-Bold", size: 15)
+        
+        circularProgressBarView.translatesAutoresizingMaskIntoConstraints = false
         dayLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            dayLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
-            dayLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+            circularProgressBarView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            circularProgressBarView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            dayLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            dayLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
         ])
     }
     
@@ -48,5 +52,11 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         else {
             dayLabel.textColor = .black
         }
+    }
+    
+    func updateCircle(strokeEnd: CGFloat) {
+        circularProgressBarView.strokeEnd = 0.5
+        
+        circularProgressBarView.setNeedsDisplay()
     }
 }

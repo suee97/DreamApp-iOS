@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3C0EDCDB29D035C400AF7D0E /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EDCDA29D035C400AF7D0E /* KeychainHelper.swift */; };
 		3C20096929EA762E000D4B71 /* RentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C20096829EA762E000D4B71 /* RentViewController.swift */; };
+		3C20096D29EBF6C9000D4B71 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C20096C29EBF6C9000D4B71 /* CircularProgressBar.swift */; };
 		3C204E7229CD5D660026E85E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E6729CD5D660026E85E /* HomeViewController.swift */; };
 		3C204E7329CD5D660026E85E /* SetPwViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E6A29CD5D660026E85E /* SetPwViewController.swift */; };
 		3C204E7429CD5D660026E85E /* PolicyAgreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C204E6B29CD5D660026E85E /* PolicyAgreeViewController.swift */; };
@@ -71,6 +72,7 @@
 		3C0EDCDA29D035C400AF7D0E /* KeychainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		3C0EDCDD29D037BB00AF7D0E /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		3C20096829EA762E000D4B71 /* RentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentViewController.swift; sourceTree = "<group>"; };
+		3C20096C29EBF6C9000D4B71 /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 		3C204E6729CD5D660026E85E /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3C204E6A29CD5D660026E85E /* SetPwViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPwViewController.swift; sourceTree = "<group>"; };
 		3C204E6B29CD5D660026E85E /* PolicyAgreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolicyAgreeViewController.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				3C204EA729CD5DA20026E85E /* ActionButton.swift */,
 				3C204EA829CD5DA20026E85E /* TitleLabel.swift */,
 				3C2FC84729D82CF200BE9A4C /* CalendarCollectionViewCell.swift */,
+				3C20096C29EBF6C9000D4B71 /* CircularProgressBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -503,6 +506,7 @@
 				3C204EAD29CD5DA20026E85E /* ActionButton.swift in Sources */,
 				5B5FDB7D29DC71B20027F88E /* FAQViewController.swift in Sources */,
 				3C6207C929D7FBD5008C696F /* EventModels.swift in Sources */,
+				3C20096D29EBF6C9000D4B71 /* CircularProgressBar.swift in Sources */,
 				3C0EDCDB29D035C400AF7D0E /* KeychainHelper.swift in Sources */,
 				5B5FDB8629DDA2CA0027F88E /* InfoViewController.swift in Sources */,
 				3C204E7A29CD5D660026E85E /* SelectLoginViewController.swift in Sources */,
