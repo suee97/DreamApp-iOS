@@ -371,6 +371,15 @@ class RentViewController: UIViewController, SendDataDelegate {
         print(String(rentRange.text!.prefix(10)))
         print(String(rentRange.text!.suffix(10)))
         PostRentRequest()
+                
+        guard let viewControllerStack = navigationController?.viewControllers else { return }
+        
+        for viewController in viewControllerStack {
+            if let vc = viewController as? AlwaysViewController {
+                navigationController?.popToViewController(vc, animated: true)
+            }
+        }
+        
     }
     
     private func PostRentRequest() {
@@ -557,6 +566,7 @@ class CalendarModal: UIViewController {
     @objc private func onTapRentOneDayButton() {
         endDay.text = startDay.text
         sendEndDay = sendStartDay
+        confirmButton.setActive(true)
     }
 
     @objc private func handleDatePicker(_ sender: UIDatePicker) {
