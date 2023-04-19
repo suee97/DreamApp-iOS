@@ -393,7 +393,7 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
         selectedDay.text = ""
         cell.update(day: days[indexPath.item])
         cell.checkWeekend(indexPath: indexPath)
-        cell.updateCircle(strokeEnd: 0.4)
+//        cell.updateCircle(strokeEnd: 0.4)
         
         return cell
     }

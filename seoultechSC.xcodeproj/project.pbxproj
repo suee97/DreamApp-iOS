@@ -54,6 +54,12 @@
 		3C6207CC29D7FC1A008C696F /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6207CA29D7FC1A008C696F /* EventCollectionViewCell.swift */; };
 		3C6317E729D16DE100469836 /* DevInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6317E629D16DE100469836 /* DevInfoViewController.swift */; };
 		3C6317EB29D1864800469836 /* AlwaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6317EA29D1864800469836 /* AlwaysViewController.swift */; };
+		3CF8953C29F045B6009F797B /* FestivalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8953729F045B5009F797B /* FestivalViewController.swift */; };
+		3CF8953D29F045B6009F797B /* IntroModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8953829F045B5009F797B /* IntroModalViewController.swift */; };
+		3CF8953E29F045B6009F797B /* StampModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8953929F045B5009F797B /* StampModalViewController.swift */; };
+		3CF8953F29F045B6009F797B /* DuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8953B29F045B6009F797B /* DuesViewController.swift */; };
+		3CF8954129F045EC009F797B /* FestivalModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8954029F045EC009F797B /* FestivalModels.swift */; };
+		3CF8954329F05E7F009F797B /* LogInModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8954229F05E7F009F797B /* LogInModalViewController.swift */; };
 		5B5FDB7529DB02010027F88E /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EDCDD29D037BB00AF7D0E /* SettingViewController.swift */; };
 		5B5FDB7729DB04D00027F88E /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FDB7629DB04D00027F88E /* UserInfo.swift */; };
 		5B5FDB7929DB1B2B0027F88E /* LogoutModalViewCnotroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FDB7829DB1B2B0027F88E /* LogoutModalViewCnotroller.swift */; };
@@ -118,6 +124,12 @@
 		3C6207CA29D7FC1A008C696F /* EventCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCell.swift; sourceTree = "<group>"; };
 		3C6317E629D16DE100469836 /* DevInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevInfoViewController.swift; sourceTree = "<group>"; };
 		3C6317EA29D1864800469836 /* AlwaysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysViewController.swift; sourceTree = "<group>"; };
+		3CF8953729F045B5009F797B /* FestivalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FestivalViewController.swift; sourceTree = "<group>"; };
+		3CF8953829F045B5009F797B /* IntroModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroModalViewController.swift; sourceTree = "<group>"; };
+		3CF8953929F045B5009F797B /* StampModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StampModalViewController.swift; sourceTree = "<group>"; };
+		3CF8953B29F045B6009F797B /* DuesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuesViewController.swift; sourceTree = "<group>"; };
+		3CF8954029F045EC009F797B /* FestivalModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FestivalModels.swift; sourceTree = "<group>"; };
+		3CF8954229F05E7F009F797B /* LogInModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInModalViewController.swift; sourceTree = "<group>"; };
 		5B5FDB7629DB04D00027F88E /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		5B5FDB7829DB1B2B0027F88E /* LogoutModalViewCnotroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutModalViewCnotroller.swift; sourceTree = "<group>"; };
 		5B5FDB7A29DC71700027F88E /* WhatIsSCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIsSCViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +183,8 @@
 		3C204E6629CD5D660026E85E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				3CF8953A29F045B6009F797B /* Dues */,
+				3CF8953629F045B5009F797B /* Festival */,
 				3C6207C329D7FB81008C696F /* event */,
 				3C204E6729CD5D660026E85E /* HomeViewController.swift */,
 				3C6317E829D185DC00469836 /* Always */,
@@ -215,6 +229,7 @@
 		3C204E8229CD5D8A0026E85E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3CF8954029F045EC009F797B /* FestivalModels.swift */,
 				3C5C1F2329E1307A0027E66B /* Banners.swift */,
 				3C6207C829D7FBD5008C696F /* EventModels.swift */,
 				3C204E8329CD5D8A0026E85E /* AuthModels.swift */,
@@ -298,8 +313,27 @@
 				3C2FC84529D80CBD00BE9A4C /* AlwaysRentViewController.swift */,
 				3C5C1F2729E40C440027E66B /* GetRentDataService.swift */,
 				3C20096829EA762E000D4B71 /* RentViewController.swift */,
+				3CF8954229F05E7F009F797B /* LogInModalViewController.swift */,
 			);
 			path = Always;
+			sourceTree = "<group>";
+		};
+		3CF8953629F045B5009F797B /* Festival */ = {
+			isa = PBXGroup;
+			children = (
+				3CF8953729F045B5009F797B /* FestivalViewController.swift */,
+				3CF8953829F045B5009F797B /* IntroModalViewController.swift */,
+				3CF8953929F045B5009F797B /* StampModalViewController.swift */,
+			);
+			path = Festival;
+			sourceTree = "<group>";
+		};
+		3CF8953A29F045B6009F797B /* Dues */ = {
+			isa = PBXGroup;
+			children = (
+				3CF8953B29F045B6009F797B /* DuesViewController.swift */,
+			);
+			path = Dues;
 			sourceTree = "<group>";
 		};
 		5BCAD97E29A509820010E811 = {
@@ -510,12 +544,15 @@
 				3C0EDCDB29D035C400AF7D0E /* KeychainHelper.swift in Sources */,
 				5B5FDB8629DDA2CA0027F88E /* InfoViewController.swift in Sources */,
 				3C204E7A29CD5D660026E85E /* SelectLoginViewController.swift in Sources */,
+				3CF8953E29F045B6009F797B /* StampModalViewController.swift in Sources */,
 				3C204E7F29CD5D7C0026E85E /* Commons.swift in Sources */,
 				5B5FDB7729DB04D00027F88E /* UserInfo.swift in Sources */,
 				3C204EAA29CD5DA20026E85E /* CustomTableViewCell.swift in Sources */,
 				5B5FDB7F29DC71C70027F88E /* SCFeatureViewController.swift in Sources */,
 				3C204E7929CD5D660026E85E /* LoginViewController.swift in Sources */,
 				5BF106C229D9678500808426 /* AuthHelper.swift in Sources */,
+				3CF8954129F045EC009F797B /* FestivalModels.swift in Sources */,
+				3CF8953C29F045B6009F797B /* FestivalViewController.swift in Sources */,
 				3C6317EB29D1864800469836 /* AlwaysViewController.swift in Sources */,
 				3C204E7829CD5D660026E85E /* PhoneAuthViewController.swift in Sources */,
 				3C204E7529CD5D660026E85E /* StudentCardAuthViewController.swift in Sources */,
@@ -525,14 +562,17 @@
 				3C20096929EA762E000D4B71 /* RentViewController.swift in Sources */,
 				3C6207C229D2CAC8008C696F /* AlwaysCollectionViewCell.swift in Sources */,
 				3C204E7329CD5D660026E85E /* SetPwViewController.swift in Sources */,
+				3CF8953D29F045B6009F797B /* IntroModalViewController.swift in Sources */,
 				3C204E7629CD5D660026E85E /* SignUpEndViewController.swift in Sources */,
 				3C204EA129CD5D960026E85E /* SceneDelegate.swift in Sources */,
 				3C204EAB29CD5DA20026E85E /* RadioButton.swift in Sources */,
 				3C2FC84829D82CF200BE9A4C /* CalendarCollectionViewCell.swift in Sources */,
 				3C2FC84629D80CBD00BE9A4C /* AlwaysRentViewController.swift in Sources */,
 				3C5C1F2A29E40CF70027E66B /* NetworkResult.swift in Sources */,
+				3CF8954329F05E7F009F797B /* LogInModalViewController.swift in Sources */,
 				3C204E7729CD5D660026E85E /* EnterInfoViewController.swift in Sources */,
 				3C5C1F2429E1307A0027E66B /* Banners.swift in Sources */,
+				3CF8953F29F045B6009F797B /* DuesViewController.swift in Sources */,
 				3C204E7429CD5D660026E85E /* PolicyAgreeViewController.swift in Sources */,
 				3C5C1F2629E14AA60027E66B /* RentDataModels.swift in Sources */,
 				3C204EA929CD5DA20026E85E /* GreyTextField.swift in Sources */,
