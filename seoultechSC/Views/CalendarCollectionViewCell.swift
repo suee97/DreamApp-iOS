@@ -23,16 +23,16 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     
     private func configure() {
         self.addSubview(dayLabel)
-        self.addSubview(circularProgressBarView)
+//        self.addSubview(circularProgressBarView)
         
         dayLabel.font = UIFont(name: "Pretendard-Bold", size: 15)
         
-        circularProgressBarView.translatesAutoresizingMaskIntoConstraints = false
+//        circularProgressBarView.translatesAutoresizingMaskIntoConstraints = false
         dayLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            circularProgressBarView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            circularProgressBarView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+//            circularProgressBarView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+//            circularProgressBarView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             dayLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             dayLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
         ])
