@@ -221,11 +221,13 @@ class PolicyAgreeViewController: UIViewController {
     }
     
     @objc private func onTapPrivacyContentButton() {
-        print("PrivacyContentButton clicked")
+        let vc = PrivacyViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func onTapServiceContentButton() {
-        print("ServiceContentButton clicked")
+        let vc = ServiceViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     

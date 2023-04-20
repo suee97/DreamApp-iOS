@@ -744,15 +744,13 @@ class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate {
     }
     
     @objc private func serviceBtn() {
-        print("onTapEventTap")
-    }
-    
-    @objc private func locationBtn() {
-        print("onTapEventTap")
+        let vc = ServiceViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func policyBtn() {
-        print("onTapEventTap")
+        let vc = PrivacyViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func infoBtn() {
