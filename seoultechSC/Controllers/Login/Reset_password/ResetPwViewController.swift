@@ -190,16 +190,13 @@ class ResetPwViewController: UIViewController {
                     }
                     self.setVcState(state: .normal)
                     showToast(view: self.view, message: "오류가 발생했습니다.")
-                    print("1111")
                 } catch {
                     self.setVcState(state: .normal)
                     showToast(view: self.view, message: "오류가 발생했습니다.")
-                    print("2222")
                 }
             case .failure:
                 self.setVcState(state: .normal)
                 showToast(view: self.view, message: "오류가 발생했습니다.")
-                print("3333")
             }
         }
         
