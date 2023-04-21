@@ -184,7 +184,7 @@ class ResetPwViewController: UIViewController {
                     if result.status == 200 {
                         self.setVcState(state: .normal)
                         let vc = SelectLoginViewController()
-                        showToast(view: vc.view, message: "비밀번호 변경이 완료되었습니다. 다시 로그인해주세요.")
+                        showToast(view: vc.view, message: "비밀번호 변경이 완료되었습니다.")
                         self.navigationController?.setViewControllers([vc], animated: true)
                         return
                     }
