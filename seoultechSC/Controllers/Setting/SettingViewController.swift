@@ -669,6 +669,8 @@ class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate {
     }
     
     @objc private func resetPasswordBtn() {
+        let vc = LoginResetPwViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func withdrawlBtn() {
