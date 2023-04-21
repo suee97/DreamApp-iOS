@@ -147,7 +147,7 @@ class PolicyAgreeViewController: UIViewController {
         serviceContentButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 109),
+            logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 62),
             logo.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             logo.widthAnchor.constraint(equalToConstant: 140),
             logo.heightAnchor.constraint(equalToConstant: 67),
