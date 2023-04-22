@@ -271,16 +271,6 @@ class InfoTabButton: UIButton {
         self.setTitle(title, for: .normal)
         self.setTitleColor(.secondaryPurple, for: .normal)
         self.titleLabel?.font = UIFont(name: "Pretendard-Bold", size: 16)
-//        let logoText = UILabel()
-//
-//        logoText.text = title
-//        logoText.font = UIFont(name: "Pretendard-Bold", size: 16)
-//        logoText.textColor = .primaryPurple
-//        logoText.translatesAutoresizingMaskIntoConstraints = false
-//
-//        self.addSubview(logoText)
-//        logoText.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-//        logoText.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
     }
     
     func setTitlePrimary() {
@@ -297,28 +287,5 @@ class InfoTabButton: UIButton {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-}
-
-extension CALayer {
-    func clickedBorder() {
-        let border = CALayer()
-        border.frame = CGRect.init(x: 0, y: frame.height - 5, width: frame.width, height: 5)
-        border.backgroundColor = UIColor.primaryPurple.cgColor
-        
-        self.addSublayer(border)
-    }
-    
-    func nonClickedBorder() {
-        let border = CALayer()
-        border.frame = CGRect.init(x: 0, y: frame.height - 3, width: frame.width, height: 3)
-        border.backgroundColor = UIColor.secondaryPurple.cgColor
-        
-        let border2 = CALayer()
-        border2.frame = CGRect.init(x: 0, y: frame.height - 5, width: frame.width, height: 5)
-        border2.backgroundColor = UIColor.white.cgColor
-        
-        self.addSublayer(border2)
-        self.addSublayer(border)
     }
 }
