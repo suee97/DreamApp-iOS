@@ -12,7 +12,7 @@ class CircularProgressBar: UIView {
     private var _progressValue: CGFloat = 0.75
     private var lineWidth: CGFloat = 3
     
-    var strokeEnd: CGFloat = 0.8
+    var strokeEnd: CGFloat = 1
     
     override init(frame: CGRect) {
         super.init(frame: frame)

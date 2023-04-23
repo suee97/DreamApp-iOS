@@ -23,16 +23,12 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     
     private func configure() {
         self.addSubview(dayLabel)
-//        self.addSubview(circularProgressBarView)
         
         dayLabel.font = UIFont(name: "Pretendard-Bold", size: 15)
         
-//        circularProgressBarView.translatesAutoresizingMaskIntoConstraints = false
         dayLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-//            circularProgressBarView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-//            circularProgressBarView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             dayLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             dayLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
         ])
@@ -40,6 +36,8 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     
     func update(day: String) {
         dayLabel.text = day
+        self.isUserInteractionEnabled = true
+        circularProgressBarView.isHidden = true
     }
     
     func checkWeekend(indexPath: IndexPath) {
@@ -54,9 +52,94 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func updateCircle(strokeEnd: CGFloat) {
-        circularProgressBarView.strokeEnd = 0.5
+    func drawCircle(day: String, alreadyRentDataList: [AlreadyRentData]) {
+        if (alreadyRentDataList.count == 0) {
+            self.isUserInteractionEnabled = true
+            circularProgressBarView.isHidden = true
+        }
         
-        circularProgressBarView.setNeedsDisplay()
+        for rent in alreadyRentDataList {
+            if (rent.startMonth.prefix(2) == rent.endMonth.prefix(2)) {
+                // 대여기간 : 04.01 ~ 04.05 일때,  2,3,4일 체크
+                if ((rent.startTime < Int(day) ?? 0) && (Int(day) ?? 0 < rent.endTime)) {
+                    self.isUserInteractionEnabled = true
+                    circularProgressBarView.isHidden = false
+                    self.addSubview(circularProgressBarView)
+                    
+                    circularProgressBarView.translatesAutoresizingMaskIntoConstraints = false
+                    
+                    NSLayoutConstraint.activate([
+                        circularProgressBarView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+                        circularProgressBarView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+                    ])
+                    circularProgressBarView.setNeedsDisplay()
+                    
+                    // 대여기간 : 04.03 ~ 04.03 일때,  3일 체크 (하루 대여하는 날 표시)
+                } else if ((rent.startTime == Int(day) ?? 0) && (Int(day) ?? 0 == rent.endTime)) {
+                    self.isUserInteractionEnabled = true
+                    circularProgressBarView.isHidden = false
+                    self.addSubview(circularProgressBarView)
+                    
+                    circularProgressBarView.translatesAutoresizingMaskIntoConstraints = false
+                    
+                    NSLayoutConstraint.activate([
+                        circularProgressBarView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+                        circularProgressBarView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+                    ])
+                    circularProgressBarView.setNeedsDisplay()
+                    
+                    // 대여기간 : 04.01 ~ 04.05 일때,  1,5일 체크
+                } else if ((rent.startTime == Int(day) ?? 0) || (Int(day) ?? 0 == rent.endTime)) {
+                    self.isUserInteractionEnabled = true
+                    circularProgressBarView.isHidden = false
+                    self.addSubview(circularProgressBarView)
+                    
+                    circularProgressBarView.translatesAutoresizingMaskIntoConstraints = false
+                    
+                    NSLayoutConstraint.activate([
+                        circularProgressBarView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+                        circularProgressBarView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+                    ])
+                    circularProgressBarView.setNeedsDisplay()
+                }
+                // 대여기간 : 07.30 ~ 08.03 일때,
+            } else if (rent.startMonth.prefix(2) != rent.endMonth.prefix(2)) {
+                // 7월 달력에 30,31일 표시
+                if (Int(rent.currentMonth) == Int(rent.startMonth.prefix(2))) {
+                    if (rent.startTime <= Int(day) ?? 0) {
+                        self.isUserInteractionEnabled = true
+                        circularProgressBarView.isHidden = false
+                        self.addSubview(circularProgressBarView)
+                        
+                        circularProgressBarView.translatesAutoresizingMaskIntoConstraints = false
+                        
+                        NSLayoutConstraint.activate([
+                            circularProgressBarView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+                            circularProgressBarView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+                        ])
+                        circularProgressBarView.setNeedsDisplay()
+                    }
+                // 8월 달력에 1,2,3일 표시
+                } else if (Int(rent.currentMonth) == Int(rent.endMonth.prefix(2))) {
+                    if (rent.endTime >= Int(day) ?? 0) {
+                        self.isUserInteractionEnabled = true
+                        circularProgressBarView.isHidden = false
+                        self.addSubview(circularProgressBarView)
+                        
+                        circularProgressBarView.translatesAutoresizingMaskIntoConstraints = false
+                        
+                        NSLayoutConstraint.activate([
+                            circularProgressBarView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+                            circularProgressBarView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+                        ])
+                        circularProgressBarView.setNeedsDisplay()
+                    }
+                }
+            }
+        }
+        if (day == "") {
+            self.isUserInteractionEnabled = false
+            circularProgressBarView.isHidden = true
+        }
     }
 }
