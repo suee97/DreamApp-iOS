@@ -45,7 +45,6 @@
 		3C2FC84829D82CF200BE9A4C /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2FC84729D82CF200BE9A4C /* CalendarCollectionViewCell.swift */; };
 		3C5C1F2429E1307A0027E66B /* Banners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5C1F2329E1307A0027E66B /* Banners.swift */; };
 		3C5C1F2629E14AA60027E66B /* RentDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5C1F2529E14AA60027E66B /* RentDataModels.swift */; };
-		3C5C1F2829E40C440027E66B /* GetRentDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5C1F2729E40C440027E66B /* GetRentDataService.swift */; };
 		3C5C1F2A29E40CF70027E66B /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5C1F2929E40CF70027E66B /* NetworkResult.swift */; };
 		3C6207C229D2CAC8008C696F /* AlwaysCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6207C129D2CAC8008C696F /* AlwaysCollectionViewCell.swift */; };
 		3C6207C629D7FB81008C696F /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6207C429D7FB81008C696F /* EventViewController.swift */; };
@@ -54,12 +53,17 @@
 		3C6207CC29D7FC1A008C696F /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6207CA29D7FC1A008C696F /* EventCollectionViewCell.swift */; };
 		3C6317E729D16DE100469836 /* DevInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6317E629D16DE100469836 /* DevInfoViewController.swift */; };
 		3C6317EB29D1864800469836 /* AlwaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6317EA29D1864800469836 /* AlwaysViewController.swift */; };
+		3CEA12FA29F3B699000F8BEF /* RoomEscapeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA12F929F3B699000F8BEF /* RoomEscapeViewController.swift */; };
+		3CEA12FC29F3C22E000F8BEF /* RoomEscapeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA12FB29F3C22E000F8BEF /* RoomEscapeModels.swift */; };
+		3CEA12FE29F3EA7F000F8BEF /* SuccessModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA12FD29F3EA7F000F8BEF /* SuccessModalViewController.swift */; };
 		3CF8953C29F045B6009F797B /* FestivalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8953729F045B5009F797B /* FestivalViewController.swift */; };
 		3CF8953D29F045B6009F797B /* IntroModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8953829F045B5009F797B /* IntroModalViewController.swift */; };
 		3CF8953E29F045B6009F797B /* StampModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8953929F045B5009F797B /* StampModalViewController.swift */; };
 		3CF8953F29F045B6009F797B /* DuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8953B29F045B6009F797B /* DuesViewController.swift */; };
 		3CF8954129F045EC009F797B /* FestivalModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8954029F045EC009F797B /* FestivalModels.swift */; };
 		3CF8954329F05E7F009F797B /* LogInModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8954229F05E7F009F797B /* LogInModalViewController.swift */; };
+		3CF8954529F0FFC5009F797B /* MyRentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8954429F0FFC5009F797B /* MyRentViewController.swift */; };
+		3CF8954729F104B9009F797B /* MyRentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8954629F104B9009F797B /* MyRentTableViewCell.swift */; };
 		5B5FDB7529DB02010027F88E /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EDCDD29D037BB00AF7D0E /* SettingViewController.swift */; };
 		5B5FDB7729DB04D00027F88E /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FDB7629DB04D00027F88E /* UserInfo.swift */; };
 		5B5FDB7929DB1B2B0027F88E /* LogoutModalViewCnotroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FDB7829DB1B2B0027F88E /* LogoutModalViewCnotroller.swift */; };
@@ -115,7 +119,6 @@
 		3C2FC84729D82CF200BE9A4C /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		3C5C1F2329E1307A0027E66B /* Banners.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Banners.swift; sourceTree = "<group>"; };
 		3C5C1F2529E14AA60027E66B /* RentDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentDataModels.swift; sourceTree = "<group>"; };
-		3C5C1F2729E40C440027E66B /* GetRentDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRentDataService.swift; sourceTree = "<group>"; };
 		3C5C1F2929E40CF70027E66B /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		3C6207C129D2CAC8008C696F /* AlwaysCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysCollectionViewCell.swift; sourceTree = "<group>"; };
 		3C6207C429D7FB81008C696F /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
@@ -124,12 +127,17 @@
 		3C6207CA29D7FC1A008C696F /* EventCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCell.swift; sourceTree = "<group>"; };
 		3C6317E629D16DE100469836 /* DevInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevInfoViewController.swift; sourceTree = "<group>"; };
 		3C6317EA29D1864800469836 /* AlwaysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysViewController.swift; sourceTree = "<group>"; };
+		3CEA12F929F3B699000F8BEF /* RoomEscapeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomEscapeViewController.swift; sourceTree = "<group>"; };
+		3CEA12FB29F3C22E000F8BEF /* RoomEscapeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomEscapeModels.swift; sourceTree = "<group>"; };
+		3CEA12FD29F3EA7F000F8BEF /* SuccessModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessModalViewController.swift; sourceTree = "<group>"; };
 		3CF8953729F045B5009F797B /* FestivalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FestivalViewController.swift; sourceTree = "<group>"; };
 		3CF8953829F045B5009F797B /* IntroModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroModalViewController.swift; sourceTree = "<group>"; };
 		3CF8953929F045B5009F797B /* StampModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StampModalViewController.swift; sourceTree = "<group>"; };
 		3CF8953B29F045B6009F797B /* DuesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuesViewController.swift; sourceTree = "<group>"; };
 		3CF8954029F045EC009F797B /* FestivalModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FestivalModels.swift; sourceTree = "<group>"; };
 		3CF8954229F05E7F009F797B /* LogInModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInModalViewController.swift; sourceTree = "<group>"; };
+		3CF8954429F0FFC5009F797B /* MyRentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRentViewController.swift; sourceTree = "<group>"; };
+		3CF8954629F104B9009F797B /* MyRentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRentTableViewCell.swift; sourceTree = "<group>"; };
 		5B5FDB7629DB04D00027F88E /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		5B5FDB7829DB1B2B0027F88E /* LogoutModalViewCnotroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutModalViewCnotroller.swift; sourceTree = "<group>"; };
 		5B5FDB7A29DC71700027F88E /* WhatIsSCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIsSCViewController.swift; sourceTree = "<group>"; };
@@ -236,6 +244,7 @@
 				5B5FDB7629DB04D00027F88E /* UserInfo.swift */,
 				3C5C1F2529E14AA60027E66B /* RentDataModels.swift */,
 				3C5C1F2929E40CF70027E66B /* NetworkResult.swift */,
+				3CEA12FB29F3C22E000F8BEF /* RoomEscapeModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -281,6 +290,7 @@
 				3C204EA829CD5DA20026E85E /* TitleLabel.swift */,
 				3C2FC84729D82CF200BE9A4C /* CalendarCollectionViewCell.swift */,
 				3C20096C29EBF6C9000D4B71 /* CircularProgressBar.swift */,
+				3CF8954629F104B9009F797B /* MyRentTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -302,6 +312,8 @@
 			children = (
 				3C6207C429D7FB81008C696F /* EventViewController.swift */,
 				3C6207C529D7FB81008C696F /* EventDetailViewController.swift */,
+				3CEA12F929F3B699000F8BEF /* RoomEscapeViewController.swift */,
+				3CEA12FD29F3EA7F000F8BEF /* SuccessModalViewController.swift */,
 			);
 			path = event;
 			sourceTree = "<group>";
@@ -311,9 +323,9 @@
 			children = (
 				3C6317EA29D1864800469836 /* AlwaysViewController.swift */,
 				3C2FC84529D80CBD00BE9A4C /* AlwaysRentViewController.swift */,
-				3C5C1F2729E40C440027E66B /* GetRentDataService.swift */,
 				3C20096829EA762E000D4B71 /* RentViewController.swift */,
 				3CF8954229F05E7F009F797B /* LogInModalViewController.swift */,
+				3CF8954429F0FFC5009F797B /* MyRentViewController.swift */,
 			);
 			path = Always;
 			sourceTree = "<group>";
@@ -554,6 +566,7 @@
 				3CF8954129F045EC009F797B /* FestivalModels.swift in Sources */,
 				3CF8953C29F045B6009F797B /* FestivalViewController.swift in Sources */,
 				3C6317EB29D1864800469836 /* AlwaysViewController.swift in Sources */,
+				3CEA12FA29F3B699000F8BEF /* RoomEscapeViewController.swift in Sources */,
 				3C204E7829CD5D660026E85E /* PhoneAuthViewController.swift in Sources */,
 				3C204E7529CD5D660026E85E /* StudentCardAuthViewController.swift in Sources */,
 				5B5FDB8529DD2BC80027F88E /* ContentLabel.swift in Sources */,
@@ -569,15 +582,18 @@
 				3C2FC84829D82CF200BE9A4C /* CalendarCollectionViewCell.swift in Sources */,
 				3C2FC84629D80CBD00BE9A4C /* AlwaysRentViewController.swift in Sources */,
 				3C5C1F2A29E40CF70027E66B /* NetworkResult.swift in Sources */,
+				3CF8954529F0FFC5009F797B /* MyRentViewController.swift in Sources */,
 				3CF8954329F05E7F009F797B /* LogInModalViewController.swift in Sources */,
 				3C204E7729CD5D660026E85E /* EnterInfoViewController.swift in Sources */,
 				3C5C1F2429E1307A0027E66B /* Banners.swift in Sources */,
 				3CF8953F29F045B6009F797B /* DuesViewController.swift in Sources */,
+				3CEA12FE29F3EA7F000F8BEF /* SuccessModalViewController.swift in Sources */,
 				3C204E7429CD5D660026E85E /* PolicyAgreeViewController.swift in Sources */,
 				3C5C1F2629E14AA60027E66B /* RentDataModels.swift in Sources */,
 				3C204EA929CD5DA20026E85E /* GreyTextField.swift in Sources */,
-				3C5C1F2829E40C440027E66B /* GetRentDataService.swift in Sources */,
+				3CEA12FC29F3C22E000F8BEF /* RoomEscapeModels.swift in Sources */,
 				3C6207C729D7FB81008C696F /* EventDetailViewController.swift in Sources */,
+				3CF8954729F104B9009F797B /* MyRentTableViewCell.swift in Sources */,
 				3C204EAE29CD5DA20026E85E /* TitleLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
