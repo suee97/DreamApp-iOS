@@ -391,7 +391,7 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
         selectedDay.text = ""
         cell.update(day: days[indexPath.item])
         cell.checkWeekend(indexPath: indexPath)
-        cell.drawCircle(day: days[indexPath.item], alreadyRentDataList: alreadyRentDataList)
+        cell.drawCircle(day: days[indexPath.item], alreadyRentDataList: alreadyRentDataList, totalAmount: itemTotalAmount, availableAmount: checkAvailableAmount(selectedDay: days[indexPath.item]))
         
         return cell
     }

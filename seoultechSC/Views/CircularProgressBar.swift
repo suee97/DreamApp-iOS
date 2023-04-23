@@ -12,18 +12,16 @@ class CircularProgressBar: UIView {
     private var _progressValue: CGFloat = 0.75
     private var lineWidth: CGFloat = 3
     
-    var strokeEnd: CGFloat = 1
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         draw(self.bounds)
-        setProgress(self.bounds)
+//        setProgress(self.bounds)
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         draw(self.bounds)
-        setProgress(self.bounds)
+//        setProgress(self.bounds)
     }
     
     override func draw(_ rect: CGRect) {
@@ -46,7 +44,7 @@ class CircularProgressBar: UIView {
         self.layer.addSublayer(shapeLayer)
     }
     
-    func setProgress(_ rect: CGRect) {
+    func setProgress(_ rect: CGRect, strokeEnd: CGFloat) {
         
         let bezierPath = UIBezierPath()
 

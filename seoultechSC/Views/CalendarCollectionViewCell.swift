@@ -52,7 +52,7 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func drawCircle(day: String, alreadyRentDataList: [AlreadyRentData]) {
+    func drawCircle(day: String, alreadyRentDataList: [AlreadyRentData], totalAmount: Int, availableAmount: Int) {
         if (alreadyRentDataList.count == 0) {
             self.isUserInteractionEnabled = true
             circularProgressBarView.isHidden = true
@@ -65,6 +65,8 @@ class CalendarCollectionViewCell: UICollectionViewCell {
                     self.isUserInteractionEnabled = true
                     circularProgressBarView.isHidden = false
                     self.addSubview(circularProgressBarView)
+                    
+                    circularProgressBarView.setProgress(self.circularProgressBarView.bounds, strokeEnd: CGFloat(totalAmount - availableAmount) / CGFloat(totalAmount))
                     
                     circularProgressBarView.translatesAutoresizingMaskIntoConstraints = false
                     
@@ -80,6 +82,8 @@ class CalendarCollectionViewCell: UICollectionViewCell {
                     circularProgressBarView.isHidden = false
                     self.addSubview(circularProgressBarView)
                     
+                    circularProgressBarView.setProgress(self.circularProgressBarView.bounds, strokeEnd: CGFloat(totalAmount - availableAmount) / CGFloat(totalAmount))
+                    
                     circularProgressBarView.translatesAutoresizingMaskIntoConstraints = false
                     
                     NSLayoutConstraint.activate([
@@ -93,6 +97,8 @@ class CalendarCollectionViewCell: UICollectionViewCell {
                     self.isUserInteractionEnabled = true
                     circularProgressBarView.isHidden = false
                     self.addSubview(circularProgressBarView)
+                    
+                    circularProgressBarView.setProgress(self.circularProgressBarView.bounds, strokeEnd: CGFloat(totalAmount - availableAmount) / CGFloat(totalAmount))
                     
                     circularProgressBarView.translatesAutoresizingMaskIntoConstraints = false
                     
@@ -111,6 +117,8 @@ class CalendarCollectionViewCell: UICollectionViewCell {
                         circularProgressBarView.isHidden = false
                         self.addSubview(circularProgressBarView)
                         
+                        circularProgressBarView.setProgress(self.circularProgressBarView.bounds, strokeEnd: CGFloat(totalAmount - availableAmount) / CGFloat(totalAmount))
+                        
                         circularProgressBarView.translatesAutoresizingMaskIntoConstraints = false
                         
                         NSLayoutConstraint.activate([
@@ -125,6 +133,8 @@ class CalendarCollectionViewCell: UICollectionViewCell {
                         self.isUserInteractionEnabled = true
                         circularProgressBarView.isHidden = false
                         self.addSubview(circularProgressBarView)
+                        
+                        circularProgressBarView.setProgress(self.circularProgressBarView.bounds, strokeEnd: CGFloat(totalAmount - availableAmount) / CGFloat(totalAmount))
                         
                         circularProgressBarView.translatesAutoresizingMaskIntoConstraints = false
                         
