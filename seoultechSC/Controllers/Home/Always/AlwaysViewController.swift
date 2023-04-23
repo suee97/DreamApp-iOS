@@ -7,8 +7,6 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     private var itemImageList : [UIImage] = [UIImage(named: "icon_mat")!, UIImage(named: "icon_dura_table")!, UIImage(named: "icon_dura_table")!, UIImage(named: "icon_amp")!, UIImage(named: "icon_canopy")!, UIImage(named: "icon_wire")!, UIImage(named: "icon_cart")!, UIImage(named: "icon_chair")!]
     
-    private var itemAmount = ["4개","4개","4개","1개","2개","2개","2개","10개"]
-    
     private var itemDescription = ["돗자리입니다.","간이테이블로 사용할 수 있습니다.","간이테이블 보다 좀 더 넓게 사용할 수 있습니다.","행사 시에 큰 음향을 낼 수 있습니다.","기둥과 천막으로 부스를 만들 수 있습니다.","콘센트를 연장하여 사용할 수 있습니다.","여러 짐을 한 번에 옮길 수 있습니다.","외부 행사 시에 간이 의자로 활용할 수 있습니다."]
     
     
@@ -17,7 +15,7 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     private let contentView : UIView = UIView()
     
-    private let myInfoContainer: UIView = {
+    private lazy var myInfoContainer: UIView = {
         let container = UIView()
         
         let myImage : UIImageView = {
@@ -31,29 +29,29 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         let myName : UILabel = {
             let name = UILabel()
-            name.text = "이름"
+            name.text = signInUser.name
             name.font = UIFont(name: "Pretendard-Bold", size: 16)
             return name
         }()
         
         let myCode : UILabel = {
             let code = UILabel()
-            code.text = "학번"
-            code.font = UIFont(name: "Pretendard-Bold", size: 12)
+            code.text = signInUser.studentNo
+            code.font = UIFont(name: "Pretendard-Regular", size: 12)
             return code
         }()
         
         let myGroup : UILabel = {
             let group = UILabel()
-            group.text = "단과대학"
-            group.font = UIFont(name: "Pretendard-Bold", size: 12)
+            group.text = findCollege(major: signInUser.department)
+            group.font = UIFont(name: "Pretendard-Regular", size: 12)
             return group
         }()
         
         let myMajor : UILabel = {
             let major = UILabel()
-            major.text = "학과"
-            major.font = UIFont(name: "Pretendard-Bold", size: 12)
+            major.text = signInUser.department
+            major.font = UIFont(name: "Pretendard-Regular", size: 12)
             return major
         }()
         
@@ -297,9 +295,7 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
                 myInfoContainer.bottomAnchor.constraint(equalTo: myReservationButton.bottomAnchor),
             ])
             
-            myReservationButton.setActive(false)
-            myReservationButton.setTitleColor(UIColor(red: 0.592, green: 0.592, blue: 0.592, alpha: 1), for: .normal)
-            myReservationButton.backgroundColor = UIColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)
+            myReservationButton.setActive(true)
             
             contentView.bringSubviewToFront(myReservationButton)
             
@@ -314,13 +310,24 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
                 needLoginContainer.bottomAnchor.constraint(equalTo: myReservationButton.bottomAnchor),
             ])
             
-            myReservationButton.setActive(false)
+            myReservationButton.setActive(true)
             myReservationButton.setTitleColor(UIColor(red: 0.592, green: 0.592, blue: 0.592, alpha: 1), for: .normal)
             myReservationButton.backgroundColor = UIColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)
             
             contentView.bringSubviewToFront(myReservationButton)
         }
         
+    }
+    
+    private func findCollege(major: String) -> String {
+        for i in 0..<collegeList.count {
+            for j in 0..<majorList[i].count {
+                if major == majorList[i][j] {
+                    return collegeList[i]
+                }
+            }
+        }
+        return ""
     }
     
     private func configureCollectionViewDelegate() {
@@ -359,14 +366,14 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
         vc.item.text = itemTitle[indexPath.row]
         vc.itemImageView.image = itemImageList[indexPath.row]
         vc.purpose.text = itemDescription[indexPath.row]
-        vc.totalAmount.text = itemAmount[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
     
     
     // MARK: - Selectors
     @objc private func myReservationBtn() {
-        print("MyReservation Confirm")
+        let vc = MyRentViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func goToLoginButton() {
