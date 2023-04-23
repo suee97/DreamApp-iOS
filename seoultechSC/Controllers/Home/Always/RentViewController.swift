@@ -308,7 +308,6 @@ class RentViewController: UIViewController, SendDataDelegate {
     }
     
     private func checkAllInfo() {
-        print(rentPurpose.text?.count)
         if (rentRange.text != nil && rentPurpose.text!.count != 0 && rentAmountLabel.text != "0" && confirmButton.checked != false) {
             rentButton.setActive(true)
         } else {
@@ -370,47 +369,97 @@ class RentViewController: UIViewController, SendDataDelegate {
         print(changeCategory(category: itemTitle.text!))
         print(String(rentRange.text!.prefix(10)))
         print(String(rentRange.text!.suffix(10)))
-        PostRentRequest()
+        PostRentRequest(completion: {result in
+            if result == .success {
+                guard let viewControllerStack = self.navigationController?.viewControllers else { return }
                 
-        guard let viewControllerStack = navigationController?.viewControllers else { return }
-        
-        for viewController in viewControllerStack {
-            if let vc = viewController as? AlwaysViewController {
-                navigationController?.popToViewController(vc, animated: true)
+                for viewController in viewControllerStack {
+                    if let vc = viewController as? AlwaysViewController {
+                        self.navigationController?.popToViewController(vc, animated: true)
+                    }
+                }
+            } else if result == .expired {
+                AuthHelper.shared.refreshAccessToken(completion: {result in
+                    if result == .refreshed {
+                        self.PostRentRequest(completion: { result in
+                            if result == .success {
+                                guard let viewControllerStack = self.navigationController?.viewControllers else { return }
+                                
+                                for viewController in viewControllerStack {
+                                    if let vc = viewController as? AlwaysViewController {
+                                        self.navigationController?.popToViewController(vc, animated: true)
+                                    }
+                                }
+                            } else {
+                                showToast(view: self.view, message: "토큰 재발급 오류 발생")
+                            }
+                        })
+                    } else {
+                        
+                    }
+                })
+            } else {
+                
             }
-        }
-        
+        })
     }
     
-    private func PostRentRequest() {
+    private func PostRentRequest(completion: @escaping (PostRentResult) -> Void) {
         let url = "\(api_url)/rent"
         
-        var request = URLRequest(url: URL(string: url)!)
-        request.httpMethod = "POST"
+        let aToken = KeychainHelper.sharedKeychain.getAccessToken() ?? ""
+        let header: HTTPHeaders = [
+            "Authorization": "Bearer \(aToken)"
+        ]
         
         let params = ["purpose" : rentPurpose.text!,
                       "account" : Int(rentAmountLabel.text!)!,
                       "itemCategory" : changeCategory(category: itemTitle.text!),
                       "startTime" : String(rentRange.text!.prefix(10)),
                       "endTime": String(rentRange.text!.suffix(10))] as Dictionary
-        do {
-            try request.httpBody = JSONSerialization.data(withJSONObject: params, options: [])
-        } catch {
-            print("http Body Error")
-        }
         
-        AF.request(request).responseString { response in
+        AF.request(url,
+                   method: .post,
+                   parameters: params,
+                   encoding: JSONEncoding(options: []),
+                   headers: header)
+        .responseJSON { response in
             switch response.result {
-            case .success:
-                print("success")
+            case.success:
+                do {
+                    let decoder = JSONDecoder()
+                    guard let responseData = response.data else { return }
+                    let result = try decoder.decode(MyRentDataApiResult.self, from: responseData)
+                    
+                    if result.status == 200 {
+                        completion(.success)
+                        return
+                    }
+                    if result.errorCode == "ST011" {
+                        completion(.expired)
+                        return
+                    }
+                    if result.errorCode == "ST054" {
+                        self.view.makeToast("해당 날짜에 요청하신 갯수만큼 물품을 대여하실 수 없습니다.")
+                        completion(.fail)
+                        return
+                    }
+                    completion(.fail)
+                } catch {
+                    completion(.fail)
+                }
             case .failure:
-                print("fail")
+                completion(.fail)
             }
         }
     }
-    
 }
 
+enum PostRentResult {
+    case success
+    case expired
+    case fail
+}
 
 
 
@@ -570,7 +619,6 @@ class CalendarModal: UIViewController {
     }
 
     @objc private func handleDatePicker(_ sender: UIDatePicker) {
-        print("touch")
         
         let formatter = DateFormatter()
         formatter.dateStyle = .long
@@ -588,22 +636,37 @@ class CalendarModal: UIViewController {
         } else if (endDay.text == "종료일") {
             confirmButton.setActive(false)
             formatter.dateFormat = "MM월 dd일"
+            var firstMonth = startDay.text?.prefix(2)
+            var secondMonth = formatter.string(from: sender.date).prefix(2)
+            
             var firstDay = startDay.text!.suffix(3)
             var secondDay = formatter.string(from: sender.date).suffix(3)
             
             firstDay = firstDay.dropLast(1)
             secondDay = secondDay.dropLast(1)
             
-            if Int(firstDay)! > Int(secondDay)! {
-                confirmButton.setActive(false)
-                startDay.text = formatter.string(from: sender.date)
-                formatter.dateFormat = "YYYY-MM-dd"
-                sendStartDay = formatter.string(from: sender.date)
-            } else {
+            if (firstMonth == secondMonth) {
+                if Int(firstDay)! > Int(secondDay)! {
+                    confirmButton.setActive(false)
+                    startDay.text = formatter.string(from: sender.date)
+                    formatter.dateFormat = "YYYY-MM-dd"
+                    sendStartDay = formatter.string(from: sender.date)
+                } else {
+                    confirmButton.setActive(true)
+                    endDay.text = formatter.string(from: sender.date)
+                    formatter.dateFormat = "YYYY-MM-dd"
+                    sendEndDay = formatter.string(from: sender.date)
+                }
+            } else if (firstMonth! < secondMonth) {
                 confirmButton.setActive(true)
                 endDay.text = formatter.string(from: sender.date)
                 formatter.dateFormat = "YYYY-MM-dd"
                 sendEndDay = formatter.string(from: sender.date)
+            } else if (firstMonth! > secondMonth) {
+                confirmButton.setActive(false)
+                startDay.text = formatter.string(from: sender.date)
+                formatter.dateFormat = "YYYY-MM-dd"
+                sendStartDay = formatter.string(from: sender.date)
             }
         } else {
             confirmButton.setActive(false)
