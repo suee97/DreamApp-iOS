@@ -79,9 +79,9 @@ class HomeViewController: UIViewController {
         label2.text = "납부 확인"
         
         iconLabel.font = UIFont(name: "Pretendard-Bold", size: 25)
-        label1.font = UIFont(name: "Pretendard-Bold", size: 12)
+        label1.font = UIFont(name: "Pretendard-Regular", size: 12)
         label1.textColor = .black
-        label2.font = UIFont(name: "Pretendard-Bold", size: 12)
+        label2.font = UIFont(name: "Pretendard-Regular", size: 12)
         label2.textColor = .black
         
         iconLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -391,7 +391,7 @@ class HomeTabButton: UIButton {
         logoText.text = title
         
         logoIconLabel.font = UIFont(name: "Pretendard-Bold", size: 25)
-        logoText.font = UIFont(name: "Pretendard-Bold", size: 12)
+        logoText.font = UIFont(name: "Pretendard-Regular", size: 12)
         logoText.textColor = .black
         
         logoIconLabel.translatesAutoresizingMaskIntoConstraints = false
