@@ -25,12 +25,12 @@ class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate {
         myCode.textColor = .black
         myCode.font = UIFont(name: "Pretendard-Regular", size: 12)
         
-        let myGroup = UILabel(frame: CGRect(x: 95, y: 52, width: 100, height: 16))
+        let myGroup = UILabel(frame: CGRect(x: 95, y: 52, width: 150, height: 16))
         myGroup.text = findCollege(major: signInUser.department)
         myGroup.textColor = .black
         myGroup.font = UIFont(name: "Pretendard-Regular", size: 12)
         
-        let myMajor = UILabel(frame: CGRect(x: 95, y: 72, width: 100, height: 16))
+        let myMajor = UILabel(frame: CGRect(x: 95, y: 72, width: 150, height: 16))
         myMajor.text = signInUser.department
         myMajor.textColor = .black
         myMajor.font = UIFont(name: "Pretendard-Regular", size: 12)
