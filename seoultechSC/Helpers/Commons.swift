@@ -58,6 +58,8 @@ public func getLoginState() -> Bool {
     return UserDefaults.standard.bool(forKey: "isLogin")
 }
 
+public var needLoginMessage: String = "로그인이 필요한 기능입니다. '홈 -> 설정'에서 로그인해주세요."
+
 // Screen
 public let screenWidth = UIScreen.main.bounds.width
 public let screenHeight = UIScreen.main.bounds.height
@@ -70,10 +72,15 @@ public func getRatHeight(_ height: CGFloat) -> CGFloat {
     return screenHeight * (height/640)
 }
 
-var signInUser = User(memberId: -1, studentNo: "00000000", name: "empty", department: "empty", phoneNo: "00000000000", memberShip: false, createdAt: "empty", updatedAt: "empty", memberStatus: "empty")
+var signInUser = User(memberId: -1, studentNo: "00000000", name: "nil", department: "nil", phoneNo: "nil", memberShip: false, createdAt: "nil", updatedAt: "nil", memberStatus: "nil")
 
 var signUpUser = SignUpUser()
 
 public func showToast(view: UIView, message: String) {
-    view.makeToast(message, position: .bottom)
+    var style = ToastStyle()
+    style.backgroundColor = .black
+    style.messageColor = .white
+    style.cornerRadius = 10
+    style.messageFont = UIFont(name: "Pretendard-Regular", size: 12)!
+    view.makeToast(message, position: .bottom, style: style)
 }
