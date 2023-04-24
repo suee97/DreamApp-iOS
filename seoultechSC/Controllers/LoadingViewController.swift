@@ -1,13 +1,10 @@
 import UIKit
+import Lottie
+import SnapKit
 
 class LoadingViewController: UIViewController {
 
-    let indicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .medium)
-        indicator.color = .text_caption
-        indicator.hidesWhenStopped = true
-        return indicator
-    }()
+    let animationView: LottieAnimationView = .init(name: "lottie_splash")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,13 +14,16 @@ class LoadingViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = .white
 
-        indicator.startAnimating()
-
-        indicator.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(indicator)
-        NSLayoutConstraint.activate([
-            indicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            indicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
-        ])
+        view.addSubview(animationView)
+        
+        animationView.snp.makeConstraints({ m in
+            m.centerX.equalTo(view)
+            m.width.equalTo(getRatWidth(140))
+            m.height.equalTo(getRatHeight(125))
+            m.top.equalTo(view).inset(139)
+        })
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .loop
+        animationView.play()
     }
 }
