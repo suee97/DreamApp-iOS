@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import Toast_Swift
+import SnapKit
 
 // 배포 서버
 //public let api_url: String = Bundle.main.api_url
@@ -83,4 +84,51 @@ public func showToast(view: UIView, message: String) {
     style.cornerRadius = 10
     style.messageFont = UIFont(name: "Pretendard-Regular", size: 12)!
     view.makeToast(message, position: .bottom, style: style)
+}
+
+class Commons {
+    static let shared = Commons()
+    
+    private init(){}
+    
+    func zoomImage(vc: UIViewController, image: UIImage) {
+        let tmpVc = ZoomImageViewController()
+        tmpVc.modalTransitionStyle = .crossDissolve
+        tmpVc.modalPresentationStyle = .overCurrentContext
+        tmpVc.image = image
+        vc.present(tmpVc, animated: true, completion: nil)
+    }
+}
+
+class ZoomImageViewController: UIViewController {
+    
+    var image: UIImage? {
+        didSet {
+            let iv = UIImageView(image: image)
+            iv.contentMode = .scaleAspectFit
+            view.addSubview(iv)
+            iv.snp.makeConstraints({ m in
+                m.left.right.top.bottom.equalTo(view)
+            })
+        }
+    }
+    
+    private lazy var backgroundButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .modalBackground
+        button.addTarget(self, action: #selector(dismissModal), for: .touchUpInside)
+        return button
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.addSubview(backgroundButton)
+        backgroundButton.snp.makeConstraints({ m in
+            m.left.right.top.bottom.equalTo(view)
+        })
+    }
+    
+    @objc private func dismissModal() {
+        self.dismiss(animated: true)
+    }
 }
