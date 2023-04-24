@@ -90,14 +90,7 @@ class Commons {
     static let shared = Commons()
     
     private init(){}
-    
-    func zoomImage(vc: UIViewController, image: UIImage) {
-        let tmpVc = ZoomImageViewController()
-        tmpVc.modalTransitionStyle = .crossDissolve
-        tmpVc.modalPresentationStyle = .overCurrentContext
-        tmpVc.image = image
-        vc.present(tmpVc, animated: true, completion: nil)
-    }
+
 }
 
 class ZoomImageViewController: UIViewController {
@@ -131,4 +124,8 @@ class ZoomImageViewController: UIViewController {
     @objc private func dismissModal() {
         self.dismiss(animated: true)
     }
+}
+
+class CustomTapGesture: UITapGestureRecognizer {
+  var image: UIImage?
 }

@@ -341,6 +341,11 @@ class HomeViewController: UIViewController {
             imageScrollView.addSubview(imageView)
             
             imageScrollView.contentSize.width = imageScrollViewWidth * CGFloat(i + 1)
+            
+            imageView.isUserInteractionEnabled = true
+            let gesture = CustomTapGesture(target: self, action: #selector(onTapImage))
+            gesture.image = imageList[i]
+            imageView.addGestureRecognizer(gesture)
         }
         
         // Setup imagePageControl
@@ -360,6 +365,14 @@ class HomeViewController: UIViewController {
         
         // Setup initial imagePageControl
         imagePageControl.numberOfPages = 1
+    }
+    
+    @objc private func onTapImage(recognizer: CustomTapGesture) {
+        let vc = ZoomImageViewController()
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.image = recognizer.image
+        self.present(vc, animated: true, completion: nil)
     }
 
 }
