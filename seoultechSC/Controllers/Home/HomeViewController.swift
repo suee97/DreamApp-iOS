@@ -300,7 +300,7 @@ class HomeViewController: UIViewController {
     
     @objc private func onTapDuesTap() {
         if !getLoginState() {
-            showToast(view: view, message: needLoginMessage)
+            showToast(view: view, message: "needLoginMessage")
         } else {
             let vc = DuesViewController()
             vc.user = signInUser

@@ -1,6 +1,7 @@
 import UIKit
+import Alamofire
 
-class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, LogInDelegate {
     
     private var itemTitle = ["돗자리","간이테이블","듀라테이블","앰프&마이크","캐노피","리드선","L카","의자"]
     
@@ -19,25 +20,42 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
     private let myInfoContainer: UIView = {
         let container = UIView()
         
-        let myImage = UIImageView(frame: CGRect(x: 18, y: 15, width: 78, height: 78))
-        myImage.image = UIImage(systemName: "person")
-        myImage.contentMode = .scaleAspectFit
+        let myImage : UIImageView = {
+            let imageView = UIImageView()
+            imageView.image = UIImage(systemName: "person.crop.circle")
+            imageView.contentMode = .scaleAspectFit
+            imageView.tintColor = .secondaryPurple
+            
+            return imageView
+        }()
         
-        let myName = UILabel(frame: CGRect(x: 113, y: 16, width: 100, height: 19))
-        myName.text = "이름"
-        myName.font = UIFont(name: "Pretendard-Bold", size: 16)
+        let myName : UILabel = {
+            let name = UILabel()
+            name.text = "이름"
+            name.font = UIFont(name: "Pretendard-Bold", size: 16)
+            return name
+        }()
         
-        let myCode = UILabel(frame: CGRect(x: 113, y: 48, width: 100, height: 16))
-        myCode.text = "학번"
-        myCode.font = UIFont(name: "Pretendard-Regular", size: 12)
+        let myCode : UILabel = {
+            let code = UILabel()
+            code.text = "학번"
+            code.font = UIFont(name: "Pretendard-Bold", size: 12)
+            return code
+        }()
         
-        let myGroup = UILabel(frame: CGRect(x: 113, y: 68, width: 100, height: 16))
-        myGroup.text = "단과대학"
-        myGroup.font = UIFont(name: "Pretendard-Regular", size: 12)
+        let myGroup : UILabel = {
+            let group = UILabel()
+            group.text = "단과대학"
+            group.font = UIFont(name: "Pretendard-Bold", size: 12)
+            return group
+        }()
         
-        let myMajor = UILabel(frame: CGRect(x: 113, y: 88, width: 100, height: 16))
-        myMajor.text = "학과"
-        myMajor.font = UIFont(name: "Pretendard-Regular", size: 12)
+        let myMajor : UILabel = {
+            let major = UILabel()
+            major.text = "학과"
+            major.font = UIFont(name: "Pretendard-Bold", size: 12)
+            return major
+        }()
         
         container.addSubview(myImage)
         container.addSubview(myName)
@@ -46,6 +64,84 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
         container.addSubview(myMajor)
         
         container.layer.cornerRadius = 10
+        
+        myImage.translatesAutoresizingMaskIntoConstraints = false
+        myName.translatesAutoresizingMaskIntoConstraints = false
+        myCode.translatesAutoresizingMaskIntoConstraints = false
+        myGroup.translatesAutoresizingMaskIntoConstraints = false
+        myMajor.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            myImage.topAnchor.constraint(equalTo: container.topAnchor, constant: 20),
+            myImage.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 18),
+            myImage.widthAnchor.constraint(equalToConstant: 78),
+            myImage.heightAnchor.constraint(equalToConstant: 78),
+            
+            myName.leadingAnchor.constraint(equalTo: myImage.trailingAnchor, constant: 17),
+            myName.topAnchor.constraint(equalTo: container.topAnchor, constant: 16),
+            
+            myCode.leadingAnchor.constraint(equalTo: myImage.trailingAnchor, constant: 17),
+            myCode.topAnchor.constraint(equalTo: myName.bottomAnchor, constant: 13),
+            
+            myGroup.leadingAnchor.constraint(equalTo: myImage.trailingAnchor, constant: 17),
+            myGroup.topAnchor.constraint(equalTo: myCode.bottomAnchor, constant: 4),
+            
+            myMajor.leadingAnchor.constraint(equalTo: myImage.trailingAnchor, constant: 17),
+            myMajor.topAnchor.constraint(equalTo: myGroup.bottomAnchor, constant: 4),
+        ])
+        
+        return container
+    }()
+    
+    private let needLoginContainer: UIView = {
+        let container = UIView()
+        
+        let myImageView: UIImageView = {
+            let imageView = UIImageView()
+            imageView.image = UIImage(systemName: "person.crop.circle")
+            imageView.contentMode = .scaleAspectFit
+            imageView.tintColor = .lightGrey
+            return imageView
+        }()
+                
+        let needLoginLabel: UILabel = {
+            let label = UILabel()
+            label.text = "로그인이 필요합니다."
+            label.textColor = .black
+            label.font = UIFont(name: "Pretendard-Bold", size: 16)
+            return label
+        }()
+        
+        let loginButton: ActionButton = {
+            let button = ActionButton(title: "로그인 하기", height: 34)
+            button.setTitleColor(.white, for: .normal)
+            button.titleLabel?.font = UIFont(name: "Pretendard-Bold", size: 12)
+            
+            button.addTarget(self, action: #selector(goToLoginButton), for: .touchUpInside)
+            return button
+        }()
+        
+        container.addSubview(myImageView)
+        container.addSubview(needLoginLabel)
+        container.addSubview(loginButton)
+        
+        container.layer.cornerRadius = 10
+        
+        myImageView.translatesAutoresizingMaskIntoConstraints = false
+        needLoginLabel.translatesAutoresizingMaskIntoConstraints = false
+        loginButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            myImageView.topAnchor.constraint(equalTo: container.topAnchor, constant: 20),
+            myImageView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 18),
+            myImageView.widthAnchor.constraint(equalToConstant: 78),
+            myImageView.heightAnchor.constraint(equalToConstant: 78),
+            needLoginLabel.leftAnchor.constraint(equalTo: myImageView.rightAnchor, constant: 17),
+            needLoginLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: 27),
+            loginButton.widthAnchor.constraint(equalToConstant: 97),
+            loginButton.leftAnchor.constraint(equalTo: myImageView.rightAnchor, constant: 18),
+            loginButton.topAnchor.constraint(equalTo: needLoginLabel.bottomAnchor, constant: 10)
+        ])
         
         return container
     }()
@@ -146,20 +242,17 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
         view.backgroundColor = .backgroundPurple
         scrollView.backgroundColor = .clear
         contentView.backgroundColor = .clear
-        myInfoContainer.backgroundColor = .white
         collectionView.backgroundColor = .clear
         
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
-        contentView.addSubview(myInfoContainer)
         contentView.addSubview(myReservationButton)
         contentView.addSubview(collectionView)
         contentView.addSubview(infoContainer)
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        myInfoContainer.translatesAutoresizingMaskIntoConstraints = false
         myReservationButton.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         infoContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -173,12 +266,7 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
             contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
             contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
-            myInfoContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            myInfoContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 26),
-            myInfoContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
-            myInfoContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
-            myInfoContainer.bottomAnchor.constraint(equalTo: myReservationButton.bottomAnchor),
-            myReservationButton.topAnchor.constraint(equalTo: myInfoContainer.topAnchor, constant: 119),
+            myReservationButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 141),
             myReservationButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
             myReservationButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
             collectionView.topAnchor.constraint(equalTo: myReservationButton.bottomAnchor, constant: 30),
@@ -196,6 +284,42 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
         let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
         contentViewHeight.priority = .defaultLow
         contentViewHeight.isActive = true
+        
+        if getLoginState() {
+            contentView.addSubview(myInfoContainer)
+            myInfoContainer.backgroundColor = .white
+            myInfoContainer.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                myInfoContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+                myInfoContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 26),
+                myInfoContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
+                myInfoContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
+                myInfoContainer.bottomAnchor.constraint(equalTo: myReservationButton.bottomAnchor),
+            ])
+            
+            myReservationButton.setActive(false)
+            myReservationButton.setTitleColor(UIColor(red: 0.592, green: 0.592, blue: 0.592, alpha: 1), for: .normal)
+            myReservationButton.backgroundColor = UIColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)
+            
+            contentView.bringSubviewToFront(myReservationButton)
+            
+        } else {
+            contentView.addSubview(needLoginContainer)
+            needLoginContainer.backgroundColor = .white
+            needLoginContainer.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                needLoginContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 26),
+                needLoginContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
+                needLoginContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
+                needLoginContainer.bottomAnchor.constraint(equalTo: myReservationButton.bottomAnchor),
+            ])
+            
+            myReservationButton.setActive(false)
+            myReservationButton.setTitleColor(UIColor(red: 0.592, green: 0.592, blue: 0.592, alpha: 1), for: .normal)
+            myReservationButton.backgroundColor = UIColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)
+            
+            contentView.bringSubviewToFront(myReservationButton)
+        }
         
     }
     
@@ -244,14 +368,39 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
     @objc private func myReservationBtn() {
         print("MyReservation Confirm")
     }
-}
-
-struct ItemWithImage {
-    let eventId: Int
-    let title: String
-    let formLink: String
-    let image: UIImage
-    let startTime: String
-    let endTime: String
-    let eventStatus: EventStatus
+    
+    @objc private func goToLoginButton() {
+        let vc = LogInModalViewController()
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.delegate = self
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    func updateLogIn(isLogIn: Bool) {
+        if isLogIn {
+            let vc = LoginViewController()
+            setLoginState(false)
+            let url = "\(api_url)/auth/logout"
+            let aToken: String = KeychainHelper.sharedKeychain.getAccessToken() ?? ""
+            let rToken: String = KeychainHelper.sharedKeychain.getRefreshToken() ?? ""
+            let header: HTTPHeaders = [
+                "Authorization": "Bearer \(aToken)",
+                "refresh" : "Bearer \(rToken)"
+            ]
+            
+            KeychainHelper.sharedKeychain.resetAccessRefreshToken()
+            
+            let request = AF.request(url,
+                                     method: .get,
+                                     parameters: nil,
+                                     headers: header
+            ).responseJSON { response in
+                print("logout api call")
+            }
+            
+            navigationController?.setViewControllers([vc], animated: true)
+        }
+    }
+    
 }
