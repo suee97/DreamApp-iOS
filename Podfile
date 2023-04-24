@@ -9,6 +9,7 @@ target 'seoultechSC' do
   pod 'GooglePlaces', '7.4.0'
   pod 'SwiftKeychainWrapper'
   pod 'Toast-Swift', '~> 5.0.1'
+  pod 'SnapKit', '~> 5.0.0'
   # Pods for seoultechSC
 
 end
