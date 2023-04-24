@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import Toast_Swift
+import SnapKit
 
 // 배포 서버
 //public let api_url: String = Bundle.main.api_url
@@ -58,6 +59,8 @@ public func getLoginState() -> Bool {
     return UserDefaults.standard.bool(forKey: "isLogin")
 }
 
+public var needLoginMessage: String = "로그인이 필요한 기능입니다. '홈 -> 설정'에서 로그인해주세요."
+
 // Screen
 public let screenWidth = UIScreen.main.bounds.width
 public let screenHeight = UIScreen.main.bounds.height
@@ -70,10 +73,59 @@ public func getRatHeight(_ height: CGFloat) -> CGFloat {
     return screenHeight * (height/640)
 }
 
-var signInUser = User(memberId: -1, studentNo: "00000000", name: "empty", department: "empty", phoneNo: "00000000000", memberShip: false, createdAt: "empty", updatedAt: "empty", memberStatus: "empty")
+var signInUser = User(memberId: -1, studentNo: "00000000", name: "nil", department: "nil", phoneNo: "nil", memberShip: false, createdAt: "nil", updatedAt: "nil", memberStatus: "nil")
 
 var signUpUser = SignUpUser()
 
 public func showToast(view: UIView, message: String) {
-    view.makeToast(message, position: .bottom)
+    var style = ToastStyle()
+    style.backgroundColor = .black
+    style.messageColor = .white
+    style.cornerRadius = 10
+    style.messageFont = UIFont(name: "Pretendard-Regular", size: 12)!
+    view.makeToast(message, position: .bottom, style: style)
+}
+
+class Commons {
+    static let shared = Commons()
+    
+    private init(){}
+
+}
+
+class ZoomImageViewController: UIViewController {
+    
+    var image: UIImage? {
+        didSet {
+            let iv = UIImageView(image: image)
+            iv.contentMode = .scaleAspectFit
+            view.addSubview(iv)
+            iv.snp.makeConstraints({ m in
+                m.left.right.top.bottom.equalTo(view)
+            })
+        }
+    }
+    
+    private lazy var backgroundButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .modalBackground
+        button.addTarget(self, action: #selector(dismissModal), for: .touchUpInside)
+        return button
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.addSubview(backgroundButton)
+        backgroundButton.snp.makeConstraints({ m in
+            m.left.right.top.bottom.equalTo(view)
+        })
+    }
+    
+    @objc private func dismissModal() {
+        self.dismiss(animated: true)
+    }
+}
+
+class CustomTapGesture: UITapGestureRecognizer {
+  var image: UIImage?
 }

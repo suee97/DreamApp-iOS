@@ -12,7 +12,7 @@ class DevInfoViewController: UIViewController {
     private let versionContainer : UIView = {
         let container = UIView()
         container.configureModalView()
-        
+        container.layer.shadowRadius = 3
         return container
     }()
     
@@ -20,14 +20,16 @@ class DevInfoViewController: UIViewController {
         let versionTitle = UILabel()
         versionTitle.text = "어플리케이션 버전"
         versionTitle.font = UIFont(name: "Pretendard-Bold", size: 16)
+        versionTitle.textColor = .black
         
         return versionTitle
     }()
     
     private let version : UILabel = {
         let version = UILabel()
-        version.text = "0.0.0"
+        version.text = "1.1.0"
         version.font = UIFont(name: "Pretendard-Bold", size: 48)
+        version.textColor = .black
         
         return version
     }()
@@ -35,7 +37,7 @@ class DevInfoViewController: UIViewController {
     private let contactContainer : UIView = {
         let container = UIView()
         container.configureModalView()
-        
+        container.layer.shadowRadius = 3
         return container
     }()
     
@@ -43,6 +45,7 @@ class DevInfoViewController: UIViewController {
         let contactTitle = UILabel()
         contactTitle.text = "개발 관련 문의"
         contactTitle.font = UIFont(name: "Pretendard-Bold", size: 16)
+        contactTitle.textColor = .black
         
         return contactTitle
     }()
@@ -51,6 +54,7 @@ class DevInfoViewController: UIViewController {
         let contactEmail = UILabel()
         contactEmail.text = "dev.seoultech@gmail.com"
         contactEmail.font = UIFont(name: "Pretendard-Regular", size: 15)
+        contactEmail.textColor = .black
         
         return contactEmail
     }()

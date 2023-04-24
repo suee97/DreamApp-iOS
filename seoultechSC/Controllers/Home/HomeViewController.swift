@@ -79,9 +79,9 @@ class HomeViewController: UIViewController {
         label2.text = "납부 확인"
         
         iconLabel.font = UIFont(name: "Pretendard-Bold", size: 25)
-        label1.font = UIFont(name: "Pretendard-Bold", size: 12)
+        label1.font = UIFont(name: "Pretendard-Regular", size: 12)
         label1.textColor = .black
-        label2.font = UIFont(name: "Pretendard-Bold", size: 12)
+        label2.font = UIFont(name: "Pretendard-Regular", size: 12)
         label2.textColor = .black
         
         iconLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -341,6 +341,11 @@ class HomeViewController: UIViewController {
             imageScrollView.addSubview(imageView)
             
             imageScrollView.contentSize.width = imageScrollViewWidth * CGFloat(i + 1)
+            
+            imageView.isUserInteractionEnabled = true
+            let gesture = CustomTapGesture(target: self, action: #selector(onTapImage))
+            gesture.image = imageList[i]
+            imageView.addGestureRecognizer(gesture)
         }
         
         // Setup imagePageControl
@@ -361,6 +366,14 @@ class HomeViewController: UIViewController {
         // Setup initial imagePageControl
         imagePageControl.numberOfPages = 1
     }
+    
+    @objc private func onTapImage(recognizer: CustomTapGesture) {
+        let vc = ZoomImageViewController()
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.image = recognizer.image
+        self.present(vc, animated: true, completion: nil)
+    }
 
 }
 
@@ -378,7 +391,7 @@ class HomeTabButton: UIButton {
         self.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
         self.layer.shadowOpacity = 1
         self.layer.shadowOffset = CGSize.zero
-        self.layer.shadowRadius = 4
+        self.layer.shadowRadius = 3
         
         if icon != "🤝🏻" && icon != "🎟️" {
             self.layer.cornerRadius = 20
@@ -391,7 +404,7 @@ class HomeTabButton: UIButton {
         logoText.text = title
         
         logoIconLabel.font = UIFont(name: "Pretendard-Bold", size: 25)
-        logoText.font = UIFont(name: "Pretendard-Bold", size: 12)
+        logoText.font = UIFont(name: "Pretendard-Regular", size: 12)
         logoText.textColor = .black
         
         logoIconLabel.translatesAutoresizingMaskIntoConstraints = false

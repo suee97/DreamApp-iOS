@@ -87,7 +87,7 @@ class IntroModalViewController: UIViewController {
     
     // MARK: - Helpers
     private func configureUI() {
-        view.backgroundColor = .clear
+        view.backgroundColor = .modalBackground
         
         view.addSubview(transparentButton)
         view.addSubview(modalView)
@@ -191,7 +191,7 @@ class FestivalInfoElementView: UIView {
             logo.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
             logo.layer.shadowOpacity = 1
             logo.layer.shadowOffset = CGSize.zero
-            logo.layer.shadowRadius = 6
+            logo.layer.shadowRadius = 3
             logo.addSubview(logoImage)
             logoImage.centerXAnchor.constraint(equalTo: logo.centerXAnchor).isActive = true
             logoImage.centerYAnchor.constraint(equalTo: logo.centerYAnchor).isActive = true

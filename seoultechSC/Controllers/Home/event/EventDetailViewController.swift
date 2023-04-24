@@ -45,6 +45,10 @@ class EventDetailViewController: UIViewController {
         imageView.backgroundColor = .clear
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
+        let gesture = CustomTapGesture(target: self, action: #selector(onTapImage))
+        gesture.image = event?.image
+        imageView.addGestureRecognizer(gesture)
         return imageView
     }()
     
@@ -140,8 +144,11 @@ class EventDetailViewController: UIViewController {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
-    
-    // MARK: - Functions
-
-
+    @objc private func onTapImage(recognizer: CustomTapGesture) {
+        let vc = ZoomImageViewController()
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.image = recognizer.image
+        self.present(vc, animated: true, completion: nil)
+    }
 }

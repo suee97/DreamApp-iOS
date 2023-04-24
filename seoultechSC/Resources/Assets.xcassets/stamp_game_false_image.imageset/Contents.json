@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "festival_game_image.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
