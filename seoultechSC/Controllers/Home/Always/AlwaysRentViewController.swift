@@ -10,7 +10,9 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
     private var calendarMonth = Date()
     private var days = [String]()
     private var rentDataList: [RentData] = []
-    private var alreadyRent : [AlreadyRentData] = []
+    private var alreadyRentDataList: [AlreadyRentData] = []
+    private var alreadyRentDay : [Int] = []
+    private var itemTotalAmount = Int()
     
     let itemInfoContainer: UIView = {
         let container = UIView()
@@ -20,8 +22,7 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
     }()
     
     var itemImageView: UIImageView = {
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 80, height: 120))
-        imageView.contentMode = .scaleAspectFill
+        let imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 5
         
@@ -138,9 +139,6 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
     
     private lazy var rentButton : ActionButton = {
         let button = ActionButton(title: "대여하러 가기")
-        
-        button.setActive(false)
-        
         button.addTarget(self, action: #selector(rentBtn), for: .touchUpInside)
         
         return button
@@ -225,6 +223,8 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
             itemInfoContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 196),
             itemImageView.centerYAnchor.constraint(equalTo: itemInfoContainer.centerYAnchor),
             itemImageView.leadingAnchor.constraint(equalTo: itemInfoContainer.leadingAnchor, constant: 17),
+            itemImageView.widthAnchor.constraint(equalToConstant: 80),
+            itemImageView.heightAnchor.constraint(equalToConstant: 120),
             itemTitle.topAnchor.constraint(equalTo: itemInfoContainer.topAnchor, constant: 25),
             itemTitle.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 16),
             item.leadingAnchor.constraint(equalTo: itemTitle.trailingAnchor, constant: 28),
@@ -315,14 +315,13 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
         updateCalendar()
     }
     
-    // 일요일: 1, 토요일: 7 로 반환되니 0번 인덱스를 일요일로 표시해주기 위해 -1을 해줌
-    private func startDayOfTheWeek() -> Int {
-        return calendar.component(.weekday, from: calendarMonth) - 1
-    }
-    
-    // 해당 달의 날짜가 며칠까지 있는지 계산 후 반환
-    private func endDate() -> Int {
-        return calendar.range(of: .day, in: .month, for: calendarMonth)?.count ?? Int()
+    private func updateCalendar() {
+        updateTitle()
+        updateDays()
+        updateRentData()
+        rentDataList.removeAll()
+        alreadyRentDay.removeAll()
+        alreadyRentDataList.removeAll()
     }
     
     private func updateTitle() {
@@ -342,8 +341,16 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
             }
             days.append("\(day - startDayOfTheWeek + 1)")
         }
-        
-        collectionView.reloadData()
+    }
+    
+    // 일요일: 1, 토요일: 7 로 반환되니 0번 인덱스를 일요일로 표시해주기 위해 -1을 해줌
+    private func startDayOfTheWeek() -> Int {
+        return calendar.component(.weekday, from: calendarMonth) - 1
+    }
+    
+    // 해당 달의 날짜가 며칠까지 있는지 계산 후 반환
+    private func endDate() -> Int {
+        return calendar.range(of: .day, in: .month, for: calendarMonth)?.count ?? Int()
     }
     
     private func updateRentData() {
@@ -356,17 +363,9 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
         
         var newMonth = changeMonth(month: String(month))
         category = changeCategory(category: category)
-        print(year)
-        print(newMonth)
-        print(category)
         
         fetchRent(month: newMonth, year: year, category: category)
-    }
-    
-    private func updateCalendar() {
-        updateTitle()
-        updateDays()
-        updateRentData()
+        fetchRentTotalAmount(category: category)
     }
     
     private func minusMonth() {
@@ -393,7 +392,7 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
         selectedDay.text = ""
         cell.update(day: days[indexPath.item])
         cell.checkWeekend(indexPath: indexPath)
-//        cell.updateCircle(strokeEnd: 0.4)
+        cell.drawCircle(day: days[indexPath.item], alreadyRentDataList: alreadyRentDataList, totalAmount: itemTotalAmount, availableAmount: checkAvailableAmount(selectedDay: days[indexPath.item]))
         
         return cell
     }
@@ -405,11 +404,9 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
         selectedDay.textColor = .navy
         selectedDay.font = UIFont(name: "Pretendard-Bold", size: 12)
         
-        availableAmount.text = checkAvailableAmount(selectedDay: days[indexPath.item])
+        availableAmount.text = String(checkAvailableAmount(selectedDay: days[indexPath.item]))
         availableAmount.textColor = .navy
         availableAmount.font = UIFont(name: "Pretendard-Bold", size: 12)
-        
-        rentButton.setActive(true)
         
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor(red: 0.486, green: 0.529, blue: 0.949, alpha: 1).cgColor
@@ -422,8 +419,6 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor(red: 0.913, green: 0.913, blue: 0.913, alpha: 1).cgColor
         cell.backgroundColor = .white
-        
-        rentButton.setActive(false)
         
     }
     
@@ -440,14 +435,11 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
         return .zero
     }
     
-//    RentDataModel(rentId: 127, account: 1, purpose: "ㅇㅇㅇㅇㅇ", rentStatus: "WAIT", itemCategory: "CANOPY", startTime: "2023-04-24", endTime: "2023-04-26", createdAt: "2023-04-19T02:13:41.922762", updatedAt: "2023-04-19T02:13:41.922762")
-    
     private func fetchRent(month: String, year: String, category: String) {
         let url = "\(api_url)/rent/calendar?month="+month+"&year="+year+"&category="+category
         AF.request(url, method: .get).responseJSON { response in
             switch response.result {
             case .success:
-//                print("success")
                 do {
                     let decoder = JSONDecoder()
                     guard let responseData = response.data else { return }
@@ -456,9 +448,18 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
                     
                     if result.status == 200 && dataCount != 0 {
                         for rent in result.data! {
-                            print(rent)
                             self.rentDataList.append(RentData(rentId: rent.rentId, account: rent.account, purpose: rent.purpose, rentStatus: rent.rentStatus, itemCategory: rent.itemCategory, startTime: rent.startTime, endTime: rent.endTime, createdAt: rent.createdAt, updatedAt: rent.updatedAt))
+                            self.alreadyRentDay.append(Int(rent.startTime.suffix(2))!)
+                            self.alreadyRentDay.append(Int(rent.endTime.suffix(2))!)
+                            self.alreadyRentDataList.append(AlreadyRentData(currentMonth: month, startMonth: String(rent.startTime.suffix(5)), endMonth: String(rent.endTime.suffix(5)) ,startTime: (Int(rent.startTime.suffix(2))!), endTime: (Int(rent.endTime.suffix(2))!), account: rent.account))
                         }
+                        print(self.alreadyRentDataList)
+                        print(self.alreadyRentDay)
+                        self.collectionView.reloadData()
+                    }
+                    if dataCount == 0 {
+                        print(self.alreadyRentDay)
+                        self.collectionView.reloadData()
                     }
                 } catch {
 
@@ -469,25 +470,30 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     
-    private func checkAvailableAmount(selectedDay: String) -> String {
-        
-        var availableAmount : Int = Int(totalAmount.text!.dropLast(1))!
-        
-        for day in rentDataList {
-//            if (Int(day.startTime.suffix(2))! < Int(selectedDay)!) && (Int(selectedDay)! < Int(day.endTime.suffix(2))!) {
-//                availableAmount = availableAmount - day.account
-//                return String(availableAmount)
-//            }
-            if (Int(day.startTime.suffix(2)) == Int(selectedDay)) {
-                availableAmount = availableAmount - day.account
-                return String(availableAmount)
-            }
-            if (Int(day.endTime.suffix(2)) == Int(selectedDay)) {
-                availableAmount = availableAmount - day.account
-                return String(availableAmount)
+    private func fetchRentTotalAmount(category: String) {
+        let url = "\(api_url)/rent/item/calendar?category="+category
+        AF.request(url, method: .get).responseJSON { response in
+            switch response.result {
+            case .success:
+                do {
+                    let decoder = JSONDecoder()
+                    guard let responseData = response.data else { return }
+                    let result = try decoder.decode(RentTotalAmountApiResult.self, from: responseData)
+                    let dataCount = result.data?.count
+                    
+                    if result.status == 200 && dataCount != 0 {
+                        for rent in result.data! {
+                            self.itemTotalAmount = rent.count
+                            self.totalAmount.text = String(self.itemTotalAmount) + "개"
+                        }
+                    }
+                } catch {
+
+                }
+            case .failure:
+                print("fail")
             }
         }
-        return String(totalAmount.text!.dropLast(1))
     }
     
     private func changeMonth(month: String) -> String {
@@ -525,6 +531,47 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
         }
         return eng_Catgory
     }
+    
+    private func checkAvailableAmount(selectedDay: String) -> Int {
+        
+        var availableAmount = Int(itemTotalAmount)
+        
+        for rent in alreadyRentDataList {
+            if (rent.startMonth.prefix(2) == rent.endMonth.prefix(2)) {
+                // 대여기간 : 04.01 ~ 04.05 일때,  1,2,3,4,5일 수량 체크
+                if ((rent.startTime <= Int(selectedDay) ?? 0) && (Int(selectedDay) ?? 0 <= rent.endTime)) {
+                    availableAmount -= rent.account
+                    print(1)
+                    print(availableAmount)
+                }
+                // 대여기간 : 04.03 ~ 04.03 일때, 수량 체크 (하루 대여하는 날)
+                else if (Int(selectedDay) == rent.startTime && Int(selectedDay) == rent.endTime) {
+                    availableAmount -= rent.account
+                    print(2)
+                    print(availableAmount)
+                }
+            // 대여기간 : 07.30 ~ 08.03 일때,
+            } else if (rent.startMonth.prefix(2) != rent.endMonth.prefix(2)) {
+                // 7월 달력에 30,31일 수량 체크
+                if (Int(rent.currentMonth) == Int(rent.startMonth.prefix(2))) {
+                    if (rent.startTime <= Int(selectedDay) ?? 0) {
+                        availableAmount -= rent.account
+                        print(4)
+                        print(availableAmount)
+                    }
+                    
+                // 8월 달력에 1,2,3일 수량 체크
+                } else if (Int(rent.currentMonth) == Int(rent.endMonth.prefix(2))) {
+                    if (rent.endTime >= Int(selectedDay) ?? 0) {
+                        availableAmount -= rent.account
+                        print(5)
+                        print(availableAmount)
+                    }
+                }
+            }
+        }
+        return availableAmount
+    }
 
     @objc private func prevButtonTouched(_ sender: UIButton) {
         minusMonth()
@@ -535,10 +582,14 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     @objc private func rentBtn() {
-        let vc = RentViewController()
-        vc.itemTitle.text = item.text
-        vc.availableAmount = Int(totalAmount.text!.dropLast(1))!
-        navigationController?.pushViewController(vc, animated: true)
+        if getLoginState() {
+            let vc = RentViewController()
+            vc.itemTitle.text = item.text
+            vc.availableAmount = Int(totalAmount.text!.dropLast(1))!
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            showToast(view: self.view, message: "로그인이 필요한 기능입니다.  '설정 > 로그인하기'에서 로그인해주세요.")
+        }
     }
     
 }
@@ -556,7 +607,10 @@ struct RentData {
 }
 
 struct AlreadyRentData {
-    let startTime: String
-    let endTime: String
-    let account: String
+    let currentMonth: String
+    let startMonth: String
+    let endMonth: String
+    let startTime: Int
+    let endTime: Int
+    let account: Int
 }

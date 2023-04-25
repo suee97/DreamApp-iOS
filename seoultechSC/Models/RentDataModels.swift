@@ -22,6 +22,7 @@ struct MyRentDataApiResult: Codable {
     let status: Int
     let message: String?
     let data: [MyRentDataModel]?
+    let errorCode: String?
 }
 
 struct MyRentDataModel: Codable {
@@ -36,7 +37,7 @@ struct MyRentDataModel: Codable {
     let updatedAt: String
 }
 
-struct RentAvailableApiResult: Codable {
+struct RentTotalAmountApiResult: Codable {
     let status: Int
     let message: String?
     let data: [RentItemCountModel]?

@@ -138,10 +138,15 @@ class EventDetailViewController: UIViewController {
     
     // MARK: - Selectors
     @objc private func onTapApplyButton() {
-        guard let formStr = event?.formLink else { return }
-        guard let url = URL(string: formStr),
-        UIApplication.shared.canOpenURL(url) else { return }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        if (event?.title == "방탈출") {
+            let vc = RoomEscapeViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            guard let formStr = event?.formLink else { return }
+            guard let url = URL(string: formStr),
+            UIApplication.shared.canOpenURL(url) else { return }
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
     @objc private func onTapImage(recognizer: CustomTapGesture) {

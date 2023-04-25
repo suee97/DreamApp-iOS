@@ -131,7 +131,7 @@ class RentViewController: UIViewController, SendDataDelegate {
         
         container.layer.cornerRadius = 10
         container.backgroundColor = .lightGrey
-        container.heightAnchor.constraint(equalToConstant: 76).isActive = true
+        container.heightAnchor.constraint(equalToConstant: 130).isActive = true
         
         return container
     }()
@@ -139,7 +139,9 @@ class RentViewController: UIViewController, SendDataDelegate {
     private lazy var notice: UILabel = {
         let notice = UILabel()
         
-        notice.text = "주의사항"
+        notice.text = changeNotice(category: itemTitle.text!)
+        notice.numberOfLines = 10
+        
         notice.textColor = .black
         notice.font = UIFont(name: "Pretendard-Regular", size: 14)
         
@@ -213,7 +215,7 @@ class RentViewController: UIViewController, SendDataDelegate {
             container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 26),
             container.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             container.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            container.bottomAnchor.constraint(equalTo: rentButton.topAnchor, constant: -17),
+            container.heightAnchor.constraint(equalToConstant: 540),
 
             itemTitle.centerXAnchor.constraint(equalTo: container.centerXAnchor),
             itemTitle.topAnchor.constraint(equalTo: container.topAnchor, constant: 11),
@@ -270,12 +272,13 @@ class RentViewController: UIViewController, SendDataDelegate {
             
             notice.topAnchor.constraint(equalTo: rentNotice.topAnchor, constant: 14),
             notice.leadingAnchor.constraint(equalTo: rentNotice.leadingAnchor, constant: 14),
+            notice.trailingAnchor.constraint(equalTo: rentNotice.trailingAnchor, constant: -14),
 
             confirmButton.topAnchor.constraint(equalTo: rentNotice.bottomAnchor, constant: 14),
             confirmButton.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 21),
             
             rentButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            rentButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -38),
+            rentButton.topAnchor.constraint(equalTo: container.bottomAnchor, constant: 17),
             rentButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             rentButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
@@ -307,8 +310,53 @@ class RentViewController: UIViewController, SendDataDelegate {
         return eng_Catgory
     }
     
+    private func changeNotice(category: String) -> String {
+        var kor_Category = category
+        var notice = ""
+        switch kor_Category {
+        case "돗자리" :
+            notice = """
+                    1. 찢어지지 않게 사용해주세요.\n
+                    2. 깨끗하게 사용해주세요.
+                    """
+        case "간이테이블" :
+            notice = "1. 깨끗하게 사용해주세요."
+        case "듀라테이블" :
+            notice = "1. 듀라테이블을 조립하거나 정리할 때, 테이블 다리 접합부 또는 관절 부분에 손이 끼이지 않도록 주의해주세요."
+        case "앰프&마이크" :
+            notice = """
+                    1. 앰프에 물이 들어가지 않도록 해야 합니다. \n
+                    2. 다른 장비를 연결한 뒤에 앰프의 전원을 켜주세요. \n
+                    3. 사용 후에는 볼륨노브를 0으로 설정한 뒤 앰프의 전원을 끄고 장비를 분리해주세요.
+                    """
+        case "캐노피" :
+            notice = """
+                    1. 캐노피를 설치하거나 기둥 높이를 조절할 때에는 여럿이서 작업해야 합니다. \n
+                    2. 운반 시에 끌지 않고 들어서 이동시켜야 합니다. \n
+                    3. 캐노피를 경사면에 설치하지 않도록 해주세요.
+                    """
+        case "리드선" :
+            notice = """
+                    1. 선을 말아서 정리할 때, 릴의 한쪽으로 선이 치우치지 않도록 해주세요. \n
+                    2. 리드선을 모두 풀어서 사용해야 부하를 최소화할 수 있습니다.
+                    """
+        case "L카" :
+            notice = """
+                    1. 바퀴가 고장나지 않도록 조심히 다뤄주세요. \n
+                    2. 카트를 끌 때, 사람이 올라타지 않도록 해야합니다.
+                    """
+        case "의자" :
+            notice = """
+                    1. 의자를 포개서 정리할 때, 의자 사이에 손이 끼이지 않도록 주의해주세요. \n
+                    2. 의자 위에 무거운 물건을 올리지 말아주세요.
+                    """
+        default:
+            print("")
+        }
+        return notice
+    }
+    
     private func checkAllInfo() {
-        print(rentPurpose.text?.count)
         if (rentRange.text != nil && rentPurpose.text!.count != 0 && rentAmountLabel.text != "0" && confirmButton.checked != false) {
             rentButton.setActive(true)
         } else {
@@ -370,47 +418,97 @@ class RentViewController: UIViewController, SendDataDelegate {
         print(changeCategory(category: itemTitle.text!))
         print(String(rentRange.text!.prefix(10)))
         print(String(rentRange.text!.suffix(10)))
-        PostRentRequest()
+        PostRentRequest(completion: {result in
+            if result == .success {
+                guard let viewControllerStack = self.navigationController?.viewControllers else { return }
                 
-        guard let viewControllerStack = navigationController?.viewControllers else { return }
-        
-        for viewController in viewControllerStack {
-            if let vc = viewController as? AlwaysViewController {
-                navigationController?.popToViewController(vc, animated: true)
+                for viewController in viewControllerStack {
+                    if let vc = viewController as? AlwaysViewController {
+                        self.navigationController?.popToViewController(vc, animated: true)
+                    }
+                }
+            } else if result == .expired {
+                AuthHelper.shared.refreshAccessToken(completion: {result in
+                    if result == .refreshed {
+                        self.PostRentRequest(completion: { result in
+                            if result == .success {
+                                guard let viewControllerStack = self.navigationController?.viewControllers else { return }
+                                
+                                for viewController in viewControllerStack {
+                                    if let vc = viewController as? AlwaysViewController {
+                                        self.navigationController?.popToViewController(vc, animated: true)
+                                    }
+                                }
+                            } else {
+                                showToast(view: self.view, message: "토큰 재발급 오류 발생")
+                            }
+                        })
+                    } else {
+                        
+                    }
+                })
+            } else {
+                
             }
-        }
-        
+        })
     }
     
-    private func PostRentRequest() {
+    private func PostRentRequest(completion: @escaping (PostRentResult) -> Void) {
         let url = "\(api_url)/rent"
         
-        var request = URLRequest(url: URL(string: url)!)
-        request.httpMethod = "POST"
+        let aToken = KeychainHelper.sharedKeychain.getAccessToken() ?? ""
+        let header: HTTPHeaders = [
+            "Authorization": "Bearer \(aToken)"
+        ]
         
         let params = ["purpose" : rentPurpose.text!,
                       "account" : Int(rentAmountLabel.text!)!,
                       "itemCategory" : changeCategory(category: itemTitle.text!),
                       "startTime" : String(rentRange.text!.prefix(10)),
                       "endTime": String(rentRange.text!.suffix(10))] as Dictionary
-        do {
-            try request.httpBody = JSONSerialization.data(withJSONObject: params, options: [])
-        } catch {
-            print("http Body Error")
-        }
         
-        AF.request(request).responseString { response in
+        AF.request(url,
+                   method: .post,
+                   parameters: params,
+                   encoding: JSONEncoding(options: []),
+                   headers: header)
+        .responseJSON { response in
             switch response.result {
-            case .success:
-                print("success")
+            case.success:
+                do {
+                    let decoder = JSONDecoder()
+                    guard let responseData = response.data else { return }
+                    let result = try decoder.decode(MyRentDataApiResult.self, from: responseData)
+                    
+                    if result.status == 200 {
+                        completion(.success)
+                        return
+                    }
+                    if result.errorCode == "ST011" {
+                        completion(.expired)
+                        return
+                    }
+                    if result.errorCode == "ST054" {
+                        self.view.makeToast("해당 날짜에 요청하신 갯수만큼 물품을 대여하실 수 없습니다.")
+                        completion(.fail)
+                        return
+                    }
+                    completion(.fail)
+                } catch {
+                    completion(.fail)
+                }
             case .failure:
-                print("fail")
+                completion(.fail)
             }
         }
     }
-    
 }
 
+enum PostRentResult {
+    case success
+    case expired
+    case fail
+}
 
 
 
@@ -570,7 +668,6 @@ class CalendarModal: UIViewController {
     }
 
     @objc private func handleDatePicker(_ sender: UIDatePicker) {
-        print("touch")
         
         let formatter = DateFormatter()
         formatter.dateStyle = .long
@@ -588,22 +685,37 @@ class CalendarModal: UIViewController {
         } else if (endDay.text == "종료일") {
             confirmButton.setActive(false)
             formatter.dateFormat = "MM월 dd일"
+            var firstMonth = startDay.text?.prefix(2)
+            var secondMonth = formatter.string(from: sender.date).prefix(2)
+            
             var firstDay = startDay.text!.suffix(3)
             var secondDay = formatter.string(from: sender.date).suffix(3)
             
             firstDay = firstDay.dropLast(1)
             secondDay = secondDay.dropLast(1)
             
-            if Int(firstDay)! > Int(secondDay)! {
-                confirmButton.setActive(false)
-                startDay.text = formatter.string(from: sender.date)
-                formatter.dateFormat = "YYYY-MM-dd"
-                sendStartDay = formatter.string(from: sender.date)
-            } else {
+            if (firstMonth == secondMonth) {
+                if Int(firstDay)! > Int(secondDay)! {
+                    confirmButton.setActive(false)
+                    startDay.text = formatter.string(from: sender.date)
+                    formatter.dateFormat = "YYYY-MM-dd"
+                    sendStartDay = formatter.string(from: sender.date)
+                } else {
+                    confirmButton.setActive(true)
+                    endDay.text = formatter.string(from: sender.date)
+                    formatter.dateFormat = "YYYY-MM-dd"
+                    sendEndDay = formatter.string(from: sender.date)
+                }
+            } else if (firstMonth! < secondMonth) {
                 confirmButton.setActive(true)
                 endDay.text = formatter.string(from: sender.date)
                 formatter.dateFormat = "YYYY-MM-dd"
                 sendEndDay = formatter.string(from: sender.date)
+            } else if (firstMonth! > secondMonth) {
+                confirmButton.setActive(false)
+                startDay.text = formatter.string(from: sender.date)
+                formatter.dateFormat = "YYYY-MM-dd"
+                sendStartDay = formatter.string(from: sender.date)
             }
         } else {
             confirmButton.setActive(false)
