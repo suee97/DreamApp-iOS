@@ -14,12 +14,11 @@ class RoomEscapeViewController: UIViewController, SuccessDelegate {
         let label = UILabel()
         label.font = UIFont(name: "Pretendard-Regular", size: 12)
         label.textColor = .primaryPurple
-        
         return label
     }()
     
     private lazy var progressBar: UIProgressView = {
-       let progressBar = UIProgressView()
+        let progressBar = UIProgressView()
         progressBar.progressViewStyle = .default
         
         progressBar.progressTintColor = .primaryPurple
@@ -33,7 +32,6 @@ class RoomEscapeViewController: UIViewController, SuccessDelegate {
         let container = UIView()
         container.backgroundColor = .white
         container.layer.cornerRadius = 10
-        
         return container
     }()
     
@@ -43,7 +41,6 @@ class RoomEscapeViewController: UIViewController, SuccessDelegate {
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 5
         imageView.image = UIImage(named: "dream_charactor")
-        
         return imageView
     }()
     
@@ -55,7 +52,6 @@ class RoomEscapeViewController: UIViewController, SuccessDelegate {
         answer.textColor = .black
         answer.attributedPlaceholder = NSAttributedString(string: "정답을 입력하세요", attributes: [NSAttributedString.Key.foregroundColor: UIColor.text_caption ])
         answer.addLeftPadding()
-        
         return answer
     }()
     
@@ -65,19 +61,16 @@ class RoomEscapeViewController: UIViewController, SuccessDelegate {
         button.addTarget(self, action: #selector(onTapNextButton), for: .touchUpInside)
         return button
     }()
-
+    
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavigationBar()
-        
-        fetchCurrentRoomInfo()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        
         fetchProblemInfo()
     }
     
@@ -150,18 +143,19 @@ class RoomEscapeViewController: UIViewController, SuccessDelegate {
                 self.navigationController?.popToViewController(vc, animated: true)
             }
         }
-        
     }
     
     private func fetchProblemInfo() {
         fetchProblem(completion: { result in
             if result == .success {
+                self.fetchCurrentRoomInfo()
                 return
             } else if result == .expired {
                 AuthHelper.shared.refreshAccessToken(completion: { result in
                     if result == .refreshed {
                         self.fetchProblem(completion: { result in
                             if result == .success {
+                                self.fetchCurrentRoomInfo()
                                 return
                             } else {
                                 showToast(view: self.view, message: "오류가 발생했습니다.")
@@ -186,6 +180,8 @@ class RoomEscapeViewController: UIViewController, SuccessDelegate {
         ]
         
         AF.request(url, method: .get, headers: header).responseJSON { response in
+            print(">> ~/room/escapes")
+            print(response)
             switch response.result {
             case .success:
                 do {
@@ -216,22 +212,20 @@ class RoomEscapeViewController: UIViewController, SuccessDelegate {
     }
     
     private func showProblem() {
-        
         if (currentRoomId >= 8) {
-            currentImageUrl = "https://devstartappbucket.s3.ap-northeast-2.amazonaws.com/app/foodtruck/22.jpg"
+            currentImageUrl = "https://devstartappbucket.s3.ap-northeast-2.amazonaws.com/app/roomescape/room_escape_8.png"
             
             totalProblem.text = "총 8문제 중 8문제"
             progressBar.progress = Float(8) / Float(8)
             
             guard let url = URL(string: currentImageUrl) else { return }
-            problemImageView.load(url: url)
+            problemImageView.load(url: url, completion: {})
             
             let vc = SuccessModalViewController()
             vc.modalTransitionStyle = .crossDissolve
             vc.modalPresentationStyle = .overCurrentContext
             vc.delegate = self
             self.present(vc, animated: true, completion: nil)
-            
         } else {
             totalQuizCount = roomEscapeDataList.count
             currentImageUrl = roomEscapeDataList[currentRoomId].imageUrl
@@ -240,7 +234,16 @@ class RoomEscapeViewController: UIViewController, SuccessDelegate {
             progressBar.progress = Float(currentRoomId+1) / Float(totalQuizCount)
             
             guard let url = URL(string: currentImageUrl) else { return }
-            problemImageView.load(url: url)
+            problemImageView.load(url: url, completion: {
+                let gesture = CustomTapGesture(target: self, action: #selector(self.onTapImage))
+                gesture.image = self.problemImageView.image
+                self.problemImageView.addGestureRecognizer(gesture)
+            })
+            
+            problemImageView.isUserInteractionEnabled = true
+            let gesture = CustomTapGesture(target: self, action: #selector(onTapImage))
+            gesture.image = problemImageView.image
+            problemImageView.addGestureRecognizer(gesture)
         }
     }
     
@@ -279,6 +282,8 @@ class RoomEscapeViewController: UIViewController, SuccessDelegate {
         ]
         
         AF.request(url, method: .get, headers: header).responseJSON { response in
+            print("current room info")
+            print(response)
             switch response.result {
             case .success:
                 do {
@@ -290,8 +295,8 @@ class RoomEscapeViewController: UIViewController, SuccessDelegate {
                         self.currentRoomId = result.data![0].roomId
                         completion(.success)
                         return
-                        
-                    } else if result.errorCode == "ST011" {
+                    }
+                    if result.errorCode == "ST011" {
                         completion(.expired)
                         return
                     }
@@ -314,8 +319,9 @@ class RoomEscapeViewController: UIViewController, SuccessDelegate {
             "Authorization": "Bearer \(aToken)"
         ]
         
+        let answer = answerSheet.text!.uppercased()
         let params = ["roomId" : currentRoomId + 1,
-                      "answer" : answerSheet.text!] as Dictionary
+                      "answer" : answer] as Dictionary
         
         AF.request(url,
                    method: .post,
@@ -361,9 +367,8 @@ class RoomEscapeViewController: UIViewController, SuccessDelegate {
                 showToast(view: self.view, message: "정답입니다")
                 self.currentRoomId += 1
                 self.showProblem()
-                
+                self.answerSheet.text = ""
                 return
-                
             } else if result == .expired {
                 AuthHelper.shared.refreshAccessToken(completion: {result in
                     if result == .refreshed {
@@ -372,21 +377,28 @@ class RoomEscapeViewController: UIViewController, SuccessDelegate {
                                 showToast(view: self.view, message: "정답입니다")
                                 self.currentRoomId += 1
                                 self.showProblem()
-                                
+                                self.answerSheet.text = ""
                                 return
-                                
                             } else {
-                                showToast(view: self.view, message: "토큰 재발급 오류 발생")
+                                showToast(view: self.view, message: "오류가 발생했습니다.")
                             }
                         })
                     } else {
-                        
+                        showToast(view: self.view, message: "오류가 발생했습니다.")
                     }
                 })
             } else {
                 showToast(view: self.view, message: "정답이 아닙니다.")
             }
         })
+    }
+    
+    @objc private func onTapImage(recognizer: CustomTapGesture) {
+        let vc = ZoomImageViewController()
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.image = recognizer.image
+        self.present(vc, animated: true, completion: nil)
     }
 }
 
@@ -395,16 +407,17 @@ extension UITextField {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 21, height: self.frame.height))
         self.leftView = paddingView
         self.leftViewMode = ViewMode.always
-      }
+    }
 }
 
 extension UIImageView {
-    func load(url: URL) {
+    func load(url: URL, completion: @escaping () -> Void) {
         DispatchQueue.global().async { [weak self] in
             if let data = try? Data(contentsOf: url) {
                 if let image = UIImage(data: data) {
                     DispatchQueue.main.async {
                         self?.image = image
+                        completion()
                     }
                 }
             }

@@ -138,7 +138,7 @@ class EventDetailViewController: UIViewController {
     
     // MARK: - Selectors
     @objc private func onTapApplyButton() {
-        if (event?.title == "방탈출") {
+        if (event?.eventId == 999) {
             let vc = RoomEscapeViewController()
             navigationController?.pushViewController(vc, animated: true)
         } else {
