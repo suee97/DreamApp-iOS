@@ -149,14 +149,14 @@ class DevInfoViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             logo.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
+            logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 39),
             logo.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 110),
             logo.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -110),
             versionContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            versionContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 239),
+            versionContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 171),
             versionContainer.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
             versionContainer.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20),
-            versionContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 379),
+            versionContainer.heightAnchor.constraint(equalToConstant: 140),
             versionTitle.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             versionTitle.topAnchor.constraint(equalTo: versionContainer.topAnchor, constant: 30),
             versionTitle.bottomAnchor.constraint(equalTo: versionContainer.bottomAnchor, constant: -91),
@@ -164,10 +164,10 @@ class DevInfoViewController: UIViewController {
             version.topAnchor.constraint(equalTo: versionContainer.topAnchor, constant: 52),
             version.bottomAnchor.constraint(equalTo: versionContainer.bottomAnchor, constant: -30),
             contactContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            contactContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 399),
+            contactContainer.topAnchor.constraint(equalTo: versionContainer.bottomAnchor, constant: 20),
             contactContainer.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
             contactContainer.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20),
-            contactContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 489),
+            contactContainer.heightAnchor.constraint(equalToConstant: 90),
             contactTitle.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             contactTitle.topAnchor.constraint(equalTo: contactContainer.topAnchor, constant: 21),
             contactTitle.bottomAnchor.constraint(equalTo: contactContainer.bottomAnchor, constant: -50),
@@ -178,6 +178,7 @@ class DevInfoViewController: UIViewController {
             devList.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             devList.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 43),
             devList.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -43),
+            devList.heightAnchor.constraint(equalToConstant: 90)
         ])
         
     }
