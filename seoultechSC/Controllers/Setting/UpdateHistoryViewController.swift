@@ -5,19 +5,47 @@ class UpdateHistoryViewController: UIViewController {
     private let scrollView : UIScrollView = UIScrollView()
     private let contentView : UIView = UIView()
     
+    private let divider1: UIView = {
+        let view = UIView()
+        view.backgroundColor = .lightGrey
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    private let divider2: UIView = {
+        let view = UIView()
+        view.backgroundColor = .lightGrey
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    private let divider3: UIView = {
+        let view = UIView()
+        view.backgroundColor = .lightGrey
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    private let divider4: UIView = {
+        let view = UIView()
+        view.backgroundColor = .lightGrey
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private let appVersionContainer_4 : UIView = {
         let container = UIView()
         
         let version = UILabel()
         version.text = "1.1.0"
+        version.textColor = .black
         version.font = UIFont(name: "Pretendard-Bold", size: 16)
         
         let updateDate = UILabel()
         updateDate.text = "2023.05.06"
+        updateDate.textColor = .black
         updateDate.font = UIFont(name: "Pretendard-Regular", size: 12)
         
         let update1 = UILabel()
         update1.text = "Dream 총학생회 어플리케이션 업데이트"
+        update1.textColor = .black
         update1.font = UIFont(name: "Pretendard-Regular", size: 15)
         
         let ViewArr = [version, updateDate, update1]
@@ -46,14 +74,17 @@ class UpdateHistoryViewController: UIViewController {
         
         let version = UILabel()
         version.text = "1.0.3"
+        version.textColor = .black
         version.font = UIFont(name: "Pretendard-Bold", size: 16)
         
         let updateDate = UILabel()
         updateDate.text = "2022.09.20"
+        updateDate.textColor = .black
         updateDate.font = UIFont(name: "Pretendard-Regular", size: 12)
         
         let update1 = UILabel()
         update1.text = "상시사업 현황이 제대로 보이지 않는 문제 수정"
+        update1.textColor = .black
         update1.font = UIFont(name: "Pretendard-Regular", size: 15)
         
         let ViewArr = [version, updateDate, update1]
@@ -82,19 +113,23 @@ class UpdateHistoryViewController: UIViewController {
         
         let version = UILabel()
         version.text = "1.0.2"
+        version.textColor = .black
         version.font = UIFont(name: "Pretendard-Bold", size: 16)
         
         let updateDate = UILabel()
         updateDate.text = "2022.09.20"
+        updateDate.textColor = .black
         updateDate.font = UIFont(name: "Pretendard-Regular", size: 12)
         
         let update1 = UILabel()
         update1.text = "오타 및 버그 수정"
+        update1.textColor = .black
         update1.font = UIFont(name: "Pretendard-Regular", size: 15)
         
         let update2 = UILabel()
-        update1.text = "UI/UX 개선"
-        update1.font = UIFont(name: "Pretendard-Regular", size: 15)
+        update2.text = "UI/UX 개선"
+        update2.textColor = .black
+        update2.font = UIFont(name: "Pretendard-Regular", size: 15)
         
         let ViewArr = [version, updateDate, update1, update2]
         
@@ -125,14 +160,17 @@ class UpdateHistoryViewController: UIViewController {
         
         let version = UILabel()
         version.text = "1.0.1"
+        version.textColor = .black
         version.font = UIFont(name: "Pretendard-Bold", size: 16)
         
         let updateDate = UILabel()
         updateDate.text = "2022.09.07"
+        updateDate.textColor = .black
         updateDate.font = UIFont(name: "Pretendard-Regular", size: 12)
         
         let update1 = UILabel()
         update1.text = "ST'art 총학생회 어플리케이션 출시"
+        update1.textColor = .black
         update1.font = UIFont(name: "Pretendard-Regular", size: 15)
         
         let ViewArr = [version, updateDate, update1]
@@ -192,6 +230,10 @@ class UpdateHistoryViewController: UIViewController {
         
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
+        contentView.addSubview(divider1)
+        contentView.addSubview(divider2)
+        contentView.addSubview(divider3)
+        contentView.addSubview(divider4)
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -221,13 +263,29 @@ class UpdateHistoryViewController: UIViewController {
             contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
             
             appVersionContainer_4.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
-            
             appVersionContainer_3.topAnchor.constraint(equalTo: appVersionContainer_4.bottomAnchor, constant: 12),
-            
             appVersionContainer_2.topAnchor.constraint(equalTo: appVersionContainer_3.bottomAnchor, constant: 12),
-            
             appVersionContainer_1.topAnchor.constraint(equalTo: appVersionContainer_2.bottomAnchor, constant: 12),
             
+            divider1.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
+            divider1.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
+            divider1.heightAnchor.constraint(equalToConstant: 1),
+            divider1.topAnchor.constraint(equalTo: appVersionContainer_4.bottomAnchor, constant: 4),
+            
+            divider2.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
+            divider2.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
+            divider2.heightAnchor.constraint(equalToConstant: 1),
+            divider2.topAnchor.constraint(equalTo: appVersionContainer_3.bottomAnchor, constant: 4),
+            
+            divider3.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
+            divider3.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
+            divider3.heightAnchor.constraint(equalToConstant: 1),
+            divider3.topAnchor.constraint(equalTo: appVersionContainer_2.bottomAnchor, constant: 4),
+            
+            divider4.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
+            divider4.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
+            divider4.heightAnchor.constraint(equalToConstant: 1),
+            divider4.topAnchor.constraint(equalTo: appVersionContainer_1.bottomAnchor, constant: 4)
         ])
         
         contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
