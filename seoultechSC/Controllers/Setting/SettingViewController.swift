@@ -766,7 +766,6 @@ class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate, Wi
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overCurrentContext
         vc.delegate = self
-        showToast(view: self.view, message: "로그아웃")
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -881,7 +880,7 @@ class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate, Wi
                                      parameters: nil,
                                      headers: header
             ).responseJSON { response in
-                print("logout api call")
+                
             }
             
             navigationController?.setViewControllers([vc], animated: true)
