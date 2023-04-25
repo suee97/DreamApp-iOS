@@ -9,7 +9,7 @@ class SuccessModalViewController: UIViewController {
         view.configureModalView()
         
         let label1 = UILabel()
-        label1.text = "방탈출 성공!"
+        label1.text = "Mission Complete!"
         label1.textColor = .black
         label1.font = UIFont(name: "Pretendard-Bold", size: 16)
         

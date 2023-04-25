@@ -26,7 +26,7 @@ class DevInfoViewController: UIViewController {
     
     private let version : UILabel = {
         let version = UILabel()
-        version.text = "0.0.0"
+        version.text = "1.1.0"
         version.font = UIFont(name: "Pretendard-Bold", size: 48)
         
         return version

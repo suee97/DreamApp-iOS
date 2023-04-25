@@ -5,9 +5,11 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     private var itemTitle = ["돗자리","간이테이블","듀라테이블","앰프&마이크","캐노피","리드선","L카","의자"]
     
-    private var itemImageList : [UIImage] = [UIImage(named: "icon_mat")!, UIImage(named: "icon_dura_table")!, UIImage(named: "icon_dura_table")!, UIImage(named: "icon_amp")!, UIImage(named: "icon_canopy")!, UIImage(named: "icon_wire")!, UIImage(named: "icon_cart")!, UIImage(named: "icon_chair")!]
+    private var itemImageList : [UIImage] = [UIImage(named: "icon_mat")!, UIImage(named: "icon_mini_table")!, UIImage(named: "icon_dura_table")!, UIImage(named: "icon_amp")!, UIImage(named: "icon_canopy")!, UIImage(named: "icon_wire")!, UIImage(named: "icon_cart")!, UIImage(named: "icon_chair")!]
     
-    private var itemDescription = ["돗자리입니다.","간이테이블로 사용할 수 있습니다.","간이테이블 보다 좀 더 넓게 사용할 수 있습니다.","행사 시에 큰 음향을 낼 수 있습니다.","기둥과 천막으로 부스를 만들 수 있습니다.","콘센트를 연장하여 사용할 수 있습니다.","여러 짐을 한 번에 옮길 수 있습니다.","외부 행사 시에 간이 의자로 활용할 수 있습니다."]
+    private var itemDetailImageList : [UIImage] = [UIImage(named: "mat")!, UIImage(named: "mini_table")!, UIImage(named: "table")!, UIImage(named: "amp")!, UIImage(named: "canopy")!, UIImage(named: "wire")!, UIImage(named: "cart")!, UIImage(named: "chair")!]
+    
+    private var itemDescription = ["붕어방에서 피크닉 할 때 사용할 수 있습니다.","간이 테이블로 사용할 수 있습니다.","간이테이블 보다 좀 더 넓게 사용할 수 있습니다.","행사 시에 큰 음향을 낼 수 있습니다.","기둥과 천막으로 부스를 만들 수 있습니다.","콘센트를 연장하여 사용할 수 있습니다.","여러 짐을 한 번에 옮길 수 있습니다.","외부 행사 시에 간이 의자로 활용할 수 있습니다."]
     
     
     let imageList: [UIImage] = [UIImage(named: "dream_logo")!, UIImage(named: "dream_logo")!, UIImage(systemName: "person")!]
@@ -364,7 +366,7 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = AlwaysRentViewController()
         vc.item.text = itemTitle[indexPath.row]
-        vc.itemImageView.image = itemImageList[indexPath.row]
+        vc.itemImageView.image = itemDetailImageList[indexPath.row]
         vc.purpose.text = itemDescription[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }

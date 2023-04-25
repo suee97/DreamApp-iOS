@@ -4,12 +4,10 @@ class AlwaysCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "AlwaysCollectionViewCell"
     
-    private let itemImageViewSize : CGFloat = 40
-    
     let itemImageView : UIImageView = {
         
         var imageView = UIImageView()
-        imageView.layer.cornerRadius = 10
+        imageView.contentMode = .scaleAspectFit
         
         return imageView
     }()
@@ -51,10 +49,8 @@ class AlwaysCollectionViewCell: UICollectionViewCell {
         itemTitle.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            
             itemImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
-            itemImageView.widthAnchor.constraint(equalToConstant: itemImageViewSize),
-            itemImageView.heightAnchor.constraint(equalToConstant: itemImageViewSize),
+            itemImageView.widthAnchor.constraint(equalToConstant: 35),
             itemImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             itemTitle.topAnchor.constraint(equalTo: self.topAnchor, constant: 74),
             itemTitle.centerXAnchor.constraint(equalTo: self.centerXAnchor),

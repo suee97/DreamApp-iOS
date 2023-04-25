@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "icon_canopy.png",
+      "filename" : "icon_canopy.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },

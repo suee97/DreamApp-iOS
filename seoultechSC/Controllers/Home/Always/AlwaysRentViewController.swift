@@ -22,8 +22,7 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
     }()
     
     var itemImageView: UIImageView = {
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 80, height: 120))
-        imageView.contentMode = .scaleAspectFill
+        let imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 5
         
@@ -224,6 +223,8 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
             itemInfoContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 196),
             itemImageView.centerYAnchor.constraint(equalTo: itemInfoContainer.centerYAnchor),
             itemImageView.leadingAnchor.constraint(equalTo: itemInfoContainer.leadingAnchor, constant: 17),
+            itemImageView.widthAnchor.constraint(equalToConstant: 80),
+            itemImageView.heightAnchor.constraint(equalToConstant: 120),
             itemTitle.topAnchor.constraint(equalTo: itemInfoContainer.topAnchor, constant: 25),
             itemTitle.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 16),
             item.leadingAnchor.constraint(equalTo: itemTitle.trailingAnchor, constant: 28),

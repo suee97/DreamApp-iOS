@@ -56,6 +56,8 @@
 		3CEA12FA29F3B699000F8BEF /* RoomEscapeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA12F929F3B699000F8BEF /* RoomEscapeViewController.swift */; };
 		3CEA12FC29F3C22E000F8BEF /* RoomEscapeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA12FB29F3C22E000F8BEF /* RoomEscapeModels.swift */; };
 		3CEA12FE29F3EA7F000F8BEF /* SuccessModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA12FD29F3EA7F000F8BEF /* SuccessModalViewController.swift */; };
+		3CEA130029F611B5000F8BEF /* WithdrawalModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA12FF29F611B5000F8BEF /* WithdrawalModalViewController.swift */; };
+		3CEA130229F63DCF000F8BEF /* UpdateHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA130129F63DCF000F8BEF /* UpdateHistoryViewController.swift */; };
 		3CF8953C29F045B6009F797B /* FestivalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8953729F045B5009F797B /* FestivalViewController.swift */; };
 		3CF8953D29F045B6009F797B /* IntroModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8953829F045B5009F797B /* IntroModalViewController.swift */; };
 		3CF8953E29F045B6009F797B /* StampModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8953929F045B5009F797B /* StampModalViewController.swift */; };
@@ -130,6 +132,8 @@
 		3CEA12F929F3B699000F8BEF /* RoomEscapeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomEscapeViewController.swift; sourceTree = "<group>"; };
 		3CEA12FB29F3C22E000F8BEF /* RoomEscapeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomEscapeModels.swift; sourceTree = "<group>"; };
 		3CEA12FD29F3EA7F000F8BEF /* SuccessModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessModalViewController.swift; sourceTree = "<group>"; };
+		3CEA12FF29F611B5000F8BEF /* WithdrawalModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalModalViewController.swift; sourceTree = "<group>"; };
+		3CEA130129F63DCF000F8BEF /* UpdateHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateHistoryViewController.swift; sourceTree = "<group>"; };
 		3CF8953729F045B5009F797B /* FestivalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FestivalViewController.swift; sourceTree = "<group>"; };
 		3CF8953829F045B5009F797B /* IntroModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroModalViewController.swift; sourceTree = "<group>"; };
 		3CF8953929F045B5009F797B /* StampModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StampModalViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +176,8 @@
 				3C0EDCDD29D037BB00AF7D0E /* SettingViewController.swift */,
 				3C6317E629D16DE100469836 /* DevInfoViewController.swift */,
 				5B5FDB7829DB1B2B0027F88E /* LogoutModalViewCnotroller.swift */,
+				3CEA12FF29F611B5000F8BEF /* WithdrawalModalViewController.swift */,
+				3CEA130129F63DCF000F8BEF /* UpdateHistoryViewController.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -571,6 +577,7 @@
 				3C204E7529CD5D660026E85E /* StudentCardAuthViewController.swift in Sources */,
 				5B5FDB8529DD2BC80027F88E /* ContentLabel.swift in Sources */,
 				3C204E7229CD5D660026E85E /* HomeViewController.swift in Sources */,
+				3CEA130229F63DCF000F8BEF /* UpdateHistoryViewController.swift in Sources */,
 				5BF106C429D967CC00808426 /* LoadingViewController.swift in Sources */,
 				3C20096929EA762E000D4B71 /* RentViewController.swift in Sources */,
 				3C6207C229D2CAC8008C696F /* AlwaysCollectionViewCell.swift in Sources */,
@@ -578,6 +585,7 @@
 				3CF8953D29F045B6009F797B /* IntroModalViewController.swift in Sources */,
 				3C204E7629CD5D660026E85E /* SignUpEndViewController.swift in Sources */,
 				3C204EA129CD5D960026E85E /* SceneDelegate.swift in Sources */,
+				3CEA130029F611B5000F8BEF /* WithdrawalModalViewController.swift in Sources */,
 				3C204EAB29CD5DA20026E85E /* RadioButton.swift in Sources */,
 				3C2FC84829D82CF200BE9A4C /* CalendarCollectionViewCell.swift in Sources */,
 				3C2FC84629D80CBD00BE9A4C /* AlwaysRentViewController.swift in Sources */,
