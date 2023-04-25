@@ -232,7 +232,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func onTapResetButton() {
-        print("reset button clicked")
+        let vc = ResetPwPhoneAuthViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func onTapSignUpButton() {

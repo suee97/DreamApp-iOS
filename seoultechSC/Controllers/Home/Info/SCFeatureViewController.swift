@@ -4,13 +4,12 @@ class SCFeatureViewController: UIViewController {
 
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         scrollView.isScrollEnabled = true
         scrollView.showsVerticalScrollIndicator = false
         return scrollView
     }()
     
-    let contentView = UIView(frame: CGRect(x: 0, y: 0, width: getRatWidth(320), height: getRatHeight(780)))
+    let contentView = UIView(frame: CGRect(x: 0, y: 0, width: getRatWidth(320), height: 1200))
     
     private let label1: DescLabel = {
         let label = DescLabel(isTitle: true)

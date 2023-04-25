@@ -93,7 +93,7 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
             imageView.tintColor = .secondaryPurple
             return imageView
         }()
-                
+        
         let needLoginLabel: UILabel = {
             let label = UILabel()
             label.text = "로그인이 필요합니다."
@@ -104,6 +104,7 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
         
         let loginButton: ActionButton = {
             let button = ActionButton(title: "로그인 하기", height: 34)
+            button.addTarget(self, action: #selector(loginBtn), for: .touchUpInside)
             return button
         }()
         
@@ -190,11 +191,77 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
         
     }()
     
+    private let nonLoginManageAccountContainer: UIView = {
+        
+        let container = UIView()
+        container.layer.cornerRadius = 10
+        
+        let divider: UIView = {
+            let view = UIView()
+            view.backgroundColor = .lightGrey
+            return view
+        }()
+        
+        container.addSubview(divider)
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        divider.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 14).isActive = true
+        divider.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -9).isActive = true
+        divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        divider.topAnchor.constraint(equalTo: container.topAnchor, constant: 36).isActive = true
+        
+        let title = UILabel(frame: CGRect(x: 14, y: 9, width: 320, height: 19))
+        title.text = "계정관리"
+        title.textColor = .text_caption
+        title.font = UIFont(name: "Pretendard-Bold", size: 16)
+        
+        let logout = UIButton(frame: CGRect(x: 15, y: 44, width: 320, height: 20))
+        logout.setTitle("로그아웃", for: .normal)
+        logout.setTitleColor(.text_caption, for: .normal)
+        logout.contentHorizontalAlignment = .leading
+        logout.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
+        logout.backgroundColor = .clear
+        
+        let resetPassword = UIButton(frame: CGRect(x: 15, y: 74, width: 320, height: 20))
+        resetPassword.setTitle("비밀번호 재설정", for: .normal)
+        resetPassword.setTitleColor(.text_caption, for: .normal)
+        resetPassword.contentHorizontalAlignment = .leading
+        resetPassword.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
+        resetPassword.backgroundColor = .clear
+        
+        let withdrawl = UIButton(frame: CGRect(x: 15, y: 104, width: 320, height: 20))
+        withdrawl.setTitle("회원탈퇴", for: .normal)
+        withdrawl.setTitleColor(.text_caption, for: .normal)
+        withdrawl.contentHorizontalAlignment = .leading
+        withdrawl.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
+        withdrawl.backgroundColor = .clear
+        
+        container.addSubview(title)
+        container.addSubview(logout)
+        container.addSubview(resetPassword)
+        container.addSubview(withdrawl)
+        
+        return container
+        
+    }()
+    
     private let SNSContainer: UIView = {
         
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 30)
         let container = UIView()
         container.layer.cornerRadius = 10
+        
+        let divider: UIView = {
+            let view = UIView()
+            view.backgroundColor = .lightGrey
+            return view
+        }()
+        
+        container.addSubview(divider)
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        divider.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 14).isActive = true
+        divider.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -9).isActive = true
+        divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        divider.topAnchor.constraint(equalTo: container.topAnchor, constant: 36).isActive = true
         
         let title = UILabel()
         title.text = "총학생회 SNS 바로가기"
@@ -245,7 +312,7 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
         
         title.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         container.addSubview(title)
         container.addSubview(stackView)
         
@@ -414,7 +481,6 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
         
         container.addSubview(title)
         container.addSubview(service)
-        container.addSubview(location)
         container.addSubview(policy)
         container.addSubview(info)
         
@@ -509,6 +575,7 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
         scrollView.backgroundColor = .clear
         contentView.backgroundColor = .clear
         manageAccountContainer.backgroundColor = .white
+        nonLoginManageAccountContainer.backgroundColor = .white
         SNSContainer.backgroundColor = .white
         InfoContainer.backgroundColor = .white
         adviceContainer.backgroundColor = .white
@@ -516,7 +583,6 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
         
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        contentView.addSubview(manageAccountContainer)
         contentView.addSubview(SNSContainer)
         contentView.addSubview(InfoContainer)
         contentView.addSubview(adviceContainer)
@@ -527,7 +593,6 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        manageAccountContainer.translatesAutoresizingMaskIntoConstraints = false
         SNSContainer.translatesAutoresizingMaskIntoConstraints = false
         InfoContainer.translatesAutoresizingMaskIntoConstraints = false
         adviceContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -554,7 +619,7 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
             manageAccountContainer.heightAnchor.constraint(equalToConstant: 140),
             
             SNSContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            SNSContainer.topAnchor.constraint(equalTo: manageAccountContainer.bottomAnchor, constant: 20),
+            SNSContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 290),
             SNSContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
             SNSContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
             SNSContainer.heightAnchor.constraint(equalToConstant: 110),
@@ -596,7 +661,10 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
         
         if getLoginState() {
             contentView.addSubview(myInfoContainer)
+            contentView.addSubview(manageAccountContainer)
             myInfoContainer.translatesAutoresizingMaskIntoConstraints = false
+            manageAccountContainer.translatesAutoresizingMaskIntoConstraints = false
+            
             NSLayoutConstraint.activate([
                 myInfoContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 26),
                 myInfoContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
@@ -605,17 +673,40 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
             ])
         } else {
             contentView.addSubview(needLoginContainer)
+            contentView.addSubview(nonLoginManageAccountContainer)
             needLoginContainer.translatesAutoresizingMaskIntoConstraints = false
+            nonLoginManageAccountContainer.translatesAutoresizingMaskIntoConstraints = false
+            
             NSLayoutConstraint.activate([
                 needLoginContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 26),
                 needLoginContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
                 needLoginContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
-                needLoginContainer.bottomAnchor.constraint(equalTo: manageAccountContainer.topAnchor, constant: -32)
+                needLoginContainer.bottomAnchor.constraint(equalTo: nonLoginManageAccountContainer.topAnchor, constant: -32),
+                nonLoginManageAccountContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+                nonLoginManageAccountContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 140),
+                nonLoginManageAccountContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
+                nonLoginManageAccountContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
+                nonLoginManageAccountContainer.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: 270)
             ])
         }
     }
     
     // MARK: - Selectors
+    @objc private func loginBtn() {
+        let vc = LoginModalViewController()
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.delegate = self
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    func updateLogin(isLogin: Bool) {
+        if isLogin {
+            let vc = SelectLoginViewController()
+            navigationController?.setViewControllers([vc], animated: true)
+        }
+    }
+    
     @objc private func logoutBtn() {
         let vc = LogoutModalViewController()
         vc.modalTransitionStyle = .crossDissolve
@@ -626,6 +717,8 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
     }
     
     @objc private func resetPasswordBtn() {
+        let vc = LoginResetPwViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func withdrawlBtn() {
@@ -637,32 +730,45 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
     }
     
     @objc private func instagramBtn() {
-        guard let url = URL(string: "https://www.instagram.com/seoultech__39/"),
-        UIApplication.shared.canOpenURL(url) else { return }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        let Username =  "seoultech__39"
+        let appURL = URL(string: "instagram://user?username=\(Username)")!
+        let application = UIApplication.shared
+        
+        if application.canOpenURL(appURL) {
+            application.open(appURL)
+        } else {
+            let webURL = URL(string: "https://instagram.com/\(Username)")!
+            application.open(webURL)
+        }
     }
     
     @objc private func youtubeBtn() {
-        guard let url = URL(string: "https://www.youtube.com/channel/UCLYljVZiYHeJxaHTbRpVauQ"),
-        UIApplication.shared.canOpenURL(url) else { return }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        let youtubeId = "UCLYljVZiYHeJxaHTbRpVauQ"
+        var youtubeUrl = URL(string:"youtube://www.youtube.com/channel/\(youtubeId)")!
+        let application = UIApplication.shared
+        
+        if application.canOpenURL(youtubeUrl){
+            application.open(youtubeUrl)
+        } else{
+            let webURL = URL(string: "https://www.youtube.com/channel/\(youtubeId)")!
+            application.open(webURL)
+        }
     }
     
     @objc private func kakaoBtn() {
-        guard let url = URL(string: "https://pf.kakao.com/_yxatCV"),
-        UIApplication.shared.canOpenURL(url) else { return }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        let application = UIApplication.shared
+        let url = URL(string: "https://pf.kakao.com/_yxatCV")!
+        application.open(url)
     }
     
     @objc private func homepageBtn() {
-        guard let url = URL(string: "https://gwack2.seoultech.ac.kr/"),
-        UIApplication.shared.canOpenURL(url) else { return }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        let application = UIApplication.shared
+        let url = URL(string: "https://gwack2.seoultech.ac.kr")!
+        application.open(url)
     }
     
     @objc private func updateBtn() {
-        let vc = UpdateHistoryViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        print("onTapEventTap")
     }
     
     @objc private func infoAboutDevBtn() {
@@ -675,23 +781,27 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
     }
     
     @objc private func reportBtn() {
-        print("onTapEventTap")
+        let vc = SuggestViewController()
+        vc.appBarTitle = "오류 신고"
+        vc.suggestCase = .error
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func someAdviceBtn() {
-        print("onTapEventTap")
+        let vc = SuggestViewController()
+        vc.appBarTitle = "기타 제안"
+        vc.suggestCase = .etc
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func serviceBtn() {
-        print("onTapEventTap")
-    }
-    
-    @objc private func locationBtn() {
-        print("onTapEventTap")
+        let vc = ServiceViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func policyBtn() {
-        print("onTapEventTap")
+        let vc = PrivacyViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func infoBtn() {

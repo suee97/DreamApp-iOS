@@ -6,6 +6,8 @@ PODS:
   - GoogleMaps/Maps (7.4.0):
     - GoogleMaps/Base
   - GooglePlaces (7.4.0)
+  - lottie-ios (4.1.3)
+  - SnapKit (5.0.1)
   - SwiftKeychainWrapper (4.0.1)
   - Toast-Swift (5.0.1)
 
@@ -13,6 +15,8 @@ DEPENDENCIES:
   - Alamofire (~> 5.2)
   - GoogleMaps (= 7.4.0)
   - GooglePlaces (= 7.4.0)
+  - lottie-ios
+  - SnapKit (~> 5.0.0)
   - SwiftKeychainWrapper
   - Toast-Swift (~> 5.0.1)
 
@@ -21,6 +25,8 @@ SPEC REPOS:
     - Alamofire
     - GoogleMaps
     - GooglePlaces
+    - lottie-ios
+    - SnapKit
     - SwiftKeychainWrapper
     - Toast-Swift
 
@@ -28,9 +34,11 @@ SPEC CHECKSUMS:
   Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
   GoogleMaps: 032f676450ba0779bd8ce16840690915f84e57ac
   GooglePlaces: 544e908d94860bf6f8fc1865b80d2c7eb6b5f937
+  lottie-ios: d0954d3150061f662ed0adf96ef98d7421864c47
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 479bf599defbdaea68c9ab1c103aafaaacf45606
+PODFILE CHECKSUM: cc0bd2be5030694bab1ed7e5919640f1ef0eca89
 
 COCOAPODS: 1.12.0

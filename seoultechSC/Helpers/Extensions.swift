@@ -34,7 +34,7 @@ extension UIView {
         self.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
         self.layer.shadowOpacity = 1
         self.layer.shadowOffset = CGSize.zero
-        self.layer.shadowRadius = 6
+        self.layer.shadowRadius = 3
     }
 }
 
@@ -75,5 +75,28 @@ extension Bundle {
         guard let resource = NSDictionary(contentsOfFile: file) else { return "" }
         guard let key = resource["MAPS_API_KEY"] as? String else { fatalError("dev api base url 설정 안됨") }
         return key
+    }
+}
+
+extension CALayer {
+    func clickedBorder() {
+        let border = CALayer()
+        border.frame = CGRect.init(x: 0, y: frame.height - 5, width: frame.width, height: 5)
+        border.backgroundColor = UIColor.primaryPurple.cgColor
+        
+        self.addSublayer(border)
+    }
+    
+    func nonClickedBorder() {
+        let border = CALayer()
+        border.frame = CGRect.init(x: 0, y: frame.height - 3, width: frame.width, height: 3)
+        border.backgroundColor = UIColor.secondaryPurple.cgColor
+        
+        let border2 = CALayer()
+        border2.frame = CGRect.init(x: 0, y: frame.height - 5, width: frame.width, height: 5)
+        border2.backgroundColor = UIColor.white.cgColor
+        
+        self.addSublayer(border2)
+        self.addSublayer(border)
     }
 }

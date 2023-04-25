@@ -137,7 +137,7 @@ class StudentCardAuthViewController: UIViewController, UpdateImageDelegate {
         ])
         
         NSLayoutConstraint.activate([
-            logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 109),
+            logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 62),
             logo.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             logo.widthAnchor.constraint(equalToConstant: 140),
             logo.heightAnchor.constraint(equalToConstant: 67),
@@ -174,13 +174,12 @@ class StudentCardAuthViewController: UIViewController, UpdateImageDelegate {
             "phoneNo": signUpUser.phoneNo ?? ""
         ]
         
-        // TODO: 예외처리
         AF.upload(multipartFormData: { multipartFormData in
             for (key, value) in params {
                 multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
             }
             
-            multipartFormData.append(signUpUser.file!, withName: "file", fileName: "tmp_file.jpeg", mimeType: "image/jpeg")
+            multipartFormData.append(signUpUser.file!, withName: "file", fileName: "\(signUpUser.studentNo)_card.jpeg", mimeType: "image/jpeg")
             
         }, to: url, method: .post, headers: header)
         .responseJSON { response in
