@@ -1,7 +1,7 @@
 import UIKit
 import Alamofire
 
-class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegate {
+class SettingViewController: UIViewController, LogoutDelegate, LoginDelegate, WithdrawalDelegate {
     
     private let scrollView : UIScrollView = UIScrollView()
     
@@ -136,6 +136,19 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
         let container = UIView()
         container.layer.cornerRadius = 10
         
+        let divider: UIView = {
+            let view = UIView()
+            view.backgroundColor = .lightGrey
+            return view
+        }()
+        
+        container.addSubview(divider)
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        divider.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 14).isActive = true
+        divider.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -9).isActive = true
+        divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        divider.topAnchor.constraint(equalTo: container.topAnchor, constant: 36).isActive = true
+        
         let title = UILabel()
         title.text = "계정관리"
         title.textColor = .black
@@ -209,36 +222,56 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
         divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
         divider.topAnchor.constraint(equalTo: container.topAnchor, constant: 36).isActive = true
         
-        let title = UILabel(frame: CGRect(x: 14, y: 9, width: 320, height: 19))
+        let title = UILabel()
         title.text = "계정관리"
         title.textColor = .text_caption
         title.font = UIFont(name: "Pretendard-Bold", size: 16)
         
-        let logout = UIButton(frame: CGRect(x: 15, y: 44, width: 320, height: 20))
+        let logout = UIButton()
         logout.setTitle("로그아웃", for: .normal)
         logout.setTitleColor(.text_caption, for: .normal)
         logout.contentHorizontalAlignment = .leading
         logout.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
         logout.backgroundColor = .clear
+        logout.isEnabled = false
         
-        let resetPassword = UIButton(frame: CGRect(x: 15, y: 74, width: 320, height: 20))
+        let resetPassword = UIButton()
         resetPassword.setTitle("비밀번호 재설정", for: .normal)
         resetPassword.setTitleColor(.text_caption, for: .normal)
         resetPassword.contentHorizontalAlignment = .leading
         resetPassword.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
         resetPassword.backgroundColor = .clear
+        resetPassword.isEnabled = false
         
-        let withdrawl = UIButton(frame: CGRect(x: 15, y: 104, width: 320, height: 20))
+        let withdrawl = UIButton()
         withdrawl.setTitle("회원탈퇴", for: .normal)
         withdrawl.setTitleColor(.text_caption, for: .normal)
         withdrawl.contentHorizontalAlignment = .leading
         withdrawl.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
         withdrawl.backgroundColor = .clear
+        withdrawl.isEnabled = false
         
-        container.addSubview(title)
-        container.addSubview(logout)
-        container.addSubview(resetPassword)
-        container.addSubview(withdrawl)
+        let viewArr = [title, logout, resetPassword, withdrawl]
+        
+        for i in viewArr {
+            container.addSubview(i)
+            i.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        NSLayoutConstraint.activate([
+            title.topAnchor.constraint(equalTo: container.topAnchor, constant: 9),
+            title.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 14),
+            
+            logout.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 16),
+            logout.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 15),
+            
+            resetPassword.topAnchor.constraint(equalTo: logout.bottomAnchor, constant: 2),
+            resetPassword.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 15),
+            
+            withdrawl.topAnchor.constraint(equalTo: resetPassword.bottomAnchor, constant: 2),
+            withdrawl.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 15),
+            
+        ])
         
         return container
         
@@ -334,6 +367,19 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
         let container = UIView()
         container.layer.cornerRadius = 10
         
+        let divider: UIView = {
+            let view = UIView()
+            view.backgroundColor = .lightGrey
+            return view
+        }()
+        
+        container.addSubview(divider)
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        divider.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 14).isActive = true
+        divider.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -9).isActive = true
+        divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        divider.topAnchor.constraint(equalTo: container.topAnchor, constant: 36).isActive = true
+        
         let title = UILabel()
         title.text = "정보"
         title.textColor = .black
@@ -381,6 +427,19 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
         
         let container = UIView()
         container.layer.cornerRadius = 10
+        
+        let divider: UIView = {
+            let view = UIView()
+            view.backgroundColor = .lightGrey
+            return view
+        }()
+        
+        container.addSubview(divider)
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        divider.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 14).isActive = true
+        divider.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -9).isActive = true
+        divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        divider.topAnchor.constraint(equalTo: container.topAnchor, constant: 36).isActive = true
         
         let title = UILabel()
         title.text = "제안사항"
@@ -442,6 +501,19 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
         let container = UIView()
         container.layer.cornerRadius = 10
         
+        let divider: UIView = {
+            let view = UIView()
+            view.backgroundColor = .lightGrey
+            return view
+        }()
+        
+        container.addSubview(divider)
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        divider.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 14).isActive = true
+        divider.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -9).isActive = true
+        divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        divider.topAnchor.constraint(equalTo: container.topAnchor, constant: 36).isActive = true
+        
         let title = UILabel()
         title.text = "약관 및 정책"
         title.textColor = .black
@@ -455,14 +527,6 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
         service.backgroundColor = .clear
         service.addTarget(self, action: #selector(serviceBtn), for: .touchUpInside)
         
-        let location = UIButton()
-        location.setTitle("위치기반서비스 이용약관", for: .normal)
-        location.setTitleColor(.black, for: .normal)
-        location.contentHorizontalAlignment = .leading
-        location.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
-        location.backgroundColor = .clear
-        location.addTarget(self, action: #selector(locationBtn), for: .touchUpInside)
-        
         let policy = UIButton()
         policy.setTitle("개인정보처리방침", for: .normal)
         policy.setTitleColor(.black, for: .normal)
@@ -471,20 +535,11 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
         policy.backgroundColor = .clear
         policy.addTarget(self, action: #selector(policyBtn), for: .touchUpInside)
         
-        let info = UIButton()
-        info.setTitle("정보제공처", for: .normal)
-        info.setTitleColor(.black, for: .normal)
-        info.contentHorizontalAlignment = .leading
-        info.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
-        info.backgroundColor = .clear
-        info.addTarget(self, action: #selector(infoBtn), for: .touchUpInside)
-        
         container.addSubview(title)
         container.addSubview(service)
         container.addSubview(policy)
-        container.addSubview(info)
         
-        let viewArr = [title, service, location, policy, info]
+        let viewArr = [title, service, policy]
         
         for i in viewArr {
             container.addSubview(i)
@@ -498,14 +553,8 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
             service.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 16),
             service.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 15),
             
-            location.topAnchor.constraint(equalTo: service.bottomAnchor, constant: 2),
-            location.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 15),
-            
-            policy.topAnchor.constraint(equalTo: location.bottomAnchor, constant: 2),
+            policy.topAnchor.constraint(equalTo: service.bottomAnchor, constant: 2),
             policy.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 15),
-            
-            info.topAnchor.constraint(equalTo: policy.bottomAnchor, constant: 2),
-            info.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 15),
             
         ])
         
@@ -612,12 +661,6 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
             contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
             
-            manageAccountContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            manageAccountContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 140),
-            manageAccountContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
-            manageAccountContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
-            manageAccountContainer.heightAnchor.constraint(equalToConstant: 140),
-            
             SNSContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             SNSContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 290),
             SNSContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
@@ -640,7 +683,7 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
             policyContainer.topAnchor.constraint(equalTo: adviceContainer.bottomAnchor, constant: 20),
             policyContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
             policyContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
-            policyContainer.heightAnchor.constraint(equalToConstant: 175),
+            policyContainer.heightAnchor.constraint(equalToConstant: 110),
             
             tel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             tel.topAnchor.constraint(equalTo: policyContainer.bottomAnchor, constant: 35),
@@ -669,7 +712,13 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
                 myInfoContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 26),
                 myInfoContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
                 myInfoContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
-                myInfoContainer.bottomAnchor.constraint(equalTo: manageAccountContainer.topAnchor, constant: -32)
+                myInfoContainer.bottomAnchor.constraint(equalTo: manageAccountContainer.topAnchor, constant: -32),
+                
+                manageAccountContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+                manageAccountContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 140),
+                manageAccountContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
+                manageAccountContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
+                manageAccountContainer.heightAnchor.constraint(equalToConstant: 140),
             ])
         } else {
             contentView.addSubview(needLoginContainer)
@@ -682,11 +731,12 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
                 needLoginContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
                 needLoginContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
                 needLoginContainer.bottomAnchor.constraint(equalTo: nonLoginManageAccountContainer.topAnchor, constant: -32),
+                
                 nonLoginManageAccountContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
                 nonLoginManageAccountContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 140),
                 nonLoginManageAccountContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
                 nonLoginManageAccountContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
-                nonLoginManageAccountContainer.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: 270)
+                nonLoginManageAccountContainer.heightAnchor.constraint(equalToConstant: 140),
             ])
         }
     }
@@ -768,7 +818,8 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
     }
     
     @objc private func updateBtn() {
-        print("onTapEventTap")
+        let vc = UpdateHistoryViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func infoAboutDevBtn() {
@@ -777,7 +828,10 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
     }
     
     @objc private func adviceFunctionBtn() {
-        print("onTapEventTap")
+        let vc = SuggestViewController()
+        vc.appBarTitle = "기능 개선 제안"
+        vc.suggestCase = .feature
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func reportBtn() {
@@ -802,14 +856,6 @@ class SettingViewController: UIViewController, LogoutDelegate, WithdrawalDelegat
     @objc private func policyBtn() {
         let vc = PrivacyViewController()
         navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    @objc private func infoBtn() {
-        print("onTapEventTap")
-    }
-    
-    @objc private func opensourceBtn() {
-        print("onTapEventTap")
     }
     
     func updateLogout(isLogout: Bool) {

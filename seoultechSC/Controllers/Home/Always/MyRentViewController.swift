@@ -52,17 +52,14 @@ class MyRentViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavigationBar()
+        
+        fetchMyRentInfo()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(MyRentTableViewCell.self, forCellReuseIdentifier: MyRentTableViewCell.identifier)
-        tableView.delegate = self
-        tableView.dataSource = self
-        
         configureUI()
-        fetchMyRentInfo()
         
     }
     
@@ -114,6 +111,10 @@ class MyRentViewController: UIViewController, UITableViewDataSource, UITableView
                 noneRentContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 20),
             ])
         } else {
+            tableView.register(MyRentTableViewCell.self, forCellReuseIdentifier: MyRentTableViewCell.identifier)
+            tableView.delegate = self
+            tableView.dataSource = self
+            
             view.addSubview(tableView)
             tableView.translatesAutoresizingMaskIntoConstraints = false
             tableView.layer.cornerRadius = 10
