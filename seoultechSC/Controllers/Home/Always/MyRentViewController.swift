@@ -108,7 +108,7 @@ class MyRentViewController: UIViewController, UITableViewDataSource, UITableView
                 noneRentContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
                 noneRentContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
                 noneRentContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-                noneRentContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 20),
+                noneRentContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             ])
         } else {
             tableView.register(MyRentTableViewCell.self, forCellReuseIdentifier: MyRentTableViewCell.identifier)
@@ -178,7 +178,7 @@ class MyRentViewController: UIViewController, UITableViewDataSource, UITableView
                     let result = try decoder.decode(MyRentDataApiResult.self, from: responseData)
                     let dataCount = result.data?.count
                     
-                    if result.status == 200 && dataCount != 0 {
+                    if result.status == 200 {
                         for rent in result.data! {
                             self.myRentDataList.append(MyRentData(rentId: rent.rentId, account: rent.account, purpose: rent.purpose, rentStatus: rent.rentStatus, itemCategory: rent.itemCategory, startTime: rent.startTime, endTime: rent.endTime, createdAt: rent.createdAt, updatedAt: rent.updatedAt))
                         }

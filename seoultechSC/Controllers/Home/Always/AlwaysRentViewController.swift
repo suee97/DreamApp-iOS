@@ -32,12 +32,14 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
     var itemTitle: UILabel = {
         let title = UILabel()
         title.text = "품목명"
+        title.textColor = .black
         title.font = UIFont(name: "Pretendard-Bold", size: 16)
         return title
     }()
     
     var item: UILabel = {
         let item = UILabel()
+        item.textColor = .black
         item.font = UIFont(name: "Pretendard-Regular", size: 12)
         return item
     }()
@@ -45,6 +47,7 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
     var totalAmountTitle: UILabel = {
         let title = UILabel()
         title.text = "총 수량"
+        title.textColor = .black
         title.font = UIFont(name: "Pretendard-Bold", size: 12)
         return title
     }()
@@ -52,12 +55,14 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
     var purposeTitle: UILabel = {
         let title = UILabel()
         title.text = "사용 목적"
+        title.textColor = .black
         title.font = UIFont(name: "Pretendard-Bold", size: 12)
         return title
     }()
     
     var totalAmount: UILabel = {
         let title = UILabel()
+        title.textColor = .black
         title.font = UIFont(name: "Pretendard-Regular", size: 12)
         return title
     }()
@@ -65,6 +70,7 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
     var purpose: UILabel = {
         let title = UILabel()
         title.numberOfLines = 3
+        title.textColor = .black
         title.font = UIFont(name: "Pretendard-Regular", size: 12)
         return title
     }()
@@ -76,7 +82,6 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
         let title = UILabel()
         title.font = UIFont(name: "Pretendard-Bold", size: 16)
         title.textColor = .navy
-        
         return title
     }()
     
@@ -152,12 +157,10 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         configureCollectionViewDelegate()
         configureCalendar()
         configureUI()
-        
+        scrollView.showsVerticalScrollIndicator = false
     }
     
     // MARK: - Helpers
@@ -303,6 +306,8 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
                 label.textColor = .red
             } else if i == 6 {
                 label.textColor = .blue
+            } else {
+                label.textColor = .black
             }
         }
     }
@@ -453,12 +458,9 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
                             self.alreadyRentDay.append(Int(rent.endTime.suffix(2))!)
                             self.alreadyRentDataList.append(AlreadyRentData(currentMonth: month, startMonth: String(rent.startTime.suffix(5)), endMonth: String(rent.endTime.suffix(5)) ,startTime: (Int(rent.startTime.suffix(2))!), endTime: (Int(rent.endTime.suffix(2))!), account: rent.account))
                         }
-                        print(self.alreadyRentDataList)
-                        print(self.alreadyRentDay)
                         self.collectionView.reloadData()
                     }
                     if dataCount == 0 {
-                        print(self.alreadyRentDay)
                         self.collectionView.reloadData()
                     }
                 } catch {
@@ -541,14 +543,10 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
                 // 대여기간 : 04.01 ~ 04.05 일때,  1,2,3,4,5일 수량 체크
                 if ((rent.startTime <= Int(selectedDay) ?? 0) && (Int(selectedDay) ?? 0 <= rent.endTime)) {
                     availableAmount -= rent.account
-                    print(1)
-                    print(availableAmount)
                 }
                 // 대여기간 : 04.03 ~ 04.03 일때, 수량 체크 (하루 대여하는 날)
                 else if (Int(selectedDay) == rent.startTime && Int(selectedDay) == rent.endTime) {
                     availableAmount -= rent.account
-                    print(2)
-                    print(availableAmount)
                 }
             // 대여기간 : 07.30 ~ 08.03 일때,
             } else if (rent.startMonth.prefix(2) != rent.endMonth.prefix(2)) {
@@ -556,16 +554,12 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
                 if (Int(rent.currentMonth) == Int(rent.startMonth.prefix(2))) {
                     if (rent.startTime <= Int(selectedDay) ?? 0) {
                         availableAmount -= rent.account
-                        print(4)
-                        print(availableAmount)
                     }
                     
                 // 8월 달력에 1,2,3일 수량 체크
                 } else if (Int(rent.currentMonth) == Int(rent.endMonth.prefix(2))) {
                     if (rent.endTime >= Int(selectedDay) ?? 0) {
                         availableAmount -= rent.account
-                        print(5)
-                        print(availableAmount)
                     }
                 }
             }
@@ -588,7 +582,7 @@ class AlwaysRentViewController: UIViewController, UICollectionViewDelegate, UICo
             vc.availableAmount = Int(totalAmount.text!.dropLast(1))!
             navigationController?.pushViewController(vc, animated: true)
         } else {
-            showToast(view: self.view, message: "로그인이 필요한 기능입니다.  '설정 > 로그인하기'에서 로그인해주세요.")
+            showToast(view: self.view, message: needLoginMessage)
         }
     }
     

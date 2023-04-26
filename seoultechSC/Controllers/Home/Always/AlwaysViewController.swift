@@ -32,6 +32,7 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
         let myName : UILabel = {
             let name = UILabel()
             name.text = signInUser.name
+            name.textColor = .black
             name.font = UIFont(name: "Pretendard-Bold", size: 16)
             return name
         }()
@@ -39,6 +40,7 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
         let myCode : UILabel = {
             let code = UILabel()
             code.text = signInUser.studentNo
+            code.textColor = .black
             code.font = UIFont(name: "Pretendard-Regular", size: 12)
             return code
         }()
@@ -46,6 +48,7 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
         let myGroup : UILabel = {
             let group = UILabel()
             group.text = findCollege(major: signInUser.department)
+            group.textColor = .black
             group.font = UIFont(name: "Pretendard-Regular", size: 12)
             return group
         }()
@@ -53,6 +56,7 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
         let myMajor : UILabel = {
             let major = UILabel()
             major.text = signInUser.department
+            major.textColor = .black
             major.font = UIFont(name: "Pretendard-Regular", size: 12)
             return major
         }()
@@ -374,8 +378,12 @@ class AlwaysViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     // MARK: - Selectors
     @objc private func myReservationBtn() {
-        let vc = MyRentViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        if getLoginState() {
+            let vc = MyRentViewController()
+            navigationController?.pushViewController(vc, animated: true)
+            return
+        }
+        showToast(view: view, message: needLoginMessage)
     }
     
     @objc private func goToLoginButton() {

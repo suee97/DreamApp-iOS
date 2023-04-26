@@ -1,5 +1,6 @@
 import UIKit
 import Alamofire
+import SnapKit
 
 protocol SendDataDelegate {
     func sendDate(data: String)
@@ -15,13 +16,13 @@ class RentViewController: UIViewController, SendDataDelegate {
     let container: UIView = {
         let container = UIView()
         container.layer.cornerRadius = 10
-        
         return container
     }()
     
     var itemTitle: UILabel = {
         let title = UILabel()
         title.text = "품목 이름"
+        title.textColor = .black
         title.font = UIFont(name: "Pretendard-Bold", size: 16)
         return title
     }()
@@ -41,6 +42,7 @@ class RentViewController: UIViewController, SendDataDelegate {
     var rentRangeTitle: UILabel = {
         let title = UILabel()
         title.text = "기간"
+        title.textColor = .black
         title.font = UIFont(name: "Pretendard-Bold", size: 16)
         return title
     }()
@@ -64,6 +66,7 @@ class RentViewController: UIViewController, SendDataDelegate {
     var rentPurposeTitle: UILabel = {
         let title = UILabel()
         title.text = "목적"
+        title.textColor = .black
         title.font = UIFont(name: "Pretendard-Bold", size: 16)
         return title
     }()
@@ -80,6 +83,7 @@ class RentViewController: UIViewController, SendDataDelegate {
     var rentAmountTitle: UILabel = {
         let title = UILabel()
         title.text = "수량"
+        title.textColor = .black
         title.font = UIFont(name: "Pretendard-Bold", size: 16)
         return title
     }()
@@ -97,6 +101,7 @@ class RentViewController: UIViewController, SendDataDelegate {
     var rentAmountLabel: UILabel = {
         let title = UILabel()
         title.text = "0"
+        title.textColor = .black
         title.font = UIFont(name: "Pretendard-Regular", size: 16)
         title.textColor = .text_caption
         return title
@@ -122,6 +127,7 @@ class RentViewController: UIViewController, SendDataDelegate {
     var rentNoticeTitle: UILabel = {
         let title = UILabel()
         title.text = "주의사항"
+        title.textColor = .black
         title.font = UIFont(name: "Pretendard-Bold", size: 16)
         return title
     }()
@@ -144,7 +150,7 @@ class RentViewController: UIViewController, SendDataDelegate {
         
         notice.textColor = .black
         notice.font = UIFont(name: "Pretendard-Regular", size: 14)
-        
+        notice.textColor = .black
         return notice
     }()
     
@@ -210,34 +216,72 @@ class RentViewController: UIViewController, SendDataDelegate {
             i.translatesAutoresizingMaskIntoConstraints = false
         }
         
+        container.snp.makeConstraints({ m in
+            m.left.right.equalTo(view).inset(getRatWidth(20))
+            m.top.equalTo(view.safeAreaLayoutGuide).inset(getRatHeight(23))
+            m.bottom.equalTo(view.safeAreaLayoutGuide).inset(getRatHeight(105))
+        })
+        
+        itemTitle.snp.makeConstraints({ m in
+            m.centerX.equalTo(container.snp.centerX)
+            m.top.equalTo(container.snp.top).inset(getRatHeight(11))
+        })
+        
+        line.snp.makeConstraints({ m in
+            m.left.right.equalTo(container).inset(getRatWidth(11))
+            m.height.equalTo(1)
+            m.top.equalTo(itemTitle.snp.bottom).offset(getRatHeight(13))
+        })
+        
+        rentRangeTitle.snp.makeConstraints({ m in
+            m.left.equalTo(container).inset(getRatWidth(21))
+            m.top.equalTo(line.snp.bottom).offset(getRatHeight(19))
+        })
+        
+        rentRange.snp.makeConstraints({ m in
+            m.left.right.equalTo(container).inset(getRatWidth(20))
+            m.height.equalTo(40)
+            m.top.equalTo(rentRangeTitle.snp.bottom).offset(getRatHeight(10))
+        })
+        
+        rentRangeButton.snp.makeConstraints({ m in
+            m.centerY.equalTo(rentRange)
+            m.right.equalTo(rentRange).inset(getRatWidth(13))
+        })
+        
+        rentPurposeTitle.snp.makeConstraints({ m in
+            m.left.equalTo(container).inset(getRatWidth(21))
+            m.top.equalTo(rentRange.snp.bottom).offset(getRatHeight(20))
+        })
+        
         NSLayoutConstraint.activate([
-            container.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 26),
-            container.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            container.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            container.heightAnchor.constraint(equalToConstant: 540),
+//            container.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+//            container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 26),
+//            container.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+//            container.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+//            container.heightAnchor.constraint(equalToConstant: 540),
 
-            itemTitle.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-            itemTitle.topAnchor.constraint(equalTo: container.topAnchor, constant: 11),
+//            itemTitle.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+//            itemTitle.topAnchor.constraint(equalTo: container.topAnchor, constant: 11),
 
-            line.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-            line.topAnchor.constraint(equalTo: itemTitle.bottomAnchor, constant: 13),
-            line.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 12),
-            line.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -12),
+//            line.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+//            line.topAnchor.constraint(equalTo: itemTitle.bottomAnchor, constant: 13),
+//            line.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 12),
+//            line.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -12),
 
-            rentRangeTitle.topAnchor.constraint(equalTo: line.bottomAnchor, constant: 19),
-            rentRangeTitle.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 21),
+//            rentRangeTitle.topAnchor.constraint(equalTo: line.bottomAnchor, constant: 19),
+//            rentRangeTitle.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 21),
 
-            rentRange.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-            rentRange.topAnchor.constraint(equalTo: rentRangeTitle.bottomAnchor, constant: 10),
-            rentRange.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 20),
-            rentRange.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -20),
+//            rentRange.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+//            rentRange.topAnchor.constraint(equalTo: rentRangeTitle.bottomAnchor, constant: 10),
+//            rentRange.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 20),
+//            rentRange.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -20),
             
-            rentRangeButton.centerYAnchor.constraint(equalTo: rentRange.centerYAnchor),
-            rentRangeButton.trailingAnchor.constraint(equalTo: rentRange.trailingAnchor, constant: -13),
+//            rentRangeButton.centerYAnchor.constraint(equalTo: rentRange.centerYAnchor),
+//            rentRangeButton.trailingAnchor.constraint(equalTo: rentRange.trailingAnchor, constant: -13),
 
-            rentPurposeTitle.topAnchor.constraint(equalTo: rentRange.bottomAnchor, constant: 20),
-            rentPurposeTitle.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 21),
+//            rentPurposeTitle.topAnchor.constraint(equalTo: rentRange.bottomAnchor, constant: 20),
+//            rentPurposeTitle.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 21),
 
             rentPurpose.centerXAnchor.constraint(equalTo: container.centerXAnchor),
             rentPurpose.topAnchor.constraint(equalTo: rentPurposeTitle.bottomAnchor, constant: 10),
@@ -412,12 +456,6 @@ class RentViewController: UIViewController, SendDataDelegate {
     }
     
     @objc private func onTapRentButton() {
-        print("서버로 전송")
-        print(rentPurpose.text!)
-        print(Int(rentAmountLabel.text!)!)
-        print(changeCategory(category: itemTitle.text!))
-        print(String(rentRange.text!.prefix(10)))
-        print(String(rentRange.text!.suffix(10)))
         PostRentRequest(completion: {result in
             if result == .success {
                 guard let viewControllerStack = self.navigationController?.viewControllers else { return }
@@ -440,7 +478,7 @@ class RentViewController: UIViewController, SendDataDelegate {
                                     }
                                 }
                             } else {
-                                showToast(view: self.view, message: "토큰 재발급 오류 발생")
+                                showToast(view: self.view, message: "오류가 발생했습니다.")
                             }
                         })
                     } else {
@@ -533,7 +571,7 @@ class CalendarModal: UIViewController {
         var startDay = UILabel()
         startDay.text = "시작일"
         startDay.font = UIFont(name: "Pretendard-Bold", size: 16)
-        
+        startDay.textColor = .black
         return startDay
     }()
     
@@ -541,13 +579,14 @@ class CalendarModal: UIViewController {
         var startDay = UILabel()
         startDay.text = "-"
         startDay.font = UIFont(name: "Pretendard-Bold", size: 16)
-        
+        startDay.textColor = .black
         return startDay
     }()
     
     private var endDay: UILabel = {
         var endDay = UILabel()
         endDay.text = "종료일"
+        endDay.textColor = .black
         endDay.font = UIFont(name: "Pretendard-Bold", size: 16)
         
         return endDay
@@ -579,6 +618,7 @@ class CalendarModal: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        
     }
     
     private func configureUI() {
@@ -594,6 +634,7 @@ class CalendarModal: UIViewController {
         datePicker.datePickerMode = .date
         datePicker.locale = Locale(identifier: "ko-KR")
         datePicker.timeZone = .autoupdatingCurrent
+        
         datePicker.addTarget(self, action: #selector(handleDatePicker(_:)), for: .valueChanged)
         
         var components = DateComponents()
@@ -725,3 +766,23 @@ class CalendarModal: UIViewController {
         }
     }
 }
+
+import SwiftUI
+#if DEBUG
+struct ViewControllerRepresentable: UIViewControllerRepresentable {
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+
+    }
+    @available(iOS 13.0, *)
+    func makeUIViewController(context: Context) -> some UIViewController {
+        RentViewController()
+    }
+}
+
+struct ViewController_Previews: PreviewProvider {
+    static var previews: some View {
+        ViewControllerRepresentable()
+    }
+}
+
+#endif

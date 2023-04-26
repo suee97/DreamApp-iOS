@@ -300,7 +300,7 @@ class HomeViewController: UIViewController {
     
     @objc private func onTapDuesTap() {
         if !getLoginState() {
-            showToast(view: view, message: "needLoginMessage")
+            showToast(view: view, message: needLoginMessage)
         } else {
             let vc = DuesViewController()
             vc.user = signInUser
@@ -314,28 +314,30 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func onTapFestivalTap() {
-        let url = "\(api_url)/festival"
-        AF.request(url, method: .get).responseJSON { response in
-            switch response.result {
-            case .success:
-                do {
-                    let decoder = JSONDecoder()
-                    guard let responseData = response.data else { return }
-                    let result = try decoder.decode(AuthApiResult.self, from: responseData)
-                    if result.status == 200 {
-                        let vc = FestivalViewController()
-                        self.navigationController?.pushViewController(vc, animated: true)
-                        return
-                    }
-                    // not 200
-                    showToast(view: self.view, message: "축제 기간이 아닙니다.")
-                } catch {
-                    showToast(view: self.view, message: "오류가 발생했습니다.")
-                }
-            case .failure:
-                showToast(view: self.view, message: "오류가 발생했습니다.")
-            }
-        }
+        let vc = FestivalViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+//        let url = "\(api_url)/festival"
+//        AF.request(url, method: .get).responseJSON { response in
+//            switch response.result {
+//            case .success:
+//                do {
+//                    let decoder = JSONDecoder()
+//                    guard let responseData = response.data else { return }
+//                    let result = try decoder.decode(AuthApiResult.self, from: responseData)
+//                    if result.status == 200 {
+//                        let vc = FestivalViewController()
+//                        self.navigationController?.pushViewController(vc, animated: true)
+//                        return
+//                    }
+//                    // not 200
+//                    showToast(view: self.view, message: "축제 기간이 아니거나 오류가 발생했습니다.\n장애가 계속될 시 문의해주세요. (02-970-7012)")
+//                } catch {
+//                    showToast(view: self.view, message: "오류가 발생했습니다.")
+//                }
+//            case .failure:
+//                showToast(view: self.view, message: "오류가 발생했습니다.")
+//            }
+//        }
     }
     
     @objc private func onTapEventTap() {
