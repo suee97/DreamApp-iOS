@@ -5,21 +5,29 @@ class LogInModalViewController: UIViewController {
     
     var delegate: LogInDelegate?
     
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "로그인"
+        label.textColor = .black
+        label.font = UIFont(name: "Pretendard-Bold", size: 16)
+        return label
+    }()
+    
     private let modalView: UIView = {
         let view = UIView()
         view.configureModalView()
         
         let label1 = UILabel()
-        label1.text = "로그인 화면으로 이동합니다."
-        label1.textColor = .black
-        label1.font = UIFont(name: "Pretendard-Bold", size: 16)
+        label1.text = "로그인 하시겠습니까?"
+        label1.textColor = .text_caption
+        label1.font = UIFont(name: "Pretendard-Regular", size: 12)
         
         label1.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(label1)
         
         NSLayoutConstraint.activate([
-            label1.topAnchor.constraint(equalTo: view.topAnchor, constant: 35),
-            label1.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            label1.topAnchor.constraint(equalTo: view.topAnchor, constant: 58),
+            label1.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
         return view
@@ -46,10 +54,12 @@ class LogInModalViewController: UIViewController {
         view.backgroundColor = .modalBackground
         
         view.addSubview(modalView)
+        modalView.addSubview(titleLabel)
         modalView.addSubview(cancelButton)
         modalView.addSubview(confirmButton)
         
         modalView.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         confirmButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -58,8 +68,10 @@ class LogInModalViewController: UIViewController {
             modalView.heightAnchor.constraint(equalToConstant: 160),
             modalView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             modalView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            cancelButton.widthAnchor.constraint(equalToConstant: 80),
-            confirmButton.widthAnchor.constraint(equalToConstant: 162),
+            titleLabel.topAnchor.constraint(equalTo: modalView.topAnchor, constant: 19),
+            titleLabel.centerXAnchor.constraint(equalTo: modalView.centerXAnchor),
+            cancelButton.widthAnchor.constraint(equalToConstant: 121),
+            confirmButton.widthAnchor.constraint(equalToConstant: 121),
             cancelButton.bottomAnchor.constraint(equalTo: modalView.bottomAnchor, constant: -15),
             confirmButton.bottomAnchor.constraint(equalTo: modalView.bottomAnchor, constant: -15),
             cancelButton.leftAnchor.constraint(equalTo: modalView.leftAnchor, constant: 17),
