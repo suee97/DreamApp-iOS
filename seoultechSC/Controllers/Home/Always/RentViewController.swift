@@ -123,7 +123,7 @@ class RentViewController: UIViewController, SendDataDelegate {
         
         return minusbutton
     }()
-
+    
     var rentNoticeTitle: UILabel = {
         let title = UILabel()
         title.text = "주의사항"
@@ -144,13 +144,10 @@ class RentViewController: UIViewController, SendDataDelegate {
     
     private lazy var notice: UILabel = {
         let notice = UILabel()
-        
         notice.text = changeNotice(category: itemTitle.text!)
         notice.numberOfLines = 10
-        
         notice.textColor = .black
         notice.font = UIFont(name: "Pretendard-Regular", size: 14)
-        notice.textColor = .black
         return notice
     }()
     
@@ -176,7 +173,13 @@ class RentViewController: UIViewController, SendDataDelegate {
         button.addTarget(self, action: #selector(onTapRentButton), for: .touchUpInside)
         return button
     }()
-
+    
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .clear
+        return scrollView
+    }()
+    
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -209,17 +212,18 @@ class RentViewController: UIViewController, SendDataDelegate {
         view.backgroundColor = .backgroundPurple
         container.backgroundColor = .white
         
-        let ViewArr = [container, itemTitle, line, rentRangeTitle, rentRange, rentRangeButton, rentPurposeTitle, rentPurpose, rentAmountTitle, rentAmount, rentAmountLabel ,plusButton, minusButton, rentNoticeTitle, rentNotice, notice, confirmButton, rentButton]
+        let ViewArr = [container, itemTitle, line, rentRangeTitle, rentRange, rentRangeButton, rentPurposeTitle, rentPurpose, rentAmountTitle, rentAmount, rentAmountLabel ,plusButton, minusButton, rentNoticeTitle, rentNotice, confirmButton, rentButton, scrollView]
+        
+        scrollView.addSubview(notice)
         
         for i in ViewArr {
             view.addSubview(i)
-            i.translatesAutoresizingMaskIntoConstraints = false
         }
         
         container.snp.makeConstraints({ m in
             m.left.right.equalTo(view).inset(getRatWidth(20))
             m.top.equalTo(view.safeAreaLayoutGuide).inset(getRatHeight(23))
-            m.bottom.equalTo(view.safeAreaLayoutGuide).inset(getRatHeight(105))
+            m.bottom.equalTo(view).inset(getRatHeight(85))
         })
         
         itemTitle.snp.makeConstraints({ m in
@@ -240,7 +244,7 @@ class RentViewController: UIViewController, SendDataDelegate {
         
         rentRange.snp.makeConstraints({ m in
             m.left.right.equalTo(container).inset(getRatWidth(20))
-            m.height.equalTo(40)
+            m.height.equalTo(getRatHeight(40))
             m.top.equalTo(rentRangeTitle.snp.bottom).offset(getRatHeight(10))
         })
         
@@ -254,78 +258,68 @@ class RentViewController: UIViewController, SendDataDelegate {
             m.top.equalTo(rentRange.snp.bottom).offset(getRatHeight(20))
         })
         
-        NSLayoutConstraint.activate([
-//            container.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-//            container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 26),
-//            container.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-//            container.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-//            container.heightAnchor.constraint(equalToConstant: 540),
-
-//            itemTitle.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-//            itemTitle.topAnchor.constraint(equalTo: container.topAnchor, constant: 11),
-
-//            line.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-//            line.topAnchor.constraint(equalTo: itemTitle.bottomAnchor, constant: 13),
-//            line.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 12),
-//            line.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -12),
-
-//            rentRangeTitle.topAnchor.constraint(equalTo: line.bottomAnchor, constant: 19),
-//            rentRangeTitle.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 21),
-
-//            rentRange.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-//            rentRange.topAnchor.constraint(equalTo: rentRangeTitle.bottomAnchor, constant: 10),
-//            rentRange.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 20),
-//            rentRange.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -20),
-            
-//            rentRangeButton.centerYAnchor.constraint(equalTo: rentRange.centerYAnchor),
-//            rentRangeButton.trailingAnchor.constraint(equalTo: rentRange.trailingAnchor, constant: -13),
-
-//            rentPurposeTitle.topAnchor.constraint(equalTo: rentRange.bottomAnchor, constant: 20),
-//            rentPurposeTitle.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 21),
-
-            rentPurpose.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-            rentPurpose.topAnchor.constraint(equalTo: rentPurposeTitle.bottomAnchor, constant: 10),
-            rentPurpose.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 20),
-            rentPurpose.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -20),
-
-            rentAmountTitle.topAnchor.constraint(equalTo: rentPurpose.bottomAnchor, constant: 20),
-            rentAmountTitle.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 21),
-
-            rentAmount.topAnchor.constraint(equalTo: rentAmountTitle.bottomAnchor, constant: 10),
-            rentAmount.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 20),
-            rentAmount.widthAnchor.constraint(equalToConstant: 123),
-            
-            rentAmountLabel.centerXAnchor.constraint(equalTo: rentAmount.centerXAnchor),
-            rentAmountLabel.centerYAnchor.constraint(equalTo: rentAmount.centerYAnchor),
-            
-            minusButton.centerYAnchor.constraint(equalTo: rentAmount.centerYAnchor),
-            minusButton.leadingAnchor.constraint(equalTo: rentAmount.leadingAnchor, constant: 8),
-            minusButton.widthAnchor.constraint(equalToConstant: 20),
-            
-            plusButton.centerYAnchor.constraint(equalTo: rentAmount.centerYAnchor),
-            plusButton.trailingAnchor.constraint(equalTo: rentAmount.trailingAnchor, constant: -8),
-            plusButton.widthAnchor.constraint(equalToConstant: 20),
-
-            rentNoticeTitle.topAnchor.constraint(equalTo: rentAmount.bottomAnchor, constant: 20),
-            rentNoticeTitle.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 21),
-
-            rentNotice.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-            rentNotice.topAnchor.constraint(equalTo: rentNoticeTitle.bottomAnchor, constant: 10),
-            rentNotice.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 20),
-            rentNotice.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -20),
-            
-            notice.topAnchor.constraint(equalTo: rentNotice.topAnchor, constant: 14),
-            notice.leadingAnchor.constraint(equalTo: rentNotice.leadingAnchor, constant: 14),
-            notice.trailingAnchor.constraint(equalTo: rentNotice.trailingAnchor, constant: -14),
-
-            confirmButton.topAnchor.constraint(equalTo: rentNotice.bottomAnchor, constant: 14),
-            confirmButton.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 21),
-            
-            rentButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            rentButton.topAnchor.constraint(equalTo: container.bottomAnchor, constant: 17),
-            rentButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            rentButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-        ])
+        rentPurpose.snp.makeConstraints({ m in
+            m.left.right.equalTo(container).inset(getRatWidth(20))
+            m.height.equalTo(getRatHeight(40))
+            m.top.equalTo(rentPurposeTitle.snp.bottom).offset(getRatHeight(10))
+        })
+        
+        rentAmountTitle.snp.makeConstraints({ m in
+            m.left.equalTo(container).inset(getRatWidth(20))
+            m.top.equalTo(rentPurpose.snp.bottom).offset(getRatHeight(20))
+        })
+        
+        rentAmount.snp.makeConstraints({ m in
+            m.height.equalTo(getRatHeight(40))
+            m.left.equalTo(container).inset(getRatWidth(21))
+            m.top.equalTo(rentAmountTitle.snp.bottom).offset(getRatHeight(10))
+            m.width.equalTo(getRatWidth(123))
+        })
+        
+        rentAmountLabel.snp.makeConstraints({ m in
+            m.centerX.centerY.equalTo(rentAmount)
+        })
+        
+        minusButton.snp.makeConstraints({ m in
+            m.width.height.equalTo(20)
+            m.centerY.equalTo(rentAmount)
+            m.left.equalTo(rentAmount).inset(getRatWidth(8))
+        })
+        
+        plusButton.snp.makeConstraints({ m in
+            m.width.height.equalTo(20)
+            m.centerY.equalTo(rentAmount)
+            m.right.equalTo(rentAmount).inset(getRatWidth(8))
+        })
+        
+        rentNoticeTitle.snp.makeConstraints({ m in
+            m.left.equalTo(container).inset(getRatWidth(21))
+            m.top.equalTo(rentAmount.snp.bottom).offset(getRatHeight(20))
+        })
+        
+        rentNotice.snp.makeConstraints({ m in
+            m.left.right.equalTo(container).inset(getRatWidth(20))
+            m.top.equalTo(rentNoticeTitle.snp.bottom).offset(getRatHeight(10))
+            m.height.equalTo(getRatHeight(76))
+        })
+        
+        notice.snp.makeConstraints({ m in
+            m.left.top.right.equalTo(scrollView)
+        })
+        
+        confirmButton.snp.makeConstraints({ m in
+            m.left.equalTo(container).inset(21)
+            m.top.equalTo(rentNotice.snp.bottom).offset(getRatHeight(14))
+        })
+        
+        rentButton.snp.makeConstraints({ m in
+            m.left.right.equalTo(view).inset(getRatWidth(20))
+            m.top.equalTo(container.snp.bottom).offset(getRatHeight(17))
+        })
+        
+        scrollView.snp.makeConstraints({ m in
+            m.left.right.top.bottom.equalTo(rentNotice).inset(10)
+        })
     }
     
     private func changeCategory(category: String) -> String {
@@ -360,7 +354,7 @@ class RentViewController: UIViewController, SendDataDelegate {
         switch kor_Category {
         case "돗자리" :
             notice = """
-                    1. 찢어지지 않게 사용해주세요.\n
+                    1. 찢어지지 않게 사용해주세요.
                     2. 깨끗하게 사용해주세요.
                     """
         case "간이테이블" :
@@ -369,29 +363,29 @@ class RentViewController: UIViewController, SendDataDelegate {
             notice = "1. 듀라테이블을 조립하거나 정리할 때, 테이블 다리 접합부 또는 관절 부분에 손이 끼이지 않도록 주의해주세요."
         case "앰프&마이크" :
             notice = """
-                    1. 앰프에 물이 들어가지 않도록 해야 합니다. \n
-                    2. 다른 장비를 연결한 뒤에 앰프의 전원을 켜주세요. \n
+                    1. 앰프에 물이 들어가지 않도록 해야 합니다.
+                    2. 다른 장비를 연결한 뒤에 앰프의 전원을 켜주세요.
                     3. 사용 후에는 볼륨노브를 0으로 설정한 뒤 앰프의 전원을 끄고 장비를 분리해주세요.
                     """
         case "캐노피" :
             notice = """
-                    1. 캐노피를 설치하거나 기둥 높이를 조절할 때에는 여럿이서 작업해야 합니다. \n
-                    2. 운반 시에 끌지 않고 들어서 이동시켜야 합니다. \n
+                    1. 캐노피를 설치하거나 기둥 높이를 조절할 때에는 여럿이서 작업해야 합니다.
+                    2. 운반 시에 끌지 않고 들어서 이동시켜야 합니다.
                     3. 캐노피를 경사면에 설치하지 않도록 해주세요.
                     """
         case "리드선" :
             notice = """
-                    1. 선을 말아서 정리할 때, 릴의 한쪽으로 선이 치우치지 않도록 해주세요. \n
+                    1. 선을 말아서 정리할 때, 릴의 한쪽으로 선이 치우치지 않도록 해주세요.
                     2. 리드선을 모두 풀어서 사용해야 부하를 최소화할 수 있습니다.
                     """
         case "L카" :
             notice = """
-                    1. 바퀴가 고장나지 않도록 조심히 다뤄주세요. \n
+                    1. 바퀴가 고장나지 않도록 조심히 다뤄주세요.
                     2. 카트를 끌 때, 사람이 올라타지 않도록 해야합니다.
                     """
         case "의자" :
             notice = """
-                    1. 의자를 포개서 정리할 때, 의자 사이에 손이 끼이지 않도록 주의해주세요. \n
+                    1. 의자를 포개서 정리할 때, 의자 사이에 손이 끼이지 않도록 주의해주세요.
                     2. 의자 위에 무거운 물건을 올리지 말아주세요.
                     """
         default:
@@ -614,7 +608,7 @@ class CalendarModal: UIViewController {
         button.addTarget(self, action: #selector(onTapConfirmButton), for: .touchUpInside)
         return button
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -622,9 +616,9 @@ class CalendarModal: UIViewController {
     }
     
     private func configureUI() {
-            setAttributes()
-            setContraints()
-        }
+        setAttributes()
+        setContraints()
+    }
     
     private func setAttributes() {
         view.backgroundColor = .black.withAlphaComponent(0.3)
@@ -637,6 +631,8 @@ class CalendarModal: UIViewController {
         
         datePicker.addTarget(self, action: #selector(handleDatePicker(_:)), for: .valueChanged)
         
+        datePicker.overrideUserInterfaceStyle = .light
+        
         var components = DateComponents()
         components.day = 0
         
@@ -644,7 +640,7 @@ class CalendarModal: UIViewController {
         
         datePicker.minimumDate = todayDate
     }
-
+    
     private func setContraints() {
         view.addSubview(modalView)
         modalView.addSubview(datePicker)
@@ -707,7 +703,7 @@ class CalendarModal: UIViewController {
         sendEndDay = sendStartDay
         confirmButton.setActive(true)
     }
-
+    
     @objc private func handleDatePicker(_ sender: UIDatePicker) {
         
         let formatter = DateFormatter()
@@ -766,23 +762,3 @@ class CalendarModal: UIViewController {
         }
     }
 }
-
-import SwiftUI
-#if DEBUG
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-
-    }
-    @available(iOS 13.0, *)
-    func makeUIViewController(context: Context) -> some UIViewController {
-        RentViewController()
-    }
-}
-
-struct ViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewControllerRepresentable()
-    }
-}
-
-#endif
