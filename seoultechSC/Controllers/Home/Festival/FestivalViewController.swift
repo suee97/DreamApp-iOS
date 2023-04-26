@@ -115,7 +115,22 @@ class FestivalViewController: UIViewController, GMSMapViewDelegate {
         for i in FestivalCommons.shared.stampList {
             let marker = GMSMarker(position: i.location)
             marker.title = i.name
-            marker.icon = UIImage(named: "stamp_marker")
+            
+            switch i.name {
+            case "game":
+                marker.icon = UIImage(named: "festival_marker_game")
+            case "yard":
+                marker.icon = UIImage(named: "festival_marker_yard")
+            case "stage":
+                marker.icon = UIImage(named: "festival_marker_stage")
+            case "bungeobang":
+                marker.icon = UIImage(named: "festival_marker_bungeobang")
+            case "photo":
+                marker.icon = UIImage(named: "festival_marker_photo")
+            default:
+                marker.icon = UIImage(named: "festival_marker_game")
+            }
+            
             marker.map = mapView
         }
     }
@@ -140,7 +155,7 @@ class FestivalViewController: UIViewController, GMSMapViewDelegate {
     }
     
     private func setUpCircles() {
-        let strokeColor = UIColor(red: 39/255, green: 205/255, blue: 123/255, alpha: 1)
+        let strokeColor = UIColor(red: 70/255, green: 77/255, blue: 135/255, alpha: 1)
         
         for i in FestivalCommons.shared.stampList {
             let circle = GMSCircle(position: i.location, radius: 50)

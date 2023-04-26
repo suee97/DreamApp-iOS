@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "festival_marker_bungeobang.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
