@@ -4,10 +4,10 @@ import Toast_Swift
 import SnapKit
 
 // 배포 서버
-//public let api_url: String = Bundle.main.api_url
+public let api_url: String = Bundle.main.api_url
 
 // 개발 서버
-public let api_url: String = Bundle.main.dev_api_url
+//public let api_url: String = Bundle.main.dev_api_url
 
 // Google Maps API Key
 public let maps_api_key: String = Bundle.main.maps_api_key

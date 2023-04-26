@@ -1,6 +1,3 @@
-//
-//  CalendarCollectionViewCell.swift
-//  seoultechSC
 import UIKit
 
 class CalendarCollectionViewCell: UICollectionViewCell {

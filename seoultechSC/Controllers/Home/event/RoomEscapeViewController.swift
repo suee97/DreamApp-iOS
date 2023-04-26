@@ -1,7 +1,7 @@
 import UIKit
 import Alamofire
 
-class RoomEscapeViewController: UIViewController, SuccessDelegate {
+class RoomEscapeViewController: UIViewController, SuccessDelegate, UITextFieldDelegate {
     
     private var currentRoomId : Int = 0
     private var currentImageUrl : String = ""
@@ -72,6 +72,12 @@ class RoomEscapeViewController: UIViewController, SuccessDelegate {
         super.viewDidLoad()
         configureUI()
         fetchProblemInfo()
+        answerSheet.delegate = self
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tapGesture)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     // MARK: - Helpers
@@ -180,8 +186,7 @@ class RoomEscapeViewController: UIViewController, SuccessDelegate {
         ]
         
         AF.request(url, method: .get, headers: header).responseJSON { response in
-            print(">> ~/room/escapes")
-            print(response)
+
             switch response.result {
             case .success:
                 do {
@@ -282,8 +287,6 @@ class RoomEscapeViewController: UIViewController, SuccessDelegate {
         ]
         
         AF.request(url, method: .get, headers: header).responseJSON { response in
-            print("current room info")
-            print(response)
             switch response.result {
             case .success:
                 do {
@@ -331,10 +334,7 @@ class RoomEscapeViewController: UIViewController, SuccessDelegate {
         .responseJSON { response in
             switch response.result {
             case.success:
-                print(self.currentRoomId + 1)
-                print(self.answerSheet.text!)
                 do {
-                    print(response)
                     let decoder = JSONDecoder()
                     guard let responseData = response.data else { return }
                     let result = try decoder.decode(RoomEscapeAnswerApiResult.self, from: responseData)
@@ -351,7 +351,6 @@ class RoomEscapeViewController: UIViewController, SuccessDelegate {
                     completion(.fail)
                 }
             case .failure:
-                print("failure")
                 completion(.fail)
             }
         }
@@ -399,6 +398,22 @@ class RoomEscapeViewController: UIViewController, SuccessDelegate {
         vc.modalPresentationStyle = .overCurrentContext
         vc.image = recognizer.image
         self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            self.view.frame.origin.y = -keyboardHeight + 140
+        }
+    }
+    
+    @objc private func keyboardWillHide() {
+        self.view.frame.origin.y = 0
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 }
 
