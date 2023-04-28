@@ -138,15 +138,31 @@ class EventDetailViewController: UIViewController {
     
     // MARK: - Selectors
     @objc private func onTapApplyButton() {
-        if (event?.eventId == 999) {
-            let vc = RoomEscapeViewController()
-            navigationController?.pushViewController(vc, animated: true)
-        } else {
-            guard let formStr = event?.formLink else { return }
-            guard let url = URL(string: formStr),
-            UIApplication.shared.canOpenURL(url) else { return }
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        if event?.eventId == 999 {
+            if !getLoginState() {
+                showToast(view: view, message: needLoginMessage)
+            } else {
+                let vc = RoomEscapeViewController()
+                navigationController?.pushViewController(vc, animated: true)
+            }
+            return
         }
+        
+        if event?.eventId == 998 {
+            if !getLoginState() {
+                showToast(view: view, message: needLoginMessage)
+            } else {
+                let vc = VoteViewController()
+                navigationController?.pushViewController(vc, animated: true)
+            }
+            return
+        }
+        
+        guard let formStr = event?.formLink else { return }
+        guard let url = URL(string: formStr),
+        UIApplication.shared.canOpenURL(url) else { return }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        return
     }
     
     @objc private func onTapImage(recognizer: CustomTapGesture) {
