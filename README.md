@@ -1,4 +1,4 @@
-### 현재 개발중에 있습니다. 23.04.30 이내에 앱스토어 및 플레이스토어에 배포될 예정입니다.
+### 현재 개발중에 있습니다. 23.05.06 이내에 앱스토어 및 플레이스토어에 배포될 예정입니다.
 
 # 서울과학기술대학교 39대 총학생회 어플리케이션
 <div>
@@ -36,7 +36,12 @@
     <img width = "188" src = "https://user-images.githubusercontent.com/55964078/230780372-cc2f2712-461b-43df-8a06-d0f8f1540df6.PNG">
   </p>
 </div>
-
+<div>
+  <p align = "center">
+    <img width = "188" src = "https://user-images.githubusercontent.com/55964078/235388369-496e897f-132c-4637-bbc4-56ea74d65ea6.gif">
+    <img width = "188" src = "https://user-images.githubusercontent.com/55964078/235388438-c9ec1318-7ab2-4352-beb4-9273aaee9966.gif">
+  </p>
+</div>
 # App
 ## Functions
 - 총학생회 소개
