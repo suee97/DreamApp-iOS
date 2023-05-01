@@ -3,7 +3,7 @@ import Foundation
 struct VoteListApiResult: Codable {
     let status: Int
     let message: String?
-    let data: [Vote]
+    let data: [Vote]?
     let errorCode: String?
 }
 
