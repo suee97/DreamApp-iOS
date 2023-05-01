@@ -224,13 +224,11 @@ class VoteViewController: UIViewController, UICollectionViewDelegate, UICollecti
                     case .fail:
                         showToast(view: self.view, message: "오류가 발생했습니다.")
                         self.indicator.stopAnimating()
-                        print("fail1111")
                     }
                 })
             case .fail:
                 showToast(view: self.view, message: "오류가 발생했습니다.")
                 self.indicator.stopAnimating()
-                print("fail2222")
             }
         })
     }
@@ -243,14 +241,12 @@ class VoteViewController: UIViewController, UICollectionViewDelegate, UICollecti
         ]
         
         AF.request(url, method: .get, headers: header).responseJSON { response in
-            print(response)
             switch response.result {
             case .success:
                 do {
                     let decoder = JSONDecoder()
                     guard let responseData = response.data else { return }
                     let result = try decoder.decode(VoteListApiResult.self, from: responseData)
-                    print(result.message)
                     if result.status == 200 {
                         for i in result.data! {
                             self.voteList.append(i)
@@ -263,14 +259,11 @@ class VoteViewController: UIViewController, UICollectionViewDelegate, UICollecti
                         return
                     }
                     completion(.fail)
-                    print("fail1")
                 } catch {
                     completion(.fail)
-                    print("fail2")
                 }
             case .failure:
                 completion(.fail)
-                print("fail3")
             }
         }
     }

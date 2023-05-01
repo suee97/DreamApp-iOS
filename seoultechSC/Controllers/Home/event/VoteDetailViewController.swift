@@ -315,7 +315,6 @@ class VoteDetailViewController: UIViewController {
                    parameters: params,
                    encoding: JSONEncoding(options: []),
                    headers: header).responseJSON { response in
-            print(response)
             switch response.result {
             case .success:
                 do {
