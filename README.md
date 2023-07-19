@@ -63,3 +63,8 @@
 	- 업데이트 내역 및 개발 정보 확인
 	- 제안하기
 	- 약관 및 정책
+
+## Distribution
+<p>
+  <a href="https://apps.apple.com/kr/app/%EC%84%9C%EC%9A%B8%EA%B3%BC%ED%95%99%EA%B8%B0%EC%88%A0%EB%8C%80%ED%95%99%EA%B5%90-%EC%B4%9D%ED%95%99%EC%83%9D%ED%9A%8C/id1641852619"><img src="https://img.shields.io/badge/App Store-0D96F6?style=flat-square&logo=AppStore&logoColor=white", width=152, height=40/></a> 
+</p>
