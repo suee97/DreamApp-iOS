@@ -15,7 +15,7 @@
 
 # Team
 - iOS-Client : [오승언](https://github.com/suee97) [변상우](https://github.com/tkddn0518)
-- android-Cliend : [백송희](https://github.com/100SongH) [채홍무](https://github.com/Hong-Mu)
+- Android-Client : [백송희](https://github.com/100SongH) [채홍무](https://github.com/Hong-Mu)
 - Spring-Backend : [임새연](https://github.com/saeyeonn) [박준찬](https://github.com/9pruruluru2) [유서린](https://github.com/SeorinY)
 - Design : 김태림
 
