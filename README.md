@@ -5,11 +5,11 @@
   </p>
 </div>
 
-* [Introduction](https://github.com/suee97/StartApp-Flutter/#Introduction)
-* [Team](https://github.com/suee97/StartApp-Flutter/#Team)
-* [Distribution](https://github.com/suee97/StartApp-Flutter/#Distribution)
-* [Overview](https://github.com/suee97/StartApp-Flutter/#Overview)
-* [App](https://github.com/suee97/StartApp-Flutter/#App)
+* [Introduction](https://github.com/suee97/DreamApp-iOS/#Introduction)
+* [Team](https://github.com/suee97/DreamApp-iOS/#Team)
+* [Distribution](https://github.com/suee97/DreamApp-iOS/#Distribution)
+* [Overview](https://github.com/suee97/DreamApp-iOS/#Overview)
+* [App](https://github.com/suee97/DreamApp-iOS/#App)
 
 # Introduction
 서울과학기술대학교 총학생회 앱은 학우들에게 총학생회 및 여러 자치기구의 사업들에 대한 정보들을 빠르게 제공하고 다양한 사업에 쉽게 접근할 수 있도록 합니다.
