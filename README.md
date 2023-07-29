@@ -7,6 +7,7 @@
 
 * [Introduction](https://github.com/suee97/StartApp-Flutter/#Introduction)
 * [Team](https://github.com/suee97/StartApp-Flutter/#Team)
+* [Distribution](https://github.com/suee97/StartApp-Flutter/#Distribution)
 * [Overview](https://github.com/suee97/StartApp-Flutter/#Overview)
 * [App](https://github.com/suee97/StartApp-Flutter/#App)
 
@@ -18,6 +19,11 @@
 - Android-Client : [백송희](https://github.com/100SongH) [채홍무](https://github.com/Hong-Mu)
 - Spring-Backend : [임새연](https://github.com/saeyeonn) [박준찬](https://github.com/9pruruluru2) [유서린](https://github.com/SeorinY)
 - Design : 김태림
+
+# Distribution
+<p>
+  <a href="https://apps.apple.com/kr/app/%EC%84%9C%EC%9A%B8%EA%B3%BC%ED%95%99%EA%B8%B0%EC%88%A0%EB%8C%80%ED%95%99%EA%B5%90-%EC%B4%9D%ED%95%99%EC%83%9D%ED%9A%8C/id1641852619"><img src="https://img.shields.io/badge/App Store-0D96F6?style=flat-square&logo=AppStore&logoColor=white", width=152, height=40/></a> 
+</p>
 
 # Overview
 <div>
@@ -63,8 +69,3 @@
 	- 업데이트 내역 및 개발 정보 확인
 	- 제안하기
 	- 약관 및 정책
-
-## Distribution
-<p>
-  <a href="https://apps.apple.com/kr/app/%EC%84%9C%EC%9A%B8%EA%B3%BC%ED%95%99%EA%B8%B0%EC%88%A0%EB%8C%80%ED%95%99%EA%B5%90-%EC%B4%9D%ED%95%99%EC%83%9D%ED%9A%8C/id1641852619"><img src="https://img.shields.io/badge/App Store-0D96F6?style=flat-square&logo=AppStore&logoColor=white", width=152, height=40/></a> 
-</p>
