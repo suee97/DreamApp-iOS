@@ -28,22 +28,16 @@
 # Overview
 <div>
   <p align = "center">
-    <img width = "188" src = "https://user-images.githubusercontent.com/55964078/230780270-e1d5c6ec-6904-48ab-8016-8bb27f352f78.gif">
-    <img width = "188" src = "https://user-images.githubusercontent.com/55964078/230780382-33440dfe-dbb4-47ab-a701-2291bd3f569c.PNG">
-    <img width = "188" src = "https://user-images.githubusercontent.com/55964078/230780379-24701ddb-cd26-4538-b65c-3f891774da3f.PNG">
-  </p>
-</div>
-<div>
-  <p align = "center">
-    <img width = "188" src = "https://user-images.githubusercontent.com/55964078/230780378-679338de-0460-401e-8667-9afb251edcc7.PNG">
-    <img width = "188" src = "https://user-images.githubusercontent.com/55964078/230780375-51c66a5f-1e13-443c-aadd-94eb9349626b.PNG">
-    <img width = "188" src = "https://user-images.githubusercontent.com/55964078/230780372-cc2f2712-461b-43df-8a06-d0f8f1540df6.PNG">
+	<img width = "188" src = "https://user-images.githubusercontent.com/55964078/230780270-e1d5c6ec-6904-48ab-8016-8bb27f352f78.gif">
+	  <img width = "188" src = "https://user-images.githubusercontent.com/55964078/230780378-679338de-0460-401e-8667-9afb251edcc7.PNG">
+    	<img width = "188" src = "https://user-images.githubusercontent.com/55964078/230780375-51c66a5f-1e13-443c-aadd-94eb9349626b.PNG">
   </p>
 </div>
 <div>
   <p align = "center">
     <img width = "188" src = "https://user-images.githubusercontent.com/55964078/235388369-496e897f-132c-4637-bbc4-56ea74d65ea6.gif">
     <img width = "188" src = "https://user-images.githubusercontent.com/55964078/235388438-c9ec1318-7ab2-4352-beb4-9273aaee9966.gif">
+    <img width = "188" src = "https://user-images.githubusercontent.com/55964078/230780372-cc2f2712-461b-43df-8a06-d0f8f1540df6.PNG">
   </p>
 </div>
 
