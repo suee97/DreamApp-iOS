@@ -1,4 +1,4 @@
-# 서울과학기술대학교 39대 총학생회 어플리케이션
+# 39대 총학생회 어플리케이션
 <div>
   <p align = "center">
     <img width = "300" src = "https://user-images.githubusercontent.com/55964078/230779946-b03550cb-79c4-410a-b834-db2cd0928780.svg">
@@ -12,7 +12,7 @@
 * [App](https://github.com/suee97/DreamApp-iOS/#App)
 
 # Introduction
-서울과학기술대학교 총학생회 앱은 학우들에게 총학생회 및 여러 자치기구의 사업들에 대한 정보들을 빠르게 제공하고 다양한 사업에 쉽게 접근할 수 있도록 합니다.
+총학생회 앱은 학우들에게 총학생회 및 여러 자치기구의 사업들에 대한 정보들을 빠르게 제공하고 다양한 사업에 쉽게 접근할 수 있도록 합니다.
 
 # Team
 - iOS-Client : [오승언](https://github.com/suee97) [변상우](https://github.com/tkddn0518)
