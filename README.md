@@ -24,7 +24,7 @@
   </p>
 </div>
 
-# Functions
+# Features
 - 총학생회 소개
 - 자치회비 납부 확인
 - 제휴사업
